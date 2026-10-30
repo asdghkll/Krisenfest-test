@@ -1,12 +1,731 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KRISENFEST.AT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KRISENFEST.AT – Trinkwasser-Selbstcheck</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f0f4f3;
+  color: #20372f;
+  font: 16px/1.5 system-ui, Arial, sans-serif;
+}
+
+main {
+  max-width: 760px;
+  margin: auto;
+  padding: 18px;
+}
+
+header {
+  padding: 22px 0;
+}
+
+h1 {
+  margin: 0;
+  color: #174d3b;
+}
+
+h2 {
+  font-size: 1.17rem;
+  margin: 0 0 16px;
+}
+
+section, #bericht {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 14px 0;
+  box-shadow: 0 1px 8px #0001;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin: 14px 0 5px;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  font: inherit;
+  border: 1px solid #9eada6;
+  border-radius: 8px;
+  background: white;
+  color: #20372f;
+}
+
+input[type=checkbox] {
+  width: auto;
+  transform: scale(1.25);
+  margin-right: 10px;
+}
+
+.check {
+  font-weight: 400;
+  display: block;
+  margin: 12px 0;
+}
+
+button {
+  background: #176849;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 14px 22px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  margin: 8px 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.note {
+  color: #52655d;
+  font-size: .92rem;
+}
+
+.warning {
+  background: #fff4da;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+li {
+  margin: 9px 0;
+}
+</style>
 </head>
+
 <body>
+<main>
+
+<header>
   <h1>KRISENFEST.AT</h1>
-  <p>Unsere Testwebsite funktioniert!</p>
+  <p>Trinkwasser-Selbstcheck · Testversion</p>
+</header>
+
+<section>
+<h2>1. Ihr Haushalt</h2>
+
+<label for="personen">
+Wie viele Personen leben in Ihrem Haushalt?
+</label>
+
+<input
+  id="personen"
+  type="number"
+  min="1"
+  max="30"
+  step="1"
+  placeholder="Anzahl Personen"
+>
+
+<label for="tage">
+Wie lange möchten Sie vorsorgen?
+</label>
+
+<select id="tage">
+  <option value="">Bitte auswählen</option>
+  <option value="7">7 Tage</option>
+  <option value="14">14 Tage</option>
+  <option value="30">1 Monat</option>
+  <option value="60">2 Monate</option>
+</select>
+
+</section>
+
+
+<section>
+<h2>2. Welche Wasservorräte / Wasserquellen sind vorhanden?</h2>
+
+<label for="flaschen">
+Wie viele Liter originalverschlossenes Trinkwasser
+haben Sie vorrätig?
+</label>
+
+<input
+  id="flaschen"
+  type="number"
+  min="0"
+  step="0.5"
+  placeholder="Liter (auch 0 möglich)"
+>
+
+<label for="quelle">
+Haben Sie Zugang zu einer zusätzlichen Wasserquelle?
+</label>
+
+<select id="quelle">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+<div id="quelleDetails" hidden>
+
+<label for="art">
+Welche Wasserquelle?
+</label>
+
+<select id="art">
+  <option value="">Bitte auswählen</option>
+  <option>Brunnen</option>
+  <option>Eigene Quelle</option>
+  <option>Regenwasser / Zisterne</option>
+  <option>Bach, Fluss oder See</option>
+</select>
+
+<label for="entfernung">
+Wie weit ist die Quelle entfernt?
+</label>
+
+<select id="entfernung">
+  <option value="">Bitte auswählen</option>
+  <option>Am Haus</option>
+  <option>Bis 500 m</option>
+  <option>Weiter entfernt</option>
+</select>
+
+<label for="qualitaet">
+Wurde die Wasserqualität geprüft?
+</label>
+
+<select id="qualitaet">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+<label for="strom">
+Benötigt die Wasserentnahme Netzstrom?
+</label>
+
+<select id="strom">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+<div id="ersatzBox" hidden>
+
+<label for="ersatz">
+Ist eine stromunabhängige Entnahme oder
+Ersatzstromversorgung vorhanden?
+</label>
+
+<select id="ersatz">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+</div>
+
+<label for="behaelter">
+Haben Sie geeignete, saubere und verschließbare
+Wasserbehälter?
+</label>
+
+<select id="behaelter">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+<div id="transportBox" hidden>
+
+<label for="liter">
+Wie viele Liter fassen Ihre Behälter zusammen?
+</label>
+
+<input
+  id="liter"
+  type="number"
+  min="0"
+  step="0.5"
+  placeholder="Gesamtkapazität in Litern"
+>
+
+<label for="tragbar">
+Können Sie die gefüllten Behälter sicher tragen
+oder mit einer Transporthilfe bewegen?
+</label>
+
+<select id="tragbar">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+</div>
+
+<label for="lagerung">
+Haben Sie eine geeignete Möglichkeit, das
+gewonnene Trinkwasser aufzubewahren?
+</label>
+
+<select id="lagerung">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+</div>
+</section>
+
+
+<section>
+<h2>3. Wasseraufbereitung</h2>
+
+<label for="filter">
+Ist ein Wasserfilter vorhanden?
+</label>
+
+<select id="filter">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+<div id="filterBox" hidden>
+
+<label for="modell">
+Welches Modell?
+</label>
+
+<input
+  id="modell"
+  type="text"
+  placeholder="Hersteller und Modell"
+>
+
+<label for="einsatz">
+Ist der Filter einsatzbereit?
+</label>
+
+<select id="einsatz">
+  <option value="">Bitte auswählen</option>
+  <option value="ja">Ja</option>
+  <option value="nein">Nein</option>
+</select>
+
+</div>
+
+<label>
+Welche weiteren Aufbereitungsmöglichkeiten haben Sie?
+</label>
+
+<label class="check">
+  <input type="checkbox" id="m_filter">
+  Wasserfilter
+</label>
+
+<label class="check">
+  <input type="checkbox" id="kochen">
+  Abkochen
+</label>
+
+<label class="check">
+  <input type="checkbox" id="chemie">
+  Desinfektionsmittel zur Trinkwasseraufbereitung
+</label>
+
+<label class="check">
+  <input type="checkbox" id="keine">
+  Keine Aufbereitungsmöglichkeit
+</label>
+
+</section>
+
+<button id="auswerten">
+Selbstcheck auswerten
+</button>
+
+<div id="bericht" hidden aria-live="polite"></div>
+
+<p class="note">
+Vorläufiger Selbstcheck.
+Die rechnerische Orientierung beträgt
+2 Liter je Person und Tag.
+Die Eignung einer Wasserquelle und ihrer
+Aufbereitung muss fachlich beurteilt werden.
+</p>
+
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const val = id => $(id).value;
+const yes = id => val(id) === "ja";
+
+function aktualisieren() {
+  $("quelleDetails").hidden = !yes("quelle");
+  $("ersatzBox").hidden = !(
+    yes("quelle") && yes("strom")
+  );
+  $("transportBox").hidden = !(
+    yes("quelle") && yes("behaelter")
+  );
+  $("filterBox").hidden = !yes("filter");
+  $("bericht").hidden = true;
+}
+
+$("quelle").addEventListener("change", aktualisieren);
+$("strom").addEventListener("change", aktualisieren);
+$("behaelter").addEventListener("change", aktualisieren);
+
+$("filter").addEventListener("change", () => {
+  $("m_filter").checked = yes("filter");
+
+  if (yes("filter")) {
+    $("keine").checked = false;
+  }
+
+  aktualisieren();
+});
+
+$("m_filter").addEventListener("change", () => {
+  $("filter").value = $("m_filter").checked
+    ? "ja"
+    : "nein";
+
+  if ($("m_filter").checked) {
+    $("keine").checked = false;
+  }
+
+  aktualisieren();
+});
+
+for (const id of ["kochen", "chemie", "m_filter"]) {
+  $(id).addEventListener("change", () => {
+    if ($(id).checked) {
+      $("keine").checked = false;
+    }
+  });
+}
+
+$("keine").addEventListener("change", () => {
+  if ($("keine").checked) {
+    for (const id of ["kochen", "chemie", "m_filter"]) {
+      $(id).checked = false;
+    }
+
+    $("filter").value = "nein";
+    aktualisieren();
+  }
+});
+
+for (const element of document.querySelectorAll("input,select")) {
+  element.addEventListener("input", () => {
+    $("bericht").hidden = true;
+  });
+}
+
+function auswertung() {
+  const personen = Number(val("personen"));
+  const tage = Number(val("tage"));
+  const vorrat = Number(val("flaschen"));
+
+  if (
+    !Number.isInteger(personen) ||
+    personen < 1 ||
+    !tage ||
+    val("flaschen") === "" ||
+    !Number.isFinite(vorrat) ||
+    vorrat < 0 ||
+    !val("quelle") ||
+    !val("filter")
+  ) {
+    alert(
+      "Bitte füllen Sie zunächst die Angaben " +
+      "zum Haushalt, Vorrat, zur Quelle und zum Filter aus."
+    );
+    return;
+  }
+
+  const bedarf = personen * 2;
+  const vorratstage = vorrat / bedarf;
+  const quelle = yes("quelle");
+
+  if (quelle) {
+    const pflichtfelder = [
+      "art",
+      "entfernung",
+      "qualitaet",
+      "strom",
+      "behaelter",
+      "lagerung"
+    ];
+
+    if (pflichtfelder.some(id => !val(id))) {
+      alert(
+        "Bitte beantworten Sie alle sichtbaren Fragen " +
+        "zur Wasserquelle."
+      );
+      return;
+    }
+  }
+
+  if (quelle && yes("strom") && !val("ersatz")) {
+    alert(
+      "Bitte beantworten Sie die Frage zur Ersatzversorgung."
+    );
+    return;
+  }
+
+  if (quelle && yes("behaelter")) {
+    if (
+      val("liter") === "" ||
+      Number(val("liter")) <= 0 ||
+      !val("tragbar")
+    ) {
+      alert(
+        "Bitte ergänzen Sie die Behälterkapazität " +
+        "und Tragbarkeit."
+      );
+      return;
+    }
+  }
+
+  if (yes("filter")) {
+    if (
+      !val("modell").trim() ||
+      !val("einsatz")
+    ) {
+      alert(
+        "Bitte geben Sie das Filtermodell " +
+        "und seine Einsatzbereitschaft an."
+      );
+      return;
+    }
+  }
+
+  const transportProblem =
+    quelle && (
+      !yes("behaelter") ||
+      (
+        yes("behaelter") &&
+        !yes("tragbar")
+      ) ||
+      !yes("lagerung")
+    );
+
+  const stromProblem =
+    quelle &&
+    yes("strom") &&
+    !yes("ersatz");
+
+  const quellweg =
+    quelle &&
+    !transportProblem &&
+    !stromProblem;
+
+  const aufbereitung =
+    (
+      yes("filter") &&
+      yes("einsatz")
+    ) ||
+    $("kochen").checked ||
+    $("chemie").checked;
+
+  const gedeckt = vorrat >= bedarf * tage;
+
+  let titel = "";
+  const punkte = [];
+
+  if (gedeckt) {
+    titel =
+      "Trinkwasservorrat für den gewählten Zeitraum " +
+      "rechnerisch ausreichend.";
+  } else if (quellweg && aufbereitung) {
+    titel =
+      "Laufende Wasserversorgung grundsätzlich möglich – " +
+      "Wasserqualität und Aufbereitung prüfen.";
+  } else if (quellweg) {
+    titel =
+      "Alternative Wasserquelle vorhanden – " +
+      "Trinkwasseraufbereitung noch nicht ausreichend geklärt.";
+  } else {
+    titel =
+      "Trinkwasserversorgung nicht ausreichend abgesichert.";
+  }
+
+  if (!gedeckt && !quellweg) {
+    const fehlmenge = Math.max(
+      0,
+      bedarf * tage - vorrat
+    );
+
+    punkte.push(
+      "Für den gewählten Zeitraum fehlen rechnerisch " +
+      fehlmenge.toLocaleString("de-AT") +
+      " Liter eingelagertes Trinkwasser. " +
+      "Ergänzen Sie den Vorrat oder schaffen Sie einen " +
+      "praktisch nutzbaren alternativen Versorgungsweg."
+    );
+  }
+
+  if (quelle) {
+    if (!yes("behaelter")) {
+      punkte.push(
+        "Geeignete, saubere und verschließbare " +
+        "Transport- und Entnahmebehälter bereitstellen."
+      );
+    } else {
+      const kapazitaet = Number(val("liter"));
+
+      if (kapazitaet < bedarf) {
+        punkte.push(
+          "Ihre Behälter fassen zusammen " +
+          kapazitaet +
+          " Liter; benötigt werden " +
+          bedarf +
+          " Liter pro Tag. Planen Sie mehrere tägliche " +
+          "Befüllungen oder zusätzliche gut tragbare Behälter ein."
+        );
+      }
+
+      if (!yes("tragbar")) {
+        punkte.push(
+          "Leichtere Einzelbehälter, beispielsweise " +
+          "5-Liter-Kanister, oder eine Transporthilfe vorsehen."
+        );
+      }
+    }
+
+    if (!yes("lagerung")) {
+      punkte.push(
+        "Geeignete Behälter für die hygienische " +
+        "Aufbewahrung des gewonnenen Wassers bereithalten."
+      );
+    }
+
+    if (stromProblem) {
+      punkte.push(
+        "Stromabhängige Wasserentnahme ohne " +
+        "Ersatzversorgung ist bei Stromausfall nicht gesichert."
+      );
+    }
+
+    if (val("entfernung") === "Weiter entfernt") {
+      punkte.push(
+        "Den Wassertransport mit gefüllten Behältern " +
+        "vorab praktisch erproben."
+      );
+    }
+
+    if (!yes("qualitaet")) {
+      punkte.push(
+        "Die Wasserqualität ist nicht geprüft. " +
+        "Die Quelle nicht ohne geeignete Beurteilung " +
+        "als sicheres Trinkwasser einstufen."
+      );
+    }
+
+    if (!aufbereitung) {
+      punkte.push(
+        "Eine passende Möglichkeit zur " +
+        "Trinkwasseraufbereitung prüfen. " +
+        "Ein mechanischer Filter allein schützt nicht " +
+        "gegen alle Keime oder chemischen Stoffe."
+      );
+    }
+
+    if (yes("filter")) {
+      const modell = val("modell").toLowerCase();
+
+      if (
+        modell.includes("pocket") ||
+        modell.includes("befree")
+      ) {
+        punkte.push(
+          "Der genannte Katadyn-Filter kann Bakterien " +
+          "und bestimmte Parasiten reduzieren, " +
+          "aber nicht zuverlässig Viren oder chemische " +
+          "Belastungen entfernen. Herstellerangaben " +
+          "und Zustand prüfen."
+        );
+      } else {
+        punkte.push(
+          "Leistungsfähigkeit und Eignung des angegebenen " +
+          "Filtermodells anhand der Herstellerangaben prüfen."
+        );
+      }
+    }
+  }
+
+  if (tage >= 30) {
+    punkte.push(
+      "Für die längerfristige Vorsorge einen alternativen " +
+      "Wasserbezugsweg und gut tragbare Transportbehälter vorsehen."
+    );
+  }
+
+  if (!punkte.length) {
+    punkte.push(
+      "Vorräte regelmäßig kontrollieren und den geplanten " +
+      "Versorgungsweg praktisch erproben."
+    );
+  }
+
+  const liste = punkte.map(punkt => {
+    const li = document.createElement("li");
+    li.textContent = punkt;
+    return li.outerHTML;
+  }).join("");
+
+  $("bericht").innerHTML = `
+    <h2>Ihre Trinkwasserversorgung</h2>
+
+    <p>
+      <strong>${titel}</strong>
+    </p>
+
+    <p class="note">
+      Rechnerischer Orientierungsbedarf:
+      ${bedarf} Liter pro Tag.
+      Vorhandener Flaschenvorrat:
+      ${vorrat} Liter
+      (${Math.floor(vorratstage)} volle Tage).
+    </p>
+
+    <h3>Ihre nächsten Schritte</h3>
+
+    <ol>${liste}</ol>
+
+    <p class="warning">
+      Eine vorhandene Wasserquelle gilt nicht
+      automatisch als hygienisch sicheres Trinkwasser.
+      Prüfen Sie insbesondere mögliche chemische
+      Belastungen und die Eignung des eingesetzten
+      Aufbereitungsverfahrens.
+    </p>
+  `;
+
+  $("bericht").hidden = false;
+
+  $("bericht").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+$("auswerten").addEventListener(
+  "click",
+  auswertung
+);
+</script>
+
 </body>
 </html>
