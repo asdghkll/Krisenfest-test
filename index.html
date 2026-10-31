@@ -5,23 +5,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KRISENFEST.AT – Trinkwasser-Selbstcheck</title>
+
 <style>
-:root{
+:root {
   --navy:#092440;
   --red:#e21729;
   --blue:#1677b9;
   --pale:#eaf5ff;
-  --text:#203955;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
+
+* { box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
   margin:0;
   font:16px/1.5 system-ui,-apple-system,Arial,sans-serif;
   color:var(--navy);
   background:#f3f6fa;
 }
-.top{
+
+.top {
   background:#fff;
   border-bottom:1px solid #dde5ee;
   padding:9px 5%;
@@ -30,7 +34,8 @@ body{
   justify-content:space-between;
   gap:15px;
 }
-.logo{
+
+.logo {
   display:inline-block;
   color:var(--navy);
   font-weight:900;
@@ -40,38 +45,45 @@ body{
   font-size:27px;
   white-space:nowrap;
 }
-.logo svg{
+
+.logo svg {
   display:block;
-  width:61%;
-  height:28px;
-  margin:0 auto -3px;
+  width:58%;
+  height:22px;
+  margin:0 auto -4px;
 }
-.logo b{color:var(--red)}
-.top nav{
+
+.logo b { color:var(--red); }
+
+.top nav {
   display:flex;
   gap:27px;
   font-size:13px;
   color:#526980;
 }
-.top nav strong{
+
+.top nav strong {
   border-bottom:3px solid var(--red);
   padding-bottom:7px;
   color:var(--navy);
 }
-.hero{
+
+.hero {
   position:relative;
   overflow:hidden;
   min-height:355px;
   background:linear-gradient(#c9e2f4,#f4f8fc);
 }
-.mountains{
+
+.mountains {
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
   pointer-events:none;
 }
-.hero:after{
+
+.hero:after {
   content:"";
   position:absolute;
   inset:0;
@@ -83,10 +95,15 @@ body{
       #f5f9fddd 65%,
       transparent
     ),
-    linear-gradient(0deg,#f3f6fa,transparent 65%);
+    linear-gradient(
+      0deg,
+      #f3f6fa,
+      transparent 65%
+    );
   pointer-events:none;
 }
-.hero-content{
+
+.hero-content {
   position:relative;
   z-index:1;
   text-align:center;
@@ -94,26 +111,32 @@ body{
   max-width:800px;
   padding:42px 20px 32px;
 }
-.hero .logo{
+
+.hero .logo {
   font-size:clamp(42px,6vw,68px);
   letter-spacing:-3px;
 }
-.hero .logo svg{
-  height:52px;
-  margin-bottom:-3px;
+
+.hero .logo svg {
+  height:40px;
+  width:58%;
+  margin-bottom:-2px;
 }
-h1{
+
+h1 {
   font-size:clamp(27px,3.5vw,40px);
   margin:16px 0 10px;
   line-height:1.2;
 }
-.hero p{
+
+.hero p {
   margin:8px auto;
   color:#385572;
   max-width:760px;
   font-size:14px;
 }
-.steps{
+
+.steps {
   display:flex;
   gap:8px;
   justify-content:center;
@@ -121,12 +144,14 @@ h1{
   margin:26px auto 0;
   max-width:470px;
 }
-.step{
+
+.step {
   flex:1;
   font-size:11px;
   color:#69809a;
 }
-.step span{
+
+.step span {
   display:grid;
   place-items:center;
   margin:0 auto 6px;
@@ -136,11 +161,13 @@ h1{
   background:#e3ecf6;
   border:1px solid #ccd8e5;
 }
-.step:first-child span{
+
+.step:first-child span {
   background:var(--navy);
   color:#fff;
 }
-.page{
+
+.page {
   max-width:1180px;
   margin:-8px auto 55px;
   position:relative;
@@ -151,21 +178,25 @@ h1{
   align-items:start;
   gap:18px;
 }
-.card,.info{
+
+.card,.info {
   border-radius:13px;
   background:white;
   border:1px solid #e3eaf1;
   box-shadow:0 7px 24px #243e5910;
   margin:0 0 15px;
 }
-.card{padding:23px}
-.heading{
+
+.card { padding:23px; }
+
+.heading {
   display:flex;
   align-items:flex-start;
   gap:13px;
   margin-bottom:19px;
 }
-.number{
+
+.number {
   display:grid;
   place-items:center;
   flex:none;
@@ -177,30 +208,36 @@ h1{
   font-size:19px;
   font-weight:800;
 }
-h2{
+
+h2 {
   font-size:21px;
   line-height:1.3;
   margin:0;
 }
-.sub{
+
+.sub {
   color:#64788f;
   font-size:13px;
   margin:3px 0 0;
 }
-.fields{
+
+.fields {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:17px;
 }
-.field{min-width:0}
-.field.full{grid-column:1/-1}
-.field label,.field-title{
+
+.field { min-width:0; }
+.field.full { grid-column:1/-1; }
+
+.field label,.field-title {
   display:block;
   font-weight:650;
   font-size:13px;
   margin:0 0 8px;
 }
-input:not([type=checkbox]),select{
+
+input:not([type=checkbox]),select {
   font:inherit;
   width:100%;
   padding:12px 13px;
@@ -210,11 +247,13 @@ input:not([type=checkbox]),select{
   color:var(--navy);
   min-height:45px;
 }
-input:focus,select:focus{
+
+input:focus,select:focus {
   outline:2px solid #80bcea;
   outline-offset:2px;
 }
-.check{
+
+.check {
   display:flex;
   gap:12px;
   align-items:center;
@@ -222,43 +261,51 @@ input:focus,select:focus{
   font-size:14px;
   cursor:pointer;
 }
-.check input{
+
+.check input {
   width:18px;
   height:18px;
   accent-color:var(--blue);
   flex:none;
 }
-.extra{
+
+.extra {
   margin-top:18px;
   padding:18px;
   background:#f4f9ff;
   border:1px solid #d7e8f6;
   border-radius:10px;
 }
-.extra h3{
+
+.extra h3 {
   font-size:16px;
   margin:0 0 15px;
 }
-.info{
+
+.info {
   background:var(--pale);
   padding:21px;
   color:#34506e;
   font-size:14px;
 }
-.info h3{
+
+.info h3 {
   margin:0 0 12px;
   font-size:17px;
   color:var(--navy);
 }
-.info ul{
+
+.info ul {
   padding:0;
   list-style:none;
 }
-.info li{
+
+.info li {
   border-top:1px solid #d2e3f2;
   padding:9px 0;
 }
-.info li:before{
+
+.info li:before {
   content:'✓';
   background:#1589d0;
   color:white;
@@ -267,11 +314,13 @@ input:focus,select:focus{
   padding:2px 5px;
   margin-right:9px;
 }
-.buttons{
+
+.buttons {
   display:flex;
   gap:12px;
 }
-.buttons button{
+
+.buttons button {
   border:0;
   border-radius:8px;
   min-height:47px;
@@ -280,18 +329,21 @@ input:focus,select:focus{
   font-weight:750;
   cursor:pointer;
 }
-.buttons .main{
+
+.buttons .main {
   background:var(--red);
   color:white;
   flex:1;
   box-shadow:0 7px 16px #d70d2430;
 }
-.buttons .reset{
+
+.buttons .reset {
   background:white;
   border:1px solid #cbd8e6;
   color:var(--navy);
 }
-#error{
+
+#error {
   background:#fff1f0;
   color:#9b2330;
   padding:13px 16px;
@@ -299,73 +351,84 @@ input:focus,select:focus{
   margin:12px 0;
   font-weight:650;
 }
-.status{
+
+.status {
   padding:17px;
   background:#fff4db;
   border-left:5px solid #e4ab32;
   border-radius:8px;
   font-weight:750;
 }
-.status.good{
+
+.status.good {
   background:#e6f5ec;
   border-color:#30936b;
 }
-.status.risk{
+
+.status.risk {
   background:#ffebec;
   border-color:var(--red);
 }
-.result-grid{
+
+.result-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
   margin:17px 0;
 }
-.result-grid div{
+
+.result-grid div {
   background:#f1f6fa;
   padding:12px;
   border-radius:8px;
   font-size:12px;
   color:#59708a;
 }
-.result-grid b{
+
+.result-grid b {
   display:block;
   font-size:20px;
   color:var(--navy);
 }
-.actions li{margin:9px 0}
-.small{
+
+.actions li { margin:9px 0; }
+
+.small {
   font-size:12px;
   color:#61758c;
 }
-footer{
+
+footer {
   text-align:center;
   font-size:12px;
   color:#71869c;
   padding:0 20px 35px;
 }
-[hidden]{display:none!important}
 
-@media(max-width:800px){
-  .page{grid-template-columns:1fr}
-  .side{
+[hidden] { display:none!important; }
+
+@media(max-width:800px) {
+  .page { grid-template-columns:1fr; }
+  .side {
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:12px;
   }
-  .top nav{display:none}
-  .hero{min-height:330px}
+  .top nav { display:none; }
+  .hero { min-height:330px; }
 }
-@media(max-width:560px){
-  .top{padding:9px 16px}
-  .fields,.side{grid-template-columns:1fr}
-  .card{padding:18px}
-  .page{padding:0 12px}
-  .hero-content{padding-top:30px}
-  .hero .logo{font-size:44px}
-  .hero .logo svg{height:37px}
-  .hero p{font-size:13px}
-  .buttons{flex-direction:column-reverse}
-  .result-grid{grid-template-columns:1fr 1fr}
+
+@media(max-width:560px) {
+  .top { padding:9px 16px; }
+  .fields,.side { grid-template-columns:1fr; }
+  .card { padding:18px; }
+  .page { padding:0 12px; }
+  .hero-content { padding-top:30px; }
+  .hero .logo { font-size:44px; }
+  .hero .logo svg { height:32px; }
+  .hero p { font-size:13px; }
+  .buttons { flex-direction:column-reverse; }
+  .result-grid { grid-template-columns:1fr 1fr; }
 }
 </style>
 </head>
@@ -373,18 +436,21 @@ footer{
 <body>
 
 <header class="top">
+
   <div class="logo">
-    <svg viewBox="0 0 200 43" aria-hidden="true">
+    <svg viewBox="0 0 220 42" aria-hidden="true">
       <path
-        d="M5 41 51 12 78 33 106 2 145 33 162 16 196 40"
+        d="M8 34 L52 16 L78 28 L108 8 L146 28 L165 18 L210 34"
         fill="none"
         stroke="#092440"
-        stroke-width="8"
-        stroke-linejoin="miter"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
     Krisen<b>fest</b>.at
   </div>
+
   <nav aria-label="Navigation">
     <span>Wissen</span>
     <strong>Selbstchecks</strong>
@@ -392,6 +458,7 @@ footer{
     <span>Notfälle</span>
     <span>Service</span>
   </nav>
+
 </header>
 
 <section class="hero">
@@ -407,45 +474,71 @@ footer{
         <stop stop-color="#bcd9ed"/>
         <stop offset="1" stop-color="#ecf6fd"/>
       </linearGradient>
+
       <linearGradient id="mount" x2="0" y2="1">
         <stop stop-color="#7c9fb8"/>
         <stop offset="1" stop-color="#d0e2ed"/>
       </linearGradient>
     </defs>
 
-    <rect width="1400" height="390" fill="url(#sky)"/>
+    <rect
+      width="1400"
+      height="390"
+      fill="url(#sky)"
+    />
 
     <path
-      d="M-50 250 40 115 80 170 125 85 205 185
-         252 118 320 210 390 270 470 390H-50Z
-         M940 340 1018 205 1080 132 1120 168
-         1185 75 1240 164 1290 109 1460 285V390H940Z"
+      d="
+      M-50 250
+      40 115 80 170 125 85 205 185
+      252 118 320 210 390 270 470 390
+      H-50 Z
+
+      M940 340
+      1018 205 1080 132 1120 168
+      1185 75 1240 164 1290 109
+      1460 285 V390 H940 Z"
       fill="url(#mount)"
     />
 
     <path
-      d="m40 115 27 39 13-16 45-53 31 39
-         10 31-41-29-29 44-16-17-21 13Z
-         M1080 132l40 36 65-93 32 48-35-21
-         -42 65-20-11Z"
+      d="
+      M40 115
+      L67 154 80 138 125 85
+      156 124 166 155 125 126
+      96 170 80 153 59 166 Z
+
+      M1080 132
+      L1120 168 1185 75 1217 123
+      1182 102 1140 167 1120 156 Z"
       fill="#f8fdff"
       opacity=".93"
     />
 
     <path
-      d="M-10 300 75 220 150 295 225 202 320 310
-         425 370 0 390Z
-         M1000 375 1090 263 1172 300 1250 219
-         1420 320V390Z"
+      d="
+      M-10 300
+      75 220 150 295 225 202
+      320 310 425 370 0 390 Z
+
+      M1000 375
+      1090 263 1172 300 1250 219
+      1420 320 V390 Z"
       fill="#47758c"
       opacity=".47"
     />
 
     <path
-      d="M-10 335 20 266 54 340 83 246 113 343
-         151 271 188 354 220 284 248 363 310 390H-10Z
-         M1110 390l35-100 35 80 34-120 40 114
-         37-82 37 91 38-124 45 141Z"
+      d="
+      M-10 335
+      20 266 54 340 83 246
+      113 343 151 271 188 354
+      220 284 248 363 310 390 H-10 Z
+
+      M1110 390
+      L1145 290 1180 370 1214 250
+      1254 364 1291 282 1328 373
+      1366 249 1411 390 Z"
       fill="#285c6f"
       opacity=".55"
     />
@@ -454,12 +547,14 @@ footer{
   <div class="hero-content">
 
     <div class="logo">
-      <svg viewBox="0 0 200 43" aria-hidden="true">
+      <svg viewBox="0 0 220 42" aria-hidden="true">
         <path
-          d="M5 41 51 12 78 33 106 2 145 33 162 16 196 40"
+          d="M8 34 L52 16 L78 28 L108 8 L146 28 L165 18 L210 34"
           fill="none"
           stroke="#092440"
-          stroke-width="8"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         />
       </svg>
       Krisen<b>fest</b>.at
@@ -469,8 +564,8 @@ footer{
 
     <p>
       <strong>
-        Wie gut sind Sie auf einen Ausfall der
-        Trinkwasserversorgung vorbereitet?
+        Wie gut sind Sie auf einen Ausfall
+        der Trinkwasserversorgung vorbereitet?
       </strong>
     </p>
 
@@ -483,9 +578,9 @@ footer{
 
     <p>
       Dieser Selbstcheck untersucht, wie gut Ihr Haushalt
-      darauf vorbereitet ist. Berücksichtigt werden Wasservorräte,
-      alternative Wasserquellen und Möglichkeiten,
-      daraus sicheres Trinkwasser zu gewinnen.
+      darauf vorbereitet ist. Berücksichtigt werden
+      Wasservorräte, alternative Wasserquellen und
+      Möglichkeiten, daraus sicheres Trinkwasser zu gewinnen.
     </p>
 
     <div class="steps">
@@ -499,20 +594,24 @@ footer{
 </section>
 
 <main class="page">
+
 <div>
 
   <section class="card">
+
     <div class="heading">
       <span class="number">1</span>
       <div>
         <h2>Ihr Haushalt</h2>
         <p class="sub">
-          Zuerst ein paar grundlegende Angaben zu Ihrem Haushalt.
+          Zuerst ein paar grundlegende Angaben
+          zu Ihrem Haushalt.
         </p>
       </div>
     </div>
 
     <div class="fields">
+
       <div class="field">
         <label for="personen">
           Wie viele Personen leben in Ihrem Haushalt?
@@ -539,24 +638,28 @@ footer{
           <option value="60">2 Monate</option>
         </select>
       </div>
+
     </div>
   </section>
 
   <section class="card">
+
     <div class="heading">
       <span class="number">2</span>
       <div>
         <h2>
-          Welche Wasservorräte / Wasserquellen sind vorhanden?
+          Welche Wasservorräte / Wasserquellen
+          sind vorhanden?
         </h2>
         <p class="sub">
-          Eingelagerte Vorräte und alternative Möglichkeiten
-          der Wasserversorgung.
+          Eingelagerte Vorräte und alternative
+          Möglichkeiten der Wasserversorgung.
         </p>
       </div>
     </div>
 
     <div class="fields">
+
       <div class="field">
         <label for="flaschen">
           Wie viele Liter originalverschlossenes
@@ -573,7 +676,8 @@ footer{
 
       <div class="field">
         <label for="quelle">
-          Haben Sie Zugang zu einer zusätzlichen Wasserquelle?
+          Haben Sie Zugang zu einer zusätzlichen
+          Wasserquelle?
         </label>
         <select id="quelle">
           <option value="">Bitte auswählen</option>
@@ -581,12 +685,15 @@ footer{
           <option value="nein">Nein</option>
         </select>
       </div>
+
     </div>
 
     <div id="quelleDetails" class="extra" hidden>
+
       <h3>Angaben zu Ihrer Wasserquelle</h3>
 
       <div class="fields">
+
         <div class="field">
           <label for="art">Welche Wasserquelle?</label>
           <select id="art">
@@ -634,8 +741,8 @@ footer{
 
         <div class="field full" id="ersatzBox" hidden>
           <label for="ersatz">
-            Ist eine stromunabhängige Entnahme oder
-            Ersatzstromversorgung vorhanden?
+            Ist eine stromunabhängige Entnahme
+            oder Ersatzstromversorgung vorhanden?
           </label>
           <select id="ersatz">
             <option value="">Bitte auswählen</option>
@@ -669,10 +776,13 @@ footer{
         </div>
 
         <div class="field full" id="transportBox" hidden>
+
           <div class="fields">
+
             <div class="field">
               <label for="liter">
-                Wie viele Liter fassen Ihre Behälter zusammen?
+                Wie viele Liter fassen
+                Ihre Behälter zusammen?
               </label>
               <input
                 id="liter"
@@ -694,25 +804,33 @@ footer{
                 <option value="nein">Nein</option>
               </select>
             </div>
+
           </div>
+
         </div>
 
       </div>
+
     </div>
+
   </section>
 
   <section class="card">
+
     <div class="heading">
       <span class="number">3</span>
       <div>
         <h2>Wasseraufbereitung</h2>
         <p class="sub">
-          Welche Möglichkeiten stehen Ihnen im Notfall zur Verfügung?
+          Welche Möglichkeiten stehen Ihnen
+          im Notfall zur Verfügung?
         </p>
       </div>
     </div>
 
-    <p class="field-title">Mehrfachauswahl möglich</p>
+    <p class="field-title">
+      Mehrfachauswahl möglich
+    </p>
 
     <label class="check">
       <input type="checkbox" id="filter">
@@ -720,7 +838,9 @@ footer{
     </label>
 
     <div class="extra" id="filterBox" hidden>
+
       <div class="fields">
+
         <div class="field">
           <label for="modell">
             Welchen Wasserfilter besitzen Sie?
@@ -742,7 +862,9 @@ footer{
             <option value="nein">Nein</option>
           </select>
         </div>
+
       </div>
+
     </div>
 
     <label class="check">
@@ -759,64 +881,91 @@ footer{
       <input type="checkbox" id="keine">
       Keine Aufbereitungsmöglichkeit
     </label>
+
   </section>
 
   <div class="buttons">
+
     <button class="reset" id="reset" type="button">
       Angaben zurücksetzen
     </button>
+
     <button class="main" id="auswerten" type="button">
       Selbstcheck auswerten →
     </button>
+
   </div>
 
   <div id="error" hidden role="alert"></div>
 
-  <section class="card" id="bericht" hidden aria-live="polite">
+  <section
+    class="card"
+    id="bericht"
+    hidden
+    aria-live="polite"
+  >
+
     <div class="heading">
       <span class="number">4</span>
       <div>
         <h2>Ihre persönliche Einschätzung</h2>
-        <p class="sub">Basierend auf Ihren Angaben</p>
+        <p class="sub">
+          Basierend auf Ihren Angaben
+        </p>
       </div>
     </div>
+
     <div id="result"></div>
+
   </section>
 
 </div>
 
 <aside class="side">
+
   <div class="info">
+
     <h3>💧 Warum ist Trinkwasservorsorge wichtig?</h3>
+
     <p>
-      Bei einem Stromausfall, technischen Defekten oder
-      Verunreinigungen kann die öffentliche Wasserversorgung
-      zeitweise ausfallen.
+      Bei einem Stromausfall, technischen Defekten
+      oder Verunreinigungen kann die öffentliche
+      Wasserversorgung zeitweise ausfallen.
     </p>
+
     <p>
-      Prüfen Sie, ob Ihr Haushalt für den gewählten Zeitraum
-      alternative Möglichkeiten hat.
+      Prüfen Sie, ob Ihr Haushalt für den
+      gewählten Zeitraum alternative Möglichkeiten hat.
     </p>
+
     <ul>
       <li>Ressourcen erkennen</li>
       <li>Versorgungslücken verstehen</li>
       <li>Verbesserungen planen</li>
     </ul>
+
   </div>
 
   <div class="info">
+
     <h3>💡 Gut zu wissen</h3>
+
     <p>
       Für unsere Berechnung verwenden wir
-      <strong>2 Liter Trinkwasser pro Person und Tag</strong>
+      <strong>
+        2 Liter Trinkwasser pro Person und Tag
+      </strong>
       als Orientierungswert.
     </p>
+
     <p>
-      Eine Quelle oder ein Filter allein beweist noch nicht,
-      dass das Wasser sicher trinkbar ist. Auch Entnahme,
-      Transport und Wasserqualität zählen.
+      Eine Quelle oder ein Filter allein beweist
+      noch nicht, dass das Wasser sicher trinkbar ist.
+      Auch Entnahme, Transport und Wasserqualität zählen.
     </p>
+
   </div>
+
 </aside>
 
 </main>
@@ -835,44 +984,79 @@ const ja = id => v(id) === 'ja';
 const hat = id => $(id).checked;
 
 function aktualisieren() {
+
   $('quelleDetails').hidden = !ja('quelle');
-  $('ersatzBox').hidden = !(ja('quelle') && ja('strom'));
-  $('transportBox').hidden =
-    !(ja('quelle') && ja('behaelter'));
+
+  $('ersatzBox').hidden = !(
+    ja('quelle') && ja('strom')
+  );
+
+  $('transportBox').hidden = !(
+    ja('quelle') && ja('behaelter')
+  );
+
   $('filterBox').hidden = !hat('filter');
+
   $('bericht').hidden = true;
   $('error').hidden = true;
 }
 
-for (const id of ['quelle','strom','behaelter','filter']) {
+for (const id of [
+  'quelle',
+  'strom',
+  'behaelter',
+  'filter'
+]) {
   $(id).addEventListener('change', aktualisieren);
 }
 
-for (const id of ['filter','kochen','chemie']) {
+for (const id of [
+  'filter',
+  'kochen',
+  'chemie'
+]) {
+
   $(id).addEventListener('change', () => {
-    if (hat(id)) $('keine').checked = false;
+
+    if (hat(id)) {
+      $('keine').checked = false;
+    }
+
   });
 }
 
 $('keine').addEventListener('change', () => {
+
   if (hat('keine')) {
-    for (const id of ['filter','kochen','chemie']) {
+
+    for (const id of [
+      'filter',
+      'kochen',
+      'chemie'
+    ]) {
       $(id).checked = false;
     }
+
     aktualisieren();
   }
 });
 
-for (const el of document.querySelectorAll('input,select')) {
+for (
+  const el of document.querySelectorAll('input,select')
+) {
+
   el.addEventListener('input', () => {
     $('bericht').hidden = true;
     $('error').hidden = true;
   });
+
 }
 
 function fehler(text) {
+
   $('error').textContent = text;
   $('error').hidden = false;
+
   $('error').scrollIntoView({
     block:'center',
     behavior:'smooth'
@@ -880,6 +1064,7 @@ function fehler(text) {
 }
 
 function auswerten() {
+
   const personen = Number(v('personen'));
   const tage = Number(v('tage'));
   const vorrat = Number(v('flaschen'));
@@ -894,30 +1079,50 @@ function auswerten() {
     vorrat < 0 ||
     !v('quelle')
   ) {
+
     return fehler(
-      'Bitte ergänzen Sie Haushaltsgröße, Vorsorgezeitraum, ' +
-      'Wasservorrat und Wasserquelle.'
+      'Bitte ergänzen Sie Haushaltsgröße, ' +
+      'Vorsorgezeitraum, Wasservorrat und Wasserquelle.'
     );
+
   }
 
   const quelle = ja('quelle');
   const bedarf = personen * 2;
-  const vorratAusreichend = vorrat >= bedarf * tage;
+
+  const vorratAusreichend =
+    vorrat >= bedarf * tage;
 
   if (
     quelle &&
-    ['art','entfernung','qualitaet','strom',
-     'behaelter','lagerung'].some(id => !v(id))
+    [
+      'art',
+      'entfernung',
+      'qualitaet',
+      'strom',
+      'behaelter',
+      'lagerung'
+    ].some(id => !v(id))
   ) {
+
     return fehler(
-      'Bitte beantworten Sie alle Fragen zu Ihrer Wasserquelle.'
+      'Bitte beantworten Sie alle Fragen ' +
+      'zu Ihrer Wasserquelle.'
     );
+
   }
 
-  if (quelle && ja('strom') && !v('ersatz')) {
+  if (
+    quelle &&
+    ja('strom') &&
+    !v('ersatz')
+  ) {
+
     return fehler(
-      'Bitte beantworten Sie die Frage zur Ersatzversorgung.'
+      'Bitte beantworten Sie die Frage ' +
+      'zur Ersatzversorgung.'
     );
+
   }
 
   if (
@@ -930,270 +1135,429 @@ function auswerten() {
       !v('tragbar')
     )
   ) {
+
     return fehler(
       'Bitte ergänzen Sie die Behälterkapazität ' +
       'und deren Handhabbarkeit.'
     );
+
   }
 
   if (
     hat('filter') &&
-    (!v('modell').trim() || !v('einsatz'))
+    (
+      !v('modell').trim() ||
+      !v('einsatz')
+    )
   ) {
+
     return fehler(
       'Bitte geben Sie das Wasserfiltermodell ' +
       'und seine Einsatzbereitschaft an.'
     );
+
   }
 
   if (
-    !['filter','kochen','chemie','keine'].some(hat)
+    ![
+      'filter',
+      'kochen',
+      'chemie',
+      'keine'
+    ].some(hat)
   ) {
+
     return fehler(
       'Bitte wählen Sie mindestens eine Angabe ' +
       'zur Wasseraufbereitung aus.'
     );
+
   }
 
   const kapazitaet =
-    quelle && ja('behaelter') ? Number(v('liter')) : 0;
+    quelle && ja('behaelter')
+      ? Number(v('liter'))
+      : 0;
 
   const versorgungPraktisch =
     quelle &&
     ja('behaelter') &&
     ja('tragbar') &&
     ja('lagerung') &&
-    (!ja('strom') || ja('ersatz'));
+    (
+      !ja('strom') ||
+      ja('ersatz')
+    );
 
-  const ausreichendTransport = kapazitaet >= bedarf;
+  const ausreichendTransport =
+    kapazitaet >= bedarf;
 
   const aufbereitung =
-    (hat('filter') && ja('einsatz')) ||
+    (
+      hat('filter') &&
+      ja('einsatz')
+    ) ||
     hat('kochen') ||
     hat('chemie');
 
   const tipps = [];
 
-  const hinweis = t => {
-    if (!tipps.includes(t)) tipps.push(t);
+  const hinweis = text => {
+    if (!tipps.includes(text)) {
+      tipps.push(text);
+    }
   };
 
   let status = 'risk';
+
   let titel =
-    'Die Trinkwasserversorgung ist noch nicht ausreichend abgesichert.';
+    'Die Trinkwasserversorgung ist noch ' +
+    'nicht ausreichend abgesichert.';
 
   if (vorratAusreichend) {
+
     status = 'good';
+
     titel =
       'Der eingelagerte Trinkwasservorrat deckt ' +
       'den gewählten Zeitraum rechnerisch ab.';
-  } else if (versorgungPraktisch && aufbereitung) {
+
+  } else if (
+    versorgungPraktisch &&
+    aufbereitung
+  ) {
+
     status = 'attention';
+
     titel =
-      'Eine alternative Versorgung ist grundsätzlich möglich. ' +
-      'Ihre tatsächliche Trinkwassereignung muss geprüft werden.';
+      'Eine alternative Versorgung ist grundsätzlich ' +
+      'möglich. Ihre tatsächliche Trinkwassereignung ' +
+      'muss geprüft werden.';
+
   } else if (quelle) {
+
     status = 'attention';
+
     titel =
       'Eine Wasserquelle ist vorhanden; entscheidende ' +
       'Voraussetzungen sind noch nicht ausreichend abgesichert.';
+
   }
 
-  if (!vorratAusreichend && !versorgungPraktisch) {
-    const diff = Math.max(0, bedarf * tage - vorrat);
+  if (
+    !vorratAusreichend &&
+    !versorgungPraktisch
+  ) {
+
+    const diff = Math.max(
+      0,
+      bedarf * tage - vorrat
+    );
 
     hinweis(
-      'Ohne verlässlich nutzbaren alternativen Versorgungsweg ' +
-      'fehlen rechnerisch ' +
+      'Ohne verlässlich nutzbaren alternativen ' +
+      'Versorgungsweg fehlen rechnerisch ' +
       diff.toLocaleString('de-AT') +
       ' Liter Trinkwasser für den gewählten Zeitraum. ' +
-      'Ergänzen Sie Ihren Vorrat oder sichern Sie einen ' +
-      'alternativen Bezugsweg.'
+      'Ergänzen Sie Ihren Vorrat oder sichern Sie ' +
+      'einen alternativen Bezugsweg.'
     );
+
   }
 
   if (quelle) {
+
     if (!ja('behaelter')) {
+
       hinweis(
-        'Beschaffen Sie saubere, verschließbare und ' +
-        'für Trinkwasser geeignete Behälter.'
+        'Beschaffen Sie saubere, verschließbare ' +
+        'und für Trinkwasser geeignete Behälter.'
       );
+
     }
 
-    if (ja('behaelter') && !ausreichendTransport) {
+    if (
+      ja('behaelter') &&
+      !ausreichendTransport
+    ) {
+
       hinweis(
-        'Die vorhandenen Behälter reichen nicht für eine ' +
-        'einzige Befüllung des Tagesbedarfs. Planen Sie ' +
-        'zusätzliche gut tragbare Behälter oder mehrere ' +
-        'tägliche Befüllungen ein.'
+        'Die vorhandenen Behälter reichen nicht ' +
+        'für eine einzige Befüllung des Tagesbedarfs. ' +
+        'Planen Sie zusätzliche gut tragbare Behälter ' +
+        'oder mehrere tägliche Befüllungen ein.'
       );
+
     }
 
-    if (ja('behaelter') && !ja('tragbar')) {
+    if (
+      ja('behaelter') &&
+      !ja('tragbar')
+    ) {
+
       hinweis(
-        'Wählen Sie kleinere, gefüllt gut tragbare Behälter, ' +
-        'zum Beispiel 5-Liter-Kanister, oder eine Transporthilfe.'
+        'Wählen Sie kleinere, gefüllt gut tragbare ' +
+        'Behälter, zum Beispiel 5-Liter-Kanister, ' +
+        'oder eine Transporthilfe.'
       );
+
     }
 
     if (!ja('lagerung')) {
+
       hinweis(
-        'Sorgen Sie für geeignete Behälter zur hygienischen ' +
-        'Aufbewahrung des gewonnenen Wassers.'
+        'Sorgen Sie für geeignete Behälter ' +
+        'zur hygienischen Aufbewahrung ' +
+        'des gewonnenen Wassers.'
       );
+
     }
 
-    if (ja('strom') && !ja('ersatz')) {
+    if (
+      ja('strom') &&
+      !ja('ersatz')
+    ) {
+
       hinweis(
-        'Ihre Wasserentnahme ist stromabhängig. Prüfen Sie ' +
-        'eine stromunabhängige Entnahme oder geeignete Ersatzversorgung.'
+        'Ihre Wasserentnahme ist stromabhängig. ' +
+        'Prüfen Sie eine stromunabhängige Entnahme ' +
+        'oder geeignete Ersatzversorgung.'
       );
+
     }
 
-    if (v('entfernung') === 'Weiter entfernt') {
+    if (
+      v('entfernung') === 'Weiter entfernt'
+    ) {
+
       hinweis(
-        'Erproben Sie den Weg zur Quelle mit tatsächlich ' +
-        'gefüllten Behältern.'
+        'Erproben Sie den Weg zur Quelle mit ' +
+        'tatsächlich gefüllten Behältern.'
       );
+
     }
 
     if (!ja('qualitaet')) {
+
       hinweis(
-        'Lassen Sie die Wasserqualität fachlich beurteilen. ' +
-        'Eine ungeprüfte Quelle ist nicht automatisch sicher.'
+        'Lassen Sie die Wasserqualität fachlich ' +
+        'beurteilen. Eine ungeprüfte Quelle ist ' +
+        'nicht automatisch sicher.'
       );
+
     } else {
+
       hinweis(
-        'Prüfen Sie, ob die vorhandene Untersuchung tatsächlich ' +
-        'Trinkwasserqualität bestätigt und für die aktuelle ' +
-        'Situation gültig ist.'
+        'Prüfen Sie, ob die vorhandene Untersuchung ' +
+        'tatsächlich Trinkwasserqualität bestätigt ' +
+        'und für die aktuelle Situation gültig ist.'
       );
+
     }
 
     if (!aufbereitung) {
+
       hinweis(
-        'Prüfen Sie eine geeignete Aufbereitung. Mechanische ' +
-        'Filter schützen nicht allgemein vor Viren oder ' +
-        'chemischen Schadstoffen.'
+        'Prüfen Sie eine geeignete Aufbereitung. ' +
+        'Mechanische Filter schützen nicht allgemein ' +
+        'vor Viren oder chemischen Schadstoffen.'
       );
+
     }
 
     if (hat('filter')) {
-      const m = v('modell').toLowerCase();
 
-      if (m.includes('pocket') || m.includes('befree')) {
+      const modell = v('modell').toLowerCase();
+
+      if (
+        modell.includes('pocket') ||
+        modell.includes('befree')
+      ) {
+
         hinweis(
-          'Katadyn Pocket beziehungsweise BeFree können ' +
-          'bestimmte Keime reduzieren, jedoch nicht zuverlässig ' +
-          'alle Viren und chemischen Belastungen entfernen.'
+          'Katadyn Pocket beziehungsweise BeFree ' +
+          'können bestimmte Keime reduzieren, jedoch ' +
+          'nicht zuverlässig alle Viren und ' +
+          'chemischen Belastungen entfernen.'
         );
+
       } else {
+
         hinweis(
           'Prüfen Sie die Schutzwirkung des angegebenen ' +
           'Filtermodells anhand der Herstellerangaben.'
         );
+
       }
 
       if (!ja('einsatz')) {
+
         hinweis(
           'Machen Sie Ihren vorhandenen Wasserfilter ' +
           'einsatzbereit oder sehen Sie eine Alternative vor.'
         );
+
       }
+
     }
+
   }
 
-  if (tage >= 30 && !quelle) {
+  if (
+    tage >= 30 &&
+    !quelle
+  ) {
+
     hinweis(
-      'Für die längerfristige Versorgung ist ein zusätzlicher ' +
-      'Wasserbezugsweg sinnvoll. Halten Sie gut tragbare ' +
-      'Transportbehälter bereit.'
+      'Für die längerfristige Versorgung ist ein ' +
+      'zusätzlicher Wasserbezugsweg sinnvoll. ' +
+      'Halten Sie gut tragbare Transportbehälter bereit.'
     );
+
   }
 
   if (!tipps.length) {
+
     hinweis(
-      'Kontrollieren Sie Ihre Vorräte regelmäßig und ' +
-      'erproben Sie Ihren Versorgungsweg.'
+      'Kontrollieren Sie Ihre Vorräte regelmäßig ' +
+      'und erproben Sie Ihren Versorgungsweg.'
     );
+
   }
 
   const el = $('result');
+
   el.replaceChildren();
 
-  const statusEl = document.createElement('div');
-  statusEl.className = 'status ' + status;
+  const statusEl =
+    document.createElement('div');
+
+  statusEl.className =
+    'status ' + status;
+
   statusEl.textContent = titel;
+
   el.append(statusEl);
 
-  const grid = document.createElement('div');
+  const grid =
+    document.createElement('div');
+
   grid.className = 'result-grid';
 
   const werte = [
-    ['Personen', personen],
-    ['Zeitraum',
-      tage === 30 ? '1 Monat' :
-      tage === 60 ? '2 Monate' : tage + ' Tage'],
-    ['Bedarf pro Tag', bedarf + ' Liter'],
-    ['Flaschenvorrat', vorrat + ' Liter']
+    ['Personen',personen],
+    [
+      'Zeitraum',
+      tage === 30
+        ? '1 Monat'
+        : tage === 60
+          ? '2 Monate'
+          : tage + ' Tage'
+    ],
+    ['Bedarf pro Tag',bedarf + ' Liter'],
+    ['Flaschenvorrat',vorrat + ' Liter']
   ];
 
   for (const [label,wert] of werte) {
-    const d = document.createElement('div');
-    const b = document.createElement('b');
+
+    const d =
+      document.createElement('div');
+
+    const b =
+      document.createElement('b');
+
     b.textContent = wert;
-    d.append(b,document.createTextNode(label));
+
+    d.append(
+      b,
+      document.createTextNode(label)
+    );
+
     grid.append(d);
+
   }
 
   el.append(grid);
 
-  const h = document.createElement('h3');
-  h.textContent = 'Ihre nächsten Schritte';
+  const h =
+    document.createElement('h3');
+
+  h.textContent =
+    'Ihre nächsten Schritte';
+
   el.append(h);
 
-  const ol = document.createElement('ol');
+  const ol =
+    document.createElement('ol');
+
   ol.className = 'actions';
 
-  for (const t of tipps) {
-    const li = document.createElement('li');
-    li.textContent = t;
+  for (const text of tipps) {
+
+    const li =
+      document.createElement('li');
+
+    li.textContent = text;
+
     ol.append(li);
+
   }
 
   el.append(ol);
 
-  const p = document.createElement('p');
+  const p =
+    document.createElement('p');
+
   p.className = 'small';
+
   p.textContent =
-    'Vorläufige technische Bewertung. Eine sichere ' +
-    'Trinkwasserversorgung kann aus den Antworten ' +
-    'allein nicht nachgewiesen werden.';
+    'Vorläufige technische Bewertung. ' +
+    'Eine sichere Trinkwasserversorgung kann ' +
+    'aus den Antworten allein nicht nachgewiesen werden.';
+
   el.append(p);
 
   $('bericht').hidden = false;
+
   $('bericht').scrollIntoView({
     behavior:'smooth',
     block:'start'
   });
+
 }
 
-$('auswerten').addEventListener('click',auswerten);
+$('auswerten').addEventListener(
+  'click',
+  auswerten
+);
 
-$('reset').addEventListener('click',() => {
-  for (const el of document.querySelectorAll('input,select')) {
-    if (el.type === 'checkbox') {
-      el.checked = false;
-    } else {
-      el.value = '';
+$('reset').addEventListener(
+  'click',
+  () => {
+
+    for (
+      const el of document.querySelectorAll(
+        'input,select'
+      )
+    ) {
+
+      if (el.type === 'checkbox') {
+        el.checked = false;
+      } else {
+        el.value = '';
+      }
+
     }
+
+    aktualisieren();
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+
   }
-  aktualisieren();
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-});
+);
 
 aktualisieren();
 </script>
