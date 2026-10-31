@@ -5,23 +5,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KRISENFEST.AT – Selbstchecks zur Krisenvorsorge</title>
+
 <style>
 :root {
   --navy:#092440;
   --red:#e21729;
   --blue:#1887cb;
   --pale:#e8f4ff;
+  --background:#f3f6fa;
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body {
   margin:0;
-  background:#f3f6fa;
+  background:var(--background);
   color:var(--navy);
   font:17px/1.6 system-ui,-apple-system,Arial,sans-serif;
 }
 header {
-  background:white;
+  background:var(--background);
   border-bottom:1px solid #dfe8f1;
   padding:12px 5%;
   display:flex;
@@ -32,13 +34,14 @@ header {
 .original-logo {
   display:block;
   height:auto;
-  object-fit:contain;
+  overflow:visible;
 }
 header .original-logo {
   width:195px;
   max-width:50%;
 }
 nav {
+  margin-left:auto;
   display:flex;
   flex-wrap:wrap;
   align-items:center;
@@ -46,7 +49,10 @@ nav {
   font-size:15px;
   color:#526980;
 }
-nav a { color:inherit; text-decoration:none; }
+nav a {
+  color:inherit;
+  text-decoration:none;
+}
 nav a:hover,
 nav a[aria-current="page"] {
   color:var(--navy);
@@ -55,20 +61,9 @@ nav a[aria-current="page"] {
 }
 .hero {
   position:relative;
-  overflow:hidden;
-  background:linear-gradient(145deg,#d2e7f6,#f4f8fb);
-}
-.hero::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(125deg,#a9cce5,transparent 40%),
-    linear-gradient(25deg,transparent 60%,#b7d4e9);
-  opacity:.55;
+  background:var(--background);
 }
 .hero-inner {
-  position:relative;
   text-align:center;
   max-width:850px;
   margin:auto;
@@ -190,7 +185,8 @@ h2 {
   font:inherit;
   font-size:16px;
 }
-.field input:focus,.field select:focus {
+.field input:focus,
+.field select:focus {
   outline:2px solid #80bdea;
   outline-offset:1px;
 }
@@ -232,7 +228,10 @@ h2 {
 }
 .info li { margin:9px 0; }
 .info a { color:var(--navy); }
-.buttons { display:flex; gap:12px; }
+.buttons {
+  display:flex;
+  gap:12px;
+}
 button {
   padding:13px 17px;
   border-radius:8px;
@@ -299,39 +298,11 @@ footer {
   padding:14px 15px 32px;
 }
 [hidden] { display:none!important; }
-.product-page {
-  max-width:980px;
-  margin:30px auto 55px;
-  padding:0 15px;
-}
-.product-page .card { padding:35px; }
-.product-page .intro {
-  font-size:19px;
-  line-height:1.7;
-}
-.product-page h2 { margin-bottom:15px; }
-.product-categories {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:15px;
-  margin-top:20px;
-}
-.category {
-  padding:20px;
-  border:1px solid #d6e5f2;
-  border-radius:10px;
-  background:#f2f8ff;
-}
-.category h3 {
-  margin:0 0 8px;
-  font-size:19px;
-}
-.category p { margin:0; }
-.secondary-note {
-  font-size:15px;
-  color:#526a84;
-}
+
+/* Startseite */
+
 .landing {
+  background:var(--background);
   max-width:1080px;
   margin:0 auto;
   padding:32px 20px 58px;
@@ -346,7 +317,7 @@ footer {
   margin:0 auto 20px;
 }
 .landing-hero h1 {
-  margin:12px 0 12px;
+  margin:12px 0;
   font-size:clamp(30px,4vw,43px);
 }
 .landing-hero p {
@@ -412,13 +383,18 @@ footer {
   font-weight:700;
   color:#b51b2b;
 }
-.topic-action.pending { color:#60778c; }
+.topic-action.pending {
+  color:#60778c;
+}
 .home-note {
   margin-top:26px;
   color:#526a84;
   font-size:16px;
   text-align:center;
 }
+
+/* Unterseiten */
+
 .breadcrumb {
   max-width:1150px;
   padding:18px 18px 0;
@@ -447,6 +423,43 @@ footer {
   font-weight:700;
   color:var(--navy);
 }
+
+/* Produktbereich */
+
+.product-page {
+  max-width:980px;
+  margin:30px auto 55px;
+  padding:0 15px;
+}
+.product-page .card { padding:35px; }
+.product-page .intro {
+  font-size:19px;
+  line-height:1.7;
+}
+.product-categories {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+.category {
+  padding:20px;
+  border:1px solid #d6e5f2;
+  border-radius:10px;
+  background:#f2f8ff;
+}
+.category h3 {
+  margin:0 0 8px;
+  font-size:19px;
+}
+.category p { margin:0; }
+.secondary-note {
+  font-size:15px;
+  color:#526a84;
+}
+
+/* Mobilgeräte */
+
 @media(max-width:800px) {
   main { grid-template-columns:1fr; }
   .side {
@@ -471,8 +484,12 @@ footer {
   .fields,.side,.product-categories {
     grid-template-columns:1fr;
   }
-  .card,.product-page .card { padding:19px; }
-  .hero-inner { padding:27px 16px 32px; }
+  .card,.product-page .card {
+    padding:19px;
+  }
+  .hero-inner {
+    padding:27px 16px 32px;
+  }
   .hero p { font-size:16px; }
   .steps { gap:8px; }
   .steps div { flex:1; }
@@ -493,11 +510,89 @@ footer {
 
 <body>
 
+<!--
+  Freigestelltes Vektorlogo.
+  Die Konturen stammen aus dem bisherigen Logoentwurf.
+  Keine Bildhintergründe, keine Landschaftsreste.
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="0" height="0"
+     style="position:absolute;width:0;height:0;overflow:hidden"
+     aria-hidden="true">
+<defs>
+<symbol id="kfLogo" viewBox="28 0 767 195">
+<path fill="#091528" fill-rule="evenodd" d="
+M653,168 649,172 648,175 649,182 651,185 655,187 664,186
+668,180 668,174 666,170 662,167Z
+M734,105 734,121 749,121 751,123 751,186 768,186
+769,185 769,122 770,121 785,121 786,120 786,105 782,104Z
+M697,105 675,186 692,186 697,172 717,172 721,186
+739,186 734,164 731,157 729,146 726,139 717,105 715,104Z
+M707,131 709,132 711,145 714,154 713,157 701,157
+700,156 705,133Z
+M345,105 345,186 364,186 364,144 365,143 367,144
+368,148 372,153 388,184 390,186 408,186 408,105
+407,104 406,105 403,104 390,104 389,105 389,145
+388,146 386,145 365,105 363,104Z
+M283,105 283,186 333,186 333,170 304,170 303,169
+303,154 304,153 320,153 321,152 327,153 328,152
+328,137 304,136 303,135 303,122 304,121 332,121
+332,107 333,106 332,104 285,104Z
+M187,104 185,105 185,185 186,186 205,186 206,185
+206,106 204,104Z
+M115,104 114,105 114,186 133,186 134,185 134,158
+135,157 140,157 142,159 154,186 176,186 170,172
+160,155 160,153 165,150 170,144 173,135 173,126
+169,115 161,108 152,105Z
+M135,121 146,121 152,126 153,130 152,136 147,141
+144,142 134,141 134,122Z
+M40,104 39,105 39,186 59,186 59,161 64,155 67,156
+83,186 106,186 79,139 104,105 103,104 82,104
+80,105 63,131 60,133 59,132 59,105 57,104 41,105Z
+M253,103 240,103 229,107 223,112 218,122 218,133
+221,141 229,148 249,157 253,163 252,167 246,171
+236,170 225,163 219,171 216,178 221,182 230,186
+244,188 257,186 269,177 273,168 273,157 269,148
+262,142 245,135 238,128 239,123 243,120 251,120
+262,126 270,115 271,112 268,109Z
+M578,84 504,28 498,29 469,51 467,51 409,5 405,6
+353,49 345,45 321,26 315,25 234,84 254,84
+316,40 319,40 358,70 377,70 376,68 368,63
+364,58 408,23 422,33 467,70 487,70 477,60
+498,44 503,42 559,84Z
+"/>
+<path fill="#d70c23" fill-rule="evenodd" d="
+M599,104 597,108 598,121 614,121 615,122 615,185
+616,186 634,186 635,185 635,122 636,121 652,121
+653,120 653,105 651,104Z
+M481,105 481,186 530,186 530,170 502,170 500,163
+502,153 525,152 525,137 502,137 500,134 501,122
+502,121 528,121 530,106 528,104Z
+M470,104 424,104 423,105 423,186 442,186 443,185
+443,155 444,154 465,154 466,153 467,139 466,138
+445,138 443,136 443,122 444,121 470,121
+471,120 471,105Z
+M562,103 554,105 545,111 540,120 539,131 540,136
+546,145 570,157 573,160 574,163 573,167 568,171
+559,171 545,164 537,177 544,183 551,186 572,187
+581,184 590,176 593,169 593,156 591,151 585,144
+563,133 560,130 559,126 560,123 564,120
+572,120 583,126 592,112 589,109 578,104Z
+"/>
+</symbol>
+</defs>
+</svg>
+
 <header>
-  <a href="#start" aria-label="KRISENFEST.AT – Startseite">
-    <img class="original-logo"
-         alt="KRISENFEST.AT – Original-Logo">
+  <a href="#start" id="headerMark" hidden
+     aria-label="KRISENFEST.AT – Startseite">
+    <svg class="original-logo" viewBox="0 0 767 195"
+         role="img" aria-label="KRISENFEST.AT">
+      <use href="#kfLogo" width="767" height="195"></use>
+    </svg>
   </a>
+
   <nav aria-label="Hauptnavigation">
     <a href="#wissen">Wissen</a>
     <a href="#start" id="navCheck">Selbstchecks</a>
@@ -507,9 +602,16 @@ footer {
   </nav>
 </header>
 
+<!-- STARTSEITE -->
+
 <section id="startAnsicht" class="landing">
+
   <div class="landing-hero">
-    <img class="original-logo" alt="KRISENFEST.AT">
+
+    <svg class="original-logo" viewBox="0 0 767 195"
+         role="img" aria-label="KRISENFEST.AT">
+      <use href="#kfLogo" width="767" height="195"></use>
+    </svg>
 
     <p class="tag">SELBSTCHECKS ZUR KRISENVORSORGE</p>
 
@@ -537,7 +639,9 @@ footer {
       <span class="topic-description">
         Trinkwasservorräte, Wasserquellen und Aufbereitung.
       </span>
-      <span class="topic-action">Selbstcheck starten →</span>
+      <span class="topic-action">
+        Selbstcheck starten →
+      </span>
     </a>
 
     <a class="topic" href="#lebensmittel">
@@ -546,7 +650,9 @@ footer {
       <span class="topic-description">
         Vorräte und Lebensmittelversorgung bei Ausfällen.
       </span>
-      <span class="topic-action pending">Thema ansehen →</span>
+      <span class="topic-action pending">
+        Thema ansehen →
+      </span>
     </a>
 
     <a class="topic" href="#strom">
@@ -555,7 +661,9 @@ footer {
       <span class="topic-description">
         Licht, Energie und Versorgung ohne Netzstrom.
       </span>
-      <span class="topic-action pending">Thema ansehen →</span>
+      <span class="topic-action pending">
+        Thema ansehen →
+      </span>
     </a>
 
     <a class="topic" href="#heizen">
@@ -564,7 +672,9 @@ footer {
       <span class="topic-description">
         Wärmeversorgung in der kalten Jahreszeit.
       </span>
-      <span class="topic-action pending">Thema ansehen →</span>
+      <span class="topic-action pending">
+        Thema ansehen →
+      </span>
     </a>
 
     <a class="topic" href="#kommunikation">
@@ -573,7 +683,9 @@ footer {
       <span class="topic-description">
         Informationen und Erreichbarkeit bei Störungen.
       </span>
-      <span class="topic-action pending">Thema ansehen →</span>
+      <span class="topic-action pending">
+        Thema ansehen →
+      </span>
     </a>
 
     <a class="topic" href="#mobilitaet">
@@ -582,7 +694,9 @@ footer {
       <span class="topic-description">
         Unterwegs sein bei eingeschränkter Infrastruktur.
       </span>
-      <span class="topic-action pending">Thema ansehen →</span>
+      <span class="topic-action pending">
+        Thema ansehen →
+      </span>
     </a>
 
     <a class="topic" href="#hygiene">
@@ -592,7 +706,9 @@ footer {
         Körperpflege, Sanitärversorgung und Wasser
         für den Haushalt.
       </span>
-      <span class="topic-action pending">Thema ansehen →</span>
+      <span class="topic-action pending">
+        Thema ansehen →
+      </span>
     </a>
 
     <a class="topic" href="#gesundheit">
@@ -601,7 +717,9 @@ footer {
       <span class="topic-description">
         Medizinische Grundversorgung und notwendige Vorräte.
       </span>
-      <span class="topic-action pending">Thema ansehen →</span>
+      <span class="topic-action pending">
+        Thema ansehen →
+      </span>
     </a>
 
     <a class="topic" href="#weitere">
@@ -610,7 +728,9 @@ footer {
       <span class="topic-description">
         Zusätzliche Bereiche für eine umfassende Vorsorge.
       </span>
-      <span class="topic-action pending">Thema ansehen →</span>
+      <span class="topic-action pending">
+        Thema ansehen →
+      </span>
     </a>
 
   </div>
@@ -619,7 +739,10 @@ footer {
     Der Trinkwasser-Selbstcheck ist bereits verfügbar.
     Die weiteren Themen werden schrittweise ergänzt.
   </p>
+
 </section>
+
+<!-- TRINKWASSER-SELBSTCHECK -->
 
 <div id="checkAnsicht" hidden>
 
@@ -630,7 +753,10 @@ footer {
   <section class="hero">
     <div class="hero-inner">
 
-      <img class="original-logo" alt="KRISENFEST.AT">
+      <svg class="original-logo" viewBox="0 0 767 195"
+           role="img" aria-label="KRISENFEST.AT">
+        <use href="#kfLogo" width="767" height="195"></use>
+      </svg>
 
       <h1>Trinkwasser-Selbstcheck</h1>
 
@@ -651,9 +777,8 @@ footer {
       <p>
         Dieser Selbstcheck untersucht, wie gut Ihr Haushalt
         darauf vorbereitet ist. Berücksichtigt werden
-        Trinkwasservorräte, alternative Wasserquellen
-        und Möglichkeiten, daraus sicheres Trinkwasser
-        zu gewinnen.
+        Trinkwasservorräte, alternative Wasserquellen und
+        Möglichkeiten, daraus sicheres Trinkwasser zu gewinnen.
       </p>
 
       <div class="steps">
@@ -667,10 +792,10 @@ footer {
   </section>
 
   <main id="selbstcheck">
-
     <div>
 
       <section class="card">
+
         <div class="heading">
           <span class="number">1</span>
           <div>
@@ -682,6 +807,7 @@ footer {
         </div>
 
         <div class="fields">
+
           <div class="field">
             <label for="personen">
               Wie viele Personen leben in Ihrem Haushalt?
@@ -703,14 +829,19 @@ footer {
               <option value="60">2 Monate</option>
             </select>
           </div>
+
         </div>
       </section>
 
       <section class="card">
+
         <div class="heading">
           <span class="number">2</span>
           <div>
-            <h2>Welche Wasservorräte / Wasserquellen sind vorhanden?</h2>
+            <h2>
+              Welche Wasservorräte / Wasserquellen
+              sind vorhanden?
+            </h2>
             <p class="muted">
               Eingelagerte Vorräte und alternative Wasserversorgung.
             </p>
@@ -718,13 +849,14 @@ footer {
         </div>
 
         <div class="fields">
+
           <div class="field">
             <label for="flaschen">
               Wie viele Liter originalverschlossenes
               Trinkwasser haben Sie vorrätig?
             </label>
-            <input id="flaschen" type="number" min="0"
-                   step="0.5"
+            <input id="flaschen" type="number"
+                   min="0" step="0.5"
                    placeholder="Liter (auch 0 möglich)">
           </div>
 
@@ -738,14 +870,19 @@ footer {
               <option value="nein">Nein</option>
             </select>
           </div>
+
         </div>
 
         <div class="extra" id="quelleDetails" hidden>
+
           <h3>Angaben zu Ihrer Wasserquelle</h3>
 
           <div class="fields">
+
             <div class="field">
-              <label for="art">Welche Wasserquelle?</label>
+              <label for="art">
+                Welche Wasserquelle?
+              </label>
               <select id="art">
                 <option value="">Bitte auswählen</option>
                 <option value="brunnen">Brunnen</option>
@@ -817,12 +954,13 @@ footer {
 
             <div class="field full" id="transportBox" hidden>
               <div class="fields">
+
                 <div class="field">
                   <label for="liter">
                     Wie viele Liter fassen Ihre Behälter zusammen?
                   </label>
-                  <input id="liter" type="number" min="0"
-                         step="0.5"
+                  <input id="liter" type="number"
+                         min="0" step="0.5"
                          placeholder="Gesamtkapazität in Litern">
                 </div>
 
@@ -837,24 +975,31 @@ footer {
                     <option value="nein">Nein</option>
                   </select>
                 </div>
+
               </div>
             </div>
+
           </div>
         </div>
+
       </section>
 
       <section class="card">
+
         <div class="heading">
           <span class="number">3</span>
           <div>
             <h2>Wasseraufbereitung</h2>
             <p class="muted">
-              Welche Möglichkeiten stehen Ihnen im Notfall zur Verfügung?
+              Welche Möglichkeiten stehen Ihnen im
+              Notfall zur Verfügung?
             </p>
           </div>
         </div>
 
-        <p class="question">Mehrfachauswahl möglich</p>
+        <p class="question">
+          Mehrfachauswahl möglich
+        </p>
 
         <label class="check">
           <input id="filter" type="checkbox">
@@ -869,16 +1014,36 @@ footer {
                 Welchen Wasserfilter besitzen Sie?
               </label>
               <select id="modell">
-                <option value="">Hersteller und Modell auswählen</option>
-                <option value="Katadyn Pocket">Katadyn – Pocket</option>
-                <option value="Katadyn BeFree">Katadyn – BeFree</option>
-                <option value="Katadyn Combi">Katadyn – Combi</option>
-                <option value="MSR Guardian">MSR – Guardian</option>
-                <option value="MSR MiniWorks EX">MSR – MiniWorks EX</option>
-                <option value="Sawyer Squeeze">Sawyer – Squeeze</option>
-                <option value="Sawyer Mini">Sawyer – Mini</option>
-                <option value="LifeStraw Peak Series">LifeStraw – Peak Series</option>
-                <option value="GRAYL GeoPress">GRAYL – GeoPress</option>
+                <option value="">
+                  Hersteller und Modell auswählen
+                </option>
+                <option value="Katadyn Pocket">
+                  Katadyn – Pocket
+                </option>
+                <option value="Katadyn BeFree">
+                  Katadyn – BeFree
+                </option>
+                <option value="Katadyn Combi">
+                  Katadyn – Combi
+                </option>
+                <option value="MSR Guardian">
+                  MSR – Guardian
+                </option>
+                <option value="MSR MiniWorks EX">
+                  MSR – MiniWorks EX
+                </option>
+                <option value="Sawyer Squeeze">
+                  Sawyer – Squeeze
+                </option>
+                <option value="Sawyer Mini">
+                  Sawyer – Mini
+                </option>
+                <option value="LifeStraw Peak Series">
+                  LifeStraw – Peak Series
+                </option>
+                <option value="GRAYL GeoPress">
+                  GRAYL – GeoPress
+                </option>
                 <option value="sonstige">
                   Anderer Hersteller / anderes Modell
                 </option>
@@ -921,13 +1086,15 @@ footer {
           <input id="keine" type="checkbox">
           Keine Aufbereitungsmöglichkeit
         </label>
+
       </section>
 
       <div class="buttons">
         <button id="reset" type="button">
           Angaben zurücksetzen
         </button>
-        <button class="primary" id="auswerten" type="button">
+        <button class="primary"
+                id="auswerten" type="button">
           Selbstcheck auswerten →
         </button>
       </div>
@@ -940,9 +1107,12 @@ footer {
           <span class="number">4</span>
           <div>
             <h2>Ihre persönliche Einschätzung</h2>
-            <p class="muted">Basierend auf Ihren Angaben</p>
+            <p class="muted">
+              Basierend auf Ihren Angaben
+            </p>
           </div>
         </div>
+
         <div id="result"></div>
       </section>
 
@@ -953,8 +1123,8 @@ footer {
       <div class="info">
         <h3>💧 Warum ist Trinkwasservorsorge wichtig?</h3>
         <p>
-          Bei Störungen oder Verunreinigungen kann die
-          öffentliche Wasserversorgung zeitweise ausfallen.
+          Bei Störungen oder Verunreinigungen kann
+          die öffentliche Wasserversorgung zeitweise ausfallen.
         </p>
         <ul>
           <li>Ressourcen erkennen</li>
@@ -967,7 +1137,9 @@ footer {
         <h3>💡 Gut zu wissen</h3>
         <p>
           Die Berechnung orientiert sich an
-          <strong>2 Litern Trinkwasser pro Person und Tag</strong>.
+          <strong>
+            2 Litern Trinkwasser pro Person und Tag
+          </strong>.
         </p>
         <p>
           Für den allgemeinen Haushaltsvorrat empfiehlt
@@ -986,10 +1158,14 @@ footer {
 
     </aside>
   </main>
+
 </div>
+
+<!-- PRODUKTE -->
 
 <section id="produkteAnsicht" class="product-page" hidden>
   <div class="card">
+
     <h1>Produkte für die erweiterte Krisenvorsorge</h1>
 
     <p class="intro">
@@ -1003,10 +1179,10 @@ footer {
       Darüber hinaus gibt es Ausrüstung, mit der sich
       die eigene Vorbereitung weiter ausbauen lässt.
       Diese Produkte sind für die grundlegende
-      Krisenvorsorge nicht zwingend notwendig. Für Menschen,
-      die ihre Unabhängigkeit und Widerstandsfähigkeit
-      erhöhen möchten, können sie jedoch eine interessante
-      Ergänzung sein.
+      Krisenvorsorge nicht zwingend notwendig.
+      Für Menschen, die ihre Unabhängigkeit und
+      Widerstandsfähigkeit erhöhen möchten, können
+      sie jedoch eine interessante Ergänzung sein.
     </p>
 
     <p>
@@ -1062,23 +1238,36 @@ footer {
         schrittweise ergänzt. Derzeit werden hier
         noch keine einzelnen Produkte empfohlen.
       </p>
+
     </div>
   </div>
 </section>
 
+<!-- WEITERE UNTERSEITEN -->
+
 <section id="platzhalterAnsicht" class="placeholder" hidden>
   <div class="card">
-    <p class="coming">KRISENFEST.AT · Selbstchecks</p>
-    <h1 id="platzhalterTitel">Weiterer Selbstcheck</h1>
+
+    <p class="coming">
+      KRISENFEST.AT · Selbstchecks
+    </p>
+
+    <h1 id="platzhalterTitel">
+      Weiterer Selbstcheck
+    </h1>
+
     <p id="platzhalterText"></p>
+
     <p class="coming">
       Der Selbstcheck für diesen Bereich befindet sich
       in Vorbereitung. Hier entsteht später ein eigener
       Fragebogen mit Auswertung und Empfehlungen.
     </p>
+
     <a class="back-link" href="#start">
       ← Alle Selbstchecks ansehen
     </a>
+
   </div>
 </section>
 
@@ -1090,107 +1279,38 @@ footer {
 <script>
 "use strict";
 
-/* Eingebettetes Original-Logo */
-const originalLogo = "data:image/webp;base64," +
-"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";
-
-document.querySelectorAll(".original-logo").forEach(img => {
-  img.src = originalLogo;
-});
-
 const $ = id => document.getElementById(id);
 const v = id => $(id).value;
 const ja = id => v(id) === "ja";
 const hat = id => $(id).checked;
 
 function aktualisieren() {
+
   $("quelleDetails").hidden = !ja("quelle");
-  $("ersatzBox").hidden = !(ja("quelle") && ja("strom"));
-  $("transportBox").hidden = !(ja("quelle") && ja("behaelter"));
+
+  $("ersatzBox").hidden =
+    !(ja("quelle") && ja("strom"));
+
+  $("transportBox").hidden =
+    !(ja("quelle") && ja("behaelter"));
+
   $("filterBox").hidden = !hat("filter");
 
-  $("modellSonstBox").hidden = !(
-    hat("filter") && v("modell") === "sonstige"
-  );
+  $("modellSonstBox").hidden =
+    !(hat("filter") && v("modell") === "sonstige");
 
   const fragen = {
-    brunnen:"Wie weit ist der Brunnen entfernt?",
-    quelle:"Wie weit ist die Quelle entfernt?",
-    zisterne:"Wie weit ist die Zisterne entfernt?",
-    bach:"Wie weit ist der Bach entfernt?",
-    fluss:"Wie weit ist der Fluss entfernt?",
-    see:"Wie weit ist der See entfernt?"
+    brunnen: "Wie weit ist der Brunnen entfernt?",
+    quelle: "Wie weit ist die Quelle entfernt?",
+    zisterne: "Wie weit ist die Zisterne entfernt?",
+    bach: "Wie weit ist der Bach entfernt?",
+    fluss: "Wie weit ist der Fluss entfernt?",
+    see: "Wie weit ist der See entfernt?"
   };
 
   $("entfernungLabel").textContent =
-    fragen[v("art")] || "Wie weit ist die Wasserquelle entfernt?";
+    fragen[v("art")] ||
+    "Wie weit ist die Wasserquelle entfernt?";
 
   $("bericht").hidden = true;
   $("error").hidden = true;
@@ -1202,7 +1322,9 @@ for (const id of [
   $(id).addEventListener("change", aktualisieren);
 }
 
-for (const id of ["filter","kochen","chemie"]) {
+for (const id of [
+  "filter","kochen","chemie"
+]) {
   $(id).addEventListener("change", () => {
     if (hat(id)) $("keine").checked = false;
   });
@@ -1210,7 +1332,9 @@ for (const id of ["filter","kochen","chemie"]) {
 
 $("keine").addEventListener("change", () => {
   if (hat("keine")) {
-    for (const id of ["filter","kochen","chemie"]) {
+    for (const id of [
+      "filter","kochen","chemie"
+    ]) {
       $(id).checked = false;
     }
     aktualisieren();
@@ -1224,8 +1348,8 @@ for (const el of document.querySelectorAll("input,select")) {
   });
 }
 
-function fehler(t) {
-  $("error").textContent = t;
+function fehler(text) {
+  $("error").textContent = text;
   $("error").hidden = false;
   $("error").scrollIntoView({
     behavior:"smooth",
@@ -1234,6 +1358,7 @@ function fehler(t) {
 }
 
 function auswerten() {
+
   const personen = Number(v("personen"));
   const tage = Number(v("tage"));
   const vorrat = Number(v("flaschen"));
@@ -1264,7 +1389,8 @@ function auswerten() {
       .some(id => !v(id))
   ) {
     return fehler(
-      "Bitte beantworten Sie die sichtbaren Fragen zur Wasserquelle."
+      "Bitte beantworten Sie die sichtbaren " +
+      "Fragen zur Wasserquelle."
     );
   }
 
@@ -1285,8 +1411,8 @@ function auswerten() {
     )
   ) {
     return fehler(
-      "Bitte ergänzen Sie Kapazität und Tragbarkeit " +
-      "der Wasserbehälter."
+      "Bitte ergänzen Sie Kapazität und " +
+      "Tragbarkeit der Wasserbehälter."
     );
   }
 
@@ -1302,18 +1428,24 @@ function auswerten() {
     )
   ) {
     return fehler(
-      "Bitte geben Sie Filtermodell und Einsatzbereitschaft an."
+      "Bitte geben Sie Filtermodell " +
+      "und Einsatzbereitschaft an."
     );
   }
 
-  if (!["filter","kochen","chemie","keine"].some(hat)) {
+  if (
+    !["filter","kochen","chemie","keine"].some(hat)
+  ) {
     return fehler(
-      "Bitte wählen Sie eine Angabe zur Wasseraufbereitung."
+      "Bitte wählen Sie eine Angabe " +
+      "zur Wasseraufbereitung."
     );
   }
 
   const kapazitaet =
-    quelle && ja("behaelter") ? Number(v("liter")) : 0;
+    quelle && ja("behaelter")
+      ? Number(v("liter"))
+      : 0;
 
   const versorgung =
     quelle &&
@@ -1348,21 +1480,24 @@ function auswerten() {
   }
 
   const tipps = [];
-  const add = t => {
-    if (!tipps.includes(t)) tipps.push(t);
+
+  const add = text => {
+    if (!tipps.includes(text)) tipps.push(text);
   };
 
   if (!genug && !versorgung) {
     add(
-      "Ohne nutzbare zusätzliche Versorgung fehlen rechnerisch " +
+      "Ohne nutzbare zusätzliche Versorgung fehlen " +
+      "rechnerisch " +
       Math.max(0, bedarf * tage - vorrat)
         .toLocaleString("de-AT") +
-      " Liter Trinkwasser. Ergänzen Sie Vorräte oder sichern " +
-      "Sie einen alternativen Bezugsweg."
+      " Liter Trinkwasser. Ergänzen Sie Vorräte " +
+      "oder sichern Sie einen alternativen Bezugsweg."
     );
   }
 
   if (quelle) {
+
     if (!ja("behaelter")) {
       add(
         "Stellen Sie saubere, verschließbare und " +
@@ -1373,8 +1508,8 @@ function auswerten() {
     if (ja("behaelter") && kapazitaet < bedarf) {
       add(
         "Die Behälter fassen weniger als den Tagesbedarf. " +
-        "Planen Sie zusätzliche gut tragbare Behälter oder " +
-        "mehrere tägliche Befüllungen ein."
+        "Planen Sie zusätzliche gut tragbare Behälter " +
+        "oder mehrere tägliche Befüllungen ein."
       );
     }
 
@@ -1394,14 +1529,16 @@ function auswerten() {
 
     if (v("entfernung") === "Weiter entfernt") {
       add(
-        "Erproben Sie den Transportweg mit gefüllten Behältern."
+        "Erproben Sie den Transportweg " +
+        "mit gefüllten Behältern."
       );
     }
 
     if (!ja("qualitaet")) {
       add(
         "Lassen Sie die Wasserqualität beurteilen. " +
-        "Ungeprüftes Wasser gilt nicht als nachweislich trinkbar."
+        "Ungeprüftes Wasser gilt nicht als " +
+        "nachweislich trinkbar."
       );
     } else {
       add(
@@ -1418,15 +1555,16 @@ function auswerten() {
     }
 
     if (hat("filter")) {
-      const m = (
+
+      const modell = (
         v("modell") === "sonstige"
           ? v("modellSonst")
           : v("modell")
       ).toLowerCase();
 
       if (
-        m.includes("pocket") ||
-        m.includes("befree")
+        modell.includes("pocket") ||
+        modell.includes("befree")
       ) {
         add(
           "Katadyn Pocket und BeFree reduzieren bestimmte " +
@@ -1451,70 +1589,85 @@ function auswerten() {
 
   if (tage >= 30 && !quelle) {
     add(
-      "Für längere Vorsorgezeiträume ist ein zusätzlicher " +
-      "Wasserbezugsweg mit tragbaren Transportbehältern sinnvoll."
+      "Für längere Vorsorgezeiträume ist ein " +
+      "zusätzlicher Wasserbezugsweg mit tragbaren " +
+      "Transportbehältern sinnvoll."
     );
   }
 
   if (!tipps.length) {
     add(
-      "Kontrollieren Sie Ihre Vorräte regelmäßig und " +
-      "erproben Sie Ihre Notversorgung."
+      "Kontrollieren Sie Ihre Vorräte regelmäßig " +
+      "und erproben Sie Ihre Notversorgung."
     );
   }
 
-  const el = $("result");
-  el.replaceChildren();
+  const ergebnis = $("result");
+  ergebnis.replaceChildren();
 
   const status = document.createElement("div");
   status.className = "status " + art;
   status.textContent = titel;
-  el.append(status);
+  ergebnis.append(status);
 
   const metrics = document.createElement("div");
   metrics.className = "metrics";
 
-  for (const [name,value] of [
-    ["Personen",personen],
+  const werte = [
+    ["Personen", personen],
     [
       "Zeitraum",
-      tage === 30 ? "1 Monat" :
-      tage === 60 ? "2 Monate" : tage + " Tage"
+      tage === 30
+        ? "1 Monat"
+        : tage === 60
+          ? "2 Monate"
+          : tage + " Tage"
     ],
-    ["Bedarf täglich",bedarf + " Liter"],
-    ["Flaschenvorrat",vorrat + " Liter"]
-  ]) {
-    const d = document.createElement("div");
-    const b = document.createElement("b");
-    b.textContent = value;
-    d.append(b, document.createTextNode(name));
-    metrics.append(d);
+    ["Bedarf täglich", bedarf + " Liter"],
+    ["Flaschenvorrat", vorrat + " Liter"]
+  ];
+
+  for (const [name, wert] of werte) {
+
+    const feld = document.createElement("div");
+    const fett = document.createElement("b");
+
+    fett.textContent = wert;
+    feld.append(
+      fett,
+      document.createTextNode(name)
+    );
+
+    metrics.append(feld);
   }
 
-  el.append(metrics);
+  ergebnis.append(metrics);
 
-  const h = document.createElement("h3");
-  h.textContent = "Ihre nächsten Schritte";
-  el.append(h);
+  const titelEmpfehlungen = document.createElement("h3");
+  titelEmpfehlungen.textContent = "Ihre nächsten Schritte";
+  ergebnis.append(titelEmpfehlungen);
 
-  const list = document.createElement("ol");
+  const liste = document.createElement("ol");
 
-  for (const t of tipps) {
-    const li = document.createElement("li");
-    li.textContent = t;
-    list.append(li);
+  for (const text of tipps) {
+    const eintrag = document.createElement("li");
+    eintrag.textContent = text;
+    liste.append(eintrag);
   }
 
-  el.append(list);
+  ergebnis.append(liste);
 
-  const note = document.createElement("p");
-  note.className = "smallprint";
-  note.textContent =
-    "Vorläufige Bewertung. Eine sichere Trinkwasserversorgung " +
-    "kann aus den Antworten allein nicht nachgewiesen werden.";
-  el.append(note);
+  const hinweis = document.createElement("p");
+  hinweis.className = "smallprint";
+  hinweis.textContent =
+    "Vorläufige Bewertung. Eine sichere " +
+    "Trinkwasserversorgung kann aus den Antworten " +
+    "allein nicht nachgewiesen werden.";
+
+  ergebnis.append(hinweis);
 
   $("bericht").hidden = false;
+
   $("bericht").scrollIntoView({
     behavior:"smooth",
     block:"start"
@@ -1524,78 +1677,98 @@ function auswerten() {
 $("auswerten").addEventListener("click", auswerten);
 
 $("reset").addEventListener("click", () => {
-  for (const el of document.querySelectorAll("input,select")) {
+
+  for (
+    const el of document.querySelectorAll("input,select")
+  ) {
     if (el.type === "checkbox") {
       el.checked = false;
     } else {
       el.value = "";
     }
   }
+
   aktualisieren();
-  window.scrollTo({top:0,behavior:"smooth"});
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 });
 
-/* Unterseiten und Platzhalter */
+/* Navigation und Unterseiten */
 
 const unterseiten = {
+
   lebensmittel: [
     "Lebensmittel",
-    "Wie gut ist Ihre Lebensmittelversorgung für einen längeren " +
-    "Ausfall des gewohnten Einkaufs vorbereitet?"
+    "Wie gut ist Ihre Lebensmittelversorgung für " +
+    "einen längeren Ausfall des gewohnten Einkaufs vorbereitet?"
   ],
+
   strom: [
     "Strom",
-    "Welche wichtigen Geräte können Sie bei einem Ausfall " +
-    "des öffentlichen Stromnetzes weiter betreiben?"
+    "Welche wichtigen Geräte können Sie bei einem " +
+    "Ausfall des öffentlichen Stromnetzes weiter betreiben?"
   ],
+
   heizen: [
     "Heizen",
     "Welche Möglichkeiten stehen Ihnen zur Verfügung, " +
     "wenn Ihre gewohnte Wärmeversorgung ausfällt?"
   ],
+
   kommunikation: [
     "Kommunikation",
     "Wie bleiben Sie auch bei Störungen von Mobilfunk, " +
     "Internet oder Stromversorgung informiert?"
   ],
+
   mobilitaet: [
     "Mobilität",
-    "Wie gut können Sie notwendige Wege bei Einschränkungen " +
-    "der Verkehrsinfrastruktur zurücklegen?"
+    "Wie gut können Sie notwendige Wege bei " +
+    "Einschränkungen der Verkehrsinfrastruktur zurücklegen?"
   ],
+
   hygiene: [
     "Hygiene & Brauchwasser",
-    "Wie sichern Sie Hygiene und Sanitärversorgung, wenn " +
-    "Leitungswasser oder Abwasserentsorgung ausfallen?"
+    "Wie sichern Sie Hygiene und Sanitärversorgung, " +
+    "wenn Leitungswasser oder Abwasserentsorgung ausfallen?"
   ],
+
   gesundheit: [
     "Gesundheit & Erste Hilfe",
-    "Welche Vorkehrungen gibt es für Erste Hilfe, notwendige " +
-    "Medikamente und die gesundheitliche Grundversorgung?"
+    "Welche Vorkehrungen gibt es für Erste Hilfe, " +
+    "notwendige Medikamente und die gesundheitliche Grundversorgung?"
   ],
+
   weitere: [
     "Weitere Themen",
     "Hier werden später zusätzliche Themen der " +
     "Krisenvorsorge zusammengefasst."
   ],
+
   wissen: [
     "Wissen",
-    "Hier entsteht ein Wissensbereich mit Grundlagen und " +
-    "verständlichen Informationen zur Krisenvorsorge."
+    "Hier entsteht ein Wissensbereich mit Grundlagen " +
+    "und verständlichen Informationen zur Krisenvorsorge."
   ],
+
   vorsorge: [
     "Vorsorge",
     "Hier entsteht eine Übersicht mit praktischen Maßnahmen " +
     "zur persönlichen und häuslichen Krisenvorsorge."
   ],
+
   service: [
     "Service",
-    "Hier entstehen ergänzende Informationen, Hilfsmittel " +
-    "und Kontaktmöglichkeiten."
+    "Hier entstehen ergänzende Informationen, " +
+    "Hilfsmittel und Kontaktmöglichkeiten."
   ]
 };
 
 function ansichtWechsel() {
+
   const ziel =
     decodeURIComponent(location.hash.slice(1)) || "start";
 
@@ -1603,9 +1776,17 @@ function ansichtWechsel() {
   const wasser = ziel === "trinkwasser";
 
   const platzhalter =
-    Object.prototype.hasOwnProperty.call(unterseiten, ziel);
+    Object.prototype.hasOwnProperty.call(
+      unterseiten,
+      ziel
+    );
 
   const start = !(produkt || wasser || platzhalter);
+
+  // Auf der Startseite kein doppeltes Logo.
+  // Auf Unterseiten kleines Logo links im Kopf.
+
+  $("headerMark").hidden = start;
 
   $("startAnsicht").hidden = !start;
   $("checkAnsicht").hidden = !wasser;
@@ -1613,15 +1794,17 @@ function ansichtWechsel() {
   $("platzhalterAnsicht").hidden = !platzhalter;
 
   if (platzhalter) {
-    const [titel,text] = unterseiten[ziel];
+
+    const [titel, beschreibung] = unterseiten[ziel];
 
     $("platzhalterTitel").textContent = titel;
-    $("platzhalterText").textContent = text;
+    $("platzhalterText").textContent = beschreibung;
   }
 
   $("navCheck").setAttribute(
     "aria-current",
-    start || wasser ||
+    start ||
+    wasser ||
     (
       platzhalter &&
       !["wissen","vorsorge","service"].includes(ziel)
@@ -1635,16 +1818,16 @@ function ansichtWechsel() {
     produkt ? "page" : "false"
   );
 
-  document.title =
-    (
-      wasser
-        ? "Trinkwasser-Selbstcheck"
-        : produkt
-          ? "Produkte"
-          : platzhalter
-            ? unterseiten[ziel][0]
-            : "Selbstchecks zur Krisenvorsorge"
-    ) + " – KRISENFEST.AT";
+  const seitentitel =
+    wasser
+      ? "Trinkwasser-Selbstcheck"
+      : produkt
+        ? "Produkte"
+        : platzhalter
+          ? unterseiten[ziel][0]
+          : "Selbstchecks zur Krisenvorsorge";
+
+  document.title = seitentitel + " – KRISENFEST.AT";
 
   window.scrollTo(0,0);
 }
@@ -1652,6 +1835,7 @@ function ansichtWechsel() {
 window.addEventListener("hashchange", ansichtWechsel);
 
 $("zeigeBereiche").addEventListener("click", () => {
+
   const sichtbar = $("produktBereiche").hidden;
 
   $("produktBereiche").hidden = !sichtbar;
