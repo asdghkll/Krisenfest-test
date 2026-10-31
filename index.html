@@ -1,914 +1,1201 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KRISENFEST.AT – Trinkwasser-Selbstcheck</title>
-
 <style>
-* {
-  box-sizing: border-box;
+:root{
+  --navy:#092440;
+  --red:#e21729;
+  --blue:#1677b9;
+  --pale:#eaf5ff;
+  --text:#203955;
 }
-
-body {
-  margin: 0;
-  background: #f0f4f3;
-  color: #20372f;
-  font: 16px/1.5 system-ui, Arial, sans-serif;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font:16px/1.5 system-ui,-apple-system,Arial,sans-serif;
+  color:var(--navy);
+  background:#f3f6fa;
 }
-
-main {
-  max-width: 760px;
-  margin: auto;
-  padding: 18px;
+.top{
+  background:#fff;
+  border-bottom:1px solid #dde5ee;
+  padding:9px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
 }
-
-header {
-  padding: 22px 0;
+.logo{
+  display:inline-block;
+  color:var(--navy);
+  font-weight:900;
+  letter-spacing:-1.4px;
+  line-height:1;
+  text-align:center;
+  font-size:27px;
+  white-space:nowrap;
 }
-
-h1 {
-  margin: 0;
-  color: #174d3b;
+.logo svg{
+  display:block;
+  width:61%;
+  height:28px;
+  margin:0 auto -3px;
 }
-
-h2 {
-  font-size: 1.17rem;
-  margin: 0 0 16px;
+.logo b{color:var(--red)}
+.top nav{
+  display:flex;
+  gap:27px;
+  font-size:13px;
+  color:#526980;
 }
-
-section, #bericht {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 14px 0;
-  box-shadow: 0 1px 8px #0001;
+.top nav strong{
+  border-bottom:3px solid var(--red);
+  padding-bottom:7px;
+  color:var(--navy);
 }
-
-label {
-  display: block;
-  font-weight: 600;
-  margin: 14px 0 5px;
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:355px;
+  background:linear-gradient(#c9e2f4,#f4f8fc);
 }
-
-input, select {
-  width: 100%;
-  padding: 13px;
-  font: inherit;
-  border: 1px solid #9eada6;
-  border-radius: 8px;
-  background: white;
-  color: #20372f;
+.mountains{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
 }
-
-input[type=checkbox] {
-  width: auto;
-  transform: scale(1.25);
-  margin-right: 10px;
+.hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #f5f9fdcc 33%,
+      #f5f9fddd 65%,
+      transparent
+    ),
+    linear-gradient(0deg,#f3f6fa,transparent 65%);
+  pointer-events:none;
 }
-
-.check {
-  font-weight: 400;
-  display: block;
-  margin: 12px 0;
+.hero-content{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  margin:auto;
+  max-width:800px;
+  padding:42px 20px 32px;
 }
-
-button {
-  background: #176849;
-  color: white;
-  border: 0;
-  border-radius: 8px;
-  padding: 14px 22px;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-  width: 100%;
-  margin: 8px 0;
+.hero .logo{
+  font-size:clamp(42px,6vw,68px);
+  letter-spacing:-3px;
 }
-
-[hidden] {
-  display: none !important;
+.hero .logo svg{
+  height:52px;
+  margin-bottom:-3px;
 }
-
-.note {
-  color: #52655d;
-  font-size: .92rem;
+h1{
+  font-size:clamp(27px,3.5vw,40px);
+  margin:16px 0 10px;
+  line-height:1.2;
 }
-
-.warning {
-  background: #fff4da;
-  padding: 12px;
-  border-radius: 8px;
+.hero p{
+  margin:8px auto;
+  color:#385572;
+  max-width:760px;
+  font-size:14px;
 }
+.steps{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  align-items:flex-start;
+  margin:26px auto 0;
+  max-width:470px;
+}
+.step{
+  flex:1;
+  font-size:11px;
+  color:#69809a;
+}
+.step span{
+  display:grid;
+  place-items:center;
+  margin:0 auto 6px;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:#e3ecf6;
+  border:1px solid #ccd8e5;
+}
+.step:first-child span{
+  background:var(--navy);
+  color:#fff;
+}
+.page{
+  max-width:1180px;
+  margin:-8px auto 55px;
+  position:relative;
+  z-index:2;
+  padding:0 18px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 280px;
+  align-items:start;
+  gap:18px;
+}
+.card,.info{
+  border-radius:13px;
+  background:white;
+  border:1px solid #e3eaf1;
+  box-shadow:0 7px 24px #243e5910;
+  margin:0 0 15px;
+}
+.card{padding:23px}
+.heading{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  margin-bottom:19px;
+}
+.number{
+  display:grid;
+  place-items:center;
+  flex:none;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:var(--red);
+  color:#fff;
+  font-size:19px;
+  font-weight:800;
+}
+h2{
+  font-size:21px;
+  line-height:1.3;
+  margin:0;
+}
+.sub{
+  color:#64788f;
+  font-size:13px;
+  margin:3px 0 0;
+}
+.fields{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:17px;
+}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+.field label,.field-title{
+  display:block;
+  font-weight:650;
+  font-size:13px;
+  margin:0 0 8px;
+}
+input:not([type=checkbox]),select{
+  font:inherit;
+  width:100%;
+  padding:12px 13px;
+  border:1px solid #cbd7e5;
+  border-radius:7px;
+  background:#fff;
+  color:var(--navy);
+  min-height:45px;
+}
+input:focus,select:focus{
+  outline:2px solid #80bcea;
+  outline-offset:2px;
+}
+.check{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:8px 0;
+  font-size:14px;
+  cursor:pointer;
+}
+.check input{
+  width:18px;
+  height:18px;
+  accent-color:var(--blue);
+  flex:none;
+}
+.extra{
+  margin-top:18px;
+  padding:18px;
+  background:#f4f9ff;
+  border:1px solid #d7e8f6;
+  border-radius:10px;
+}
+.extra h3{
+  font-size:16px;
+  margin:0 0 15px;
+}
+.info{
+  background:var(--pale);
+  padding:21px;
+  color:#34506e;
+  font-size:14px;
+}
+.info h3{
+  margin:0 0 12px;
+  font-size:17px;
+  color:var(--navy);
+}
+.info ul{
+  padding:0;
+  list-style:none;
+}
+.info li{
+  border-top:1px solid #d2e3f2;
+  padding:9px 0;
+}
+.info li:before{
+  content:'✓';
+  background:#1589d0;
+  color:white;
+  border-radius:50%;
+  font-size:11px;
+  padding:2px 5px;
+  margin-right:9px;
+}
+.buttons{
+  display:flex;
+  gap:12px;
+}
+.buttons button{
+  border:0;
+  border-radius:8px;
+  min-height:47px;
+  padding:11px 18px;
+  font:inherit;
+  font-weight:750;
+  cursor:pointer;
+}
+.buttons .main{
+  background:var(--red);
+  color:white;
+  flex:1;
+  box-shadow:0 7px 16px #d70d2430;
+}
+.buttons .reset{
+  background:white;
+  border:1px solid #cbd8e6;
+  color:var(--navy);
+}
+#error{
+  background:#fff1f0;
+  color:#9b2330;
+  padding:13px 16px;
+  border-radius:8px;
+  margin:12px 0;
+  font-weight:650;
+}
+.status{
+  padding:17px;
+  background:#fff4db;
+  border-left:5px solid #e4ab32;
+  border-radius:8px;
+  font-weight:750;
+}
+.status.good{
+  background:#e6f5ec;
+  border-color:#30936b;
+}
+.status.risk{
+  background:#ffebec;
+  border-color:var(--red);
+}
+.result-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:17px 0;
+}
+.result-grid div{
+  background:#f1f6fa;
+  padding:12px;
+  border-radius:8px;
+  font-size:12px;
+  color:#59708a;
+}
+.result-grid b{
+  display:block;
+  font-size:20px;
+  color:var(--navy);
+}
+.actions li{margin:9px 0}
+.small{
+  font-size:12px;
+  color:#61758c;
+}
+footer{
+  text-align:center;
+  font-size:12px;
+  color:#71869c;
+  padding:0 20px 35px;
+}
+[hidden]{display:none!important}
 
-li {
-  margin: 9px 0;
+@media(max-width:800px){
+  .page{grid-template-columns:1fr}
+  .side{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .top nav{display:none}
+  .hero{min-height:330px}
+}
+@media(max-width:560px){
+  .top{padding:9px 16px}
+  .fields,.side{grid-template-columns:1fr}
+  .card{padding:18px}
+  .page{padding:0 12px}
+  .hero-content{padding-top:30px}
+  .hero .logo{font-size:44px}
+  .hero .logo svg{height:37px}
+  .hero p{font-size:13px}
+  .buttons{flex-direction:column-reverse}
+  .result-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 
 <body>
-<main>
 
-<header>
-  <h1>KRISENFEST.AT</h1>
-  <p>Trinkwasser-Selbstcheck · Testversion</p>
+<header class="top">
+  <div class="logo">
+    <svg viewBox="0 0 200 43" aria-hidden="true">
+      <path
+        d="M5 41 51 12 78 33 106 2 145 33 162 16 196 40"
+        fill="none"
+        stroke="#092440"
+        stroke-width="8"
+        stroke-linejoin="miter"
+      />
+    </svg>
+    Krisen<b>fest</b>.at
+  </div>
+  <nav aria-label="Navigation">
+    <span>Wissen</span>
+    <strong>Selbstchecks</strong>
+    <span>Vorsorge</span>
+    <span>Notfälle</span>
+    <span>Service</span>
+  </nav>
 </header>
 
+<section class="hero">
 
-<section class="intro">
+  <svg
+    class="mountains"
+    viewBox="0 0 1400 390"
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id="sky" x2="0" y2="1">
+        <stop stop-color="#bcd9ed"/>
+        <stop offset="1" stop-color="#ecf6fd"/>
+      </linearGradient>
+      <linearGradient id="mount" x2="0" y2="1">
+        <stop stop-color="#7c9fb8"/>
+        <stop offset="1" stop-color="#d0e2ed"/>
+      </linearGradient>
+    </defs>
 
-<h2>Wie gut sind Sie auf einen Ausfall der Trinkwasserversorgung vorbereitet?</h2>
+    <rect width="1400" height="390" fill="url(#sky)"/>
 
-<p>
-Im Alltag ist sauberes Trinkwasser für uns selbstverständlich.
-Wir öffnen den Wasserhahn und verfügen jederzeit über ausreichend Wasser.
-</p>
+    <path
+      d="M-50 250 40 115 80 170 125 85 205 185
+         252 118 320 210 390 270 470 390H-50Z
+         M940 340 1018 205 1080 132 1120 168
+         1185 75 1240 164 1290 109 1460 285V390H940Z"
+      fill="url(#mount)"
+    />
 
-<p>
-Doch was passiert, wenn die öffentliche Wasserversorgung durch einen
-Stromausfall, einen technischen Defekt oder eine Verunreinigung
-vorübergehend unterbrochen wird oder das Leitungswasser nicht mehr
-als Trinkwasser geeignet ist?
-</p>
+    <path
+      d="m40 115 27 39 13-16 45-53 31 39
+         10 31-41-29-29 44-16-17-21 13Z
+         M1080 132l40 36 65-93 32 48-35-21
+         -42 65-20-11Z"
+      fill="#f8fdff"
+      opacity=".93"
+    />
 
-<p>
-<strong>
-Dieser Selbstcheck untersucht, wie gut Ihr Haushalt auf eine solche
-Situation vorbereitet ist.
-</strong>
-</p>
+    <path
+      d="M-10 300 75 220 150 295 225 202 320 310
+         425 370 0 390Z
+         M1000 375 1090 263 1172 300 1250 219
+         1420 320V390Z"
+      fill="#47758c"
+      opacity=".47"
+    />
 
-<p>
-Dabei berücksichtigen wir sowohl Ihre vorhandenen Trinkwasservorräte
-als auch alternative Wasserquellen und die Möglichkeiten, daraus bei
-Bedarf sicheres Trinkwasser zu gewinnen.
-</p>
+    <path
+      d="M-10 335 20 266 54 340 83 246 113 343
+         151 271 188 354 220 284 248 363 310 390H-10Z
+         M1110 390l35-100 35 80 34-120 40 114
+         37-82 37 91 38-124 45 141Z"
+      fill="#285c6f"
+      opacity=".55"
+    />
+  </svg>
 
-<p>
-<strong>
-Finden Sie heraus, ob Ihre Trinkwasserversorgung für den gewünschten
-Vorsorgezeitraum ausreichend abgesichert ist und welche Verbesserungen
-gegebenenfalls sinnvoll wären.
-</strong>
-</p>
+  <div class="hero-content">
 
+    <div class="logo">
+      <svg viewBox="0 0 200 43" aria-hidden="true">
+        <path
+          d="M5 41 51 12 78 33 106 2 145 33 162 16 196 40"
+          fill="none"
+          stroke="#092440"
+          stroke-width="8"
+        />
+      </svg>
+      Krisen<b>fest</b>.at
+    </div>
+
+    <h1>Trinkwasser-Selbstcheck</h1>
+
+    <p>
+      <strong>
+        Wie gut sind Sie auf einen Ausfall der
+        Trinkwasserversorgung vorbereitet?
+      </strong>
+    </p>
+
+    <p>
+      Im Alltag ist sauberes Trinkwasser selbstverständlich.
+      Doch was passiert, wenn die öffentliche Wasserversorgung
+      durch Stromausfall, technische Defekte oder
+      Verunreinigungen vorübergehend unterbrochen wird?
+    </p>
+
+    <p>
+      Dieser Selbstcheck untersucht, wie gut Ihr Haushalt
+      darauf vorbereitet ist. Berücksichtigt werden Wasservorräte,
+      alternative Wasserquellen und Möglichkeiten,
+      daraus sicheres Trinkwasser zu gewinnen.
+    </p>
+
+    <div class="steps">
+      <div class="step"><span>1</span>Haushalt</div>
+      <div class="step"><span>2</span>Wasserversorgung</div>
+      <div class="step"><span>3</span>Aufbereitung</div>
+      <div class="step"><span>4</span>Ergebnis</div>
+    </div>
+
+  </div>
 </section>
 
+<main class="page">
+<div>
 
-<section>
-<h2>1. Ihr Haushalt</h2>
+  <section class="card">
+    <div class="heading">
+      <span class="number">1</span>
+      <div>
+        <h2>Ihr Haushalt</h2>
+        <p class="sub">
+          Zuerst ein paar grundlegende Angaben zu Ihrem Haushalt.
+        </p>
+      </div>
+    </div>
 
-<label for="personen">
-Wie viele Personen leben in Ihrem Haushalt?
-</label>
+    <div class="fields">
+      <div class="field">
+        <label for="personen">
+          Wie viele Personen leben in Ihrem Haushalt?
+        </label>
+        <input
+          id="personen"
+          type="number"
+          min="1"
+          max="30"
+          step="1"
+          placeholder="Anzahl Personen"
+        >
+      </div>
 
-<input
-  id="personen"
-  type="number"
-  min="1"
-  max="30"
-  step="1"
-  placeholder="Anzahl Personen"
->
+      <div class="field">
+        <label for="tage">
+          Für welchen Zeitraum möchten Sie vorsorgen?
+        </label>
+        <select id="tage">
+          <option value="">Bitte auswählen</option>
+          <option value="7">7 Tage</option>
+          <option value="14">14 Tage</option>
+          <option value="30">1 Monat</option>
+          <option value="60">2 Monate</option>
+        </select>
+      </div>
+    </div>
+  </section>
 
-<label for="tage">
-Wie lange möchten Sie vorsorgen?
-</label>
+  <section class="card">
+    <div class="heading">
+      <span class="number">2</span>
+      <div>
+        <h2>
+          Welche Wasservorräte / Wasserquellen sind vorhanden?
+        </h2>
+        <p class="sub">
+          Eingelagerte Vorräte und alternative Möglichkeiten
+          der Wasserversorgung.
+        </p>
+      </div>
+    </div>
 
-<select id="tage">
-  <option value="">Bitte auswählen</option>
-  <option value="7">7 Tage</option>
-  <option value="14">14 Tage</option>
-  <option value="30">1 Monat</option>
-  <option value="60">2 Monate</option>
-</select>
+    <div class="fields">
+      <div class="field">
+        <label for="flaschen">
+          Wie viele Liter originalverschlossenes
+          Trinkwasser haben Sie vorrätig?
+        </label>
+        <input
+          id="flaschen"
+          type="number"
+          min="0"
+          step="0.5"
+          placeholder="Liter (auch 0 möglich)"
+        >
+      </div>
 
-</section>
+      <div class="field">
+        <label for="quelle">
+          Haben Sie Zugang zu einer zusätzlichen Wasserquelle?
+        </label>
+        <select id="quelle">
+          <option value="">Bitte auswählen</option>
+          <option value="ja">Ja</option>
+          <option value="nein">Nein</option>
+        </select>
+      </div>
+    </div>
 
+    <div id="quelleDetails" class="extra" hidden>
+      <h3>Angaben zu Ihrer Wasserquelle</h3>
 
-<section>
-<h2>2. Welche Wasservorräte / Wasserquellen sind vorhanden?</h2>
+      <div class="fields">
+        <div class="field">
+          <label for="art">Welche Wasserquelle?</label>
+          <select id="art">
+            <option value="">Bitte auswählen</option>
+            <option>Brunnen</option>
+            <option>Eigene Quelle</option>
+            <option>Regenwasser / Zisterne</option>
+            <option>Bach, Fluss oder See</option>
+          </select>
+        </div>
 
-<label for="flaschen">
-Wie viele Liter originalverschlossenes Trinkwasser
-haben Sie vorrätig?
-</label>
+        <div class="field">
+          <label for="entfernung">
+            Wie weit ist die Quelle entfernt?
+          </label>
+          <select id="entfernung">
+            <option value="">Bitte auswählen</option>
+            <option>Am Haus</option>
+            <option>Bis 500 m</option>
+            <option>Weiter entfernt</option>
+          </select>
+        </div>
 
-<input
-  id="flaschen"
-  type="number"
-  min="0"
-  step="0.5"
-  placeholder="Liter (auch 0 möglich)"
->
+        <div class="field">
+          <label for="qualitaet">
+            Wurde die Wasserqualität geprüft?
+          </label>
+          <select id="qualitaet">
+            <option value="">Bitte auswählen</option>
+            <option value="ja">Ja</option>
+            <option value="nein">Nein</option>
+          </select>
+        </div>
 
-<label for="quelle">
-Haben Sie Zugang zu einer zusätzlichen Wasserquelle?
-</label>
+        <div class="field">
+          <label for="strom">
+            Benötigt die Wasserentnahme Netzstrom?
+          </label>
+          <select id="strom">
+            <option value="">Bitte auswählen</option>
+            <option value="ja">Ja</option>
+            <option value="nein">Nein</option>
+          </select>
+        </div>
 
-<select id="quelle">
-  <option value="">Bitte auswählen</option>
-  <option value="ja">Ja</option>
-  <option value="nein">Nein</option>
-</select>
+        <div class="field full" id="ersatzBox" hidden>
+          <label for="ersatz">
+            Ist eine stromunabhängige Entnahme oder
+            Ersatzstromversorgung vorhanden?
+          </label>
+          <select id="ersatz">
+            <option value="">Bitte auswählen</option>
+            <option value="ja">Ja</option>
+            <option value="nein">Nein</option>
+          </select>
+        </div>
 
+        <div class="field">
+          <label for="behaelter">
+            Haben Sie geeignete, saubere und
+            verschließbare Wasserbehälter?
+          </label>
+          <select id="behaelter">
+            <option value="">Bitte auswählen</option>
+            <option value="ja">Ja</option>
+            <option value="nein">Nein</option>
+          </select>
+        </div>
 
-<div id="quelleDetails" hidden>
+        <div class="field">
+          <label for="lagerung">
+            Haben Sie eine Möglichkeit zur hygienischen
+            Aufbewahrung des gewonnenen Wassers?
+          </label>
+          <select id="lagerung">
+            <option value="">Bitte auswählen</option>
+            <option value="ja">Ja</option>
+            <option value="nein">Nein</option>
+          </select>
+        </div>
 
-<label for="art">
-Welche Wasserquelle?
-</label>
+        <div class="field full" id="transportBox" hidden>
+          <div class="fields">
+            <div class="field">
+              <label for="liter">
+                Wie viele Liter fassen Ihre Behälter zusammen?
+              </label>
+              <input
+                id="liter"
+                type="number"
+                min="0"
+                step="0.5"
+                placeholder="Gesamtkapazität in Litern"
+              >
+            </div>
 
-<select id="art">
-  <option value="">Bitte auswählen</option>
-  <option>Brunnen</option>
-  <option>Eigene Quelle</option>
-  <option>Regenwasser / Zisterne</option>
-  <option>Bach, Fluss oder See</option>
-</select>
+            <div class="field">
+              <label for="tragbar">
+                Können Sie gefüllte Behälter tragen
+                oder mit einer Transporthilfe bewegen?
+              </label>
+              <select id="tragbar">
+                <option value="">Bitte auswählen</option>
+                <option value="ja">Ja</option>
+                <option value="nein">Nein</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
+      </div>
+    </div>
+  </section>
 
-<label for="entfernung">
-Wie weit ist die Quelle entfernt?
-</label>
+  <section class="card">
+    <div class="heading">
+      <span class="number">3</span>
+      <div>
+        <h2>Wasseraufbereitung</h2>
+        <p class="sub">
+          Welche Möglichkeiten stehen Ihnen im Notfall zur Verfügung?
+        </p>
+      </div>
+    </div>
 
-<select id="entfernung">
-  <option value="">Bitte auswählen</option>
-  <option>Am Haus</option>
-  <option>Bis 500 m</option>
-  <option>Weiter entfernt</option>
-</select>
+    <p class="field-title">Mehrfachauswahl möglich</p>
 
+    <label class="check">
+      <input type="checkbox" id="filter">
+      Wasserfilter
+    </label>
 
-<label for="qualitaet">
-Wurde die Wasserqualität geprüft?
-</label>
+    <div class="extra" id="filterBox" hidden>
+      <div class="fields">
+        <div class="field">
+          <label for="modell">
+            Welchen Wasserfilter besitzen Sie?
+          </label>
+          <input
+            id="modell"
+            type="text"
+            placeholder="Hersteller und Modell"
+          >
+        </div>
 
-<select id="qualitaet">
-  <option value="">Bitte auswählen</option>
-  <option value="ja">Ja</option>
-  <option value="nein">Nein</option>
-</select>
+        <div class="field">
+          <label for="einsatz">
+            Ist der Wasserfilter einsatzbereit?
+          </label>
+          <select id="einsatz">
+            <option value="">Bitte auswählen</option>
+            <option value="ja">Ja</option>
+            <option value="nein">Nein</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
+    <label class="check">
+      <input type="checkbox" id="kochen">
+      Abkochen (Kochmöglichkeit vorhanden)
+    </label>
 
-<label for="strom">
-Benötigt die Wasserentnahme Netzstrom?
-</label>
+    <label class="check">
+      <input type="checkbox" id="chemie">
+      Desinfektionsmittel zur Trinkwasseraufbereitung
+    </label>
 
-<select id="strom">
-  <option value="">Bitte auswählen</option>
-  <option value="ja">Ja</option>
-  <option value="nein">Nein</option>
-</select>
+    <label class="check">
+      <input type="checkbox" id="keine">
+      Keine Aufbereitungsmöglichkeit
+    </label>
+  </section>
 
+  <div class="buttons">
+    <button class="reset" id="reset" type="button">
+      Angaben zurücksetzen
+    </button>
+    <button class="main" id="auswerten" type="button">
+      Selbstcheck auswerten →
+    </button>
+  </div>
 
-<div id="ersatzBox" hidden>
+  <div id="error" hidden role="alert"></div>
 
-<label for="ersatz">
-Ist eine stromunabhängige Entnahme oder
-Ersatzstromversorgung vorhanden?
-</label>
-
-<select id="ersatz">
-  <option value="">Bitte auswählen</option>
-  <option value="ja">Ja</option>
-  <option value="nein">Nein</option>
-</select>
+  <section class="card" id="bericht" hidden aria-live="polite">
+    <div class="heading">
+      <span class="number">4</span>
+      <div>
+        <h2>Ihre persönliche Einschätzung</h2>
+        <p class="sub">Basierend auf Ihren Angaben</p>
+      </div>
+    </div>
+    <div id="result"></div>
+  </section>
 
 </div>
 
+<aside class="side">
+  <div class="info">
+    <h3>💧 Warum ist Trinkwasservorsorge wichtig?</h3>
+    <p>
+      Bei einem Stromausfall, technischen Defekten oder
+      Verunreinigungen kann die öffentliche Wasserversorgung
+      zeitweise ausfallen.
+    </p>
+    <p>
+      Prüfen Sie, ob Ihr Haushalt für den gewählten Zeitraum
+      alternative Möglichkeiten hat.
+    </p>
+    <ul>
+      <li>Ressourcen erkennen</li>
+      <li>Versorgungslücken verstehen</li>
+      <li>Verbesserungen planen</li>
+    </ul>
+  </div>
 
-<label for="behaelter">
-Haben Sie geeignete, saubere und verschließbare
-Wasserbehälter?
-</label>
-
-<select id="behaelter">
-  <option value="">Bitte auswählen</option>
-  <option value="ja">Ja</option>
-  <option value="nein">Nein</option>
-</select>
-
-
-<div id="transportBox" hidden>
-
-<label for="liter">
-Wie viele Liter fassen Ihre Behälter zusammen?
-</label>
-
-<input
-  id="liter"
-  type="number"
-  min="0"
-  step="0.5"
-  placeholder="Gesamtkapazität in Litern"
->
-
-<label for="tragbar">
-Können Sie die gefüllten Behälter sicher tragen
-oder mit einer Transporthilfe bewegen?
-</label>
-
-<select id="tragbar">
-  <option value="">Bitte auswählen</option>
-  <option value="ja">Ja</option>
-  <option value="nein">Nein</option>
-</select>
-
-</div>
-
-
-<label for="lagerung">
-Haben Sie eine geeignete Möglichkeit, das
-gewonnene Trinkwasser aufzubewahren?
-</label>
-
-<select id="lagerung">
-  <option value="">Bitte auswählen</option>
-  <option value="ja">Ja</option>
-  <option value="nein">Nein</option>
-</select>
-
-</div>
-</section>
-
-
-<section>
-<h2>3. Wasseraufbereitung</h2>
-
-<p>
-Welche Möglichkeiten zur Wasseraufbereitung
-stehen Ihnen zur Verfügung?
-</p>
-
-<label class="check">
-  <input type="checkbox" id="m_filter">
-  Wasserfilter
-</label>
-
-
-<div id="filterBox" hidden>
-
-<label for="modell">
-Welchen Wasserfilter besitzen Sie?
-</label>
-
-<input
-  id="modell"
-  type="text"
-  placeholder="Hersteller und Modell"
->
-
-<label for="einsatz">
-Ist der Wasserfilter einsatzbereit?
-</label>
-
-<select id="einsatz">
-  <option value="">Bitte auswählen</option>
-  <option value="ja">Ja</option>
-  <option value="nein">Nein</option>
-</select>
-
-</div>
-
-
-<label class="check">
-  <input type="checkbox" id="kochen">
-  Abkochen
-</label>
-
-<label class="check">
-  <input type="checkbox" id="chemie">
-  Desinfektionsmittel zur Trinkwasseraufbereitung
-</label>
-
-<label class="check">
-  <input type="checkbox" id="keine">
-  Keine Aufbereitungsmöglichkeit
-</label>
-
-</section>
-
-
-<button id="auswerten">
-Selbstcheck auswerten
-</button>
-
-<div id="bericht" hidden aria-live="polite"></div>
-
-<p class="note">
-Vorläufiger Selbstcheck.
-Die rechnerische Orientierung beträgt
-2 Liter je Person und Tag.
-Die Eignung einer Wasserquelle und ihrer
-Aufbereitung muss fachlich beurteilt werden.
-</p>
+  <div class="info">
+    <h3>💡 Gut zu wissen</h3>
+    <p>
+      Für unsere Berechnung verwenden wir
+      <strong>2 Liter Trinkwasser pro Person und Tag</strong>
+      als Orientierungswert.
+    </p>
+    <p>
+      Eine Quelle oder ein Filter allein beweist noch nicht,
+      dass das Wasser sicher trinkbar ist. Auch Entnahme,
+      Transport und Wasserqualität zählen.
+    </p>
+  </div>
+</aside>
 
 </main>
 
+<footer>
+  KRISENFEST.AT · Kostenloser Vorsorge-Selbstcheck ·
+  Technische Testversion
+</footer>
 
 <script>
+'use strict';
 
 const $ = id => document.getElementById(id);
-
-const val = id => $(id).value;
-
-const yes = id => val(id) === "ja";
-
-const filterVorhanden = () => $("m_filter").checked;
-
+const v = id => $(id).value;
+const ja = id => v(id) === 'ja';
+const hat = id => $(id).checked;
 
 function aktualisieren() {
-
-  $("quelleDetails").hidden = !yes("quelle");
-
-  $("ersatzBox").hidden = !(
-    yes("quelle") && yes("strom")
-  );
-
-  $("transportBox").hidden = !(
-    yes("quelle") && yes("behaelter")
-  );
-
-  $("filterBox").hidden = !filterVorhanden();
-
-  $("bericht").hidden = true;
-
+  $('quelleDetails').hidden = !ja('quelle');
+  $('ersatzBox').hidden = !(ja('quelle') && ja('strom'));
+  $('transportBox').hidden =
+    !(ja('quelle') && ja('behaelter'));
+  $('filterBox').hidden = !hat('filter');
+  $('bericht').hidden = true;
+  $('error').hidden = true;
 }
 
-
-for (const id of [
-  "quelle",
-  "strom",
-  "behaelter",
-  "m_filter"
-]) {
-
-  $(id).addEventListener("change", aktualisieren);
-
+for (const id of ['quelle','strom','behaelter','filter']) {
+  $(id).addEventListener('change', aktualisieren);
 }
 
-
-for (const id of [
-  "kochen",
-  "chemie",
-  "m_filter"
-]) {
-
-  $(id).addEventListener("change", () => {
-
-    if ($(id).checked) {
-      $("keine").checked = false;
-    }
-
+for (const id of ['filter','kochen','chemie']) {
+  $(id).addEventListener('change', () => {
+    if (hat(id)) $('keine').checked = false;
   });
-
 }
 
-
-$("keine").addEventListener("change", () => {
-
-  if ($("keine").checked) {
-
-    for (const id of [
-      "kochen",
-      "chemie",
-      "m_filter"
-    ]) {
-
+$('keine').addEventListener('change', () => {
+  if (hat('keine')) {
+    for (const id of ['filter','kochen','chemie']) {
       $(id).checked = false;
-
     }
-
     aktualisieren();
-
   }
-
 });
 
-
-for (
-  const element of document.querySelectorAll(
-    "input,select"
-  )
-) {
-
-  element.addEventListener("input", () => {
-    $("bericht").hidden = true;
+for (const el of document.querySelectorAll('input,select')) {
+  el.addEventListener('input', () => {
+    $('bericht').hidden = true;
+    $('error').hidden = true;
   });
-
 }
 
+function fehler(text) {
+  $('error').textContent = text;
+  $('error').hidden = false;
+  $('error').scrollIntoView({
+    block:'center',
+    behavior:'smooth'
+  });
+}
 
-function auswertung() {
-
-  const personen = Number(val("personen"));
-  const tage = Number(val("tage"));
-  const vorrat = Number(val("flaschen"));
+function auswerten() {
+  const personen = Number(v('personen'));
+  const tage = Number(v('tage'));
+  const vorrat = Number(v('flaschen'));
 
   if (
     !Number.isInteger(personen) ||
     personen < 1 ||
     personen > 30 ||
-    ![7, 14, 30, 60].includes(tage) ||
-    val("flaschen") === "" ||
+    ![7,14,30,60].includes(tage) ||
+    v('flaschen') === '' ||
     !Number.isFinite(vorrat) ||
     vorrat < 0 ||
-    !val("quelle")
+    !v('quelle')
   ) {
-
-    alert(
-      "Bitte vervollständigen Sie die Angaben " +
-      "zum Haushalt, zum Vorsorgezeitraum " +
-      "und zu den Wasservorräten."
+    return fehler(
+      'Bitte ergänzen Sie Haushaltsgröße, Vorsorgezeitraum, ' +
+      'Wasservorrat und Wasserquelle.'
     );
-
-    return;
-
   }
 
-
+  const quelle = ja('quelle');
   const bedarf = personen * 2;
-  const vorratstage = vorrat / bedarf;
-  const quelle = yes("quelle");
-
-
-  if (quelle) {
-
-    const pflichtfelder = [
-      "art",
-      "entfernung",
-      "qualitaet",
-      "strom",
-      "behaelter",
-      "lagerung"
-    ];
-
-    if (pflichtfelder.some(id => !val(id))) {
-
-      alert(
-        "Bitte beantworten Sie alle sichtbaren " +
-        "Fragen zur Wasserquelle."
-      );
-
-      return;
-
-    }
-
-  }
-
+  const vorratAusreichend = vorrat >= bedarf * tage;
 
   if (
     quelle &&
-    yes("strom") &&
-    !val("ersatz")
+    ['art','entfernung','qualitaet','strom',
+     'behaelter','lagerung'].some(id => !v(id))
   ) {
-
-    alert(
-      "Bitte beantworten Sie die Frage " +
-      "zur Ersatzversorgung."
+    return fehler(
+      'Bitte beantworten Sie alle Fragen zu Ihrer Wasserquelle.'
     );
-
-    return;
-
   }
 
+  if (quelle && ja('strom') && !v('ersatz')) {
+    return fehler(
+      'Bitte beantworten Sie die Frage zur Ersatzversorgung.'
+    );
+  }
 
   if (
     quelle &&
-    yes("behaelter")
-  ) {
-
-    if (
-      val("liter") === "" ||
-      !Number.isFinite(Number(val("liter"))) ||
-      Number(val("liter")) <= 0 ||
-      !val("tragbar")
-    ) {
-
-      alert(
-        "Bitte ergänzen Sie die Behälterkapazität " +
-        "und Tragbarkeit."
-      );
-
-      return;
-
-    }
-
-  }
-
-
-  if (
-    filterVorhanden() &&
+    ja('behaelter') &&
     (
-      !val("modell").trim() ||
-      !val("einsatz")
+      v('liter') === '' ||
+      Number(v('liter')) <= 0 ||
+      !Number.isFinite(Number(v('liter'))) ||
+      !v('tragbar')
     )
   ) {
-
-    alert(
-      "Bitte geben Sie das Filtermodell " +
-      "und seine Einsatzbereitschaft an."
+    return fehler(
+      'Bitte ergänzen Sie die Behälterkapazität ' +
+      'und deren Handhabbarkeit.'
     );
-
-    return;
-
   }
 
-
-  const transportProblem =
-    quelle && (
-      !yes("behaelter") ||
-      (
-        yes("behaelter") &&
-        !yes("tragbar")
-      ) ||
-      !yes("lagerung")
+  if (
+    hat('filter') &&
+    (!v('modell').trim() || !v('einsatz'))
+  ) {
+    return fehler(
+      'Bitte geben Sie das Wasserfiltermodell ' +
+      'und seine Einsatzbereitschaft an.'
     );
+  }
 
+  if (
+    !['filter','kochen','chemie','keine'].some(hat)
+  ) {
+    return fehler(
+      'Bitte wählen Sie mindestens eine Angabe ' +
+      'zur Wasseraufbereitung aus.'
+    );
+  }
 
-  const stromProblem =
+  const kapazitaet =
+    quelle && ja('behaelter') ? Number(v('liter')) : 0;
+
+  const versorgungPraktisch =
     quelle &&
-    yes("strom") &&
-    !yes("ersatz");
+    ja('behaelter') &&
+    ja('tragbar') &&
+    ja('lagerung') &&
+    (!ja('strom') || ja('ersatz'));
 
-
-  const quellweg =
-    quelle &&
-    !transportProblem &&
-    !stromProblem;
-
+  const ausreichendTransport = kapazitaet >= bedarf;
 
   const aufbereitung =
-    (
-      filterVorhanden() &&
-      yes("einsatz")
-    ) ||
-    $("kochen").checked ||
-    $("chemie").checked;
+    (hat('filter') && ja('einsatz')) ||
+    hat('kochen') ||
+    hat('chemie');
 
+  const tipps = [];
 
-  const gedeckt =
-    vorrat >= bedarf * tage;
+  const hinweis = t => {
+    if (!tipps.includes(t)) tipps.push(t);
+  };
 
+  let status = 'risk';
+  let titel =
+    'Die Trinkwasserversorgung ist noch nicht ausreichend abgesichert.';
 
-  let titel = "";
-  const punkte = [];
-
-
-  if (gedeckt) {
-
+  if (vorratAusreichend) {
+    status = 'good';
     titel =
-      "Trinkwasservorrat für den gewählten " +
-      "Zeitraum rechnerisch ausreichend.";
-
-  } else if (quellweg && aufbereitung) {
-
+      'Der eingelagerte Trinkwasservorrat deckt ' +
+      'den gewählten Zeitraum rechnerisch ab.';
+  } else if (versorgungPraktisch && aufbereitung) {
+    status = 'attention';
     titel =
-      "Laufende Wasserversorgung grundsätzlich " +
-      "möglich – Wasserqualität und Aufbereitung prüfen.";
-
-  } else if (quellweg) {
-
+      'Eine alternative Versorgung ist grundsätzlich möglich. ' +
+      'Ihre tatsächliche Trinkwassereignung muss geprüft werden.';
+  } else if (quelle) {
+    status = 'attention';
     titel =
-      "Alternative Wasserquelle vorhanden – " +
-      "Trinkwasseraufbereitung noch nicht " +
-      "ausreichend geklärt.";
-
-  } else {
-
-    titel =
-      "Trinkwasserversorgung nicht ausreichend " +
-      "abgesichert.";
-
+      'Eine Wasserquelle ist vorhanden; entscheidende ' +
+      'Voraussetzungen sind noch nicht ausreichend abgesichert.';
   }
 
+  if (!vorratAusreichend && !versorgungPraktisch) {
+    const diff = Math.max(0, bedarf * tage - vorrat);
 
-  if (!gedeckt && !quellweg) {
-
-    const fehlmenge = Math.max(
-      0,
-      bedarf * tage - vorrat
+    hinweis(
+      'Ohne verlässlich nutzbaren alternativen Versorgungsweg ' +
+      'fehlen rechnerisch ' +
+      diff.toLocaleString('de-AT') +
+      ' Liter Trinkwasser für den gewählten Zeitraum. ' +
+      'Ergänzen Sie Ihren Vorrat oder sichern Sie einen ' +
+      'alternativen Bezugsweg.'
     );
-
-    punkte.push(
-      "Für den gewählten Zeitraum fehlen " +
-      "rechnerisch " +
-      fehlmenge.toLocaleString("de-AT") +
-      " Liter eingelagertes Trinkwasser. " +
-      "Ergänzen Sie den Vorrat oder schaffen Sie " +
-      "einen praktisch nutzbaren alternativen " +
-      "Versorgungsweg."
-    );
-
   }
-
 
   if (quelle) {
-
-    if (!yes("behaelter")) {
-
-      punkte.push(
-        "Geeignete, saubere und verschließbare " +
-        "Transport- und Entnahmebehälter bereitstellen."
+    if (!ja('behaelter')) {
+      hinweis(
+        'Beschaffen Sie saubere, verschließbare und ' +
+        'für Trinkwasser geeignete Behälter.'
       );
+    }
 
+    if (ja('behaelter') && !ausreichendTransport) {
+      hinweis(
+        'Die vorhandenen Behälter reichen nicht für eine ' +
+        'einzige Befüllung des Tagesbedarfs. Planen Sie ' +
+        'zusätzliche gut tragbare Behälter oder mehrere ' +
+        'tägliche Befüllungen ein.'
+      );
+    }
+
+    if (ja('behaelter') && !ja('tragbar')) {
+      hinweis(
+        'Wählen Sie kleinere, gefüllt gut tragbare Behälter, ' +
+        'zum Beispiel 5-Liter-Kanister, oder eine Transporthilfe.'
+      );
+    }
+
+    if (!ja('lagerung')) {
+      hinweis(
+        'Sorgen Sie für geeignete Behälter zur hygienischen ' +
+        'Aufbewahrung des gewonnenen Wassers.'
+      );
+    }
+
+    if (ja('strom') && !ja('ersatz')) {
+      hinweis(
+        'Ihre Wasserentnahme ist stromabhängig. Prüfen Sie ' +
+        'eine stromunabhängige Entnahme oder geeignete Ersatzversorgung.'
+      );
+    }
+
+    if (v('entfernung') === 'Weiter entfernt') {
+      hinweis(
+        'Erproben Sie den Weg zur Quelle mit tatsächlich ' +
+        'gefüllten Behältern.'
+      );
+    }
+
+    if (!ja('qualitaet')) {
+      hinweis(
+        'Lassen Sie die Wasserqualität fachlich beurteilen. ' +
+        'Eine ungeprüfte Quelle ist nicht automatisch sicher.'
+      );
     } else {
-
-      const kapazitaet = Number(val("liter"));
-
-      if (kapazitaet < bedarf) {
-
-        punkte.push(
-          "Ihre Behälter fassen zusammen " +
-          kapazitaet +
-          " Liter; benötigt werden " +
-          bedarf +
-          " Liter pro Tag. Planen Sie mehrere " +
-          "tägliche Befüllungen oder zusätzliche " +
-          "gut tragbare Behälter ein."
-        );
-
-      }
-
-      if (!yes("tragbar")) {
-
-        punkte.push(
-          "Leichtere Einzelbehälter, beispielsweise " +
-          "5-Liter-Kanister, oder eine Transporthilfe " +
-          "vorsehen."
-        );
-
-      }
-
-    }
-
-
-    if (!yes("lagerung")) {
-
-      punkte.push(
-        "Geeignete Behälter für die hygienische " +
-        "Aufbewahrung des gewonnenen Wassers bereithalten."
+      hinweis(
+        'Prüfen Sie, ob die vorhandene Untersuchung tatsächlich ' +
+        'Trinkwasserqualität bestätigt und für die aktuelle ' +
+        'Situation gültig ist.'
       );
-
     }
-
-
-    if (stromProblem) {
-
-      punkte.push(
-        "Stromabhängige Wasserentnahme ohne " +
-        "Ersatzversorgung ist bei Stromausfall " +
-        "nicht gesichert."
-      );
-
-    }
-
-
-    if (
-      val("entfernung") === "Weiter entfernt"
-    ) {
-
-      punkte.push(
-        "Den Wassertransport mit gefüllten " +
-        "Behältern vorab praktisch erproben."
-      );
-
-    }
-
-
-    if (!yes("qualitaet")) {
-
-      punkte.push(
-        "Die Wasserqualität ist nicht geprüft. " +
-        "Die Quelle nicht ohne geeignete Beurteilung " +
-        "als sicheres Trinkwasser einstufen."
-      );
-
-    }
-
 
     if (!aufbereitung) {
-
-      punkte.push(
-        "Eine passende Möglichkeit zur " +
-        "Trinkwasseraufbereitung prüfen. " +
-        "Ein mechanischer Filter allein schützt " +
-        "nicht gegen alle Keime oder chemischen Stoffe."
+      hinweis(
+        'Prüfen Sie eine geeignete Aufbereitung. Mechanische ' +
+        'Filter schützen nicht allgemein vor Viren oder ' +
+        'chemischen Schadstoffen.'
       );
-
     }
 
+    if (hat('filter')) {
+      const m = v('modell').toLowerCase();
 
-    if (filterVorhanden()) {
-
-      const modell = val("modell").toLowerCase();
-
-      if (
-        modell.includes("pocket") ||
-        modell.includes("befree")
-      ) {
-
-        punkte.push(
-          "Der genannte Katadyn-Filter kann Bakterien " +
-          "und bestimmte Parasiten reduzieren, " +
-          "aber nicht zuverlässig Viren oder chemische " +
-          "Belastungen entfernen. Herstellerangaben " +
-          "und Zustand prüfen."
+      if (m.includes('pocket') || m.includes('befree')) {
+        hinweis(
+          'Katadyn Pocket beziehungsweise BeFree können ' +
+          'bestimmte Keime reduzieren, jedoch nicht zuverlässig ' +
+          'alle Viren und chemischen Belastungen entfernen.'
         );
-
       } else {
-
-        punkte.push(
-          "Leistungsfähigkeit und Eignung des angegebenen " +
-          "Filtermodells anhand der Herstellerangaben prüfen."
+        hinweis(
+          'Prüfen Sie die Schutzwirkung des angegebenen ' +
+          'Filtermodells anhand der Herstellerangaben.'
         );
-
       }
 
+      if (!ja('einsatz')) {
+        hinweis(
+          'Machen Sie Ihren vorhandenen Wasserfilter ' +
+          'einsatzbereit oder sehen Sie eine Alternative vor.'
+        );
+      }
     }
-
   }
 
-
-  if (tage >= 30) {
-
-    punkte.push(
-      "Für die längerfristige Vorsorge einen " +
-      "alternativen Wasserbezugsweg und gut " +
-      "tragbare Transportbehälter vorsehen."
+  if (tage >= 30 && !quelle) {
+    hinweis(
+      'Für die längerfristige Versorgung ist ein zusätzlicher ' +
+      'Wasserbezugsweg sinnvoll. Halten Sie gut tragbare ' +
+      'Transportbehälter bereit.'
     );
-
   }
 
-
-  if (!punkte.length) {
-
-    punkte.push(
-      "Vorräte regelmäßig kontrollieren und " +
-      "den geplanten Versorgungsweg praktisch erproben."
+  if (!tipps.length) {
+    hinweis(
+      'Kontrollieren Sie Ihre Vorräte regelmäßig und ' +
+      'erproben Sie Ihren Versorgungsweg.'
     );
-
   }
 
+  const el = $('result');
+  el.replaceChildren();
 
-  const liste = punkte.map(punkt => {
+  const statusEl = document.createElement('div');
+  statusEl.className = 'status ' + status;
+  statusEl.textContent = titel;
+  el.append(statusEl);
 
-    const li = document.createElement("li");
-    li.textContent = punkt;
+  const grid = document.createElement('div');
+  grid.className = 'result-grid';
 
-    return li.outerHTML;
+  const werte = [
+    ['Personen', personen],
+    ['Zeitraum',
+      tage === 30 ? '1 Monat' :
+      tage === 60 ? '2 Monate' : tage + ' Tage'],
+    ['Bedarf pro Tag', bedarf + ' Liter'],
+    ['Flaschenvorrat', vorrat + ' Liter']
+  ];
 
-  }).join("");
+  for (const [label,wert] of werte) {
+    const d = document.createElement('div');
+    const b = document.createElement('b');
+    b.textContent = wert;
+    d.append(b,document.createTextNode(label));
+    grid.append(d);
+  }
 
+  el.append(grid);
 
-  $("bericht").innerHTML = `
-    <h2>Ihre Trinkwasserversorgung</h2>
+  const h = document.createElement('h3');
+  h.textContent = 'Ihre nächsten Schritte';
+  el.append(h);
 
-    <p>
-      <strong>${titel}</strong>
-    </p>
+  const ol = document.createElement('ol');
+  ol.className = 'actions';
 
-    <p class="note">
-      Rechnerischer Orientierungsbedarf:
-      ${bedarf} Liter pro Tag.
+  for (const t of tipps) {
+    const li = document.createElement('li');
+    li.textContent = t;
+    ol.append(li);
+  }
 
-      Vorhandener Flaschenvorrat:
-      ${vorrat} Liter
-      (${Math.floor(vorratstage)} volle Tage).
-    </p>
+  el.append(ol);
 
-    <h3>Ihre nächsten Schritte</h3>
+  const p = document.createElement('p');
+  p.className = 'small';
+  p.textContent =
+    'Vorläufige technische Bewertung. Eine sichere ' +
+    'Trinkwasserversorgung kann aus den Antworten ' +
+    'allein nicht nachgewiesen werden.';
+  el.append(p);
 
-    <ol>${liste}</ol>
-
-    <p class="warning">
-      Eine vorhandene Wasserquelle gilt nicht
-      automatisch als hygienisch sicheres Trinkwasser.
-
-      Prüfen Sie insbesondere mögliche chemische
-      Belastungen und die Eignung des eingesetzten
-      Aufbereitungsverfahrens.
-    </p>
-  `;
-
-
-  $("bericht").hidden = false;
-
-  $("bericht").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
+  $('bericht').hidden = false;
+  $('bericht').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
   });
-
 }
 
+$('auswerten').addEventListener('click',auswerten);
 
-$("auswerten").addEventListener(
-  "click",
-  auswertung
-);
+$('reset').addEventListener('click',() => {
+  for (const el of document.querySelectorAll('input,select')) {
+    if (el.type === 'checkbox') {
+      el.checked = false;
+    } else {
+      el.value = '';
+    }
+  }
+  aktualisieren();
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+});
 
+aktualisieren();
 </script>
 
 </body>
