@@ -2,384 +2,358 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fcfcfb">
-  <meta name="description" content="Kostenlose und anonyme Selbsttests zur Krisenvorsorge mit individuellen Empfehlungen.">
-  <title>Unsere Selbsttests – KRISENFEST.AT</title>
-  <style>
-    :root {
-      --navy: #0a2945;
-      --red: #d90c27;
-      --paper: #fcfcfb;
-      --line: #e5eaed;
-    }
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--paper);
-      color: var(--navy);
-      font: 16px/1.65 -apple-system, BlinkMacSystemFont,
-            "Segoe UI", Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 5px;
-      background: linear-gradient(
-        90deg, var(--navy) 0 75%, var(--red) 75%
-      );
-      z-index: 5;
-      pointer-events: none;
-    }
-    .wrap {
-      max-width: 1120px;
-      padding: 0 32px 36px;
-      margin: auto;
-    }
-    header {
-      text-align: center;
-      padding: 33px 0 18px;
-      border-bottom: 1px solid var(--line);
-    }
-    .logo {
-      display: block;
-      width: 320px;
-      max-width: 80vw;
-      height: auto;
-      margin: auto;
-    }
-    .back {
-      display: inline-block;
-      margin: 21px 0 0;
-      color: #566c7e;
-      text-decoration: none;
-      font-size: 13px;
-    }
-    .back:hover {
-      color: var(--red);
-      text-decoration: underline;
-    }
-    .hero {
-      max-width: 830px;
-      margin: 12px auto 29px;
-      text-align: center;
-    }
-    .eyebrow {
-      margin: 0 0 10px;
-      color: #65778a;
-      letter-spacing: .23em;
-      font-size: 11px;
-      font-weight: 750;
-      text-transform: uppercase;
-    }
-    h1 {
-      margin: 0;
-      font: 700 clamp(33px, 4vw, 45px)/1.18
-            Georgia, "Times New Roman", serif;
-      letter-spacing: -.03em;
-    }
-    .rule {
-      width: 54px;
-      height: 2px;
-      margin: 19px auto 18px;
-      background: var(--red);
-    }
-    .hero p:not(.eyebrow) {
-      max-width: 760px;
-      margin: 0 auto 13px;
-      color: #35495b;
-      font-size: 17px;
-      line-height: 1.65;
-      text-wrap: balance;
-    }
-    .hero strong {
-      color: var(--navy);
-    }
-    h2 {
-      margin: 0 0 17px;
-      font: 700 22px/1.25
-            Georgia, "Times New Roman", serif;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-    .card {
-      display: flex;
-      flex-direction: column;
-      padding: 17px 19px 15px;
-      min-height: 145px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      background: white;
-      color: inherit;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(12,38,58,.035);
-    }
-    .card-heading {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      margin-bottom: 9px;
-    }
-    .icon {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      flex: none;
-      border-radius: 9px;
-      background: #f2f6f8;
-      font-size: 21px;
-    }
-    .card h3 {
-      margin: 0;
-      font: 700 19px/1.25
-            Georgia, "Times New Roman", serif;
-    }
-    .card p {
-      margin: 0;
-      color: #526575;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    a.card {
-      cursor: pointer;
-      border-color: #bdcdd9;
-    }
-    a.card:hover {
-      border-color: var(--red);
-      box-shadow: 0 7px 24px rgba(12,38,58,.10);
-      background: #fffafb;
-    }
-    a.card:focus-visible,
-    a:focus-visible {
-      outline: 3px solid var(--red);
-      outline-offset: 3px;
-    }
-    .card.pending {
-      background: #fafbfc;
-    }
-    .soon {
-      margin-top: auto;
-      padding-top: 11px;
-      color: #778896;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .045em;
-    }
-    .note {
-      text-align: center;
-      margin: 24px 0 30px;
-      color: #647789;
-      font-size: 13px;
-    }
-    footer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 9px 18px;
-      padding: 18px 0 5px;
-      border-top: 1px solid var(--line);
-      color: #81919f;
-      font-size: 12px;
-    }
-    footer a {
-      color: #526575;
-      text-decoration: none;
-      border-bottom: 1px solid #bdc8d1;
-    }
-    footer a:hover {
-      color: var(--red);
-      border-color: var(--red);
-    }
-    @media (max-width: 850px) {
-      .cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    @media (max-width: 560px) {
-      .wrap {
-        padding: 0 21px 25px;
-      }
-      header {
-        padding: 31px 0 18px;
-      }
-      .logo {
-        width: 290px;
-      }
-      .hero {
-        margin: 12px auto 27px;
-      }
-      .hero p:not(.eyebrow) {
-        font-size: 16px;
-      }
-      .cards {
-        grid-template-columns: 1fr;
-        gap: 11px;
-      }
-      .card {
-        min-height: 0;
-        padding: 15px 17px;
-      }
-      .back {
-        margin-top: 17px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fcfcfb">
+<meta name="description" content="Kostenlose und anonyme Selbsttests zur Krisenvorsorge.">
+<title>Unsere Selbsttests – KRISENFEST.AT</title>
+<style>
+:root {
+  --navy:#0a2945;
+  --red:#d90c27;
+  --paper:#fcfcfb;
+  --line:#e5eaed;
+}
+*,*::before,*::after {box-sizing:border-box}
+body {
+  margin:0;
+  min-height:100vh;
+  background:var(--paper);
+  color:var(--navy);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,
+       "Segoe UI",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+body::before {
+  content:"";
+  position:fixed;
+  top:0;left:0;right:0;
+  height:5px;
+  background:linear-gradient(
+    90deg,var(--navy) 0 75%,var(--red) 75%
+  );
+  z-index:5;
+  pointer-events:none;
+}
+.wrap {
+  max-width:1120px;
+  padding:0 32px 36px;
+  margin:auto;
+}
+header {
+  text-align:center;
+  padding:33px 0 18px;
+  border-bottom:1px solid var(--line);
+}
+.logo {
+  display:block;
+  width:320px;
+  max-width:80vw;
+  height:auto;
+  margin:auto;
+}
+.back {
+  display:inline-block;
+  margin:21px 0 0;
+  color:#566c7e;
+  text-decoration:none;
+  font-size:13px;
+}
+.back:hover {
+  color:var(--red);
+  text-decoration:underline;
+}
+.hero {
+  max-width:830px;
+  margin:12px auto 29px;
+  text-align:center;
+}
+.eyebrow {
+  margin:0 0 10px;
+  color:#65778a;
+  letter-spacing:.23em;
+  font-size:11px;
+  font-weight:750;
+  text-transform:uppercase;
+}
+h1 {
+  margin:0;
+  font:700 clamp(33px,4vw,45px)/1.18
+       Georgia,"Times New Roman",serif;
+  letter-spacing:-.03em;
+}
+.rule {
+  width:54px;
+  height:2px;
+  margin:19px auto 18px;
+  background:var(--red);
+}
+.hero p:not(.eyebrow) {
+  max-width:760px;
+  margin:0 auto 13px;
+  color:#35495b;
+  font-size:17px;
+  line-height:1.65;
+  text-wrap:balance;
+}
+.hero strong {color:var(--navy)}
+h2 {
+  margin:0 0 17px;
+  font:700 22px/1.25
+       Georgia,"Times New Roman",serif;
+}
+.cards {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.card {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:17px 19px 15px;
+  min-height:145px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:white;
+  color:inherit;
+  text-decoration:none;
+  box-shadow:0 4px 15px rgba(12,38,58,.035);
+}
+.card-heading {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  margin-bottom:9px;
+}
+.icon {
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  flex:none;
+  border-radius:9px;
+  background:#f2f6f8;
+  font-size:21px;
+}
+.card h3 {
+  margin:0;
+  font:700 19px/1.25
+       Georgia,"Times New Roman",serif;
+}
+.card p {
+  margin:0;
+  color:#526575;
+  font-size:14px;
+  line-height:1.5;
+  text-align:center;
+  text-wrap:balance;
+}
+.card p .line {display:block}
+a.card {
+  cursor:pointer;
+  border-color:#bdcdd9;
+}
+a.card:hover {
+  border-color:var(--red);
+  box-shadow:0 7px 24px rgba(12,38,58,.10);
+  background:#fffafb;
+}
+a.card:focus-visible,a:focus-visible {
+  outline:3px solid var(--red);
+  outline-offset:3px;
+}
+.card.pending {background:#fafbfc}
+.soon {
+  margin-top:auto;
+  padding-top:11px;
+  text-align:center;
+  color:#778896;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.045em;
+}
+.note {
+  text-align:center;
+  margin:24px 0 30px;
+  color:#647789;
+  font-size:13px;
+}
+footer {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:9px 18px;
+  padding:18px 0 5px;
+  border-top:1px solid var(--line);
+  color:#81919f;
+  font-size:12px;
+}
+footer a {
+  color:#526575;
+  text-decoration:none;
+  border-bottom:1px solid #bdc8d1;
+}
+footer a:hover {
+  color:var(--red);
+  border-color:var(--red);
+}
+@media(max-width:850px) {
+  .cards {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:560px) {
+  .wrap {padding:0 21px 25px}
+  header {padding:31px 0 18px}
+  .logo {width:290px}
+  .hero {margin:12px auto 27px}
+  .hero p:not(.eyebrow) {font-size:16px}
+  .cards {
+    grid-template-columns:1fr;
+    gap:11px;
+  }
+  .card {
+    min-height:0;
+    padding:15px 17px;
+  }
+  .back {margin-top:17px}
+}
+</style>
 </head>
-
 <body>
-  <div class="wrap">
+<div class="wrap">
 
-    <header>
-      <a href="index.html" aria-label="Zur Homepage">
-        <img class="logo"
-             src="krisenfest-logo-transparent.png"
-             alt="KRISENFEST.AT">
-      </a>
-    </header>
+<header>
+  <a href="index.html" aria-label="Zur Homepage">
+    <img class="logo"
+         src="krisenfest-logo-transparent.png"
+         alt="KRISENFEST.AT">
+  </a>
+</header>
 
-    <main>
+<main>
+<a class="back" href="index.html">
+  ← Zur Homepage
+</a>
 
-      <a class="back" href="index.html">
-        ← Zur Homepage
-      </a>
+<section class="hero" aria-labelledby="titel">
+  <p class="eyebrow">
+    Krisenvorsorge selbst überprüfen
+  </p>
+  <h1 id="titel">Unsere Selbsttests</h1>
+  <div class="rule" aria-hidden="true"></div>
+  <p>
+    Wie gut ist Ihr Haushalt auf mögliche
+    Versorgungsstörungen und andere
+    Krisensituationen vorbereitet?
+  </p>
+  <p>
+    <strong>
+      Alle Selbsttests sind kostenlos und anonym.
+    </strong>
+    Nach der Auswertung erhalten Sie konkrete,
+    auf Ihre Angaben abgestimmte Empfehlungen.
+  </p>
+</section>
 
-      <section class="hero" aria-labelledby="titel">
-        <p class="eyebrow">
-          Krisenvorsorge selbst überprüfen
-        </p>
+<section aria-labelledby="themen">
+<h2 id="themen">
+  Wählen Sie einen Themenbereich
+</h2>
 
-        <h1 id="titel">Unsere Selbsttests</h1>
+<div class="cards">
 
-        <div class="rule" aria-hidden="true"></div>
+  <a class="card"
+     href="trinkwasser.html#h1"
+     aria-label="Trinkwasser-Selbsttest öffnen">
+    <div class="card-heading">
+      <span class="icon" aria-hidden="true">💧</span>
+      <h3>Trinkwasser</h3>
+    </div>
+    <p>
+      <span class="line">Vorräte, alternative Wasserquellen</span>
+      <span class="line">und sichere Wasseraufbereitung.</span>
+    </p>
+  </a>
 
-        <p>
-          Wie gut ist Ihr Haushalt auf mögliche
-          Versorgungsstörungen und andere
-          Krisensituationen vorbereitet?
-        </p>
+  <article class="card pending">
+    <div class="card-heading">
+      <span class="icon" aria-hidden="true">⚡</span>
+      <h3>Strom &amp; Energie</h3>
+    </div>
+    <p>
+      <span class="line">Stromversorgung, Beleuchtung</span>
+      <span class="line">und Überbrückung von Ausfällen.</span>
+    </p>
+    <span class="soon">In Vorbereitung</span>
+  </article>
 
-        <p>
-          <strong>
-            Alle Selbsttests sind kostenlos und anonym.
-          </strong>
-          Nach der Auswertung erhalten Sie konkrete,
-          auf Ihre Angaben abgestimmte Empfehlungen.
-        </p>
-      </section>
+  <article class="card pending">
+    <div class="card-heading">
+      <span class="icon" aria-hidden="true">🥫</span>
+      <h3>Lebensmittel</h3>
+    </div>
+    <p>
+      <span class="line">Vorräte und Möglichkeiten</span>
+      <span class="line">zur Versorgung des Haushalts.</span>
+    </p>
+    <span class="soon">In Vorbereitung</span>
+  </article>
 
-      <section aria-labelledby="themen">
+  <article class="card pending">
+    <div class="card-heading">
+      <span class="icon" aria-hidden="true">♨️</span>
+      <h3>Wärme &amp; Heizen</h3>
+    </div>
+    <p>
+      <span class="line">Wärmeversorgung auch bei</span>
+      <span class="line">Störungen der Infrastruktur.</span>
+    </p>
+    <span class="soon">In Vorbereitung</span>
+  </article>
 
-        <h2 id="themen">
-          Wählen Sie einen Themenbereich
-        </h2>
+  <article class="card pending">
+    <div class="card-heading">
+      <span class="icon" aria-hidden="true">📻</span>
+      <h3>Kommunikation</h3>
+    </div>
+    <p>
+      <span class="line">Informationen erhalten und mit</span>
+      <span class="line">anderen in Verbindung bleiben.</span>
+    </p>
+    <span class="soon">In Vorbereitung</span>
+  </article>
 
-        <div class="cards">
+  <article class="card pending">
+    <div class="card-heading">
+      <span class="icon" aria-hidden="true">🩹</span>
+      <h3>Gesundheit &amp; Erste Hilfe</h3>
+    </div>
+    <p>
+      <span class="line">Wichtige Grundlagen für die</span>
+      <span class="line">gesundheitliche Vorsorge.</span>
+    </p>
+    <span class="soon">In Vorbereitung</span>
+  </article>
 
-          <a class="card"
-             href="trinkwasser.html#h1"
-             aria-label="Trinkwasser-Selbsttest öffnen">
+</div>
+</section>
 
-            <div class="card-heading">
-              <span class="icon" aria-hidden="true">💧</span>
-              <h3>Trinkwasser</h3>
-            </div>
+<p class="note">
+  Weitere Selbsttests werden Schritt für Schritt ergänzt.
+</p>
+</main>
 
-            <p>
-              Vorräte, alternative Wasserquellen und
-              sichere Wasseraufbereitung.
-            </p>
+<footer>
+  <span>KRISENFEST.AT · GEMEINSAM VORBEREITET</span>
+  <a href="index.html">Homepage</a>
+  <a href="impressum.html">Impressum</a>
+  <a href="datenschutz.html">Datenschutz</a>
+</footer>
 
-          </a>
-
-          <article class="card pending">
-            <div class="card-heading">
-              <span class="icon" aria-hidden="true">⚡</span>
-              <h3>Strom &amp; Energie</h3>
-            </div>
-            <p>
-              Stromversorgung, Beleuchtung und
-              Überbrückung von Ausfällen.
-            </p>
-            <span class="soon">In Vorbereitung</span>
-          </article>
-
-          <article class="card pending">
-            <div class="card-heading">
-              <span class="icon" aria-hidden="true">🥫</span>
-              <h3>Lebensmittel</h3>
-            </div>
-            <p>
-              Vorräte und Möglichkeiten zur
-              Versorgung des Haushalts.
-            </p>
-            <span class="soon">In Vorbereitung</span>
-          </article>
-
-          <article class="card pending">
-            <div class="card-heading">
-              <span class="icon" aria-hidden="true">♨️</span>
-              <h3>Wärme &amp; Heizen</h3>
-            </div>
-            <p>
-              Wärmeversorgung auch bei Störungen
-              der Infrastruktur.
-            </p>
-            <span class="soon">In Vorbereitung</span>
-          </article>
-
-          <article class="card pending">
-            <div class="card-heading">
-              <span class="icon" aria-hidden="true">📻</span>
-              <h3>Kommunikation</h3>
-            </div>
-            <p>
-              Informationen erhalten und mit
-              anderen in Verbindung bleiben.
-            </p>
-            <span class="soon">In Vorbereitung</span>
-          </article>
-
-          <article class="card pending">
-            <div class="card-heading">
-              <span class="icon" aria-hidden="true">🩹</span>
-              <h3>Gesundheit &amp; Erste Hilfe</h3>
-            </div>
-            <p>
-              Wichtige Grundlagen für die
-              gesundheitliche Vorsorge.
-            </p>
-            <span class="soon">In Vorbereitung</span>
-          </article>
-
-        </div>
-      </section>
-
-      <p class="note">
-        Weitere Selbsttests werden Schritt für Schritt ergänzt.
-      </p>
-
-    </main>
-
-    <footer>
-      <span>KRISENFEST.AT · GEMEINSAM VORBEREITET</span>
-      <a href="index.html">Homepage</a>
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
-    </footer>
-
-  </div>
+</div>
 </body>
 </html>
