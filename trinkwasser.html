@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f5f8fc">
 <title>KRISENFEST.AT – Trinkwasser-Selbstcheck</title>
-
 <style>
 :root {
   --navy:#071e3b;
@@ -15,29 +14,29 @@
   --muted:#506176;
   --shadow:0 8px 28px rgba(19,44,75,.09);
 }
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body {
   margin:0;
   background:#f6f8fb;
   color:var(--navy);
   font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
 }
-a {color:inherit}
-[hidden] {display:none!important}
+a { color:inherit; }
+[hidden] { display:none!important; }
 
+/* Kopfzeile */
 .topbar {
   background:#ffffffed;
   border-bottom:1px solid #dbe4ed;
 }
 .topin {
   max-width:1200px;
-  min-height:90px;
   margin:auto;
-  padding:16px 22px;
+  padding:16px 22px 28px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:flex-start;
   gap:24px;
 }
 .smallbrand {
@@ -48,18 +47,19 @@ a {color:inherit}
 }
 .brandmark {
   display:block;
-  width:min(320px,46vw);
+  width:320px;
+  max-width:46vw;
   height:auto;
 }
 
-/* Navigation: Unterkante auf Höhe der Logo-Unterkante */
+/* Navigation: feste, deutlich tiefere Position */
 .nav {
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  align-self:flex-end;
   flex-wrap:wrap;
   gap:clamp(10px,1.7vw,24px);
+  margin-top:40px;
 }
 .nav > span {
   font-size:14px;
@@ -94,6 +94,7 @@ a {color:inherit}
   border-bottom:2px solid var(--red);
 }
 
+/* Hauptlayout */
 .layout {
   max-width:1200px;
   margin:28px auto 60px;
@@ -103,7 +104,7 @@ a {color:inherit}
   gap:23px;
   align-items:start;
 }
-.primary {min-width:0}
+.primary { min-width:0; }
 .panel,.sidebox {
   background:white;
   border:1px solid #e5eaf0;
@@ -111,7 +112,7 @@ a {color:inherit}
   box-shadow:var(--shadow);
   margin-bottom:17px;
 }
-.panel {padding:24px 26px 25px}
+.panel { padding:24px 26px 25px; }
 .headrow {
   display:flex;
   align-items:flex-start;
@@ -142,6 +143,7 @@ a {color:inherit}
   color:#64738b;
 }
 
+/* Eingabefelder */
 .fields {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
@@ -154,7 +156,7 @@ a {color:inherit}
   display:grid;
   grid-template-rows:minmax(0,1fr) 48px;
 }
-.field.wide {grid-column:1/-1}
+.field.wide { grid-column:1/-1; }
 .field label,.field-title {
   color:#14243f;
   font-weight:660;
@@ -197,8 +199,7 @@ input::-webkit-outer-spin-button {
   -webkit-appearance:none;
   margin:0;
 }
-
-.fields.single {display:block}
+.fields.single { display:block; }
 .fields.single > .field {
   max-width:540px;
   width:100%;
@@ -208,13 +209,14 @@ input::-webkit-outer-spin-button {
   margin-top:20px;
 }
 
+/* Zusätzliche Fragen */
 .conditional {
   padding:17px;
   background:#f5f9fd;
   border:1px solid #dde7f1;
   border-radius:11px;
 }
-.conditional .fields {margin-bottom:4px}
+.conditional .fields { margin-bottom:4px; }
 .checkline {
   display:flex;
   align-items:flex-start;
@@ -230,7 +232,7 @@ input::-webkit-outer-spin-button {
   height:19px;
   margin:2px 0 0;
 }
-.checkline strong {font-weight:550}
+.checkline strong { font-weight:550; }
 .filtermore {
   margin:7px 0 9px 29px;
   padding:14px;
@@ -247,6 +249,7 @@ input::-webkit-outer-spin-button {
   margin:8px 0 0;
 }
 
+/* Schaltflächen */
 .actions {
   display:flex;
   gap:12px;
@@ -265,7 +268,7 @@ input::-webkit-outer-spin-button {
   font-weight:800;
   cursor:pointer;
 }
-.cta:hover {background:#c80d20}
+.cta:hover { background:#c80d20; }
 .secondary {
   background:white;
   border:1px solid #b8c8d7;
@@ -277,6 +280,7 @@ input::-webkit-outer-spin-button {
   flex:none;
 }
 
+/* Hinweise rechts */
 .sidebox {
   background:#eaf5ff;
   border-color:#dcecf8;
@@ -322,11 +326,12 @@ input::-webkit-outer-spin-button {
   align-items:flex-start;
   gap:13px;
 }
-.watericon {font-size:36px}
-.tip {background:#eff7fd}
-.tip-icon {font-size:28px}
+.watericon { font-size:36px; }
+.tip { background:#eff7fd; }
+.tip-icon { font-size:28px; }
 
-#bericht {scroll-margin-top:20px}
+/* Auswertung */
+#bericht { scroll-margin-top:20px; }
 .status {
   padding:15px;
   border-left:4px solid #e09e2b;
@@ -367,8 +372,9 @@ input::-webkit-outer-spin-button {
   margin:10px 0;
   padding-left:23px;
 }
-.tasks li {margin:10px 0}
+.tasks li { margin:10px 0; }
 
+/* Fehlende Pflichtfelder */
 .field input.invalid,
 .field select.invalid {
   border:3px solid #bf1430!important;
@@ -411,32 +417,44 @@ input::-webkit-outer-spin-button {
   text-align:center;
 }
 
+/* Mittlere Bildschirme */
 @media(max-width:960px) {
+  .topin { padding-bottom:28px; }
+  .brandmark { width:235px; }
+  .nav {
+    margin-top:20px;
+    gap:12px;
+  }
+  .nav > span,
+  .nav-group a { font-size:12px; }
   .layout {
     grid-template-columns:minmax(0,1fr) 255px;
     gap:14px;
   }
-  .sidebox {padding:19px 15px}
-  .panel {padding:22px}
-  .brandmark {width:235px}
-  .nav {gap:12px}
-  .nav > span,.nav-group a {font-size:12px}
+  .sidebox { padding:19px 15px; }
+  .panel { padding:22px; }
 }
 
+/* Mobile Darstellung */
 @media(max-width:720px) {
   .topin {
     flex-direction:column;
+    align-items:center;
     justify-content:center;
     gap:6px;
     padding:20px 12px 14px;
   }
-  .brandmark {width:min(300px,85vw)}
+  .brandmark {
+    width:min(300px,85vw);
+    max-width:85vw;
+  }
   .nav {
-    align-self:center;
+    margin-top:0;
     justify-content:center;
     gap:6px 15px;
   }
-  .nav > span,.nav-group a {font-size:12px}
+  .nav > span,
+  .nav-group a { font-size:12px; }
   .layout {
     grid-template-columns:1fr;
     padding:0 12px;
@@ -448,29 +466,30 @@ input::-webkit-outer-spin-button {
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:12px;
   }
-  .sidebox {margin-bottom:12px}
-  .panel {padding:20px 16px}
-  .panel h2 {font-size:21px}
-  .fields {grid-template-columns:1fr}
-  .field {grid-template-rows:auto 48px}
-  .field.wide {grid-column:1}
-  .fields.single > .field {max-width:none}
-  .filtermore .fields {grid-template-columns:1fr}
-  .actions {flex-direction:column}
-  .secondary,.cta {width:100%}
+  .sidebox { margin-bottom:12px; }
+  .panel { padding:20px 16px; }
+  .panel h2 { font-size:21px; }
+  .fields { grid-template-columns:1fr; }
+  .field { grid-template-rows:auto 48px; }
+  .field.wide { grid-column:1; }
+  .fields.single > .field { max-width:none; }
+  .filtermore .fields { grid-template-columns:1fr; }
+  .actions { flex-direction:column; }
+  .secondary,.cta { width:100%; }
 }
 @media(max-width:460px) {
-  .sidebar {grid-template-columns:1fr}
-  .sidebox {padding:18px}
-  .headrow {gap:10px}
-  .num {width:33px;height:33px}
-  .panel h2 {font-size:20px}
-  .resultGrid {grid-template-columns:1fr}
+  .sidebar { grid-template-columns:1fr; }
+  .sidebox { padding:18px; }
+  .headrow { gap:10px; }
+  .num { width:33px;height:33px; }
+  .panel h2 { font-size:20px; }
+  .resultGrid { grid-template-columns:1fr; }
 }
 </style>
 </head>
 
 <body>
+
 <header class="topbar">
   <div class="topin">
     <a class="smallbrand" href="selbsttests.html"
@@ -506,7 +525,6 @@ input::-webkit-outer-spin-button {
       <h2 id="h1">Ihr Haushalt</h2>
     </div>
   </div>
-
   <div class="fields single">
     <div class="field">
       <label for="personen">
@@ -527,7 +545,6 @@ input::-webkit-outer-spin-button {
       <h2 id="h2">Vorsorgezeitraum</h2>
     </div>
   </div>
-
   <div class="fields single">
     <div class="field">
       <label for="tage">
@@ -552,7 +569,6 @@ input::-webkit-outer-spin-button {
       <h2 id="h3">Wasservorrat</h2>
     </div>
   </div>
-
   <div class="fields single">
     <div class="field">
       <label for="flaschen">
@@ -670,7 +686,6 @@ input::-webkit-outer-spin-button {
                      inputmode="decimal"
                      placeholder="Gesamtkapazität in Litern">
             </div>
-
             <div class="field">
               <label for="tragbar">
                 Können Sie gefüllte Behälter sicher tragen
@@ -715,7 +730,6 @@ input::-webkit-outer-spin-button {
 
     <div class="filtermore" id="filterBox" hidden>
       <div class="fields">
-
         <div class="field">
           <label for="modell">
             Welchen Wasserfilter besitzen Sie?
@@ -751,7 +765,6 @@ input::-webkit-outer-spin-button {
             <option value="nein">Nein</option>
           </select>
         </div>
-
       </div>
     </div>
 
@@ -795,6 +808,7 @@ input::-webkit-outer-spin-button {
 </div>
 
 <aside class="sidebar" aria-label="Hinweise zum Selbstcheck">
+
   <div class="sidebox">
     <div class="side-title">
       <span class="watericon" aria-hidden="true">💧</span>
@@ -811,18 +825,9 @@ input::-webkit-outer-spin-button {
       ist und welche Verbesserungen sinnvoll wären.
     </p>
     <ul>
-      <li>
-        <span class="tick">✓</span>
-        Vorhandene Ressourcen erkennen
-      </li>
-      <li>
-        <span class="tick">✓</span>
-        Versorgungslücken verstehen
-      </li>
-      <li>
-        <span class="tick">✓</span>
-        Konkrete Verbesserungen planen
-      </li>
+      <li><span class="tick">✓</span>Vorhandene Ressourcen erkennen</li>
+      <li><span class="tick">✓</span>Versorgungslücken verstehen</li>
+      <li><span class="tick">✓</span>Konkrete Verbesserungen planen</li>
     </ul>
   </div>
 
@@ -844,6 +849,7 @@ input::-webkit-outer-spin-button {
       Wasserqualität und täglichen Entnahmemenge.
     </p>
   </div>
+
 </aside>
 </main>
 
@@ -916,13 +922,13 @@ function refresh() {
   $("error").hidden = true;
 }
 
-$("art").addEventListener("change",updateArt);
-$("modell").addEventListener("change",updateModel);
+$("art").addEventListener("change", updateArt);
+$("modell").addEventListener("change", updateModel);
 
 for (const id of [
   "quelle","strom","behaelter","m_filter"
 ]) {
-  $(id).addEventListener("change",refresh);
+  $(id).addEventListener("change", refresh);
 }
 
 for (const el of document.querySelectorAll("input,select")) {
@@ -949,7 +955,6 @@ function run() {
   const need = people * 2;
 
   const required = [];
-
   const requireField = (id,valid) => {
     if (!valid) required.push(id);
   };
@@ -1027,7 +1032,6 @@ function run() {
 
       if (field.tagName !== "FIELDSET") {
         field.setAttribute("aria-invalid","true");
-
         field.style.setProperty(
           "border","3px solid #bf1430","important"
         );
@@ -1108,7 +1112,6 @@ function run() {
   }
 
   const actions = [];
-
   const add = text => {
     if (!actions.includes(text)) {
       actions.push(text);
