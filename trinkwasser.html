@@ -13,21 +13,21 @@
   --red:#df1728;
   --blue:#1479c4;
   --muted:#506176;
-  --line:#d8e1eb;
   --shadow:0 8px 28px rgba(19,44,75,.09);
 }
 
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
 
 body {
   margin:0;
   background:#f6f8fb;
   color:var(--navy);
-  font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  font:16px/1.5 system-ui,-apple-system,
+       "Segoe UI",Arial,sans-serif;
 }
 
-a { color:inherit; }
+a {color:inherit}
 
 .topbar {
   background:#ffffffed;
@@ -66,8 +66,7 @@ a { color:inherit; }
   gap:clamp(12px,2vw,26px);
 }
 
-.nav a,
-.nav span {
+.nav a,.nav span {
   display:inline-block;
   color:#52657d;
   font-size:14px;
@@ -82,8 +81,8 @@ a { color:inherit; }
   border-bottom-color:var(--red);
 }
 
-.nav a:hover { color:var(--red); }
-.nav span { opacity:.65; cursor:default; }
+.nav a:hover {color:var(--red)}
+.nav span {opacity:.65;cursor:default}
 
 .layout {
   max-width:1200px;
@@ -95,7 +94,7 @@ a { color:inherit; }
   align-items:start;
 }
 
-.primary { min-width:0; }
+.primary {min-width:0}
 
 .panel,.sidebox {
   background:#fff;
@@ -105,7 +104,7 @@ a { color:inherit; }
   margin-bottom:17px;
 }
 
-.panel { padding:24px 26px 25px; }
+.panel {padding:24px 26px 25px}
 
 .headrow {
   display:flex;
@@ -122,7 +121,7 @@ a { color:inherit; }
   height:36px;
   border-radius:50%;
   background:var(--red);
-  color:white;
+  color:#fff;
   font-size:19px;
   font-weight:800;
 }
@@ -140,34 +139,35 @@ a { color:inherit; }
   margin:0;
 }
 
+/* Gleich hohe Eingabe- und Auswahlfelder */
 .fields {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:15px 20px;
+  gap:24px 20px;
+  align-items:stretch;
 }
 
 .field {
+  position:relative;
   min-width:0;
-  display:flex;
-  flex-direction:column;
+  display:grid;
+  grid-template-rows:minmax(0,1fr) 48px;
 }
 
-.field.wide { grid-column:1/-1; }
+.field.wide {grid-column:1/-1}
 
-.field label,
-.field-title {
-  display:block;
+.field label,.field-title {
   font-weight:660;
   font-size:14px;
   line-height:1.35;
-  margin-bottom:8px;
   color:#14243f;
 }
 
 .field > label {
-  min-height:3.6em;
   display:flex;
   align-items:flex-end;
+  min-height:0;
+  margin:0 0 8px;
 }
 
 .field input:not([type=checkbox]),
@@ -177,6 +177,7 @@ a { color:inherit; }
   min-width:0;
   height:48px;
   min-height:48px;
+  max-height:48px;
   border:1px solid #c9d4df;
   border-radius:9px;
   background:#fff;
@@ -185,7 +186,6 @@ a { color:inherit; }
   font:inherit;
   font-size:15px;
   outline:none;
-  box-shadow:0 1px 2px #1c385709;
 }
 
 .field input:focus,
@@ -207,13 +207,13 @@ input::-webkit-outer-spin-button {
 
 .conditional {
   grid-column:1/-1;
-  padding:17px 17px 5px;
+  padding:17px;
   background:#f5f9fd;
   border:1px solid #dde7f1;
   border-radius:11px;
 }
 
-.conditional .fields { margin:0 0 13px; }
+.conditional .fields {margin-bottom:4px}
 
 .checkline {
   display:flex;
@@ -232,7 +232,7 @@ input::-webkit-outer-spin-button {
   margin:2px 0 0;
 }
 
-.checkline strong { font-weight:550; }
+.checkline strong {font-weight:550}
 
 .filtermore {
   margin:7px 0 9px 29px;
@@ -270,10 +270,9 @@ input::-webkit-outer-spin-button {
   font-size:17px;
   font-weight:800;
   cursor:pointer;
-  box-shadow:0 7px 20px rgba(217,17,38,.19);
 }
 
-.cta:hover { background:#c80d20; }
+.cta:hover {background:#c80d20}
 
 .secondary {
   background:white;
@@ -321,10 +320,10 @@ input::-webkit-outer-spin-button {
 
 .tick {
   flex:none;
-  display:inline-grid;
+  display:grid;
   place-items:center;
-  background:#2389d2;
   color:white;
+  background:#2389d2;
   border-radius:50%;
   width:22px;
   height:22px;
@@ -339,17 +338,13 @@ input::-webkit-outer-spin-button {
 }
 
 .watericon {
-  display:grid;
-  place-items:center;
-  width:38px;
-  height:45px;
   font-size:36px;
 }
 
-.tip { background:#eff7fd; }
-.tip-icon { font-size:28px; }
+.tip {background:#eff7fd}
+.tip-icon {font-size:28px}
 
-#bericht { scroll-margin-top:20px; }
+#bericht {scroll-margin-top:20px}
 
 .status {
   padding:15px;
@@ -394,12 +389,37 @@ input::-webkit-outer-spin-button {
   font-size:20px;
 }
 
-.tasks {
-  margin:10px 0;
-  padding-left:23px;
+.tasks {margin:10px 0;padding-left:23px}
+.tasks li {margin:10px 0}
+
+/* Sichtbare Fehlermarkierung */
+.field input.invalid,
+.field select.invalid {
+  border:3px solid #bf1430!important;
+  background:#fff0f2!important;
+  box-shadow:0 0 0 3px #bf143022!important;
 }
 
-.tasks li { margin:10px 0; }
+.field:has(.invalid) > label {
+  color:#ac1830!important;
+}
+
+.validation-note {
+  position:absolute;
+  left:0;
+  bottom:-17px;
+  color:#b21832;
+  font-weight:700;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+#aufbereitungGruppe.invalid {
+  outline:3px solid #bf1430!important;
+  background:#fff0f2!important;
+  border-radius:6px;
+  padding:10px!important;
+}
 
 #error {
   background:#fff2f2;
@@ -411,25 +431,6 @@ input::-webkit-outer-spin-button {
   font-weight:650;
 }
 
-/* Rot markierte Pflichtfelder */
-.field input.invalid,
-.field select.invalid {
-  border:2px solid #ca2339!important;
-  background:#fff5f6!important;
-  box-shadow:0 0 0 3px rgba(202,35,57,.12)!important;
-}
-
-.field:has(.invalid) > label {
-  color:#a6172a;
-}
-
-#aufbereitungGruppe.invalid {
-  outline:2px solid #ca2339;
-  outline-offset:5px;
-  border-radius:6px;
-  background:#fff5f6;
-}
-
 .foot {
   max-width:1140px;
   margin:10px auto 40px;
@@ -439,17 +440,17 @@ input::-webkit-outer-spin-button {
   text-align:center;
 }
 
-[hidden] { display:none!important; }
+[hidden] {display:none!important}
 
 @media(max-width:960px) {
   .layout {
     grid-template-columns:minmax(0,1fr) 255px;
     gap:14px;
   }
-  .sidebox { padding:19px 15px; }
-  .panel { padding:22px; }
-  .nav { gap:13px; }
-  .nav a,.nav span { font-size:12px; }
+  .sidebox {padding:19px 15px}
+  .panel {padding:22px}
+  .nav {gap:13px}
+  .nav a,.nav span {font-size:12px}
 }
 
 @media(max-width:720px) {
@@ -459,16 +460,12 @@ input::-webkit-outer-spin-button {
     gap:5px;
     padding:20px 12px 12px;
   }
-  .brandmark {
-    width:min(300px,85vw);
-  }
+  .brandmark {width:min(300px,85vw)}
   .nav {
     justify-content:center;
     gap:12px;
   }
-  .nav a,.nav span {
-    font-size:12px;
-  }
+  .nav a,.nav span {font-size:12px}
   .layout {
     grid-template-columns:1fr;
     padding:0 12px;
@@ -480,27 +477,26 @@ input::-webkit-outer-spin-button {
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:12px;
   }
-  .sidebox { margin-bottom:12px; }
-  .panel { padding:20px 16px; }
-  .panel h2 { font-size:21px; }
-  .fields { grid-template-columns:1fr; }
-  .field.wide,.conditional { grid-column:1; }
-  .field > label { min-height:0; }
-  .filtermore .fields { grid-template-columns:1fr; }
-  .actions { flex-direction:column; }
-  .secondary,.cta { width:100%; }
+  .sidebox {margin-bottom:12px}
+  .panel {padding:20px 16px}
+  .panel h2 {font-size:21px}
+  .fields {grid-template-columns:1fr}
+  .field {
+    grid-template-rows:auto 48px;
+  }
+  .field.wide,.conditional {grid-column:1}
+  .filtermore .fields {grid-template-columns:1fr}
+  .actions {flex-direction:column}
+  .secondary,.cta {width:100%}
 }
 
 @media(max-width:460px) {
-  .sidebar { grid-template-columns:1fr; }
-  .sidebox { padding:18px; }
-  .headrow { gap:10px; }
-  .num {
-    width:33px;
-    height:33px;
-  }
-  .panel h2 { font-size:20px; }
-  .resultGrid { grid-template-columns:1fr; }
+  .sidebar {grid-template-columns:1fr}
+  .sidebox {padding:18px}
+  .headrow {gap:10px}
+  .num {width:33px;height:33px}
+  .panel h2 {font-size:20px}
+  .resultGrid {grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -509,8 +505,9 @@ input::-webkit-outer-spin-button {
 
 <header class="topbar">
   <div class="topin">
-    <a class="smallbrand" href="selbsttests.html"
-       aria-label="Zur Übersicht der Selbsttests">
+    <a class="smallbrand"
+       href="selbsttests.html"
+       aria-label="Zur Selbsttest-Übersicht">
       <img class="brandmark"
            src="krisenfest-logo-transparent.png"
            alt="KRISENFEST.AT">
@@ -518,10 +515,10 @@ input::-webkit-outer-spin-button {
 
     <nav class="nav" aria-label="Hauptnavigation">
       <a href="selbsttests.html">Selbsttests</a>
-      <span title="In Vorbereitung">Wissen</span>
-      <span title="In Vorbereitung">Vorsorge</span>
-      <span title="In Vorbereitung">Notfälle</span>
-      <span title="In Vorbereitung">Service</span>
+      <span>Wissen</span>
+      <span>Vorsorge</span>
+      <span>Notfälle</span>
+      <span>Service</span>
     </nav>
   </div>
 </header>
@@ -583,6 +580,7 @@ input::-webkit-outer-spin-button {
   </div>
 
   <div class="fields">
+
     <div class="field">
       <label for="flaschen">
         Wie viele Liter originalverschlossenes Trinkwasser
@@ -679,6 +677,7 @@ input::-webkit-outer-spin-button {
 
         <div class="field wide" id="transportBox" hidden>
           <div class="fields">
+
             <div class="field">
               <label for="liter">
                 Wie viele Liter fassen Ihre Behälter insgesamt?
@@ -700,11 +699,13 @@ input::-webkit-outer-spin-button {
                 <option value="nein">Nein</option>
               </select>
             </div>
+
           </div>
         </div>
 
       </div>
     </div>
+
   </div>
 </section>
 
@@ -733,17 +734,35 @@ input::-webkit-outer-spin-button {
 
     <div class="filtermore" id="filterBox" hidden>
       <div class="fields">
+
         <div class="field">
           <label for="modell">
             Welchen Wasserfilter besitzen Sie?
           </label>
-          <input id="modell" type="text"
+          <select id="modell">
+            <option value="">Bitte auswählen</option>
+            <option value="Katadyn Pocket">Katadyn Pocket</option>
+            <option value="Katadyn BeFree">Katadyn BeFree</option>
+            <option value="Sawyer MINI">Sawyer MINI</option>
+            <option value="Sawyer Squeeze">Sawyer Squeeze</option>
+            <option value="LifeStraw Peak Series">LifeStraw Peak Series</option>
+            <option value="GRAYL GeoPress">GRAYL GeoPress</option>
+            <option value="Anderes Modell">Anderes Modell</option>
+            <option value="Modell unbekannt">Modell unbekannt</option>
+          </select>
+        </div>
+
+        <div class="field" id="anderesModell" hidden>
+          <label for="modellAnderes">
+            Bitte Hersteller und Modell angeben
+          </label>
+          <input id="modellAnderes" type="text"
                  placeholder="Hersteller und Modell">
         </div>
 
         <div class="field">
           <label for="einsatz">
-            Ist der Filter einsatzbereit?
+            Wird die Einsatzbereitschaft regelmäßig geprüft?
           </label>
           <select id="einsatz">
             <option value="">Bitte auswählen</option>
@@ -751,6 +770,7 @@ input::-webkit-outer-spin-button {
             <option value="nein">Nein</option>
           </select>
         </div>
+
       </div>
     </div>
 
@@ -761,7 +781,9 @@ input::-webkit-outer-spin-button {
 
     <label class="checkline">
       <input type="checkbox" id="chemie">
-      <strong>Desinfektionsmittel zur Trinkwasseraufbereitung</strong>
+      <strong>
+        Desinfektionsmittel zur Trinkwasseraufbereitung
+      </strong>
     </label>
 
     <label class="checkline">
@@ -803,19 +825,16 @@ input::-webkit-outer-spin-button {
       <span class="watericon" aria-hidden="true">💧</span>
       <h3>Warum ist Trinkwasservorsorge wichtig?</h3>
     </div>
-
     <p>
       Bei einem Stromausfall, technischen Defekten oder
       Verunreinigungen kann die öffentliche Wasserversorgung
       zeitweise ausfallen.
     </p>
-
     <p>
       Finden Sie heraus, ob Ihre Versorgung für den
       gewünschten Vorsorgezeitraum ausreichend abgesichert
       ist und welche Verbesserungen sinnvoll wären.
     </p>
-
     <ul>
       <li><span class="tick">✓</span>Vorhandene Ressourcen erkennen</li>
       <li><span class="tick">✓</span>Versorgungslücken verstehen</li>
@@ -828,14 +847,12 @@ input::-webkit-outer-spin-button {
       <span class="tip-icon" aria-hidden="true">💡</span>
       <h3>Gut zu wissen</h3>
     </div>
-
     <p>
       Als rechnerischen Richtwert verwenden wir
       <strong>2 Liter Trinkwasser pro Person und Tag</strong>.
       Für die tatsächliche Notversorgung kann mehr Wasser
       erforderlich sein.
     </p>
-
     <p class="fine">
       Eine Quelle oder ein Filter allein beweist noch nicht,
       dass das Wasser sicher trinkbar ist. Für eine gesicherte
@@ -872,10 +889,31 @@ function updateArt() {
     labels[val("art")] || "Wie weit ist die Wasserquelle entfernt?";
 }
 
+function clearOne(el) {
+  el.classList.remove("invalid");
+  el.removeAttribute("aria-invalid");
+  el.style.removeProperty("border");
+  el.style.removeProperty("background-color");
+
+  const note = el.parentElement?.querySelector(".validation-note");
+  if (note) note.remove();
+}
+
 function clearInvalid() {
   for (const el of document.querySelectorAll(".invalid")) {
-    el.classList.remove("invalid");
-    el.removeAttribute("aria-invalid");
+    clearOne(el);
+  }
+  for (const note of document.querySelectorAll(".validation-note")) {
+    note.remove();
+  }
+}
+
+function updateModel() {
+  $("anderesModell").hidden =
+    val("modell") !== "Anderes Modell";
+
+  if ($("anderesModell").hidden) {
+    clearOne($("modellAnderes"));
   }
 }
 
@@ -894,13 +932,14 @@ function refresh() {
   $("error").hidden = true;
 }
 
-$("art").addEventListener("change", updateArt);
+$("art").addEventListener("change",updateArt);
+$("modell").addEventListener("change",updateModel);
 
-for (const id of ["quelle", "strom", "behaelter", "m_filter"]) {
-  $(id).addEventListener("change", refresh);
+for (const id of ["quelle","strom","behaelter","m_filter"]) {
+  $(id).addEventListener("change",refresh);
 }
 
-for (const id of ["m_filter", "kochen", "chemie"]) {
+for (const id of ["m_filter","kochen","chemie"]) {
   $(id).addEventListener("change", () => {
     if (checked(id)) $("keine").checked = false;
   });
@@ -908,7 +947,7 @@ for (const id of ["m_filter", "kochen", "chemie"]) {
 
 $("keine").addEventListener("change", () => {
   if (checked("keine")) {
-    for (const id of ["m_filter", "kochen", "chemie"]) {
+    for (const id of ["m_filter","kochen","chemie"]) {
       $(id).checked = false;
     }
     refresh();
@@ -916,20 +955,15 @@ $("keine").addEventListener("change", () => {
 });
 
 for (const el of document.querySelectorAll("input,select")) {
-  el.addEventListener("input", () => {
-    el.classList.remove("invalid");
-    el.removeAttribute("aria-invalid");
-    $("bericht").hidden = true;
-    $("error").hidden = true;
-  });
-
-  el.addEventListener("change", () => {
-    el.classList.remove("invalid");
-    el.removeAttribute("aria-invalid");
-    $("aufbereitungGruppe").classList.remove("invalid");
-    $("bericht").hidden = true;
-    $("error").hidden = true;
-  });
+  for (const evt of ["input","change"]) {
+    el.addEventListener(evt, () => {
+      clearOne(el);
+      if (el.type === "checkbox") {
+        clearOne($("aufbereitungGruppe"));
+      }
+      $("bericht").hidden = true;
+    });
+  }
 }
 
 function run() {
@@ -942,7 +976,8 @@ function run() {
   const need = people * 2;
 
   const required = [];
-  const requireField = (id, valid) => {
+
+  const requireField = (id,valid) => {
     if (!valid) required.push(id);
   };
 
@@ -954,7 +989,7 @@ function run() {
     people <= 30
   );
 
-  requireField("tage", [7,14,30,60].includes(days));
+  requireField("tage",[7,14,30,60].includes(days));
 
   requireField(
     "flaschen",
@@ -964,17 +999,17 @@ function run() {
     stored <= 1000000
   );
 
-  requireField("quelle", val("quelle") !== "");
+  requireField("quelle",val("quelle") !== "");
 
   if (source) {
     for (const id of [
-      "art", "entfernung", "qualitaet", "strom", "behaelter"
+      "art","entfernung","qualitaet","strom","behaelter"
     ]) {
-      requireField(id, val(id) !== "");
+      requireField(id,val(id) !== "");
     }
 
     if (yes("strom")) {
-      requireField("ersatz", val("ersatz") !== "");
+      requireField("ersatz",val("ersatz") !== "");
     }
 
     if (yes("behaelter")) {
@@ -984,19 +1019,28 @@ function run() {
         Number.isFinite(Number(val("liter"))) &&
         Number(val("liter")) > 0
       );
-      requireField("tragbar", val("tragbar") !== "");
+      requireField("tragbar",val("tragbar") !== "");
     }
   }
 
   if (checked("m_filter")) {
-    requireField("modell", val("modell").trim() !== "");
-    requireField("einsatz", val("einsatz") !== "");
+    requireField("modell",val("modell").trim() !== "");
+
+    if (val("modell") === "Anderes Modell") {
+      requireField(
+        "modellAnderes",
+        val("modellAnderes").trim() !== ""
+      );
+    }
+
+    requireField("einsatz",val("einsatz") !== "");
   }
 
   if (!["m_filter","kochen","chemie","keine"].some(checked)) {
     required.push("aufbereitungGruppe");
   }
 
+  // Fehlende Angaben rot hervorheben
   if (required.length) {
     for (const id of required) {
       const field = $(id);
@@ -1004,6 +1048,18 @@ function run() {
 
       if (field.tagName !== "FIELDSET") {
         field.setAttribute("aria-invalid","true");
+
+        field.style.setProperty(
+          "border","3px solid #bf1430","important"
+        );
+        field.style.setProperty(
+          "background-color","#fff0f2","important"
+        );
+
+        const note = document.createElement("small");
+        note.className = "validation-note";
+        note.textContent = "Bitte diese Angabe ergänzen.";
+        field.insertAdjacentElement("afterend",note);
       }
     }
 
@@ -1078,7 +1134,7 @@ function run() {
   };
 
   if (!stocked && !logisticsOk) {
-    const diff = Math.max(0, need * days - stored);
+    const diff = Math.max(0,need * days - stored);
     add(
       `Der Flaschenvorrat liegt rechnerisch um ` +
       `${diff.toLocaleString("de-AT")} Liter unter dem ` +
@@ -1133,8 +1189,7 @@ function run() {
       add(
         "Lassen Sie die Wasserqualität beurteilen. " +
         "Ungeprüftes Wasser darf nicht allein aufgrund " +
-        "eines vorhandenen Filters als sicheres " +
-        "Trinkwasser gelten."
+        "eines vorhandenen Filters als sicheres Trinkwasser gelten."
       );
     } else {
       add(
@@ -1147,22 +1202,26 @@ function run() {
     if (!method) {
       add(
         "Prüfen Sie eine für die jeweilige Wasserquelle " +
-        "geeignete Aufbereitung. Mechanische Filter " +
-        "bieten keinen universellen Schutz vor Viren " +
-        "oder chemischen Stoffen."
+        "geeignete Aufbereitung. Mechanische Filter bieten " +
+        "keinen universellen Schutz vor Viren oder " +
+        "chemischen Stoffen."
       );
     }
 
     if (checked("m_filter")) {
-      const m = val("modell").toLowerCase();
+      const m = (
+        val("modell") === "Anderes Modell"
+          ? val("modellAnderes")
+          : val("modell")
+      ).toLowerCase();
 
       if (m.includes("pocket") || m.includes("befree")) {
         add(
           "Ihr genanntes Filtermodell kann bestimmte " +
           "Mikroorganismen reduzieren; eine zuverlässige " +
-          "Entfernung von Viren und chemischen " +
-          "Verunreinigungen ist damit nicht allgemein " +
-          "gewährleistet. Herstellerangaben beachten."
+          "Entfernung von Viren und chemischen Verunreinigungen " +
+          "ist damit nicht allgemein gewährleistet. " +
+          "Herstellerangaben beachten."
         );
       } else {
         add(
@@ -1174,8 +1233,10 @@ function run() {
 
     if (checked("m_filter") && !yes("einsatz")) {
       add(
-        "Machen Sie Ihren Wasserfilter einsatzbereit " +
-        "oder sehen Sie eine andere geeignete Aufbereitung vor."
+        "Prüfen Sie den Wasserfilter vor der Nutzung auf " +
+        "Funktion, Zustand und Wartungsbedarf. Eine nicht " +
+        "regelmäßig geprüfte Einsatzbereitschaft sollte " +
+        "nicht vorausgesetzt werden."
       );
     }
   }
@@ -1210,7 +1271,7 @@ function run() {
   metrics.className = "resultGrid";
 
   const metricData = [
-    ["Personen", people],
+    ["Personen",people],
     [
       "Vorsorgezeitraum",
       days === 30 ? "1 Monat" :
@@ -1234,7 +1295,7 @@ function run() {
     const s = document.createElement("strong");
     s.textContent = value;
 
-    b.append(s, document.createTextNode(label));
+    b.append(s,document.createTextNode(label));
     metrics.append(b);
   }
 
@@ -1272,7 +1333,7 @@ function run() {
   });
 }
 
-$("auswerten").addEventListener("click", run);
+$("auswerten").addEventListener("click",run);
 
 $("reset").addEventListener("click", () => {
   for (const el of document.querySelectorAll("input,select")) {
@@ -1286,6 +1347,7 @@ $("reset").addEventListener("click", () => {
   refresh();
   clearInvalid();
   updateArt();
+  updateModel();
 
   window.scrollTo({
     top:0,
@@ -1295,6 +1357,7 @@ $("reset").addEventListener("click", () => {
 
 refresh();
 updateArt();
+updateModel();
 </script>
 
 </body>
