@@ -5,27 +5,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="theme-color" content="#fbfcfd">
+  <meta name="theme-color" content="#fcfcfb">
   <meta name="description" content="Wie krisenfest sind Sie und Ihre Familie? Kostenlose und anonyme Selbsttests mit individueller Auswertung und konkreten Empfehlungen.">
   <title>Krise? Welche Krise? – KRISENFEST.AT</title>
-
   <style>
     :root {
       --navy: #0a2945;
       --red: #d90c27;
-      --muted: #536475;
       --paper: #fcfcfb;
-      --line: #d9e1e8;
     }
-
     *, *::before, *::after {
       box-sizing: border-box;
     }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -35,51 +26,41 @@
             "Segoe UI", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-
     body::before {
       content: "";
-      pointer-events: none;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       height: 5px;
       background: linear-gradient(
-        90deg,
-        var(--navy) 0 75%,
-        var(--red) 75% 100%
+        90deg, var(--navy) 0 75%, var(--red) 75%
       );
+      pointer-events: none;
       z-index: 5;
     }
-
     .wrap {
-      position: relative;
-      isolation: isolate;
       max-width: 1200px;
-      margin: 0 auto;
+      margin: auto;
       padding: 0 38px 45px;
     }
-
     .site-header {
       display: flex;
       justify-content: center;
       align-items: center;
       border-bottom: 1px solid #e6ebed;
-      padding: 23px 0 21px;
+      padding: 36px 0 21px;
     }
-
     .site-header img {
+      display: block;
       width: 386px;
       max-width: 88vw;
       height: auto;
-      display: block;
     }
-
     .hero {
       padding: 43px 0 5px;
       text-align: center;
     }
-
     .eyebrow {
       font-size: 11px;
       letter-spacing: .25em;
@@ -88,23 +69,18 @@
       color: #65778a;
       margin: 0 0 16px;
     }
-
     h1 {
-      font: normal 700 clamp(32px, 3.05vw, 39px)/1.18
+      font: 700 clamp(32px, 3.05vw, 39px)/1.18
             Georgia, "Times New Roman", serif;
       letter-spacing: -.032em;
-      color: var(--navy);
       margin: 0;
     }
-
     h1 .second {
       white-space: nowrap;
     }
-
     .accent {
       color: var(--red);
     }
-
     .rule {
       width: 54px;
       height: 2px;
@@ -112,273 +88,193 @@
       border-radius: 5px;
       margin: 23px auto 0;
     }
-
     .intro {
       max-width: 785px;
       margin: 31px auto 0;
     }
-
     .intro p {
       font-size: 17px;
       line-height: 1.76;
-      letter-spacing: .002em;
       margin: 0 0 18px;
       color: #35495b;
     }
-
     .intro p:first-child {
       font-size: 18px;
       line-height: 1.72;
       color: #1c354b;
     }
-
     .intro strong {
       color: var(--navy);
-      font-weight: 720;
     }
-
     .question {
-      border-left: 3px solid var(--red);
-      background: #f2f5f7;
       max-width: 740px;
       margin: 29px auto 26px;
       padding: 17px 22px;
+      border-left: 3px solid var(--red);
+      background: #f2f5f7;
       font: 700 clamp(18px, 2vw, 22px)/1.5
             Georgia, "Times New Roman", serif;
       text-align: center;
-      color: var(--navy);
     }
-
     .intro p.small-ending {
       margin-top: 21px;
     }
-
     .action {
       text-align: center;
       margin: 27px auto 14px;
     }
-
     .button {
-      min-height: 42px;
-      padding: 9px 15px;
       display: inline-flex;
-      justify-content: center;
       align-items: center;
-      gap: 14px;
-      background: var(--red);
+      justify-content: center;
+      padding: 10px 15px;
+      min-height: 42px;
       border-radius: 5px;
+      background: var(--red);
       color: white;
       text-decoration: none;
-      font-weight: 700;
       font-size: 15px;
+      font-weight: 700;
       line-height: 1.3;
       box-shadow: 0 4px 10px rgba(130,20,33,.12);
-      transition: background .15s ease,
-                  transform .15s ease,
-                  box-shadow .15s ease;
     }
-
     .button:hover {
       background: #b80d24;
-      transform: translateY(-1px);
-      box-shadow: 0 5px 12px rgba(130,20,33,.16);
     }
-
-    .button:focus-visible {
+    .button:focus-visible,
+    a:focus-visible {
       outline: 3px solid var(--navy);
       outline-offset: 4px;
     }
-
-    .arrow {
-      font-size: 19px;
-      line-height: 1;
-      font-weight: 400;
-      transform: translateY(-1px);
-    }
-
     .trust {
       display: flex;
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
+      margin: 13px auto 47px;
+      color: #66798a;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: .055em;
       text-transform: uppercase;
-      color: #66798a;
-      margin: 13px auto 47px;
     }
-
-    .trust span + span::before {
+    .trust span+span::before {
       content: "•";
       margin-right: 14px;
       color: #b7c4ce;
     }
-
     .site-footer {
       max-width: 950px;
-      margin: 0 auto;
+      margin: auto;
       padding: 19px 0 6px;
+      border-top: 1px solid #e6ebed;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 9px 18px;
-      border-top: 1px solid #e6ebed;
       color: #8593a1;
       font-size: 12px;
       letter-spacing: .065em;
     }
-
     .site-footer a {
       color: #536475;
       text-decoration: none;
       border-bottom: 1px solid #c5cdd5;
     }
-
     .site-footer a:hover {
       color: var(--red);
-      border-bottom-color: var(--red);
+      border-color: var(--red);
     }
-
-    .site-footer a:focus-visible {
-      outline: 2px solid var(--red);
-      outline-offset: 3px;
-    }
-
     @media (max-width: 720px) {
       .wrap {
         padding: 0 23px 28px;
       }
-
       .site-header {
-        padding: 21px 0 19px;
+        padding: 34px 0 19px;
       }
-
       .site-header img {
         width: 298px;
       }
-
       .hero {
         padding: 35px 0 0;
       }
-
       .eyebrow {
         font-size: 10px;
         letter-spacing: .18em;
       }
-
       h1 {
         font-size: clamp(27px, 7.7vw, 34px);
-        letter-spacing: -.03em;
       }
-
       .rule {
         margin-top: 19px;
       }
-
       .intro {
         margin-top: 26px;
       }
-
       .intro p,
       .intro p:first-child {
         font-size: 16px;
         line-height: 1.74;
         margin-bottom: 17px;
       }
-
       .question {
         margin: 24px 0 23px;
         font-size: 20px;
         padding: 17px;
       }
-
       .action {
         margin-top: 23px;
       }
-
-      .button {
-        width: auto;
-        max-width: 100%;
-        justify-content: center;
-        padding: 10px 15px;
-      }
-
       .trust {
         font-size: 10px;
         gap: 7px 10px;
         letter-spacing: .025em;
         margin-bottom: 30px;
       }
-
-      .trust span + span::before {
+      .trust span+span::before {
         margin-right: 10px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .button {
-        transition: none;
-      }
-
-      .button:hover {
-        transform: none;
       }
     }
   </style>
 </head>
-
 <body>
   <div class="wrap">
-
     <header class="site-header">
-      <img
-        src="krisenfest-logo-transparent.png"
-        width="530"
-        height="202"
-        alt="KRISENFEST.AT – Logo mit stilisierter Bergsilhouette"
-      >
+      <img src="krisenfest-logo-transparent.png"
+           alt="KRISENFEST.AT">
     </header>
 
     <main>
-
       <section class="hero" aria-labelledby="title">
         <p class="eyebrow">
           Sicherheit beginnt mit Vorbereitung
         </p>
-
         <h1 id="title">
           Krise?
           <span class="second">
             Welche Krise<span class="accent">?</span>
           </span>
         </h1>
-
         <div class="rule" aria-hidden="true"></div>
       </section>
 
       <section class="intro"
                aria-label="Warum Krisenvorsorge wichtig ist">
-
         <p>
-          Für manche Menschen ist bis heute kaum erkennbar,
-          dass wir in zunehmend unsicheren Zeiten leben.
-          Für viele von uns ist es schlicht unvorstellbar,
-          dass der Wohlstand, die Sicherheit und die Stabilität,
-          an die wir uns über Jahrzehnte gewöhnt haben,
-          nicht selbstverständlich für immer bestehen bleiben.
+          Für manche Menschen ist bis heute kaum erkennbar, dass wir
+          in zunehmend unsicheren Zeiten leben. Für viele von uns
+          ist es schlicht unvorstellbar, dass der Wohlstand,
+          die Sicherheit und die Stabilität, an die wir uns über
+          Jahrzehnte gewöhnt haben, nicht selbstverständlich
+          für immer bestehen bleiben.
         </p>
 
         <p>
-          Doch wer die Entwicklungen der vergangenen Jahre
-          und die zunehmenden Risiken unserer Welt genauer
-          betrachtet, erkennt, dass sich grundlegende
-          Rahmenbedingungen verändert haben.
+          Doch wer die Entwicklungen der vergangenen Jahre und
+          die zunehmenden Risiken unserer Welt genauer betrachtet,
+          erkennt, dass sich grundlegende Rahmenbedingungen
+          verändert haben.
         </p>
 
         <p>
@@ -386,14 +282,13 @@
           wirtschaftliche und finanzielle Instabilität,
           mögliche Störungen unserer Energie- und
           Versorgungsinfrastruktur oder gesundheitliche Krisen –
-          die Herausforderungen sind vielfältig und ihre
-          möglichen Auswirkungen auf unser tägliches Leben
-          erheblich.
+          die Herausforderungen sind vielfältig und ihre möglichen
+          Auswirkungen auf unser tägliches Leben erheblich.
         </p>
 
         <div class="question">
-          Wie gut wären Sie und Ihre Familie auf
-          eine ernsthafte Krise vorbereitet?
+          Wie gut wären Sie und Ihre Familie auf eine
+          ernsthafte Krise vorbereitet?
         </div>
 
         <p>
@@ -409,32 +304,29 @@
             Alle Selbsttests sind kostenlos und anonym.
           </strong>
           Im Anschluss erhalten Sie eine detaillierte,
-          auf Ihre persönliche Situation abgestimmte
-          Auswertung mit konkreten Empfehlungen,
-          wie Sie Ihre Krisenvorsorge verbessern können.
+          auf Ihre persönliche Situation abgestimmte Auswertung
+          mit konkreten Empfehlungen, wie Sie Ihre
+          Krisenvorsorge verbessern können.
         </p>
 
         <p class="small-ending">
           Wir wünschen Ihnen interessante Erkenntnisse
           und viel Freude beim Entdecken Ihrer Möglichkeiten!
         </p>
-
       </section>
 
       <div class="action">
         <a class="button" href="selbsttests.html">
           Zu den Selbsttests
-          <span class="arrow" aria-hidden="true">→</span>
         </a>
       </div>
 
       <div class="trust"
-           aria-label="Selbsttests: kostenlos, anonym, mit persönlicher Auswertung">
+           aria-label="Alle Selbsttests kostenlos und anonym">
         <span>Kostenlos</span>
         <span>Anonym</span>
         <span>Individuelle Auswertung</span>
       </div>
-
     </main>
 
     <footer class="site-footer">
@@ -442,8 +334,6 @@
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
     </footer>
-
   </div>
 </body>
 </html>
-
