@@ -3,10 +3,9 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f5f8fc">
 <title>KRISENFEST.AT – Trinkwasser-Selbstcheck</title>
-
 <style>
 :root {
   --navy:#071e3b;
@@ -15,75 +14,94 @@
   --muted:#506176;
   --shadow:0 8px 28px rgba(19,44,75,.09);
 }
-
 * {box-sizing:border-box}
 html {scroll-behavior:smooth}
-
 body {
   margin:0;
   background:#f6f8fb;
   color:var(--navy);
-  font:16px/1.5 system-ui,-apple-system,
-       "Segoe UI",Arial,sans-serif;
+  font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
 }
-
 a {color:inherit}
 
+/* Kopfzeile */
 .topbar {
   background:#ffffffed;
   border-bottom:1px solid #dbe4ed;
 }
-
 .topin {
   max-width:1200px;
   min-height:90px;
   margin:auto;
   padding:16px 22px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:25px;
+  align-items:center;
+  gap:24px;
 }
-
 .smallbrand {
   display:flex;
   align-items:center;
   text-decoration:none;
   flex:none;
 }
-
 .brandmark {
   display:block;
-  width:min(320px,50vw);
+  width:min(320px,46vw);
   height:auto;
 }
 
+/* Navigation */
 .nav {
   display:flex;
-  justify-content:flex-end;
   align-items:center;
+  justify-content:flex-end;
   flex-wrap:wrap;
-  gap:clamp(12px,2vw,26px);
+  gap:clamp(10px,1.7vw,24px);
 }
-
-.nav a,.nav span {
+.nav > span,
+.nav > a {
   display:inline-block;
   color:#52657d;
   font-size:14px;
   padding:8px 0;
-  text-decoration:none;
   border-bottom:2px solid transparent;
+  text-decoration:none;
+  white-space:nowrap;
 }
-
-.nav a {
+.nav > span[title] {
+  opacity:.75;
+  cursor:default;
+}
+.nav-group {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1px;
+}
+.nav-group a {
+  font-size:14px;
+  font-weight:650;
   color:var(--navy);
+  border:0;
+  text-decoration:none;
+  padding:2px 0;
+}
+.nav-group a:hover {
+  color:var(--red);
+  text-decoration:underline;
+}
+.nav-current {
+  font-size:12px;
+  line-height:1.3;
   font-weight:750;
-  border-bottom-color:var(--red);
+  color:var(--navy);
+  padding:2px 1px 4px;
+  border-bottom:2px solid var(--red);
 }
 
-.nav a:hover {color:var(--red)}
-.nav span {opacity:.65;cursor:default}
-
+/* Hauptlayout */
 .layout {
   max-width:1200px;
   margin:28px auto 60px;
@@ -93,9 +111,7 @@ a {color:inherit}
   gap:23px;
   align-items:start;
 }
-
 .primary {min-width:0}
-
 .panel,.sidebox {
   background:#fff;
   border:1px solid #e5eaf0;
@@ -103,16 +119,13 @@ a {color:inherit}
   box-shadow:var(--shadow);
   margin-bottom:17px;
 }
-
 .panel {padding:24px 26px 25px}
-
 .headrow {
   display:flex;
   align-items:flex-start;
   gap:14px;
   margin-bottom:17px;
 }
-
 .num {
   flex:none;
   display:grid;
@@ -121,55 +134,48 @@ a {color:inherit}
   height:36px;
   border-radius:50%;
   background:var(--red);
-  color:#fff;
+  color:white;
   font-size:19px;
   font-weight:800;
 }
-
 .panel h2 {
   font-size:clamp(20px,2vw,24px);
   letter-spacing:-.5px;
   line-height:1.2;
   margin:2px 0 4px;
 }
-
 .sub {
   font-size:14px;
   color:#64738b;
   margin:0;
 }
 
-/* Gleich hohe Eingabe- und Auswahlfelder */
+/* Eingabefelder */
 .fields {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:24px 20px;
   align-items:stretch;
 }
-
 .field {
   position:relative;
   min-width:0;
   display:grid;
   grid-template-rows:minmax(0,1fr) 48px;
 }
-
 .field.wide {grid-column:1/-1}
-
 .field label,.field-title {
   font-weight:660;
   font-size:14px;
   line-height:1.35;
   color:#14243f;
 }
-
 .field > label {
   display:flex;
   align-items:flex-end;
   min-height:0;
   margin:0 0 8px;
 }
-
 .field input:not([type=checkbox]),
 .field select {
   display:block;
@@ -187,24 +193,22 @@ a {color:inherit}
   font-size:15px;
   outline:none;
 }
-
 .field input:focus,
 .field select:focus {
   border-color:#177dc2;
   box-shadow:0 0 0 3px #2599e426;
 }
-
 input[type=number] {
   appearance:textfield;
   -moz-appearance:textfield;
 }
-
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
   -webkit-appearance:none;
   margin:0;
 }
 
+/* Zusätzliche Fragen */
 .conditional {
   grid-column:1/-1;
   padding:17px;
@@ -212,9 +216,7 @@ input::-webkit-outer-spin-button {
   border:1px solid #dde7f1;
   border-radius:11px;
 }
-
 .conditional .fields {margin-bottom:4px}
-
 .checkline {
   display:flex;
   align-items:flex-start;
@@ -223,7 +225,6 @@ input::-webkit-outer-spin-button {
   cursor:pointer;
   font-size:15px;
 }
-
 .checkline input {
   flex:none;
   accent-color:var(--blue);
@@ -231,9 +232,7 @@ input::-webkit-outer-spin-button {
   height:19px;
   margin:2px 0 0;
 }
-
 .checkline strong {font-weight:550}
-
 .filtermore {
   margin:7px 0 9px 29px;
   padding:14px;
@@ -241,24 +240,22 @@ input::-webkit-outer-spin-button {
   border-left:3px solid var(--blue);
   border-radius:8px;
 }
-
 .filtermore .fields {
   grid-template-columns:1fr 1fr;
 }
-
 .fine {
   font-size:13px;
   color:var(--muted);
   margin:8px 0 0;
 }
 
+/* Schaltflächen */
 .actions {
   display:flex;
   gap:12px;
   align-items:center;
   margin:10px 0 22px;
 }
-
 .cta {
   display:block;
   width:100%;
@@ -271,9 +268,7 @@ input::-webkit-outer-spin-button {
   font-weight:800;
   cursor:pointer;
 }
-
 .cta:hover {background:#c80d20}
-
 .secondary {
   background:white;
   border:1px solid #b8c8d7;
@@ -285,30 +280,27 @@ input::-webkit-outer-spin-button {
   flex:none;
 }
 
+/* Hinweisfelder */
 .sidebox {
   background:#eaf5ff;
   border-color:#dcecf8;
   padding:23px 20px;
 }
-
 .sidebox h3 {
   font-size:19px;
   line-height:1.23;
   margin:0 0 16px;
 }
-
 .sidebox p {
   font-size:14px;
   color:#3f5675;
   margin:0 0 15px;
 }
-
 .sidebox ul {
   list-style:none;
   padding:0;
   margin:10px 0 0;
 }
-
 .sidebox li {
   display:flex;
   gap:10px;
@@ -317,7 +309,6 @@ input::-webkit-outer-spin-button {
   font-size:14px;
   border-top:1px solid #d5e6f5;
 }
-
 .tick {
   flex:none;
   display:grid;
@@ -330,22 +321,17 @@ input::-webkit-outer-spin-button {
   font-size:13px;
   font-weight:800;
 }
-
 .side-title {
   display:flex;
   gap:13px;
   align-items:flex-start;
 }
-
-.watericon {
-  font-size:36px;
-}
-
+.watericon {font-size:36px}
 .tip {background:#eff7fd}
 .tip-icon {font-size:28px}
 
+/* Auswertung */
 #bericht {scroll-margin-top:20px}
-
 .status {
   padding:15px;
   border-left:4px solid #e09e2b;
@@ -353,28 +339,23 @@ input::-webkit-outer-spin-button {
   border-radius:6px;
   margin-bottom:17px;
 }
-
 .status.good {
   background:#ecf8f1;
   border-color:#2c946d;
 }
-
 .status.attention {
   background:#fff6e8;
   border-color:#e2a339;
 }
-
 .status.risk {
   background:#fff0f0;
   border-color:#cf3949;
 }
-
 .resultGrid {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
 }
-
 .metric {
   background:#eff5fb;
   border-radius:8px;
@@ -382,28 +363,27 @@ input::-webkit-outer-spin-button {
   font-size:13px;
   color:#50617a;
 }
-
 .metric strong {
   display:block;
   color:#102f51;
   font-size:20px;
 }
-
-.tasks {margin:10px 0;padding-left:23px}
+.tasks {
+  margin:10px 0;
+  padding-left:23px;
+}
 .tasks li {margin:10px 0}
 
-/* Sichtbare Fehlermarkierung */
+/* Fehlende Pflichtfelder */
 .field input.invalid,
 .field select.invalid {
   border:3px solid #bf1430!important;
   background:#fff0f2!important;
   box-shadow:0 0 0 3px #bf143022!important;
 }
-
 .field:has(.invalid) > label {
   color:#ac1830!important;
 }
-
 .validation-note {
   position:absolute;
   left:0;
@@ -412,15 +392,14 @@ input::-webkit-outer-spin-button {
   font-weight:700;
   font-size:11px;
   white-space:nowrap;
+  z-index:2;
 }
-
 #aufbereitungGruppe.invalid {
   outline:3px solid #bf1430!important;
   background:#fff0f2!important;
   border-radius:6px;
   padding:10px!important;
 }
-
 #error {
   background:#fff2f2;
   color:#94142d;
@@ -430,7 +409,6 @@ input::-webkit-outer-spin-button {
   margin-top:12px;
   font-weight:650;
 }
-
 .foot {
   max-width:1140px;
   margin:10px auto 40px;
@@ -439,9 +417,9 @@ input::-webkit-outer-spin-button {
   font-size:12px;
   text-align:center;
 }
-
 [hidden] {display:none!important}
 
+/* Responsive Darstellung */
 @media(max-width:960px) {
   .layout {
     grid-template-columns:minmax(0,1fr) 255px;
@@ -449,23 +427,25 @@ input::-webkit-outer-spin-button {
   }
   .sidebox {padding:19px 15px}
   .panel {padding:22px}
-  .nav {gap:13px}
-  .nav a,.nav span {font-size:12px}
+  .nav {gap:12px}
+  .nav > span,.nav-group a {font-size:12px}
+  .brandmark {width:235px}
+  .nav-current {font-size:11px}
 }
-
 @media(max-width:720px) {
   .topin {
     flex-direction:column;
     justify-content:center;
-    gap:5px;
-    padding:20px 12px 12px;
+    gap:6px;
+    padding:20px 12px 14px;
   }
   .brandmark {width:min(300px,85vw)}
   .nav {
     justify-content:center;
-    gap:12px;
+    gap:6px 15px;
   }
-  .nav a,.nav span {font-size:12px}
+  .nav > span,.nav-group a {font-size:12px}
+  .nav-current {font-size:11px}
   .layout {
     grid-template-columns:1fr;
     padding:0 12px;
@@ -481,15 +461,12 @@ input::-webkit-outer-spin-button {
   .panel {padding:20px 16px}
   .panel h2 {font-size:21px}
   .fields {grid-template-columns:1fr}
-  .field {
-    grid-template-rows:auto 48px;
-  }
+  .field {grid-template-rows:auto 48px}
   .field.wide,.conditional {grid-column:1}
   .filtermore .fields {grid-template-columns:1fr}
   .actions {flex-direction:column}
   .secondary,.cta {width:100%}
 }
-
 @media(max-width:460px) {
   .sidebar {grid-template-columns:1fr}
   .sidebox {padding:18px}
@@ -500,31 +477,34 @@ input::-webkit-outer-spin-button {
 }
 </style>
 </head>
-
 <body>
 
 <header class="topbar">
   <div class="topin">
-    <a class="smallbrand"
-       href="selbsttests.html"
-       aria-label="Zur Selbsttest-Übersicht">
+    <a class="smallbrand" href="selbsttests.html"
+       aria-label="Zur Übersicht der Selbsttests">
       <img class="brandmark"
            src="krisenfest-logo-transparent.png"
            alt="KRISENFEST.AT">
     </a>
 
     <nav class="nav" aria-label="Hauptnavigation">
-      <a href="selbsttests.html">Selbsttests</a>
-      <span>Wissen</span>
-      <span>Vorsorge</span>
-      <span>Notfälle</span>
-      <span>Service</span>
+      <div class="nav-group">
+        <a href="selbsttests.html">Selbsttests</a>
+        <span class="nav-current" aria-current="page">
+          Wasser
+        </span>
+      </div>
+      <span title="Seite in Vorbereitung">Wissen</span>
+      <span title="Seite in Vorbereitung">Vorsorge</span>
+      <span title="Seite in Vorbereitung">Produkte</span>
+      <span title="Seite in Vorbereitung">Veranstaltungen</span>
+      <span title="Seite in Vorbereitung">Service</span>
     </nav>
   </div>
 </header>
 
 <main class="layout">
-
 <div class="primary">
 
 <section class="panel" aria-labelledby="h1">
@@ -537,7 +517,6 @@ input::-webkit-outer-spin-button {
       </p>
     </div>
   </div>
-
   <div class="fields">
     <div class="field">
       <label for="personen">
@@ -580,15 +559,13 @@ input::-webkit-outer-spin-button {
   </div>
 
   <div class="fields">
-
     <div class="field">
       <label for="flaschen">
         Wie viele Liter originalverschlossenes Trinkwasser
         haben Sie vorrätig?
       </label>
       <input id="flaschen" type="number"
-             min="0" step="0.5"
-             inputmode="decimal"
+             min="0" step="0.5" inputmode="decimal"
              placeholder="Liter (auch 0 möglich)">
     </div>
 
@@ -677,14 +654,12 @@ input::-webkit-outer-spin-button {
 
         <div class="field wide" id="transportBox" hidden>
           <div class="fields">
-
             <div class="field">
               <label for="liter">
                 Wie viele Liter fassen Ihre Behälter insgesamt?
               </label>
               <input id="liter" type="number"
-                     min="0" step="0.5"
-                     inputmode="decimal"
+                     min="0" step="0.5" inputmode="decimal"
                      placeholder="Gesamtkapazität in Litern">
             </div>
 
@@ -699,13 +674,11 @@ input::-webkit-outer-spin-button {
                 <option value="nein">Nein</option>
               </select>
             </div>
-
           </div>
         </div>
 
       </div>
     </div>
-
   </div>
 </section>
 
@@ -723,9 +696,7 @@ input::-webkit-outer-spin-button {
 
   <fieldset id="aufbereitungGruppe"
             style="border:0;padding:0;margin:0">
-    <legend class="field-title">
-      Mehrfachauswahl möglich
-    </legend>
+    <legend class="field-title">Mehrfachauswahl möglich</legend>
 
     <label class="checkline">
       <input type="checkbox" id="m_filter">
@@ -734,21 +705,20 @@ input::-webkit-outer-spin-button {
 
     <div class="filtermore" id="filterBox" hidden>
       <div class="fields">
-
         <div class="field">
           <label for="modell">
             Welchen Wasserfilter besitzen Sie?
           </label>
           <select id="modell">
             <option value="">Bitte auswählen</option>
-            <option value="Katadyn Pocket">Katadyn Pocket</option>
-            <option value="Katadyn BeFree">Katadyn BeFree</option>
-            <option value="Sawyer MINI">Sawyer MINI</option>
-            <option value="Sawyer Squeeze">Sawyer Squeeze</option>
-            <option value="LifeStraw Peak Series">LifeStraw Peak Series</option>
-            <option value="GRAYL GeoPress">GRAYL GeoPress</option>
-            <option value="Anderes Modell">Anderes Modell</option>
-            <option value="Modell unbekannt">Modell unbekannt</option>
+            <option>Katadyn Pocket</option>
+            <option>Katadyn BeFree</option>
+            <option>Sawyer MINI</option>
+            <option>Sawyer Squeeze</option>
+            <option>LifeStraw Peak Series</option>
+            <option>GRAYL GeoPress</option>
+            <option>Anderes Modell</option>
+            <option>Modell unbekannt</option>
           </select>
         </div>
 
@@ -770,7 +740,6 @@ input::-webkit-outer-spin-button {
             <option value="nein">Nein</option>
           </select>
         </div>
-
       </div>
     </div>
 
@@ -785,11 +754,6 @@ input::-webkit-outer-spin-button {
         Desinfektionsmittel zur Trinkwasseraufbereitung
       </strong>
     </label>
-
-    <label class="checkline">
-      <input type="checkbox" id="keine">
-      <strong>Keine Aufbereitungsmöglichkeit</strong>
-    </label>
   </fieldset>
 </section>
 
@@ -802,10 +766,9 @@ input::-webkit-outer-spin-button {
   </button>
 </div>
 
-<div id="error" hidden role="alert"></div>
+<div id="error" role="alert" hidden></div>
 
-<section class="panel" id="bericht"
-         hidden aria-live="polite">
+<section class="panel" id="bericht" aria-live="polite" hidden>
   <div class="headrow">
     <span class="num">4</span>
     <div>
@@ -819,7 +782,6 @@ input::-webkit-outer-spin-button {
 </div>
 
 <aside class="sidebar" aria-label="Hinweise zum Selbstcheck">
-
   <div class="sidebox">
     <div class="side-title">
       <span class="watericon" aria-hidden="true">💧</span>
@@ -836,9 +798,18 @@ input::-webkit-outer-spin-button {
       ist und welche Verbesserungen sinnvoll wären.
     </p>
     <ul>
-      <li><span class="tick">✓</span>Vorhandene Ressourcen erkennen</li>
-      <li><span class="tick">✓</span>Versorgungslücken verstehen</li>
-      <li><span class="tick">✓</span>Konkrete Verbesserungen planen</li>
+      <li>
+        <span class="tick">✓</span>
+        Vorhandene Ressourcen erkennen
+      </li>
+      <li>
+        <span class="tick">✓</span>
+        Versorgungslücken verstehen
+      </li>
+      <li>
+        <span class="tick">✓</span>
+        Konkrete Verbesserungen planen
+      </li>
     </ul>
   </div>
 
@@ -860,7 +831,6 @@ input::-webkit-outer-spin-button {
       Wasserqualität und täglichen Entnahmemenge.
     </p>
   </div>
-
 </aside>
 </main>
 
@@ -884,7 +854,6 @@ function updateArt() {
     "Regenwasser / Zisterne": "Wie weit ist die Zisterne entfernt?",
     "Bach, Fluss oder See": "Wie weit ist das Gewässer entfernt?"
   };
-
   $("entfernungLabel").textContent =
     labels[val("art")] || "Wie weit ist die Wasserquelle entfernt?";
 }
@@ -895,7 +864,8 @@ function clearOne(el) {
   el.style.removeProperty("border");
   el.style.removeProperty("background-color");
 
-  const note = el.parentElement?.querySelector(".validation-note");
+  const note =
+    el.parentElement?.querySelector(".validation-note");
   if (note) note.remove();
 }
 
@@ -919,40 +889,24 @@ function updateModel() {
 
 function refresh() {
   $("quelleDetails").hidden = !yes("quelle");
-
   $("ersatzBox").hidden =
     !(yes("quelle") && yes("strom"));
-
   $("transportBox").hidden =
     !(yes("quelle") && yes("behaelter"));
-
   $("filterBox").hidden = !checked("m_filter");
 
   $("bericht").hidden = true;
   $("error").hidden = true;
 }
 
-$("art").addEventListener("change",updateArt);
-$("modell").addEventListener("change",updateModel);
+$("art").addEventListener("change", updateArt);
+$("modell").addEventListener("change", updateModel);
 
-for (const id of ["quelle","strom","behaelter","m_filter"]) {
+for (const id of [
+  "quelle","strom","behaelter","m_filter"
+]) {
   $(id).addEventListener("change",refresh);
 }
-
-for (const id of ["m_filter","kochen","chemie"]) {
-  $(id).addEventListener("change", () => {
-    if (checked(id)) $("keine").checked = false;
-  });
-}
-
-$("keine").addEventListener("change", () => {
-  if (checked("keine")) {
-    for (const id of ["m_filter","kochen","chemie"]) {
-      $(id).checked = false;
-    }
-    refresh();
-  }
-});
 
 for (const el of document.querySelectorAll("input,select")) {
   for (const evt of ["input","change"]) {
@@ -974,7 +928,6 @@ function run() {
   const stored = Number(val("flaschen"));
   const source = yes("quelle");
   const need = people * 2;
-
   const required = [];
 
   const requireField = (id,valid) => {
@@ -985,21 +938,25 @@ function run() {
     "personen",
     val("personen") !== "" &&
     Number.isInteger(people) &&
-    people >= 1 &&
-    people <= 30
+    people >= 1 && people <= 30
   );
 
-  requireField("tage",[7,14,30,60].includes(days));
+  requireField(
+    "tage",
+    [7,14,30,60].includes(days)
+  );
 
   requireField(
     "flaschen",
     val("flaschen") !== "" &&
     Number.isFinite(stored) &&
-    stored >= 0 &&
-    stored <= 1000000
+    stored >= 0 && stored <= 1000000
   );
 
-  requireField("quelle",val("quelle") !== "");
+  requireField(
+    "quelle",
+    val("quelle") !== ""
+  );
 
   if (source) {
     for (const id of [
@@ -1024,7 +981,7 @@ function run() {
   }
 
   if (checked("m_filter")) {
-    requireField("modell",val("modell").trim() !== "");
+    requireField("modell",val("modell") !== "");
 
     if (val("modell") === "Anderes Modell") {
       requireField(
@@ -1036,11 +993,14 @@ function run() {
     requireField("einsatz",val("einsatz") !== "");
   }
 
-  if (!["m_filter","kochen","chemie","keine"].some(checked)) {
+  // Aufbereitung nur bei zusätzlicher Wasserquelle Pflicht.
+  if (
+    source &&
+    !["m_filter","kochen","chemie"].some(checked)
+  ) {
     required.push("aufbereitungGruppe");
   }
 
-  // Fehlende Angaben rot hervorheben
   if (required.length) {
     for (const id of required) {
       const field = $(id);
@@ -1048,7 +1008,6 @@ function run() {
 
       if (field.tagName !== "FIELDSET") {
         field.setAttribute("aria-invalid","true");
-
         field.style.setProperty(
           "border","3px solid #bf1430","important"
         );
@@ -1069,8 +1028,7 @@ function run() {
 
     const first = $(required[0]);
     first.scrollIntoView({
-      behavior:"smooth",
-      block:"center"
+      behavior:"smooth",block:"center"
     });
 
     if (first.matches("input,select")) {
@@ -1081,14 +1039,11 @@ function run() {
 
   const capacity =
     source && yes("behaelter")
-      ? Number(val("liter"))
-      : 0;
+      ? Number(val("liter")) : 0;
 
   const transportOk =
-    source &&
-    yes("behaelter") &&
-    yes("tragbar") &&
-    capacity > 0;
+    source && yes("behaelter") &&
+    yes("tragbar") && capacity > 0;
 
   const powerOk =
     !source || !yes("strom") || yes("ersatz");
@@ -1135,6 +1090,7 @@ function run() {
 
   if (!stocked && !logisticsOk) {
     const diff = Math.max(0,need * days - stored);
+
     add(
       `Der Flaschenvorrat liegt rechnerisch um ` +
       `${diff.toLocaleString("de-AT")} Liter unter dem ` +
@@ -1189,7 +1145,8 @@ function run() {
       add(
         "Lassen Sie die Wasserqualität beurteilen. " +
         "Ungeprüftes Wasser darf nicht allein aufgrund " +
-        "eines vorhandenen Filters als sicheres Trinkwasser gelten."
+        "eines vorhandenen Filters als sicheres " +
+        "Trinkwasser gelten."
       );
     } else {
       add(
@@ -1215,13 +1172,16 @@ function run() {
           : val("modell")
       ).toLowerCase();
 
-      if (m.includes("pocket") || m.includes("befree")) {
+      if (
+        m.includes("pocket") ||
+        m.includes("befree")
+      ) {
         add(
           "Ihr genanntes Filtermodell kann bestimmte " +
           "Mikroorganismen reduzieren; eine zuverlässige " +
-          "Entfernung von Viren und chemischen Verunreinigungen " +
-          "ist damit nicht allgemein gewährleistet. " +
-          "Herstellerangaben beachten."
+          "Entfernung von Viren und chemischen " +
+          "Verunreinigungen ist damit nicht allgemein " +
+          "gewährleistet. Herstellerangaben beachten."
         );
       } else {
         add(
@@ -1328,8 +1288,7 @@ function run() {
 
   $("bericht").hidden = false;
   $("bericht").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
+    behavior:"smooth",block:"start"
   });
 }
 
@@ -1350,8 +1309,7 @@ $("reset").addEventListener("click", () => {
   updateModel();
 
   window.scrollTo({
-    top:0,
-    behavior:"smooth"
+    top:0,behavior:"smooth"
   });
 });
 
@@ -1359,6 +1317,5 @@ refresh();
 updateArt();
 updateModel();
 </script>
-
 </body>
 </html>
