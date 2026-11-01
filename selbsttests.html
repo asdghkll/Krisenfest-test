@@ -3,8 +3,9 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#fcfcfb">
+<meta name="description" content="Kostenlose und anonyme Selbsttests zur Krisenvorsorge mit individuellen Empfehlungen.">
 <title>Unsere Selbsttests – KRISENFEST.AT</title>
 <style>
 :root {
@@ -28,8 +29,7 @@ body::before {
   position:fixed;
   top:0;left:0;right:0;
   height:5px;
-  background:linear-gradient(
-    90deg,var(--navy) 0 75%,var(--red) 75%);
+  background:linear-gradient(90deg,var(--navy) 0 75%,var(--red) 75%);
   z-index:5;
   pointer-events:none;
 }
@@ -38,32 +38,63 @@ body::before {
   padding:0 32px 36px;
   margin:auto;
 }
-header {
-  text-align:center;
-  padding:33px 0 18px;
+
+/* Kopfzeile und Navigation */
+.topbar {
+  background:#ffffffed;
   border-bottom:1px solid var(--line);
 }
-.logo {
-  display:block;
-  width:320px;
-  max-width:80vw;
-  height:auto;
+.topin {
+  max-width:1200px;
+  min-height:90px;
   margin:auto;
+  padding:16px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:24px;
 }
-.back {
-  display:inline-block;
-  margin:21px 0 0;
-  color:#566c7e;
+.smallbrand {
+  display:flex;
+  align-items:center;
   text-decoration:none;
-  font-size:13px;
+  flex:none;
 }
-.back:hover {
-  color:var(--red);
-  text-decoration:underline;
+.brandmark {
+  display:block;
+  width:min(320px,46vw);
+  height:auto;
 }
+.nav {
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:clamp(12px,1.7vw,23px);
+}
+.nav span,.nav a {
+  display:inline-block;
+  color:#52657d;
+  font-size:14px;
+  text-decoration:none;
+  padding:8px 0;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;
+}
+.nav .nav-active {
+  color:var(--navy);
+  font-weight:750;
+  border-bottom-color:var(--red);
+}
+.nav span[title] {
+  opacity:.75;
+  cursor:default;
+}
+
+/* Einleitung */
 .hero {
   max-width:830px;
-  margin:12px auto 29px;
+  margin:36px auto 29px;
   text-align:center;
 }
 .eyebrow {
@@ -95,11 +126,8 @@ h1 {
   text-wrap:balance;
 }
 .hero strong {color:var(--navy)}
-h2 {
-  margin:0 0 17px;
-  font:700 22px/1.25
-       Georgia,"Times New Roman",serif;
-}
+
+/* Themenfelder */
 .cards {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -109,8 +137,8 @@ h2 {
   display:flex;
   flex-direction:column;
   align-items:center;
-  min-height:108px;
   padding:13px 14px 12px;
+  min-height:108px;
   border:1px solid var(--line);
   border-radius:11px;
   background:white;
@@ -118,7 +146,6 @@ h2 {
   text-decoration:none;
   box-shadow:0 4px 15px rgba(12,38,58,.035);
 }
-/* Symbol und Text beginnen exakt auf derselben Linie */
 .card-inner {
   width:max-content;
   max-width:100%;
@@ -143,8 +170,7 @@ h2 {
 }
 .card h3 {
   margin:0;
-  font:700 19px/1.25
-       Georgia,"Times New Roman",serif;
+  font:700 19px/1.25 Georgia,"Times New Roman",serif;
 }
 .card p {
   margin:0;
@@ -178,6 +204,8 @@ a:focus-visible {
   color:#647789;
   font-size:13px;
 }
+
+/* Fußzeile */
 footer {
   display:flex;
   justify-content:center;
@@ -198,16 +226,34 @@ footer a:hover {
   color:var(--red);
   border-color:var(--red);
 }
+
+@media(max-width:960px) {
+  .nav {gap:12px}
+  .nav span,.nav a {font-size:12px}
+  .brandmark {width:235px}
+}
 @media(max-width:850px) {
   .cards {
     grid-template-columns:repeat(2,minmax(0,1fr));
   }
 }
+@media(max-width:720px) {
+  .topin {
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+    padding:20px 12px 14px;
+  }
+  .brandmark {width:min(300px,85vw)}
+  .nav {
+    justify-content:center;
+    gap:6px 15px;
+  }
+  .nav span,.nav a {font-size:12px}
+  .hero {margin:24px auto 27px}
+}
 @media(max-width:560px) {
   .wrap {padding:0 21px 25px}
-  header {padding:31px 0 18px}
-  .logo {width:290px}
-  .hero {margin:12px auto 27px}
   .hero p:not(.eyebrow) {font-size:16px}
   .cards {
     grid-template-columns:1fr;
@@ -218,130 +264,143 @@ footer a:hover {
     padding:13px 17px;
   }
   .card p .line {white-space:normal}
-  .back {margin-top:17px}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<header>
-  <a href="index.html" aria-label="Zur Homepage">
-    <img class="logo"
-         src="krisenfest-logo-transparent.png"
-         alt="KRISENFEST.AT">
-  </a>
+<header class="topbar">
+  <div class="topin">
+    <a class="smallbrand" href="index.html"
+       aria-label="Zur Homepage">
+      <img class="brandmark"
+           src="krisenfest-logo-transparent.png"
+           alt="KRISENFEST.AT">
+    </a>
+
+    <nav class="nav" aria-label="Hauptnavigation">
+      <span class="nav-active" aria-current="page">
+        Selbsttests
+      </span>
+      <span title="Seite in Vorbereitung">Wissen</span>
+      <span title="Seite in Vorbereitung">Vorsorge</span>
+      <span title="Seite in Vorbereitung">Produkte</span>
+      <span title="Seite in Vorbereitung">Veranstaltungen</span>
+      <span title="Seite in Vorbereitung">Service</span>
+    </nav>
+  </div>
 </header>
 
 <main>
-<a class="back" href="index.html">← Zur Homepage</a>
+  <section class="hero" aria-labelledby="titel">
+    <p class="eyebrow">
+      Krisenvorsorge selbst überprüfen
+    </p>
+    <h1 id="titel">Unsere Selbsttests</h1>
+    <div class="rule" aria-hidden="true"></div>
 
-<section class="hero" aria-labelledby="titel">
-  <p class="eyebrow">Krisenvorsorge selbst überprüfen</p>
-  <h1 id="titel">Unsere Selbsttests</h1>
-  <div class="rule" aria-hidden="true"></div>
-  <p>
-    Wie gut ist Ihr Haushalt auf mögliche
-    Versorgungsstörungen und andere
-    Krisensituationen vorbereitet?
+    <p>
+      Wie gut ist Ihr Haushalt auf mögliche
+      Versorgungsstörungen und andere
+      Krisensituationen vorbereitet?
+    </p>
+
+    <p>
+      <strong>Alle Selbsttests sind kostenlos und anonym.</strong>
+      Nach der Auswertung erhalten Sie konkrete,
+      auf Ihre Angaben abgestimmte Empfehlungen.
+    </p>
+  </section>
+
+  <section aria-label="Themenbereiche">
+    <div class="cards">
+
+      <a class="card" href="trinkwasser.html"
+         aria-label="Trinkwasser-Selbsttest öffnen">
+        <div class="card-inner">
+          <div class="card-heading">
+            <span class="icon" aria-hidden="true">💧</span>
+            <h3>Trinkwasser</h3>
+          </div>
+          <p>
+            <span class="line">Vorräte, alternative Wasserquellen</span>
+            <span class="line">und sichere Wasseraufbereitung.</span>
+          </p>
+        </div>
+      </a>
+
+      <article class="card pending">
+        <div class="card-inner">
+          <div class="card-heading">
+            <span class="icon" aria-hidden="true">⚡</span>
+            <h3>Strom &amp; Energie</h3>
+          </div>
+          <p>
+            <span class="line">Stromversorgung, Beleuchtung</span>
+            <span class="line">und Überbrückung von Ausfällen.</span>
+          </p>
+        </div>
+      </article>
+
+      <article class="card pending">
+        <div class="card-inner">
+          <div class="card-heading">
+            <span class="icon" aria-hidden="true">🥫</span>
+            <h3>Lebensmittel</h3>
+          </div>
+          <p>
+            <span class="line">Vorräte und Möglichkeiten zur</span>
+            <span class="line">Versorgung des Haushalts.</span>
+          </p>
+        </div>
+      </article>
+
+      <article class="card pending">
+        <div class="card-inner">
+          <div class="card-heading">
+            <span class="icon" aria-hidden="true">♨️</span>
+            <h3>Wärme &amp; Heizen</h3>
+          </div>
+          <p>
+            <span class="line">Wärmeversorgung auch bei</span>
+            <span class="line">Störungen der Infrastruktur.</span>
+          </p>
+        </div>
+      </article>
+
+      <article class="card pending">
+        <div class="card-inner">
+          <div class="card-heading">
+            <span class="icon" aria-hidden="true">📻</span>
+            <h3>Kommunikation</h3>
+          </div>
+          <p>
+            <span class="line">Informationen erhalten und mit</span>
+            <span class="line">anderen in Verbindung bleiben.</span>
+          </p>
+        </div>
+      </article>
+
+      <article class="card pending">
+        <div class="card-inner">
+          <div class="card-heading">
+            <span class="icon" aria-hidden="true">🩹</span>
+            <h3>Gesundheit &amp; Erste Hilfe</h3>
+          </div>
+          <p>
+            <span class="line">Wichtige Grundlagen für die</span>
+            <span class="line">gesundheitliche Vorsorge.</span>
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <p class="note">
+    Weitere Selbsttests werden Schritt für Schritt ergänzt.
   </p>
-  <p>
-    <strong>Alle Selbsttests sind kostenlos und anonym.</strong>
-    Nach der Auswertung erhalten Sie konkrete,
-    auf Ihre Angaben abgestimmte Empfehlungen.
-  </p>
-</section>
-
-<section aria-labelledby="themen">
-<h2 id="themen">Wählen Sie einen Themenbereich</h2>
-
-<div class="cards">
-
-  <a class="card" href="trinkwasser.html"
-     aria-label="Trinkwasser-Selbsttest öffnen">
-    <div class="card-inner">
-      <div class="card-heading">
-        <span class="icon" aria-hidden="true">💧</span>
-        <h3>Trinkwasser</h3>
-      </div>
-      <p>
-        <span class="line">Vorräte, alternative Wasserquellen</span>
-        <span class="line">und sichere Wasseraufbereitung.</span>
-      </p>
-    </div>
-  </a>
-
-  <article class="card pending">
-    <div class="card-inner">
-      <div class="card-heading">
-        <span class="icon" aria-hidden="true">⚡</span>
-        <h3>Strom &amp; Energie</h3>
-      </div>
-      <p>
-        <span class="line">Stromversorgung, Beleuchtung</span>
-        <span class="line">und Überbrückung von Ausfällen.</span>
-      </p>
-    </div>
-  </article>
-
-  <article class="card pending">
-    <div class="card-inner">
-      <div class="card-heading">
-        <span class="icon" aria-hidden="true">🥫</span>
-        <h3>Lebensmittel</h3>
-      </div>
-      <p>
-        <span class="line">Vorräte und Möglichkeiten zur</span>
-        <span class="line">Versorgung des Haushalts.</span>
-      </p>
-    </div>
-  </article>
-
-  <article class="card pending">
-    <div class="card-inner">
-      <div class="card-heading">
-        <span class="icon" aria-hidden="true">♨️</span>
-        <h3>Wärme &amp; Heizen</h3>
-      </div>
-      <p>
-        <span class="line">Wärmeversorgung auch bei</span>
-        <span class="line">Störungen der Infrastruktur.</span>
-      </p>
-    </div>
-  </article>
-
-  <article class="card pending">
-    <div class="card-inner">
-      <div class="card-heading">
-        <span class="icon" aria-hidden="true">📻</span>
-        <h3>Kommunikation</h3>
-      </div>
-      <p>
-        <span class="line">Informationen erhalten und mit</span>
-        <span class="line">anderen in Verbindung bleiben.</span>
-      </p>
-    </div>
-  </article>
-
-  <article class="card pending">
-    <div class="card-inner">
-      <div class="card-heading">
-        <span class="icon" aria-hidden="true">🩹</span>
-        <h3>Gesundheit &amp; Erste Hilfe</h3>
-      </div>
-      <p>
-        <span class="line">Wichtige Grundlagen für die</span>
-        <span class="line">gesundheitliche Vorsorge.</span>
-      </p>
-    </div>
-  </article>
-
-</div>
-</section>
-
-<p class="note">
-  Weitere Selbsttests werden Schritt für Schritt ergänzt.
-</p>
 </main>
 
 <footer>
