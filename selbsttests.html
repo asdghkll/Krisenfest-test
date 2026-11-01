@@ -29,7 +29,8 @@ body::before {
   position:fixed;
   top:0;left:0;right:0;
   height:5px;
-  background:linear-gradient(90deg,var(--navy) 0 75%,var(--red) 75%);
+  background:linear-gradient(
+    90deg,var(--navy) 0 75%,var(--red) 75%);
   z-index:5;
   pointer-events:none;
 }
@@ -38,9 +39,9 @@ body::before {
   padding:0 32px 36px;
   margin:auto;
 }
-
-/* Kopfzeile und Navigation */
 .topbar {
+  text-align:left;
+  padding:0;
   background:#ffffffed;
   border-bottom:1px solid var(--line);
 }
@@ -50,15 +51,15 @@ body::before {
   margin:auto;
   padding:16px 22px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:24px;
 }
 .smallbrand {
   display:flex;
   align-items:center;
-  text-decoration:none;
   flex:none;
+  text-decoration:none;
 }
 .brandmark {
   display:block;
@@ -90,11 +91,9 @@ body::before {
   opacity:.75;
   cursor:default;
 }
-
-/* Einleitung */
 .hero {
   max-width:830px;
-  margin:36px auto 29px;
+  margin:36px auto 48px;
   text-align:center;
 }
 .eyebrow {
@@ -126,8 +125,6 @@ h1 {
   text-wrap:balance;
 }
 .hero strong {color:var(--navy)}
-
-/* Themenfelder */
 .cards {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -204,8 +201,6 @@ a:focus-visible {
   color:#647789;
   font-size:13px;
 }
-
-/* Fußzeile */
 footer {
   display:flex;
   justify-content:center;
@@ -226,7 +221,6 @@ footer a:hover {
   color:var(--red);
   border-color:var(--red);
 }
-
 @media(max-width:960px) {
   .nav {gap:12px}
   .nav span,.nav a {font-size:12px}
@@ -250,7 +244,7 @@ footer a:hover {
     gap:6px 15px;
   }
   .nav span,.nav a {font-size:12px}
-  .hero {margin:24px auto 27px}
+  .hero {margin:24px auto 42px}
 }
 @media(max-width:560px) {
   .wrap {padding:0 21px 25px}
@@ -297,6 +291,7 @@ footer a:hover {
     <p class="eyebrow">
       Krisenvorsorge selbst überprüfen
     </p>
+
     <h1 id="titel">Unsere Selbsttests</h1>
     <div class="rule" aria-hidden="true"></div>
 
@@ -324,8 +319,12 @@ footer a:hover {
             <h3>Trinkwasser</h3>
           </div>
           <p>
-            <span class="line">Vorräte, alternative Wasserquellen</span>
-            <span class="line">und sichere Wasseraufbereitung.</span>
+            <span class="line">
+              Vorräte, alternative Wasserquellen
+            </span>
+            <span class="line">
+              und sichere Wasseraufbereitung.
+            </span>
           </p>
         </div>
       </a>
