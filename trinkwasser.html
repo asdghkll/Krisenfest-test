@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f5f8fc">
 <title>KRISENFEST.AT – Trinkwasser-Selbstcheck</title>
-
 <style>
 :root {
   --navy:#071e3b;
@@ -15,15 +14,13 @@
   --muted:#506176;
   --shadow:0 8px 28px rgba(19,44,75,.09);
 }
-
 * {box-sizing:border-box}
 html {scroll-behavior:smooth}
 body {
   margin:0;
   background:#f6f8fb;
   color:var(--navy);
-  font:16px/1.5 system-ui,-apple-system,
-       "Segoe UI",Arial,sans-serif;
+  font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
 }
 a {color:inherit}
 [hidden] {display:none!important}
@@ -495,7 +492,6 @@ input::-webkit-outer-spin-button {
 }
 </style>
 </head>
-
 <body>
 
 <header class="topbar">
@@ -639,6 +635,17 @@ input::-webkit-outer-spin-button {
             <option>Bis 500 m</option>
             <option>Weiter entfernt</option>
           </select>
+        </div>
+
+        <div class="field">
+          <label for="tagesmenge">
+            Wie viele Liter können Sie aus dieser Quelle
+            im Notfall täglich entnehmen?
+          </label>
+          <input id="tagesmenge" type="number"
+                 min="0" max="1000000" step="0.5"
+                 inputmode="decimal"
+                 placeholder="Liter pro Tag (falls bekannt)">
         </div>
 
         <div class="field">
@@ -1025,6 +1032,15 @@ function run() {
       requireField(id, val(id) !== "");
     }
 
+    if (val("tagesmenge") !== "") {
+      requireField(
+        "tagesmenge",
+        Number.isFinite(Number(val("tagesmenge"))) &&
+        Number(val("tagesmenge")) >= 0 &&
+        Number(val("tagesmenge")) <= 1000000
+      );
+    }
+
     if (yes("strom")) {
       requireField("ersatz", val("ersatz") !== "");
     }
@@ -1061,13 +1077,6 @@ function run() {
       "einsatz",
       val("einsatz") !== ""
     );
-  }
-
-  if (
-    source &&
-    !["m_filter", "kochen", "chemie"].some(checked)
-  ) {
-    required.push("aufbereitungGruppe");
   }
 
   if (required.length) {
@@ -1115,16 +1124,37 @@ function run() {
     return;
   }
 
-  /* Berechnung */
+  /* Mengenbilanz: Vorrat und täglich nutzbare Zusatzquelle trennen. */
   const total = need * days;
-  const deficit = Math.max(0, total - stored);
-  const duration = stored / need;
-  const missingDays = Math.max(0, days - duration);
-  const coverage = stored / total;
+  const bottleGap = Math.max(0, total - stored);
+  const bottleDays = stored / need;
+  const bottleCoverage = stored / total;
 
+  const amountKnown = source && val("tagesmenge") !== "";
+  const sourceDaily = amountKnown ? Number(val("tagesmenge")) : 0;
+
+  // Höchstens der tägliche Trinkwasserbedarf wird angerechnet.
+  // Quellwasser ist ein laufender Bezug, kein eingelagerter Vorrat.
+  const sourceDailyUsed = Math.min(sourceDaily, need);
+  const sourcePossible = amountKnown ? sourceDailyUsed * days : 0;
+  const coveredFromSource = Math.min(bottleGap, sourcePossible);
+  const remainingGap = Math.max(0, bottleGap - coveredFromSource);
+  const possibleCoverage =
+    Math.min(1, (stored + sourcePossible) / total);
+
+  const hasMethod = ["m_filter", "kochen", "chemie"].some(checked);
+  const capacity = source && yes("behaelter")
+    ? Number(val("liter")) : 0;
+  const powerOk = !source || !yes("strom") || yes("ersatz");
+  const transportOk =
+    source && yes("behaelter") && yes("tragbar") && capacity > 0;
+
+  // Grün nur bei ausreichendem, bereits abgefülltem Trinkwasser.
+  // Die Quelle kann rechnerisch helfen, ist aber noch keine
+  // geprüfte und jederzeit sichere Trinkwasserversorgung.
   const status =
-    coverage >= 1 ? "good" :
-    coverage >= 0.75 ? "attention" : "risk";
+    bottleGap === 0 ? "good" :
+    possibleCoverage >= 0.75 ? "attention" : "risk";
 
   const number = n =>
     Number(n.toFixed(1)).toLocaleString("de-AT", {
@@ -1140,18 +1170,9 @@ function run() {
     days === 60 ? "zwei Monate lang" :
     noun(days, "Tag", "Tage") + " lang";
 
-  const peopleWord =
-    people === 1 ? "Person" : "Personen";
-
-  const capacity =
-    source && yes("behaelter")
-      ? Number(val("liter"))
-      : 0;
-
-  const powerOk =
-    !source ||
-    !yes("strom") ||
-    yes("ersatz");
+  const peopleWord = people === 1 ? "Person" : "Personen";
+  const kind = source ? val("art") : "";
+  const distance = source ? val("entfernung") : "";
 
   const inner = $("resultInner");
   inner.replaceChildren();
@@ -1164,67 +1185,114 @@ function run() {
     return p;
   }
 
-  /* Farbiges Ergebnis mit Ausrufezeichen */
   const banner = document.createElement("div");
   banner.className = "status " + status;
 
   const title = document.createElement("h3");
   title.className = "result-heading";
 
-  if (status === "good") {
+  if (bottleGap === 0) {
     title.textContent =
-      "Ihr Trinkwasservorrat ist für den gewählten " +
-      "Zeitraum ausreichend!";
-  } else if (status === "attention") {
+      "Ihr Trinkwasservorrat ist für den gewählten Zeitraum ausreichend!";
+  } else if (source && amountKnown && remainingGap === 0) {
     title.textContent =
-      "Ihr Trinkwasservorrat reicht für den gewählten " +
-      "Zeitraum noch nicht aus!";
+      "Ihre zusätzliche Wasserquelle könnte die Mengenlücke " +
+      "schließen – die Trinkwasserversorgung ist noch zu sichern!";
+  } else if (source && amountKnown) {
+    title.textContent =
+      remainingGap <= total * 0.25
+        ? "Auch mit Ihrer zusätzlichen Wasserquelle besteht " +
+          "noch eine Versorgungslücke!"
+        : "Auch mit Ihrer zusätzlichen Wasserquelle ist " +
+          "die Wassermenge deutlich zu gering!";
+  } else if (bottleCoverage >= 0.75) {
+    title.textContent =
+      "Ihr abgefüllter Trinkwasservorrat reicht für den " +
+      "gewählten Zeitraum noch nicht aus!";
   } else {
     title.textContent =
-      "Ihr Trinkwasservorrat ist für den gewählten " +
-      "Zeitraum deutlich zu gering!";
+      "Ihr abgefüllter Trinkwasservorrat ist für den " +
+      "gewählten Zeitraum deutlich zu gering!";
   }
-
   banner.append(title);
 
   paragraph(
     banner,
-    `Sie möchten für ${people} ${peopleWord} ${period} ` +
-    `vorsorgen. Bei einem rechnerischen Richtwert von ` +
-    `2 Litern pro Person und Tag benötigen Sie dafür ` +
-    `${number(need)} Liter Trinkwasser täglich, ` +
-    `insgesamt also ${number(total)} Liter.`
+    `Sie möchten für ${people} ${peopleWord} ${period} vorsorgen. ` +
+    `Bei einem rechnerischen Richtwert von 2 Litern pro Person ` +
+    `und Tag benötigen Sie dafür ${number(need)} Liter ` +
+    `Trinkwasser täglich, insgesamt also ${number(total)} Liter.`
   );
 
   paragraph(
     banner,
     `Sie verfügen über ${number(stored)} Liter ` +
     `originalverschlossenes Trinkwasser. Dieser Vorrat ` +
-    `reicht rechnerisch für ${noun(duration,"Tag","Tage")}.`
+    `reicht ohne zusätzliche Wasserzufuhr rechnerisch ` +
+    `für ${noun(bottleDays,"Tag","Tage")}.`
   );
 
-  if (deficit > 0) {
+  if (bottleGap > 0) {
     paragraph(
       banner,
-      `Damit fehlen Ihnen ${number(deficit)} Liter ` +
-      `für den gewünschten Vorsorgezeitraum. ` +
-      `Die noch nicht durch abgefülltes Trinkwasser ` +
-      `gedeckte Zeit beträgt ` +
-      `${noun(missingDays,"Tag","Tage")}.`
+      `Ohne eine zusätzliche Quelle fehlen damit ` +
+      `${number(bottleGap)} Liter abgefülltes Trinkwasser. ` +
+      `Das entspricht ${noun(Math.max(0, days-bottleDays),
+        "Tag","Tagen")} Ihres gewählten Zeitraums.`
     );
   } else {
     paragraph(
       banner,
-      "Sie haben damit den Bedarf für Ihren gewählten " +
-      "Vorsorgezeitraum vollständig abgedeckt. " +
-      "Es besteht rechnerisch kein Defizit an " +
-      "abgefülltem Trinkwasser."
+      "Der gewählte Vorsorgezeitraum ist durch Ihren abgefüllten " +
+      "Trinkwasservorrat mengenmäßig vollständig abgedeckt."
     );
+  }
+
+  if (source) {
+    paragraph(
+      banner,
+      `Als zusätzliche Wasserquelle haben Sie „${kind}“ ` +
+      `angegeben (Entfernung: ${distance}).`
+    );
+
+    if (amountKnown) {
+      paragraph(
+        banner,
+        `Aus dieser Quelle könnten Sie nach Ihrer Schätzung ` +
+        `${number(sourceDaily)} Liter pro Tag entnehmen. ` +
+        `Wenn diese Menge an allen ${days} Tagen tatsächlich ` +
+        `verfügbar ist, lassen sich damit bis zu ` +
+        `${number(coveredFromSource)} Liter der Lücke beim ` +
+        `abgefüllten Wasser rechnerisch ausgleichen. ` +
+        (remainingGap > 0
+          ? `Es verbleiben dann noch ${number(remainingGap)} Liter ` +
+            `mengenmäßiger Fehlbedarf.`
+          : "Der Bedarf wäre unter diesen Annahmen mengenmäßig " +
+            "vollständig abgedeckt.")
+      );
+
+      paragraph(
+        banner,
+        "Diese Berechnung setzt voraus, dass die Quelle auch im " +
+        "Notfall täglich zur Verfügung steht. Sie belegt weder " +
+        "die sichere Entnahme noch die Trinkwasserqualität."
+      );
+    } else {
+      paragraph(
+        banner,
+        "Wie viel die Quelle zur Deckung Ihres Wasserbedarfs " +
+        "beitragen kann, lässt sich noch nicht beziffern: " +
+        "Die täglich entnehmbare Wassermenge wurde nicht " +
+        "angegeben. Die Lücke beim abgefüllten Trinkwasser " +
+        "ist daher nicht automatisch eine Lücke in der " +
+        "insgesamt verfügbaren Wassermenge."
+      );
+    }
   }
 
   inner.append(banner);
 
-  /* Handlungsempfehlungen */
+  /* Empfohlene Maßnahmen aus dem tatsächlich bekannten Profil */
   const recommendations = document.createElement("div");
   recommendations.className = "result-recommendations";
 
@@ -1232,171 +1300,211 @@ function run() {
   heading.textContent = "Was bedeutet das für Ihre Vorsorge?";
   recommendations.append(heading);
 
-  if (deficit > 0) {
+  if (bottleGap === 0) {
     paragraph(
       recommendations,
-      `Der unmittelbarste Weg, die Lücke zu schließen, ` +
-      `ist eine Aufstockung Ihres Vorrats um mindestens ` +
-      `${number(deficit)} Liter originalverschlossenes ` +
-      `Trinkwasser.`
+      "Ihre abgefüllte Trinkwassermenge reicht rechnerisch aus. " +
+      "Kontrollieren Sie Bestand und Haltbarkeit regelmäßig " +
+      "und lagern Sie das Wasser nach Herstellerangaben."
     );
-
-    if (source) {
-      paragraph(
-        recommendations,
-        "Alternativ können Sie die bereits angegebene " +
-        "zusätzliche Wasserquelle in Ihre Vorsorge " +
-        "einbeziehen. Entscheidend ist, ob sie im Notfall " +
-        "tatsächlich erreichbar ist, genügend Wasser " +
-        "liefert und Sie das Wasser sicher entnehmen, " +
-        "transportieren und gegebenenfalls aufbereiten können."
-      );
-    } else {
-      paragraph(
-        recommendations,
-        "Als Alternative können Sie prüfen, ob es in " +
-        "Ihrer Umgebung eine erreichbare zusätzliche " +
-        "Wasserquelle gibt – beispielsweise einen Brunnen, " +
-        "eine natürliche Quelle, einen Bach oder See " +
-        "oder eine Regenwasserzisterne. Denken Sie dabei " +
-        "auch an geeignete Behälter für den Transport."
-      );
-    }
-
+  } else if (source && amountKnown && remainingGap === 0) {
     paragraph(
       recommendations,
-      "Wasser aus solchen Quellen ist nicht automatisch " +
-      "trinkbar. Je nach Wasserqualität kommen " +
-      "beispielsweise Abkochen, geeignete Wasserfilter " +
-      "oder zugelassene Mittel zur Trinkwasserdesinfektion " +
-      "infrage. Nicht jede Methode entfernt alle " +
-      "Krankheitserreger oder chemischen Verunreinigungen."
+      `Die angegebenen ${number(sourceDaily)} Liter pro Tag ` +
+      `könnten die Lücke von ${number(bottleGap)} Litern ` +
+      `rechnerisch schließen. Der wichtigste nächste Schritt ` +
+      `ist, die tatsächliche Verfügbarkeit, die Entnahme, ` +
+      `den Transport und die Trinkwassereignung dieser ` +
+      `Quelle zu sichern. Alternativ können Sie den ` +
+      `abgefüllten Vorrat um ${number(bottleGap)} Liter erweitern.`
+    );
+  } else if (source && amountKnown) {
+    paragraph(
+      recommendations,
+      `Selbst bei täglicher Nutzung Ihrer Quelle würden ` +
+      `voraussichtlich noch ${number(remainingGap)} Liter ` +
+      `fehlen. Diese Restmenge könnten Sie zusätzlich ` +
+      `originalverschlossen bevorraten. Falls die Quelle ` +
+      `nicht zuverlässig nutzbar ist, beträgt die Lücke ` +
+      `zum abgefüllten Vorrat weiterhin ` +
+      `${number(bottleGap)} Liter.`
+    );
+  } else if (source) {
+    paragraph(
+      recommendations,
+      `Prüfen Sie zunächst, wie viele Liter Sie aus Ihrer ` +
+      `zusätzlichen Quelle im Notfall täglich zuverlässig ` +
+      `gewinnen können. Ohne diese Angabe ist keine ` +
+      `Gesamtmengenrechnung möglich. Als davon unabhängige ` +
+      `Alternative können Sie die abgefüllten Vorräte um ` +
+      `${number(bottleGap)} Liter erhöhen.`
     );
   } else {
     paragraph(
       recommendations,
-      "Ihr Vorrat an originalverschlossenem Trinkwasser " +
-      "reicht für den selbst gewählten Zeitraum rechnerisch " +
-      "aus. Kontrollieren Sie die Bestände und die " +
-      "Haltbarkeit regelmäßig und lagern Sie das Wasser " +
-      "nach Herstellerangaben."
+      `Um die Versorgungslücke zu schließen, können Sie ` +
+      `mindestens ${number(bottleGap)} Liter ` +
+      `originalverschlossenes Trinkwasser ergänzen. ` +
+      `Als Alternative lässt sich prüfen, ob eine zusätzliche ` +
+      `und zuverlässig nutzbare Wasserquelle erreichbar ist.`
     );
   }
 
-  /* Ergänzende Hinweise zu Wasserquellen */
   if (source) {
-    if (!yes("behaelter")) {
-      paragraph(
-        recommendations,
-        "Für die zusätzliche Wasserquelle fehlen laut " +
-        "Ihren Angaben geeignete, saubere und " +
-        "verschließbare Wasserbehälter. Eine entsprechende " +
-        "Ausstattung wäre sinnvoll."
-      );
-    } else if (capacity < need) {
-      paragraph(
-        recommendations,
-        `Die verfügbaren Behälter fassen zusammen ` +
-        `${number(capacity)} Liter; Ihr Tagesbedarf ` +
-        `beträgt ${number(need)} Liter. Prüfen Sie, ` +
-        `ob wiederholte Befüllungen praktisch möglich sind.`
-      );
-    }
-
-    if (yes("behaelter") && !yes("tragbar")) {
-      paragraph(
-        recommendations,
-        "Prüfen Sie, wie sich gefüllte Behälter sicher " +
-        "transportieren lassen – beispielsweise mit " +
-        "kleineren Kanistern oder einer Transporthilfe."
-      );
-    }
-
     if (!powerOk) {
       paragraph(
         recommendations,
-        "Die Wasserentnahme benötigt Netzstrom, und eine " +
-        "Ersatzlösung ist nicht vorhanden. Eine " +
-        "stromunabhängige Entnahmemöglichkeit könnte " +
-        "diese Schwachstelle beseitigen."
+        "Ihre Wasserentnahme ist vom Netzstrom abhängig; " +
+        "eine Ersatzlösung fehlt. Ohne Strom ist die Quelle " +
+        "deshalb derzeit nicht zuverlässig nutzbar."
       );
     }
 
-    if (val("entfernung") === "Weiter entfernt") {
+    if (!yes("behaelter")) {
       paragraph(
         recommendations,
-        "Erproben Sie den Weg zur Wasserquelle mit " +
-        "gefüllten Behältern, damit sich der " +
-        "Transportaufwand realistisch einschätzen lässt."
+        "Geeignete, saubere und verschließbare Behälter fehlen. " +
+        "Damit ist das Sammeln und gegebenenfalls der Transport " +
+        "des Quellwassers noch nicht abgesichert."
+      );
+    } else {
+      if (capacity < need) {
+        paragraph(
+          recommendations,
+          `Ihre Wasserbehälter fassen zusammen ` +
+          `${number(capacity)} Liter, bei einem Tagesbedarf ` +
+          `von ${number(need)} Litern. Prüfen Sie, ob ` +
+          `mehrmaliges Befüllen möglich ist oder ergänzen Sie ` +
+          `die Transportkapazität.`
+        );
+      }
+
+      if (!yes("tragbar")) {
+        paragraph(
+          recommendations,
+          "Gefüllte Wasserbehälter sind derzeit nicht sicher " +
+          "transportierbar. Eine Transporthilfe oder kleinere " +
+          "geeignete Kanister könnten das Problem lösen."
+        );
+      }
+    }
+
+    if (distance === "Weiter entfernt") {
+      paragraph(
+        recommendations,
+        "Erproben Sie den Transportweg mit gefüllten Behältern, " +
+        "um den tatsächlichen Aufwand einzuschätzen."
+      );
+    }
+
+    if (kind === "Regenwasser / Zisterne") {
+      paragraph(
+        recommendations,
+        "Bei Regenwasser und Zisternen hängt die täglich " +
+        "verfügbare Menge von Niederschlägen und dem " +
+        "Füllstand ab. Prüfen Sie deshalb auch, ob die " +
+        "angenommene Tagesmenge längere Trockenzeiten übersteht."
+      );
+    } else if (kind === "Bach, Fluss oder See") {
+      paragraph(
+        recommendations,
+        "Bei Wasser aus Bach, Fluss oder See sind " +
+        "mikrobiologische und gegebenenfalls chemische " +
+        "Belastungen zu berücksichtigen. Eine allgemeine " +
+        "Eignung als Trinkwasser lässt sich aus der Nähe " +
+        "des Gewässers nicht ableiten."
+      );
+    } else if (kind === "Brunnen" || kind === "Eigene Quelle") {
+      paragraph(
+        recommendations,
+        "Prüfen Sie bei Ihrer Quelle auch die tatsächliche " +
+        "Ergiebigkeit über längere Trockenperioden sowie " +
+        "die Trinkwassereignung."
       );
     }
 
     if (!yes("qualitaet")) {
       paragraph(
         recommendations,
-        "Da die Wasserqualität nicht geprüft wurde, " +
-        "sollten Sie die Quelle nicht als gesicherte " +
-        "Trinkwasserversorgung einplanen. Eine " +
-        "Wasseranalyse und eine passende Aufbereitung " +
-        "sind wichtige Voraussetzungen."
+        "Sie haben angegeben, dass die Wasserqualität nicht " +
+        "geprüft wurde. Das Wasser darf deshalb nicht als " +
+        "gesicherte Trinkwasserversorgung eingeplant werden. " +
+        "Lassen Sie die Qualität beurteilen und klären Sie " +
+        "gegebenenfalls die erforderliche Aufbereitung."
       );
     } else {
       paragraph(
         recommendations,
-        "Prüfen Sie, ob die vorhandene Untersuchung " +
-        "tatsächlich die Trinkwassereignung bestätigt " +
-        "und auch unter den Bedingungen einer " +
-        "Versorgungsstörung gültig bleibt."
+        "Die Wasserqualität wurde laut Ihren Angaben geprüft. " +
+        "Kontrollieren Sie, ob die Untersuchung die " +
+        "Trinkwassereignung bestätigt und für die aktuelle " +
+        "Nutzung aussagekräftig ist."
+      );
+    }
+
+    if (!hasMethod) {
+      paragraph(
+        recommendations,
+        "Sie haben keine Möglichkeit zur Wasseraufbereitung " +
+        "angegeben. Falls die zusätzliche Quelle keine " +
+        "nachweislich geeignete Trinkwasserqualität hat, " +
+        "benötigen Sie eine passende Aufbereitung oder " +
+        "zusätzliche Vorräte an sicherem Trinkwasser."
+      );
+    } else {
+      paragraph(
+        recommendations,
+        "Eine vorhandene Aufbereitungsmethode allein garantiert " +
+        "keine Trinkwasserqualität. Abkochen, Filter und " +
+        "Desinfektionsmittel haben unterschiedliche Grenzen " +
+        "und sind auf die jeweilige Wasserbelastung abzustimmen."
       );
     }
   }
 
-  /* Hinweise zum vorhandenen Filter */
   if (checked("m_filter")) {
-    const filter =
-      val("modell") === "Anderes Modell"
-        ? val("modellAnderes")
-        : val("modell");
+    const filter = val("modell") === "Anderes Modell"
+      ? val("modellAnderes") : val("modell");
 
     paragraph(
       recommendations,
       `Bei Ihrem Wasserfilter (${filter}) sollten Sie ` +
-      `die vom Hersteller dokumentierte Schutzwirkung ` +
-      `und die zulässigen Wasserarten beachten. Ein Filter ` +
-      `allein garantiert nicht die Trinkwassereignung.`
+      `die dokumentierte Schutzwirkung des Herstellers ` +
+      `und die zulässigen Wasserarten berücksichtigen. ` +
+      `Ein Filter allein sichert nicht gegen alle ` +
+      `Krankheitserreger oder chemischen Verunreinigungen ab.`
     );
 
     if (!yes("einsatz")) {
       paragraph(
         recommendations,
-        "Prüfen Sie Ihren Wasserfilter regelmäßig auf " +
-        "Einsatzbereitschaft, Zustand und erforderliche Wartung."
+        "Prüfen Sie den Zustand, die Wartung und die " +
+        "Einsatzbereitschaft Ihres Filters regelmäßig."
       );
     }
   }
 
-  if (deficit === 0 && source) {
+  if (bottleGap === 0 && source) {
     paragraph(
       recommendations,
-      "Die zusätzlich angegebene Wasserquelle ist eine " +
-      "mögliche Reserve. Sie wurde in die obige Berechnung " +
-      "der abgefüllten Trinkwassermenge bewusst nicht " +
-      "eingerechnet."
+      "Die zusätzliche Quelle ist eine mögliche Reserve. " +
+      "Ihre Wassermenge wurde nicht als abgefüllter Vorrat " +
+      "angerechnet."
     );
   }
 
   inner.append(recommendations);
 
-  /* Berechnungsgrundlage und Quellenhinweis */
   paragraph(
     inner,
-    "Die Berechnung orientiert sich an der Empfehlung " +
-    "des Österreichischen Zivilschutzverbandes, mindestens " +
+    "Die Berechnung orientiert sich an der Empfehlung des " +
+    "Österreichischen Zivilschutzverbandes, mindestens " +
     "2 Liter Trinkwasser pro Person und Tag zu bevorraten. " +
     "Für Kochen, Hygiene, besondere Bedürfnisse und bei " +
     "hohen Temperaturen ist zusätzliches Wasser erforderlich. " +
-    "Die Eignung einer zusätzlichen Wasserquelle wird durch " +
-    "diesen Selbstcheck nicht bestätigt.",
+    "Die mengenmäßige Schätzung für eine zusätzliche " +
+    "Quelle setzt deren tägliche Verfügbarkeit voraus " +
+    "und ist kein Nachweis der Trinkwassereignung.",
     "fine"
   );
 
@@ -1448,6 +1556,5 @@ refresh();
 updateArt();
 updateModel();
 </script>
-
 </body>
 </html>
