@@ -3,1701 +3,1410 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f5f8fc">
-<title>KRISENFEST.help – Trinkwasser-Selbstcheck</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f9fc">
+<title>KRISENFEST.help – Trinkwasser-Selbsttest</title>
 <style>
-:root{--navy:#071e3b;--red:#df1728;--blue:#1479c4;--muted:#506176;--shadow:0 8px 28px rgba(19,44,75,.09)}
+:root{
+  --ink:#102c4e;
+  --navy:#0b3157;
+  --blue:#176ba5;
+  --red:#d62239;
+  --pale:#eef6fc;
+  --line:#dce6f0
+}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:#f6f8fb;color:var(--navy);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
-a{color:inherit}
+body{
+  margin:0;color:var(--ink);background:#f7f9fc;
+  font:15px/1.53 system-ui,-apple-system,
+  "Segoe UI",Arial,sans-serif
+}
+a{color:#155e98}
 [hidden]{display:none!important}
-.topbar{background:#ffffffed;border-bottom:1px solid #dbe4ed}
-.topin{max-width:1200px;margin:auto;padding:16px 22px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
-.smallbrand{display:flex;align-items:center;text-decoration:none;flex:none}
-.brandmark{display:block;width:320px;max-width:46vw;height:auto}
-.nav{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:clamp(10px,1.7vw,24px);margin-top:40px}
-.nav>span{font-size:14px;color:#52657d;white-space:nowrap;opacity:.75}
-.nav-group{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
-.nav-group a{font-size:14px;font-weight:650;color:var(--navy);text-decoration:none;padding:2px 0}
-.nav-group a:hover{color:var(--red);text-decoration:underline}
-.nav-current{font-size:12px;line-height:1.3;font-weight:750;color:var(--navy);padding:2px 1px 4px;border-bottom:2px solid var(--red)}
-.layout{max-width:1200px;margin:28px auto 60px;padding:0 18px;display:grid;grid-template-columns:minmax(0,1fr) 305px;gap:23px;align-items:start}
-.primary{min-width:0}
-.panel,.sidebox{background:white;border:1px solid #e5eaf0;border-radius:14px;box-shadow:var(--shadow);margin-bottom:17px}
-.panel{padding:24px 26px 25px}
-.headrow{display:flex;align-items:flex-start;gap:14px;margin-bottom:17px}
-.num{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--red);color:white;font-size:19px;font-weight:800}
-.panel h2{margin:2px 0 4px;font-size:clamp(20px,2vw,24px);letter-spacing:-.5px;line-height:1.2}
-.sub{margin:0;font-size:14px;color:#64738b}
-.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 20px;align-items:stretch}
-.field{position:relative;min-width:0;display:grid;grid-template-rows:minmax(0,1fr) 48px}
-.field.wide{grid-column:1/-1}
-.field label,.field-title{color:#14243f;font-weight:660;font-size:14px;line-height:1.35}
-.field>label{display:flex;align-items:flex-end;margin:0 0 8px}
-.field input:not([type=checkbox]),.field select{display:block;width:100%;min-width:0;height:48px;min-height:48px;max-height:48px;border:1px solid #c9d4df;border-radius:9px;background:#fff;color:#122f52;padding:10px 13px;font:inherit;font-size:15px;outline:none}
-.field input:focus,.field select:focus{border-color:#177dc2;box-shadow:0 0 0 3px #2599e426}
-input[type=number]{appearance:textfield;-moz-appearance:textfield}
-input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-.fields.single{display:block}
-.fields.single>.field{max-width:540px;width:100%}
-.fields.single>.conditional{width:100%;margin-top:20px}
-.conditional{padding:17px;background:#f5f9fd;border:1px solid #dde7f1;border-radius:11px}
-.conditional .fields{margin-bottom:4px}
-.checkline{display:flex;align-items:flex-start;gap:11px;padding:9px 4px;cursor:pointer;font-size:15px}
-.checkline input{flex:none;accent-color:var(--blue);width:19px;height:19px;margin:2px 0 0}
-.checkline strong{font-weight:550}
-.filtermore{margin:7px 0 9px 29px;padding:14px;background:#f4f8fd;border-left:3px solid var(--blue);border-radius:8px}
-.filtermore .fields{grid-template-columns:1fr 1fr}
-.fine{font-size:13px;color:var(--muted);margin:16px 0 0}
-.actions{display:flex;gap:12px;align-items:center;margin:10px 0 22px}
-.cta{display:block;width:100%;padding:16px 24px;border:0;border-radius:10px;background:var(--red);color:white;font-size:17px;font-weight:800;cursor:pointer}
-.cta:hover{background:#c80d20}
-.secondary{background:white;border:1px solid #b8c8d7;border-radius:9px;padding:14px 17px;color:#173858;font-size:14px;cursor:pointer;flex:none}
-.sidebox{background:#eaf5ff;border-color:#dcecf8;padding:23px 20px}
-.sidebox h3{font-size:19px;line-height:1.23;margin:0 0 16px}
-.sidebox p{font-size:14px;color:#3f5675;margin:0 0 15px}
-.sidebox ul{list-style:none;padding:0;margin:10px 0 0}
-.sidebox li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;font-size:14px;border-top:1px solid #d5e6f5}
-.tick{flex:none;display:grid;place-items:center;color:white;background:#2389d2;border-radius:50%;width:22px;height:22px;font-size:13px;font-weight:800}
-.side-title{display:flex;align-items:flex-start;gap:13px}
-.watericon{font-size:36px}
-.tip{background:#eff7fd}
-.tip-icon{font-size:28px}
-
-/* Interne Analysegestaltung */
-#bericht{scroll-margin-top:20px}
-#resultInner{display:none!important}
-#resultInner .status{padding:22px 24px;border:1px solid;border-left-width:6px;border-radius:12px;margin-bottom:23px;line-height:1.65}
-#resultInner .status.good{background:#e8f7ee;border-color:#b8ddc8;border-left-color:#27845c}
-#resultInner .status.attention{background:#fff5df;border-color:#ead49b;border-left-color:#d49a26}
-#resultInner .status.risk{background:#fff0f1;border-color:#ebc4cb;border-left-color:#c43b4e}
-.result-heading{font-weight:800;font-size:19px;margin:0 0 12px;line-height:1.35}
-.result-paragraph{margin:0 0 12px;color:#233b50;font-size:15px;line-height:1.65}
-.result-paragraph:last-child{margin-bottom:0}
-.result-recommendations{line-height:1.55;color:#263d51;margin-top:25px}
-.result-recommendations h3{font-size:20px;margin:0 0 15px}
-.result-recommendations .step-card{display:grid;grid-template-columns:34px minmax(0,1fr);align-items:start;gap:12px;margin:0 0 12px;padding:16px 17px 16px 14px;border:1px solid #d4e3f3;border-left:4px solid #3578b9;border-radius:11px;background:#f5f9fe}
-.step-number{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#e3edf9;color:#225b99;font-weight:800;font-size:15px}
-.step-content{min-width:0}
-.step-label{margin:0 0 5px;color:#225b99;font-weight:800;font-size:12px;line-height:1.4;letter-spacing:.015em}
-.step-label::before{content:"↗";font-size:15px;padding-right:7px}
-.step-text{margin:0;color:#263d51;font-size:15px;line-height:1.6}
-.result-recommendations .step-card.priority{border-color:#c4d7ee;border-left-color:#154b8b;background:#edf4fd}
-.step-card.priority .step-number{background:#164e8f;color:white}
-.step-card.priority .step-label{color:#164e8f}
-.step-card.priority .step-label::before{content:"◆";font-size:12px}
-.result-recommendations .step-card.strength{border-color:#e0d8ee;border-left-color:#745aa5;background:#f7f4fc}
-.step-card.strength .step-number{background:#ebe4f5;color:#624a92}
-.step-card.strength .step-label{color:#634b95}
-.step-card.strength .step-label::before{content:"✦";font-size:14px}
-.source-note a{color:#175b90;text-decoration:underline;text-underline-offset:2px}
-.product-guidance{margin-top:23px;padding:18px 19px;background:#f3f8fd;border:1px solid #d7e6f4;border-radius:12px}
-.product-guidance h3{margin:0 0 12px;font-size:19px}
-.product-guidance p{margin:0 0 10px;color:#344b63;font-size:14px;line-height:1.6}
-.product-guidance .product-tile{background:#fff;border:1px solid #dce6f0;border-radius:9px;padding:13px 15px;margin-top:10px}
-.product-tile strong{display:block;margin-bottom:4px}
-.product-tile a{color:#175b90;font-weight:700;text-underline-offset:3px}
-.emergency-guide{margin-top:28px;border:1px solid #d3e2ef;border-radius:14px;overflow:hidden;background:#fff}
-.emergency-guide-head{padding:21px 23px 19px;background:#eaf4fc;border-bottom:1px solid #d3e2ef}
-.emergency-guide-head .eyebrow{display:block;margin-bottom:6px;color:#25628d;font-size:12px;font-weight:800;letter-spacing:.045em;text-transform:uppercase}
-.emergency-guide-head h3{margin:0 0 8px;font-size:21px;line-height:1.3;color:#0a2b4b}
-.emergency-guide-head p{margin:0;line-height:1.6;color:#39536d;font-size:14px}
-.emergency-guide-body{padding:19px 23px 20px}
-.emergency-steps{margin:0;padding:0;list-style:none;counter-reset:waterstep}
-.emergency-steps>li{position:relative;padding:0 0 16px 43px;margin:0 0 15px;border-bottom:1px solid #e7edf4;counter-increment:waterstep}
-.emergency-steps>li:last-child{border-bottom:0;margin-bottom:0;padding-bottom:5px}
-.emergency-steps>li::before{content:counter(waterstep);position:absolute;left:0;top:1px;display:grid;place-items:center;width:29px;height:29px;border-radius:8px;background:#e1effa;color:#164f81;font-weight:800;font-size:14px}
-.emergency-steps h4{margin:1px 0 7px;color:#102f50;font-size:16px}
-.emergency-steps p{margin:0 0 8px;color:#34495f;font-size:14px;line-height:1.65}
-.emergency-steps ul{margin:8px 0 0;padding-left:18px}
-.emergency-steps ul li{font-size:14px;line-height:1.6;color:#34495f;margin-bottom:6px}
-.emergency-chemical-warning{margin:18px 0 0;padding:17px 18px;border:1px solid #e6c1ba;border-left:5px solid #b5493f;border-radius:10px;background:#fff6f4}
-.emergency-chemical-warning h4{margin:0 0 9px;color:#842f2a;font-size:16px}
-.emergency-chemical-warning p{margin:0 0 9px;color:#663b37;font-size:14px;line-height:1.65}
-.emergency-guide-sources{margin:14px 0 0;color:#536c82;font-size:12px;line-height:1.6}
-.emergency-guide-sources a{color:#175b90}
-.purifier-decision{margin:12px 0 2px;padding:14px 16px;background:#f1f7fc;border-left:4px solid #2574a9;border-radius:8px}
-.purifier-decision h5{margin:0 0 8px;color:#18466c;font-size:15px}
-.purifier-decision p{margin:0 0 8px;font-size:14px;line-height:1.65}
-
-/* Eingabeprüfung */
-.field input.invalid,.field select.invalid{border:3px solid #bf1430!important;background:#fff0f2!important;box-shadow:0 0 0 3px #bf143022!important}
-.field:has(.invalid)>label{color:#ac1830}
-.validation-note{position:absolute;left:0;bottom:-17px;font-size:11px;font-weight:700;color:#b21832;white-space:nowrap}
-#error{background:#fff2f2;color:#94142d;border:1px solid #f4cad1;border-radius:9px;padding:12px;margin-top:12px;font-weight:650}
-.foot{max-width:1140px;margin:10px auto 40px;padding:0 20px;color:#637791;font-size:12px;text-align:center}
-
-/* Sichtbarer PDF-Bericht */
-.pdf-report{margin-top:12px;border:1px solid #dbe6f0;border-radius:12px;overflow:hidden;background:#eff5fa}
-.pdf-report-top{padding:15px 18px;background:#eaf5ff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:13px}
-.pdf-report-top strong{display:block;font-size:17px}
-.pdf-report-top small{display:block;color:#52677b;font-size:13px}
-.pdf-report-buttons{display:flex;gap:8px;flex-wrap:wrap}
-.pdf-report-buttons a{padding:10px 13px;background:white;border:1px solid #b8cbdc;border-radius:8px;color:#145f94;font-weight:700;text-decoration:none;font-size:13px}
-.pdf-report-buttons a.primary-pdf{background:#145f94;border-color:#145f94;color:white}
-.pdf-frame{width:100%;height:850px;border:0;display:block;background:#e4eaf0}
-.pdf-help{font-size:13px;color:#52677b;padding:10px 18px;background:#fff}
-.pdf-mobile{display:none}
-
-/* Anpassung an Tablets und Smartphones */
-@media(max-width:960px){
-.topin{padding-bottom:28px}
-.brandmark{width:235px}
-.nav{margin-top:20px;gap:12px}
-.nav>span,.nav-group a{font-size:12px}
-.layout{grid-template-columns:minmax(0,1fr) 255px;gap:14px}
-.sidebox{padding:19px 15px}
-.panel{padding:22px}
+header{background:white;border-bottom:1px solid var(--line)}
+.head{
+  max-width:1180px;margin:auto;padding:15px 22px;
+  display:flex;align-items:center;
+  justify-content:space-between;gap:20px
 }
-@media(max-width:720px){
-.topin{flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:20px 12px 14px}
-.brandmark{width:min(300px,85vw);max-width:85vw}
-.nav{margin-top:0;justify-content:center;gap:6px 15px}
-.nav>span,.nav-group a{font-size:12px}
-.layout{grid-template-columns:1fr;padding:0 12px;gap:0;margin:18px auto 60px}
-.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.sidebox{margin-bottom:12px}
-.panel{padding:20px 16px}
-.panel h2{font-size:21px}
-.fields{grid-template-columns:1fr}
-.field{grid-template-rows:auto 48px}
-.field.wide{grid-column:1}
-.fields.single>.field{max-width:none}
-.filtermore .fields{grid-template-columns:1fr}
-.actions{flex-direction:column}
-.secondary,.cta{width:100%}
-.pdf-report-top{padding:13px}
-.pdf-report-buttons{width:100%}
-.pdf-report-buttons a{flex:1;text-align:center}
-.pdf-frame{display:none}
-.pdf-mobile{display:block;margin:8px;background:white;padding:20px 16px;border:1px solid #dbe5f0;box-shadow:0 4px 18px #122a4422;max-height:650px;overflow-y:auto}
-.pdf-mobile .type-title{font-size:22px;line-height:1.3;color:#102e50}
-.pdf-mobile .type-subtitle{color:#64788c;font-size:12px}
-.pdf-mobile .type-heading{font-size:18px;border-top:1px solid #d8e5ee;padding-top:14px;margin-top:22px}
-.pdf-mobile .type-subheading{font-size:15px;margin-top:17px;color:#155984}
-.pdf-mobile p,.pdf-mobile .type-lead{font-size:13px;line-height:1.6}
-.pdf-mobile .type-status{background:#fff3d9;padding:12px;font-weight:800;border-radius:6px}
-.pdf-mobile .type-warning{color:#a12d27;background:#fff0ed;padding:12px;border-radius:6px}
-.mobile-kv{display:flex;justify-content:space-between;border-bottom:1px solid #e4edf4;gap:8px;padding:6px 0;font-size:12px}
-.mobile-kv>*{max-width:55%}
-.mobile-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.mobile-metrics>div{background:#edf5fa;padding:8px 4px;text-align:center;border-radius:6px}
-.mobile-metrics small{display:block;color:#557185;font-size:10px}
-.mobile-metrics strong{display:block;font-size:15px}
-.mobile-entry{border-left:3px solid #14649c;padding:7px 10px;background:#f3f8fc;margin:9px 0;font-size:13px}
-.mobile-entry p{margin:3px 0}
-.mobile-entry a{color:#155c8d}
+.brand img{width:285px;max-width:44vw;height:auto;display:block}
+.nav{
+  display:flex;gap:22px;flex-wrap:wrap;
+  align-items:center;font-size:14px;font-weight:650
 }
-@media(max-width:460px){
-.sidebar{grid-template-columns:1fr}
-.sidebox{padding:18px}
-.headrow{gap:10px}
-.num{width:33px;height:33px}
-.panel h2{font-size:20px}
-.result-recommendations .step-card{grid-template-columns:28px minmax(0,1fr);gap:10px;padding:13px 12px}
-.step-number{width:27px;height:27px;font-size:13px}
+.nav a{text-decoration:none}
+.nav a.current{
+  border-bottom:3px solid var(--red);
+  padding-bottom:5px
+}
+main{
+  max-width:1180px;margin:24px auto 60px;
+  padding:0 18px;display:grid;
+  grid-template-columns:minmax(0,1fr) 285px;gap:22px
+}
+.panel,.side{
+  background:#fff;border:1px solid #e0e8f0;
+  border-radius:13px;
+  box-shadow:0 7px 26px #142d4a0a
+}
+.panel{padding:24px;margin-bottom:17px}
+.side{
+  background:#ecf6ff;padding:22px;margin-bottom:16px
+}
+.side p{font-size:14px;color:#52687e}
+.side h3{margin:0 0 12px;font-size:18px}
+.side ul{
+  padding-left:20px;color:#334e68;font-size:14px
+}
+h2{font-size:22px;line-height:1.24;margin:0 0 8px}
+.section-title{
+  display:flex;gap:12px;align-items:flex-start;
+  margin-bottom:18px
+}
+.num{
+  background:var(--red);color:#fff;border-radius:50%;
+  display:grid;place-items:center;width:34px;height:34px;
+  flex:0 0 34px;font-size:18px;font-weight:800
+}
+.subtitle{margin:0;color:#64758b;font-size:13px}
+.field-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px
+}
+.field{display:flex;flex-direction:column;min-width:0}
+.field.full{grid-column:1/-1}
+.field>label{
+  display:block;font-size:14px;font-weight:650;
+  margin:0 0 8px
+}
+.field select,.field input:not([type=checkbox]){
+  height:46px;padding:9px 12px;width:100%;
+  font:inherit;color:#173750;border:1px solid #bfcedc;
+  border-radius:8px;background:white;min-width:0
+}
+.field input:focus,.field select:focus{
+  outline:2px solid #88bde4;outline-offset:1px
+}
+.nested{
+  border:1px solid #dbe9f5;border-radius:10px;
+  padding:17px;background:#f5f9fd;margin-top:16px
+}
+.check{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:9px 0;cursor:pointer
+}
+.check input{
+  width:19px;height:19px;accent-color:#247abb;margin:2px 0
+}
+.filter-extra{
+  margin:4px 0 12px 28px;background:#f4f9ff;
+  border-left:3px solid #2e80bf;padding:15px
+}
+.error{
+  border:1px solid #e7b5bd;background:#fff0f2;
+  padding:13px;border-radius:9px;color:#a6283f;
+  font-weight:650;margin-bottom:16px
+}
+.invalid{
+  border:2px solid #d62239!important;
+  background:#fff7f8!important
+}
+.actions{display:flex;gap:12px;margin:18px 0}
+.primary,.secondary{
+  border-radius:10px;padding:14px 20px;
+  cursor:pointer;font:inherit;font-weight:750
+}
+.primary{
+  background:var(--red);color:white;
+  border:1px solid var(--red);flex:1
+}
+.secondary{
+  color:var(--navy);background:white;
+  border:1px solid #b6c5d4
+}
+.version{
+  display:inline-block;border-radius:6px;
+  color:#42627d;background:#e8f1f9;
+  padding:3px 8px;font-size:11px;font-weight:750;
+  letter-spacing:.03em;margin-bottom:8px
+}
+
+/* Ausschließlich die PDF-Darstellung ist sichtbar. */
+.report{
+  overflow:hidden;border:1px solid #cbddeb;
+  border-radius:10px;background:#f0f4f8
+}
+.reportbar{
+  padding:16px;background:#e6f3fc;
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:space-between;gap:12px
+}
+.reportbar strong{display:block;font-size:17px}
+.reportbar small{color:#58738b}
+.reportbuttons{display:flex;flex-wrap:wrap;gap:8px}
+.reportbuttons a{
+  border:1px solid #aac5d8;background:white;
+  text-decoration:none;border-radius:8px;
+  padding:9px 12px;font-size:13px;font-weight:700
+}
+.reportbuttons a:first-child{
+  color:white;background:#145f97;border-color:#145f97
+}
+.pdf-frame{
+  border:0;display:block;width:100%;
+  height:780px;background:#e2eaf0
+}
+.mobile-preview{display:none}
+.reporthint{
+  margin:0;padding:12px 16px;font-size:13px;
+  color:#526d85;background:#fff
+}
+.foot{
+  text-align:center;font-size:12px;
+  color:#688097;margin:30px auto;padding:10px
+}
+
+@media(max-width:880px){
+  .brand img{width:220px}
+  .nav{gap:12px}
+  main{
+    grid-template-columns:minmax(0,1fr) 230px;gap:12px
+  }
+  .panel{padding:20px}
+  .side{padding:16px}
+}
+@media(max-width:700px){
+  .head{display:block;text-align:center}
+  .brand{display:inline-block}
+  .brand img{width:min(290px,85vw);max-width:none}
+  .nav{
+    justify-content:center;margin-top:10px;
+    font-size:12px;gap:9px
+  }
+  main{display:block;padding:0 12px;margin-top:15px}
+  .field-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .panel{padding:17px}
+  .actions{flex-direction:column}
+  .pdf-frame{display:none}
+  .reportbuttons{width:100%}
+  .reportbuttons a{flex:1;text-align:center}
+  .mobile-preview{
+    display:block;background:#fff;margin:10px;
+    padding:16px;border:1px solid #dbe7f1;
+    max-height:630px;overflow:auto
+  }
+  .mobile-preview h3{
+    font-size:18px;border-bottom:1px solid #dce8f3;
+    padding-bottom:5px
+  }
+  .mobile-preview h4{
+    font-size:15px;color:#145f97
+  }
+  .mobile-preview p,.mobile-preview li{
+    font-size:13px;line-height:1.6
+  }
+  .mobile-preview .mstatus{
+    background:#fff4df;padding:11px;border-radius:7px
+  }
+  .side{margin-bottom:10px}
+  .reporthint{font-size:12px}
 }
 </style>
 </head>
+
 <body>
-<header class="topbar">
-<div class="topin">
-<a class="smallbrand" href="selbsttests.html" aria-label="Zur Übersicht der Selbsttests">
-<img class="brandmark" src="krisenfest-logo-transparent.png" alt="KRISENFEST.help">
-</a>
-<nav class="nav" aria-label="Hauptnavigation">
-<div class="nav-group">
-<a href="selbsttests.html">Selbsttests</a>
-<span class="nav-current" aria-current="page">Wasser</span>
-</div>
-<span>Wissen</span>
-<span>Vorsorge</span>
-<span>Produkte</span>
-<span>Veranstaltungen</span>
-<span>Service</span>
-</nav>
-</div>
+<header>
+  <div class="head">
+    <a class="brand" href="selbsttests.html"
+       aria-label="Selbsttests">
+      <img src="krisenfest-logo-transparent.png"
+           alt="KRISENFEST.help">
+    </a>
+    <nav class="nav">
+      <a class="current" href="selbsttests.html">
+        Selbsttests · Wasser
+      </a>
+      <a href="index.html">Startseite</a>
+      <a href="selbsttests.html">Weitere Themen</a>
+    </nav>
+  </div>
 </header>
 
-<main class="layout">
-<div class="primary">
-
-<!-- 1. Haushalt -->
-<section class="panel" aria-labelledby="h1">
-<div class="headrow"><span class="num">1</span><div><h2 id="h1">Ihr Haushalt</h2></div></div>
-<div class="fields single">
-<div class="field">
-<label for="personen">Wie viele Personen leben in Ihrem Haushalt?</label>
-<input id="personen" type="number" min="1" max="30" step="1" inputmode="numeric" placeholder="Anzahl Personen">
-</div>
-</div>
-</section>
-
-<!-- 2. Vorsorgezeitraum -->
-<section class="panel" aria-labelledby="h2">
-<div class="headrow"><span class="num">2</span><div><h2 id="h2">Vorsorgezeitraum</h2></div></div>
-<div class="fields single">
-<div class="field">
-<label for="tage">Für welchen Zeitraum möchten Sie vorsorgen?</label>
-<select id="tage">
-<option value="">Bitte auswählen</option>
-<option value="7">7 Tage</option>
-<option value="14">14 Tage (empfohlen)</option>
-<option value="30">1 Monat</option>
-<option value="60">2 Monate</option>
-</select>
-</div>
-</div>
-</section>
-
-<!-- 3. Wasservorrat -->
-<section class="panel" aria-labelledby="h3">
-<div class="headrow"><span class="num">3</span><div><h2 id="h3">Wasservorrat</h2></div></div>
-<div class="fields single">
-<div class="field">
-<label for="flaschen">Wie viele Liter originalverschlossenes Trinkwasser haben Sie vorrätig?</label>
-<input id="flaschen" type="number" min="0" step="0.5" inputmode="decimal" placeholder="Liter (auch 0 möglich)">
-</div>
-</div>
-</section>
-
-<!-- 4. Zusätzliche Wasserquellen -->
-<section class="panel" aria-labelledby="h4">
-<div class="headrow"><span class="num">4</span><div><h2 id="h4">Zusätzliche Wasserquellen</h2></div></div>
-<div class="fields single">
-<div class="field">
-<label for="quelle">Haben Sie Zugang zu zusätzlichen Wasserquellen?</label>
-<select id="quelle">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-<div class="conditional" id="quelleDetails" hidden>
-<div class="fields">
-<div class="field">
-<label for="art">Welche Wasserquelle?</label>
-<select id="art">
-<option value="">Bitte auswählen</option>
-<option>Brunnen</option>
-<option>Eigene Quelle</option>
-<option>Regenwasser / Zisterne</option>
-<option>Bach, Fluss oder See</option>
-</select>
-</div>
-<div class="field">
-<label for="entfernung" id="entfernungLabel">Wie weit ist die Wasserquelle entfernt?</label>
-<select id="entfernung">
-<option value="">Bitte auswählen</option>
-<option>Am Haus</option>
-<option>Bis 500 m</option>
-<option>Weiter entfernt</option>
-</select>
-</div>
-<div class="field wide" id="regenBox" hidden>
-<label for="regenmenge">Wie viele Liter Regenwasser sind derzeit ungefähr in Ihrer Tonne oder Zisterne gespeichert? (Falls bekannt)</label>
-<input id="regenmenge" type="number" min="0" max="1000000" step="0.5" inputmode="decimal" placeholder="Aktueller Vorrat in Litern (optional)">
-</div>
-<div class="field">
-<label for="qualitaet">Wurde das Wasser auf Trinkwasserqualität geprüft?</label>
-<select id="qualitaet">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja, Trinkwasserqualität bestätigt</option>
-<option value="offen">Ja, aber nicht als Trinkwasser bestätigt</option>
-<option value="nein">Nein, nicht geprüft</option>
-<option value="unbekannt">Ergebnis unbekannt</option>
-</select>
-</div>
-<div class="field" id="stromBox" hidden>
-<label for="strom">Benötigt die Wasserentnahme aus dem Brunnen Netzstrom?</label>
-<select id="strom">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-<div class="field wide" id="ersatzBox" hidden>
-<label for="ersatz">Ist eine stromunabhängige Wasserentnahme oder Ersatzstromversorgung vorhanden?</label>
-<select id="ersatz">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-<div class="field">
-<label for="behaelter">Haben Sie geeignete, saubere und verschließbare Wasserbehälter?</label>
-<select id="behaelter">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-<div class="field wide" id="transportBox" hidden>
-<div class="fields">
-<div class="field">
-<label for="liter">Wie viele Liter fassen Ihre Behälter insgesamt?</label>
-<input id="liter" type="number" min="0" step="0.5" inputmode="decimal" placeholder="Gesamtkapazität in Litern">
-</div>
-<div class="field">
-<label for="tragbar">Können Sie gefüllte Behälter sicher tragen oder mit einer Transporthilfe bewegen?</label>
-<select id="tragbar">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- 5. Wasseraufbereitung -->
-<section class="panel" aria-labelledby="h5">
-<div class="headrow">
-<span class="num">5</span>
+<main>
 <div>
-<h2 id="h5">Wasseraufbereitung</h2>
-<p class="sub">Welche Möglichkeiten stehen Ihnen zur Verfügung, um Wasser im Notfall aufzubereiten?</p>
-</div>
-</div>
-<fieldset id="aufbereitungGruppe" style="border:0;padding:0;margin:0">
-<label class="checkline">
-<input type="checkbox" id="m_filter">
-<strong>Wasserfilter</strong>
-</label>
-<div class="filtermore" id="filterBox" hidden>
-<div class="fields">
-<div class="field">
-<label for="modell">Welchen Wasserfilter oder Wasserreiniger besitzen Sie?</label>
-<select id="modell">
-<option value="">Bitte auswählen</option>
-<option>Katadyn Pocket</option>
-<option>Katadyn BeFree</option>
-<option>Sawyer MINI</option>
-<option>Sawyer Squeeze</option>
-<option>LifeStraw Peak Series Straw</option>
-<option>LifeStraw Peak Series Gravity Filter 8L</option>
-<option>LifeStraw Peak Series Gravity Purifier 8L</option>
-<option>LifeStraw Peak Series (Modell unklar)</option>
-<option>MSR Guardian Gravity Purifier 10L</option>
-<option>MSR Guardian Purifier (Handpumpe)</option>
-<option>GRAYL GeoPress</option>
-<option>Anderes Modell</option>
-<option>Modell unbekannt</option>
-</select>
-</div>
-<div class="field" id="anderesModell" hidden>
-<label for="modellAnderes">Bitte Hersteller und Modell angeben</label>
-<input id="modellAnderes" type="text" placeholder="Hersteller und Modell">
-</div>
-<div class="field">
-<label for="einsatz">Wird die Einsatzbereitschaft regelmäßig geprüft?</label>
-<select id="einsatz">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-</div>
-</div>
-<label class="checkline">
-<input type="checkbox" id="kochen">
-<strong>Abkochen</strong>
-</label>
-<label class="checkline">
-<input type="checkbox" id="chemie">
-<strong>Desinfektionsmittel zur Trinkwasseraufbereitung</strong>
-</label>
-</fieldset>
+
+<section class="panel">
+  <div class="section-title">
+    <span class="num">1</span>
+    <h2>Ihr Haushalt</h2>
+  </div>
+  <div class="field" style="max-width:490px">
+    <label for="personen">
+      Wie viele Personen leben in Ihrem Haushalt?
+    </label>
+    <input id="personen" type="number"
+           min="1" max="30" step="1"
+           placeholder="Anzahl Personen">
+  </div>
 </section>
+
+<section class="panel">
+  <div class="section-title">
+    <span class="num">2</span>
+    <h2>Vorsorgezeitraum</h2>
+  </div>
+  <div class="field" style="max-width:490px">
+    <label for="tage">
+      Für welchen Zeitraum möchten Sie vorsorgen?
+    </label>
+    <select id="tage">
+      <option value="">Bitte auswählen</option>
+      <option value="7">7 Tage</option>
+      <option value="14">14 Tage (empfohlen)</option>
+      <option value="30">1 Monat</option>
+      <option value="60">2 Monate</option>
+    </select>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="section-title">
+    <span class="num">3</span>
+    <h2>Wasservorrat</h2>
+  </div>
+  <div class="field" style="max-width:490px">
+    <label for="flaschen">
+      Wie viele Liter originalverschlossenes Trinkwasser
+      haben Sie vorrätig?
+    </label>
+    <input id="flaschen" type="number"
+           min="0" max="1000000" step="0.5"
+           placeholder="Liter (auch 0 möglich)">
+  </div>
+</section>
+
+<section class="panel">
+  <div class="section-title">
+    <span class="num">4</span>
+    <h2>Zusätzliche Wasserquellen</h2>
+  </div>
+
+  <div class="field" style="max-width:490px">
+    <label for="quelle">
+      Haben Sie Zugang zu einer zusätzlichen Wasserquelle?
+    </label>
+    <select id="quelle">
+      <option value="">Bitte auswählen</option>
+      <option value="ja">Ja</option>
+      <option value="nein">Nein</option>
+    </select>
+  </div>
+
+  <div id="quelldetails" class="nested" hidden>
+    <div class="field-grid">
+
+      <div class="field">
+        <label for="art">Welche Wasserquelle?</label>
+        <select id="art">
+          <option value="">Bitte auswählen</option>
+          <option>Brunnen</option>
+          <option>Eigene Quelle</option>
+          <option>Regenwasser / Zisterne</option>
+          <option>Bach, Fluss oder See</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="entfernung">
+          Wie weit ist die Wasserquelle entfernt?
+        </label>
+        <select id="entfernung">
+          <option value="">Bitte auswählen</option>
+          <option>Am Haus</option>
+          <option>Bis 500 m</option>
+          <option>Weiter entfernt</option>
+        </select>
+      </div>
+
+      <div class="field full" id="regenbox" hidden>
+        <label for="regenmenge">
+          Wie viele Liter Regenwasser sind aktuell in
+          der Tonne oder Zisterne gespeichert? (Optional)
+        </label>
+        <input id="regenmenge" type="number"
+               min="0" max="1000000" step="0.5"
+               placeholder="Liter">
+      </div>
+
+      <div class="field">
+        <label for="qualitaet">
+          Wurde das Wasser auf Trinkwasserqualität geprüft?
+        </label>
+        <select id="qualitaet">
+          <option value="">Bitte auswählen</option>
+          <option value="ja">
+            Ja, Trinkwasserqualität bestätigt
+          </option>
+          <option value="offen">
+            Geprüft, aber nicht als Trinkwasser bestätigt
+          </option>
+          <option value="nein">Nein, nicht geprüft</option>
+          <option value="unbekannt">Ergebnis unbekannt</option>
+        </select>
+      </div>
+
+      <div class="field" id="strombox" hidden>
+        <label for="strom">
+          Benötigt die Brunnenentnahme Netzstrom?
+        </label>
+        <select id="strom">
+          <option value="">Bitte auswählen</option>
+          <option value="ja">Ja</option>
+          <option value="nein">Nein</option>
+        </select>
+      </div>
+
+      <div class="field full" id="ersatzbox" hidden>
+        <label for="ersatz">
+          Gibt es eine stromunabhängige Entnahme oder
+          funktionsfähigen Ersatzstrom?
+        </label>
+        <select id="ersatz">
+          <option value="">Bitte auswählen</option>
+          <option value="ja">Ja</option>
+          <option value="nein">Nein</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="behaelter">
+          Besitzen Sie saubere, verschließbare
+          Trinkwasserbehälter?
+        </label>
+        <select id="behaelter">
+          <option value="">Bitte auswählen</option>
+          <option value="ja">Ja</option>
+          <option value="nein">Nein</option>
+        </select>
+      </div>
+
+      <div class="field full" id="behaelterbox" hidden>
+        <div class="field-grid">
+          <div class="field">
+            <label for="liter">
+              Gesamtkapazität der Behälter (Liter)
+            </label>
+            <input id="liter" type="number"
+                   min="0.5" step="0.5"
+                   placeholder="Liter">
+          </div>
+          <div class="field">
+            <label for="tragbar">
+              Lassen sich die gefüllten Behälter
+              sicher transportieren?
+            </label>
+            <select id="tragbar">
+              <option value="">Bitte auswählen</option>
+              <option value="ja">Ja</option>
+              <option value="nein">Nein</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="section-title">
+    <span class="num">5</span>
+    <div>
+      <h2>Wasseraufbereitung</h2>
+      <p class="subtitle">
+        Welche Aufbereitungsmöglichkeiten stehen Ihnen
+        im Notfall zur Verfügung?
+      </p>
+    </div>
+  </div>
+
+  <label class="check">
+    <input type="checkbox" id="m_filter">
+    <span>Wasserfilter oder Wasserreiniger</span>
+  </label>
+
+  <div id="filterbox" class="filter-extra" hidden>
+    <div class="field-grid">
+
+      <div class="field">
+        <label for="modell">
+          Welches Modell besitzen Sie?
+        </label>
+        <select id="modell">
+          <option value="">Bitte auswählen</option>
+          <option>Katadyn Pocket</option>
+          <option>Katadyn BeFree</option>
+          <option>Sawyer MINI</option>
+          <option>Sawyer Squeeze</option>
+          <option>LifeStraw Peak Series Straw</option>
+          <option>LifeStraw Peak Series Gravity Filter 8L</option>
+          <option>LifeStraw Peak Series Gravity Purifier 8L</option>
+          <option>LifeStraw Peak Series (Modell unklar)</option>
+          <option>MSR Guardian Gravity Purifier 10L</option>
+          <option>MSR Guardian Purifier (Handpumpe)</option>
+          <option>GRAYL GeoPress</option>
+          <option>Anderes Modell</option>
+          <option>Modell unbekannt</option>
+        </select>
+      </div>
+
+      <div class="field" id="anderesbox" hidden>
+        <label for="modellAnderes">
+          Hersteller und Modell
+        </label>
+        <input id="modellAnderes"
+               placeholder="Hersteller und Modell">
+      </div>
+
+      <div class="field">
+        <label for="einsatz">
+          Wird die Einsatzbereitschaft regelmäßig geprüft?
+        </label>
+        <select id="einsatz">
+          <option value="">Bitte auswählen</option>
+          <option value="ja">Ja</option>
+          <option value="nein">Nein</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+
+  <label class="check">
+    <input type="checkbox" id="kochen">
+    <span>Abkochen</span>
+  </label>
+
+  <label class="check">
+    <input type="checkbox" id="chemie">
+    <span>Desinfektionsmittel zur Trinkwasseraufbereitung</span>
+  </label>
+</section>
+
+<div id="fehler" class="error" hidden role="alert"></div>
 
 <div class="actions">
-<button class="secondary" type="button" id="reset">Angaben zurücksetzen</button>
-<button class="cta" type="button" id="auswerten">Selbstcheck auswerten</button>
+  <button id="reset" type="button" class="secondary">
+    Angaben zurücksetzen
+  </button>
+  <button id="auswerten" type="button" class="primary">
+    Selbstcheck auswerten
+  </button>
 </div>
-<div id="error" hidden role="alert"></div>
 
-<!-- Sichtbarer Bericht: PDF statt langer Textauswertung -->
-<section class="panel" id="bericht" hidden aria-live="polite">
-<div class="headrow">
-<span class="num">✓</span>
-<div>
-<h2>Ihre persönliche Einschätzung</h2>
-<p class="sub">Basierend auf Ihren Angaben</p>
-</div>
-</div>
-<div id="resultInner" hidden aria-hidden="true"></div>
-<div id="pdfResult" class="pdf-report" hidden>
-<div class="pdf-report-top">
-<div>
-<strong>Ihre persönliche Trinkwasseranalyse</strong>
-<small>Der Bericht ist fertig. Sie können ihn ansehen, speichern oder ausdrucken.</small>
-</div>
-<div class="pdf-report-buttons">
-<a id="pdfOpen" class="primary-pdf" href="#" target="_blank" rel="noopener">PDF öffnen</a>
-<a id="pdfDownload" href="#" download="KRISENFEST_Trinkwasseranalyse.pdf">PDF speichern</a>
-</div>
-</div>
-<iframe id="pdfFrame" class="pdf-frame" title="Persönlicher Trinkwasserbericht als PDF"></iframe>
-<div id="pdfMobile" class="pdf-mobile" aria-label="Lesbare Berichtsvorschau für Mobilgeräte"></div>
-<div class="pdf-help">
-Auf Smartphones wird der Bericht zusätzlich als gut lesbare Vorschau angezeigt.
-Das Original-PDF steht über „PDF öffnen“ oder „PDF speichern“ bereit.
-Alle Angaben bleiben auf Ihrem Gerät.
-</div>
-</div>
+<section id="bericht" class="panel" hidden aria-live="polite">
+  <span class="version">
+    TRINKWASSER · PDF-VERSION 28
+  </span>
+  <h2>Ihre persönliche Einschätzung</h2>
+  <p class="subtitle">
+    Ihr individueller Bericht ist fertig und
+    wird als PDF bereitgestellt.
+  </p>
+
+  <div class="report">
+    <div class="reportbar">
+      <div>
+        <strong>Ihre persönliche Trinkwasseranalyse</strong>
+        <small>
+          PDF-Bericht mit Ausgangsdaten,
+          Bewertung und Empfehlungen
+        </small>
+      </div>
+      <div class="reportbuttons">
+        <a id="pdfOeffnen" href="#"
+           target="_blank" rel="noopener">
+          PDF anzeigen
+        </a>
+        <a id="pdfSpeichern" href="#"
+           download="KRISENFEST_Trinkwasseranalyse.pdf">
+          PDF speichern
+        </a>
+      </div>
+    </div>
+
+    <iframe id="pdfRahmen" class="pdf-frame"
+            title="Ihre persönliche Trinkwasseranalyse als PDF">
+    </iframe>
+
+    <div id="mobilVorschau" class="mobile-preview"
+         aria-label="Zusätzliche mobile Berichtsvorschau">
+    </div>
+
+    <p class="reporthint">
+      Der PDF-Bericht wird auf Ihrem Gerät erstellt.
+      Auf Smartphones können Sie ihn über
+      „PDF anzeigen“ in der PDF-Ansicht öffnen;
+      Speichern ist freiwillig.
+    </p>
+  </div>
 </section>
 </div>
 
-<aside class="sidebar" aria-label="Hinweise zum Selbstcheck">
-<div class="sidebox">
-<div class="side-title">
-<span class="watericon" aria-hidden="true">💧</span>
-<h3>Warum ist Trinkwasservorsorge wichtig?</h3>
-</div>
-<p>Bei einem Stromausfall, technischen Defekten oder Verunreinigungen kann die öffentliche Wasserversorgung zeitweise ausfallen.</p>
-<p>Finden Sie heraus, ob Ihre Versorgung für den gewünschten Vorsorgezeitraum ausreichend abgesichert ist und welche Verbesserungen sinnvoll wären.</p>
-<ul>
-<li><span class="tick">✓</span>Vorhandene Ressourcen erkennen</li>
-<li><span class="tick">✓</span>Versorgungslücken verstehen</li>
-<li><span class="tick">✓</span>Konkrete Verbesserungen planen</li>
-</ul>
-</div>
-<div class="sidebox tip">
-<div class="side-title">
-<span class="tip-icon" aria-hidden="true">💡</span>
-<h3>Gut zu wissen</h3>
-</div>
-<p>Die Berechnung orientiert sich an der Empfehlung des Österreichischen Zivilschutzverbandes: <strong>mindestens 2 Liter Trinkwasser pro Person und Tag.</strong> Für Kochen, Hygiene, besondere Bedürfnisse und bei hohen Temperaturen ist zusätzliches Wasser erforderlich.</p>
-<p class="fine">Bei einem Brunnen oder einer eigenen Quelle ist eine bestätigte Trinkwasserqualität ein großer Vorteil. Bei Regenwasser und Oberflächengewässern ist eine geeignete Aufbereitung besonders wichtig.</p>
-</div>
+<aside>
+  <div class="side">
+    <h3>💧 Warum Trinkwasservorsorge?</h3>
+    <p>
+      Bei einem Stromausfall, Leitungsdefekt oder
+      einer Verunreinigung kann die gewohnte
+      Versorgung ausfallen. Dieser Selbstcheck
+      erkennt Reserven und mögliche Versorgungslücken.
+    </p>
+    <ul>
+      <li>Wasservorrat berechnen</li>
+      <li>Zusätzliche Quellen bewerten</li>
+      <li>Filter und Aufbereitung beurteilen</li>
+      <li>Individuelle PDF-Empfehlungen erhalten</li>
+    </ul>
+  </div>
+
+  <div class="side">
+    <h3>💡 Gut zu wissen</h3>
+    <p>
+      Für diesen Selbstcheck kalkulieren wir mit
+      mindestens <strong>2 Litern Trinkwasser pro
+      Person und Tag</strong>. Wasser für Kochen,
+      Hygiene und besondere Bedürfnisse kommt hinzu.
+    </p>
+    <p>
+      Die Auswertung ist eine Vorsorgeeinschätzung,
+      keine Laboruntersuchung.
+    </p>
+  </div>
 </aside>
 </main>
 
 <footer class="foot">
-KRISENFEST.help · Kostenloser Vorsorge-Selbstcheck · Technische Testversion – keine Prüfung der Trinkwasserqualität
+  KRISENFEST.help · Kostenloser Selbstcheck ·
+  Datenverarbeitung ausschließlich im Browser ·
+  Programmstand 28
 </footer>
 
 <script>
 "use strict";
 
 const $=id=>document.getElementById(id);
-const val=id=>$(id).value;
-const yes=id=>val(id)==="ja";
-const checked=id=>$(id).checked;
+const v=id=>$(id).value;
+const ja=id=>v(id)==="ja";
+const ch=id=>$(id).checked;
 
-const kinds={
-  well:"Brunnen",
-  spring:"Eigene Quelle",
-  rain:"Regenwasser / Zisterne",
-  surface:"Bach, Fluss oder See"
+const NUM=n=>Number(n.toFixed(1)).toLocaleString(
+  "de-AT",{maximumFractionDigits:1}
+);
+
+const PROFILE={
+  "Katadyn Pocket":[
+    "micro",
+    "Robuster und reinigbarer 0,2-µm-Keramikfilter. "+
+    "Er reduziert Bakterien und Protozoen, nicht "+
+    "nachweislich Viren. Hohe nominelle Lebensdauer."
+  ],
+  "Katadyn BeFree":[
+    "micro",
+    "0,1-µm-Hohlfaser-Mikrofilter gegen Bakterien "+
+    "und Protozoen; kein ausgewiesener Virenschutz."
+  ],
+  "Sawyer MINI":[
+    "micro",
+    "0,1-µm-Mikrofilter gegen Bakterien und Protozoen; "+
+    "kein ausgewiesener Virenschutz."
+  ],
+  "Sawyer Squeeze":[
+    "micro",
+    "0,1-µm-Mikrofilter gegen Bakterien und Protozoen; "+
+    "kein ausgewiesener Virenschutz."
+  ],
+  "LifeStraw Peak Series Straw":[
+    "micro",
+    "Mikrofilter gegen Bakterien und Protozoen. "+
+    "Nicht mit einem virenreduzierenden Purifier verwechseln."
+  ],
+  "LifeStraw Peak Series Gravity Filter 8L":[
+    "micro",
+    "Schwerkraft-Mikrofilter gegen Bakterien und "+
+    "Protozoen; keine ausgewiesene Virenreduktion. "+
+    "Nicht identisch mit dem Gravity Purifier."
+  ],
+  "LifeStraw Peak Series Gravity Purifier 8L":[
+    "purifier",
+    "0,02-µm-Ultrafiltrationssystem mit laut Hersteller "+
+    "99,99 % Virenreduktion sowie Reduktion von "+
+    "Bakterien und Protozoen. 8-Liter-Schwerkraftsystem, "+
+    "stromunabhängig."
+  ],
+  "MSR Guardian Gravity Purifier 10L":[
+    "purifier",
+    "10-Liter-Schwerkraft-Wasserreiniger mit "+
+    "ausgewiesener Viren-, Bakterien- und "+
+    "Protozoenreduktion; laut Hersteller nach "+
+    "NSF P248 geprüft."
+  ],
+  "MSR Guardian Purifier (Handpumpe)":[
+    "purifier",
+    "Robuster Wasserreiniger mit Handpumpe und "+
+    "ausgewiesener Reduktion von Viren, Bakterien "+
+    "und Protozoen; benötigt keinen Netzstrom."
+  ],
+  "GRAYL GeoPress":[
+    "purifier",
+    "Mobiler Press-Wasserreiniger mit ausgewiesener "+
+    "Reduktion von Viren, Bakterien und Protozoen; "+
+    "Kartuschenkapazität etwa 250 Liter. Aktivkohle "+
+    "reduziert nur bestimmte chemische Stoffe."
+  ]
 };
 
-/*
-Produktspezifische Einordnung:
-micro = Mikrofilter ohne ausgewiesene Virenentfernung
-purifier = Wasserreiniger mit ausgewiesener Virenreduktion
-unknown = Schutzwirkung des Modells nicht belegt
-*/
-const filterProfiles={
-  "Katadyn Pocket":{
-    type:"micro",
-    detail:"Robuster, mehrfach reinigbarer 0,2-µm-Keramikfilter. Laut Katadyn wirksam gegen Bakterien, Protozoen und Sedimente; bis zu 50.000 Liter abhängig vom Wasser. Keine ausgewiesene Virenentfernung."
-  },
-  "Katadyn BeFree":{
-    type:"micro",
-    detail:"Kompakter 0,1-µm-Hohlfaserfilter gegen Bakterien und Protozoen; keine ausgewiesene Virenentfernung."
-  },
-  "Sawyer MINI":{
-    type:"micro",
-    detail:"0,1-µm-Mikrofilter gegen Bakterien und Protozoen; keine ausgewiesene Virenentfernung."
-  },
-  "Sawyer Squeeze":{
-    type:"micro",
-    detail:"0,1-µm-Mikrofilter gegen Bakterien und Protozoen; keine ausgewiesene Virenentfernung."
-  },
-  "LifeStraw Peak Series Straw":{
-    type:"micro",
-    detail:"0,2-µm-Mikrofilter gegen Bakterien und Parasiten. Der gewöhnliche Peak Series Straw entfernt laut LifeStraw keine Viren."
-  },
-  "LifeStraw Peak Series Gravity Filter 8L":{
-    type:"micro",
-    detail:"8-Liter-Schwerkraft-Mikrofilter mit 0,2-µm-Membran gegen Bakterien und Parasiten. Die normale Gravity-Filter-Ausführung besitzt keine ausgewiesene Virenentfernung."
-  },
-  "LifeStraw Peak Series Gravity Purifier 8L":{
-    type:"purifier",
-    detail:"8-Liter-Schwerkraft-Ultrafilter mit 0,02-µm-Membran. Laut LifeStraw Reduktion von Viren um 99,99 %, außerdem Bakterien und Parasiten; bis zu 18.000 Liter Membrankapazität. Er benötigt keinen Strom. Chemische Schadstoffe werden nicht allgemein entfernt."
-  },
-  "MSR Guardian Gravity Purifier 10L":{
-    type:"purifier",
-    detail:"Schwerkraft-Wasserreiniger mit 10-Liter-Behälter, der laut MSR die Anforderungen des Prüfprotokolls NSF P248 erfüllt und neben Bakterien und Protozoen auch Viren um 99,99 % reduziert. Ohne Netzstrom nutzbar. Die Aktivkohle verringert bestimmte Stoffe, macht jedoch nicht jedes chemisch belastete Wasser trinkbar."
-  },
-  "MSR Guardian Purifier (Handpumpe)":{
-    type:"purifier",
-    detail:"Robuster, handbetriebener Wasserreiniger mit selbstreinigender Hohlfasermembran. Laut MSR nach NSF P248 geprüft, mit ausgewiesener Reduktion von Bakterien, Protozoen und Viren. Ohne Netzstrom nutzbar; keine allgemeine Entfernung chemischer Schadstoffe."
-  },
-  "GRAYL GeoPress":{
-    type:"purifier",
-    detail:"Mobiler Press-Wasserreiniger. Laut GRAYL Reduktion von Viren um 99,99 % sowie Bakterien und Parasiten. Aktivkohle kann bestimmte Chemikalien reduzieren, aber nicht alle Schadstoffe. Kartuschenkapazität etwa 250 Liter."
-  }
-};
+const PRODUCT=[
+  [
+    "LifeStraw Peak Series Gravity Purifier 8L",
+    "8-Liter-Schwerkraftreiniger mit ausgewiesener "+
+    "Virenreduktion. Für größere Mengen und Haushalte; "+
+    "mit dem normalen Gravity Filter 8L nicht verwechseln.",
+    "https://eu.lifestraw.com/de-de/products/lifestraw-peak-series-gravity-purifier"
+  ],
+  [
+    "MSR Guardian Gravity Purifier 10L",
+    "Stromunabhängiger Wasserreiniger mit ausgewiesener "+
+    "Reduktion von Bakterien, Viren und Protozoen; "+
+    "alternative Schwerkraftlösung.",
+    "https://cascadedesigns.com/de-eu/products/guardian-gravity-purifier"
+  ],
+  [
+    "MSR Guardian Purifier (Handpumpe)",
+    "Robuste handbetriebene Alternative mit "+
+    "Virenreduktion und schneller Wasserentnahme.",
+    "https://cascadedesigns.com/de-eu/products/guardian-purifier"
+  ],
+  [
+    "GRAYL GeoPress",
+    "Mobiler Press-Wasserreiniger mit Virenreduktion, "+
+    "aber kleiner Kartuschenkapazität – eher persönliche "+
+    "Ergänzung als Dauerlösung für eine Familie.",
+    "https://grayl.com/pages/geopress-tech-specs"
+  ]
+];
 
-function updateArt(){
-  const labels={
-    "Brunnen":"Wie weit ist der Brunnen entfernt?",
-    "Eigene Quelle":"Wie weit ist die Quelle entfernt?",
-    "Regenwasser / Zisterne":"Wie weit ist die Zisterne entfernt?",
-    "Bach, Fluss oder See":"Wie weit ist das Gewässer entfernt?"
-  };
-  $("entfernungLabel").textContent=
-    labels[val("art")]||"Wie weit ist die Wasserquelle entfernt?";
-  $("stromBox").hidden=!(yes("quelle")&&val("art")===kinds.well);
-  $("regenBox").hidden=!(yes("quelle")&&val("art")===kinds.rain);
-  $("ersatzBox").hidden=!(
-    yes("quelle")&&val("art")===kinds.well&&yes("strom")
-  );
-}
+let pdfURL=null;
 
-function clearOne(el){
-  el.classList.remove("invalid");
-  el.removeAttribute("aria-invalid");
-  el.style.removeProperty("border");
-  el.style.removeProperty("background-color");
-  const note=el.parentElement?.querySelector(".validation-note");
-  if(note)note.remove();
-}
-
-function clearInvalid(){
-  for(const el of document.querySelectorAll(".invalid"))clearOne(el);
-  for(const note of document.querySelectorAll(".validation-note"))note.remove();
-}
-
-function updateModel(){
-  $("anderesModell").hidden=val("modell")!=="Anderes Modell";
-  if($("anderesModell").hidden)clearOne($("modellAnderes"));
-}
-
-function refresh(){
-  $("quelleDetails").hidden=!yes("quelle");
-  $("transportBox").hidden=!(yes("quelle")&&yes("behaelter"));
-  $("filterBox").hidden=!checked("m_filter");
-  updateArt();
+function clearReport(){
   $("bericht").hidden=true;
-  clearPdf();
-  $("error").hidden=true;
-}
+  $("pdfRahmen").removeAttribute("src");
+  $("mobilVorschau").replaceChildren();
 
-$("art").addEventListener("change",refresh);
-$("modell").addEventListener("change",updateModel);
-
-for(const id of ["quelle","strom","behaelter","m_filter"]){
-  $(id).addEventListener("change",refresh);
-}
-
-for(const el of document.querySelectorAll("input,select")){
-  for(const evt of ["input","change"]){
-    el.addEventListener(evt,()=>{
-      clearOne(el);
-      if(el.type==="checkbox")clearOne($("aufbereitungGruppe"));
-      $("bericht").hidden=true;
-      clearPdf();
-    });
+  if(pdfURL){
+    URL.revokeObjectURL(pdfURL);
+    pdfURL=null;
   }
 }
 
-/*
-HAUPTAUSWERTUNG
-Berechnet Vorrat, Reichweite, Wasserqualität, Nutzbarkeit
-der zusätzlichen Wasserquelle und Aufbereitung.
-*/
-function run(){
-  clearInvalid();
+function visibility(){
+  const source=ja("quelle");
+  const well=source&&v("art")==="Brunnen";
 
-  const people=Number(val("personen"));
-  const days=Number(val("tage"));
-  const stored=Number(val("flaschen"));
-  const source=yes("quelle");
-  const kind=source?val("art"):"";
+  $("quelldetails").hidden=!source;
+  $("regenbox").hidden=!(
+    source&&v("art")==="Regenwasser / Zisterne"
+  );
+  $("strombox").hidden=!well;
+  $("ersatzbox").hidden=!(well&&ja("strom"));
+  $("behaelterbox").hidden=!(source&&ja("behaelter"));
+  $("filterbox").hidden=!ch("m_filter");
+  $("anderesbox").hidden=!(
+    ch("m_filter")&&v("modell")==="Anderes Modell"
+  );
 
-  const well=kind===kinds.well;
-  const spring=kind===kinds.spring;
-  const rain=kind===kinds.rain;
-  const surface=kind===kinds.surface;
-  const natural=well||spring;
+  clearReport();
+}
 
-  const quality=source?val("qualitaet"):"";
-  const potable=quality==="ja";
+for(const e of document.querySelectorAll("input,select")){
+  e.addEventListener("input",()=>{
+    e.classList.remove("invalid");
+    clearReport();
+  });
+  e.addEventListener("change",visibility);
+}
 
-  const methods=[
-    ["m_filter","Wasserfilter"],
-    ["kochen","Abkochen"],
-    ["chemie","Trinkwasserdesinfektionsmittel"]
-  ].filter(pair=>checked(pair[0])).map(pair=>pair[1]);
-
-  const hasMethod=methods.length>0;
-
-  const filterName=checked("m_filter")
-    ?(val("modell")==="Anderes Modell"
-      ?val("modellAnderes").trim()
-      :val("modell"))
-    :"";
-
-  const filterProfile=checked("m_filter")
-    ?(filterProfiles[val("modell")]||{
-      type:"unknown",
-      detail:"Für dieses Modell ist die tatsächliche Schutzwirkung hier nicht belegt. Prüfen Sie das technische Datenblatt, insbesondere die ausgewiesene Virenreduktion."
-    })
-    :null;
-
-  const filterType=filterProfile?filterProfile.type:"none";
-  const microOnly=filterType==="micro";
-  const hasVirusPurifier=filterType==="purifier";
-
-  /* Pflichtangaben prüfen */
-  const required=[];
-  const requireField=(id,valid)=>{
-    if(!valid)required.push(id);
+function fieldsOK(){
+  const need=[];
+  const req=(id,cond)=>{
+    if(!cond)need.push(id);
   };
 
-  requireField(
+  const n=Number(v("personen"));
+  const days=Number(v("tage"));
+  const b=Number(v("flaschen"));
+
+  req(
     "personen",
-    val("personen")!==""&&
-    Number.isInteger(people)&&people>=1&&people<=30
+    v("personen")!==""&&
+    Number.isInteger(n)&&n>=1&&n<=30
   );
 
-  requireField("tage",[7,14,30,60].includes(days));
+  req("tage",[7,14,30,60].includes(days));
 
-  requireField(
+  req(
     "flaschen",
-    val("flaschen")!==""&&
-    Number.isFinite(stored)&&
-    stored>=0&&stored<=1000000
+    v("flaschen")!==""&&
+    Number.isFinite(b)&&b>=0&&b<=1000000
   );
 
-  requireField("quelle",val("quelle")!=="");
+  req("quelle",v("quelle")!=="");
 
-  if(source){
-    for(const id of ["art","entfernung","qualitaet","behaelter"]){
-      requireField(id,val(id)!=="");
+  if(ja("quelle")){
+    for(const id of [
+      "art","entfernung","qualitaet","behaelter"
+    ]){
+      req(id,v(id)!=="");
     }
 
-    if(well){
-      requireField("strom",val("strom")!=="");
-      if(yes("strom")){
-        requireField("ersatz",val("ersatz")!=="");
+    if(v("art")==="Brunnen"){
+      req("strom",v("strom")!=="");
+      if(ja("strom")){
+        req("ersatz",v("ersatz")!=="");
       }
     }
 
-    if(rain&&val("regenmenge")!==""){
-      requireField(
+    if(
+      v("art")==="Regenwasser / Zisterne"&&
+      v("regenmenge")!==""
+    ){
+      req(
         "regenmenge",
-        Number.isFinite(Number(val("regenmenge")))&&
-        Number(val("regenmenge"))>=0&&
-        Number(val("regenmenge"))<=1000000
+        Number(v("regenmenge"))>=0&&
+        Number.isFinite(Number(v("regenmenge")))
       );
     }
 
-    if(yes("behaelter")){
-      requireField(
+    if(ja("behaelter")){
+      req(
         "liter",
-        val("liter")!==""&&
-        Number.isFinite(Number(val("liter")))&&
-        Number(val("liter"))>0
+        v("liter")!==""&&Number(v("liter"))>0
       );
-      requireField("tragbar",val("tragbar")!=="");
+      req("tragbar",v("tragbar")!=="");
     }
   }
 
-  if(checked("m_filter")){
-    requireField("modell",val("modell")!=="");
+  if(ch("m_filter")){
+    req("modell",v("modell")!=="");
+    req("einsatz",v("einsatz")!=="");
 
-    if(val("modell")==="Anderes Modell"){
-      requireField(
+    if(v("modell")==="Anderes Modell"){
+      req(
         "modellAnderes",
-        val("modellAnderes").trim()!==""
+        v("modellAnderes").trim()!==""
       );
     }
-
-    requireField("einsatz",val("einsatz")!=="");
   }
 
-  if(required.length){
-    for(const id of required){
-      const field=$(id);
-      field.classList.add("invalid");
+  document.querySelectorAll(".invalid").forEach(
+    e=>e.classList.remove("invalid")
+  );
 
-      if(field.tagName!=="FIELDSET"){
-        field.setAttribute("aria-invalid","true");
+  need.forEach(id=>$(id).classList.add("invalid"));
 
-        const note=document.createElement("small");
-        note.className="validation-note";
-        note.textContent="Bitte diese Angabe ergänzen.";
-        field.insertAdjacentElement("afterend",note);
-      }
-    }
+  $("fehler").hidden=!need.length;
 
-    $("error").textContent=
+  if(need.length){
+    $("fehler").textContent=
       "Bitte ergänzen Sie die rot markierten Angaben.";
-    $("error").hidden=false;
 
-    const first=$(required[0]);
-    first.scrollIntoView({
+    $(need[0]).scrollIntoView({
       behavior:"smooth",
       block:"center"
     });
 
-    if(first.matches("input,select")){
-      first.focus({preventScroll:true});
-    }
-
-    return;
+    return false;
   }
 
-  /* Mengenberechnung */
-  const need=people*2;
-  const total=need*days;
-  const bottleGap=Math.max(0,total-stored);
-  const bottleDays=stored/need;
-  const bottleCoverage=stored/total;
+  return true;
+}
 
-  const powerOk=!well||!yes("strom")||yes("ersatz");
-  const wellPowerGap=well&&!powerOk;
+/* Fachliche Auswertung und Berichtsaufbau */
+function analyse(){
+  const n=Number(v("personen"));
+  const days=Number(v("tage"));
+  const bottle=Number(v("flaschen"));
 
-  const hasContainers=source&&yes("behaelter");
-  const capacity=hasContainers?Number(val("liter")):0;
+  const daily=n*2;
+  const need=daily*days;
+  const gap=Math.max(0,need-bottle);
 
-  const transportOk=
-    hasContainers&&yes("tragbar")&&capacity>0;
+  const source=ja("quelle");
+  const kind=source?v("art"):"";
 
-  const ready=source&&powerOk&&transportOk;
+  const well=kind==="Brunnen";
+  const spring=kind==="Eigene Quelle";
+  const rain=kind==="Regenwasser / Zisterne";
+  const surface=kind==="Bach, Fluss oder See";
 
-  const rainKnown=rain&&val("regenmenge")!=="";
-  const rainStored=rainKnown?Number(val("regenmenge")):0;
-  const combined=stored+rainStored;
+  const confirmed=v("qualitaet")==="ja";
+  const powerGap=well&&ja("strom")&&!ja("ersatz");
 
-  const remainingRainGap=rainKnown
-    ?Math.max(0,total-combined)
-    :null;
+  const containers=source&&ja("behaelter");
+  const capacity=containers?Number(v("liter")):0;
+  const transport=containers&&ja("tragbar");
+  const accessible=source&&!powerGap&&transport;
 
-  const confirmedSupply=natural&&potable&&ready;
+  const rainKnown=rain&&v("regenmenge")!=="";
+  const rainAmount=rainKnown?
+    Number(v("regenmenge")):0;
 
-  /* Gesamtampel */
+  const filter=ch("m_filter");
+
+  const model=filter?
+    (
+      v("modell")==="Anderes Modell"?
+      v("modellAnderes").trim():
+      v("modell")
+    ):"";
+
+  const profile=PROFILE[v("modell")]||[
+    "unknown",
+    "Für dieses Modell liegt hier keine nachgewiesene "+
+    "Schutzwirkung vor. Beachten Sie die Angaben "+
+    "des Herstellers."
+  ];
+
+  const purifier=filter&&profile[0]==="purifier";
+  const micro=filter&&profile[0]==="micro";
+
+  const boil=ch("kochen");
+  const chemical=ch("chemie");
+
+  const method=purifier||boil||(micro&&boil);
+  const bottleRatio=bottle/need;
+
   let status="risk";
 
-  if(bottleGap===0||confirmedSupply){
+  if(
+    bottle>=need||
+    (
+      source&&(spring||well)&&
+      confirmed&&accessible
+    )
+  ){
     status="good";
-  }else if(rain&&rainKnown){
-    if(
-      bottleCoverage>=0.75||
-      (ready&&(potable||hasMethod)&&combined/total>=0.75)
-    ){
-      status="attention";
-    }
   }else if(
-    bottleCoverage>=0.75||
-    (source&&ready&&(potable||hasMethod))||
-    (natural&&potable&&powerOk)||
-    (natural&&hasMethod&&powerOk)
+    bottleRatio>=0.75||
+    (accessible&&(confirmed||method))||
+    (
+      rainKnown&&accessible&&
+      rainAmount+bottle>=need&&method
+    )
   ){
     status="attention";
   }
 
-  const number=n=>
-    Number(n.toFixed(1)).toLocaleString("de-AT",{
-      maximumFractionDigits:1
-    });
-
-  const noun=(n,singular,plural)=>
-    number(n)+" "+(
-      Math.abs(n-1)<.00001?singular:plural
-    );
-
-  const period=
-    days===30?"einen Monat lang":
-    days===60?"zwei Monate lang":
-    noun(days,"Tag","Tage")+" lang";
-
-  const peopleWord=people===1?"Person":"Personen";
-
-  const where=
-    val("entfernung")==="Am Haus"?"direkt am Haus":
-    val("entfernung")==="Bis 500 m"?
-      "in bis zu 500 Metern Entfernung":
-      "in größerer Entfernung";
-
-  const inner=$("resultInner");
-  inner.replaceChildren();
-
-  function paragraph(parent,text,cls="result-paragraph"){
-    const p=document.createElement("p");
-    p.className=cls;
-    p.textContent=text;
-    parent.append(p);
-    return p;
-  }
-
-  /* Persönliche Einschätzung */
-  const banner=document.createElement("div");
-  banner.className="status "+status;
-
-  const title=document.createElement("h3");
-  title.className="result-heading";
-
-  if(bottleGap===0){
-    title.textContent=
-      "Ihr Trinkwasservorrat ist für den gewählten Zeitraum ausreichend!";
-  }else if(confirmedSupply){
-    title.textContent=
-      "Ihre Trinkwasserversorgung ist durch die geprüfte Wasserquelle gut abgesichert!";
-  }else if(
-    rain&&rainKnown&&combined>=total&&
-    ready&&(potable||hasMethod)
-  ){
-    title.textContent=
-      "Ihre Wasserreserve reicht mengenmäßig aus – die Trinkwasserqualität ist noch abzusichern!";
-  }else if(wellPowerGap&&bottleGap>0){
-    title.textContent=status==="risk"
-      ?"Ihr Brunnen ist eine wertvolle Ressource – ohne Ersatzstrom bleibt eine deutliche Versorgungslücke!"
-      :"Ihr Brunnen ist eine wertvolle Ressource – die Ersatzstromversorgung fehlt noch!";
-  }else if(status==="attention"){
-    title.textContent=
-      "Ihre Wasservorsorge ist teilweise abgesichert – einige Punkte bleiben offen!";
-  }else{
-    title.textContent=
-      "Ihre Trinkwasserversorgung weist noch deutliche Lücken auf!";
-  }
-
-  banner.append(title);
-
-  paragraph(
-    banner,
-    `Sie möchten für ${people} ${peopleWord} ${period} vorsorgen. `+
-    `Bei 2 Litern Trinkwasser pro Person und Tag benötigen Sie `+
-    `${number(need)} Liter täglich, insgesamt ${number(total)} Liter.`
-  );
-
-  paragraph(
-    banner,
-    `Sie haben ${number(stored)} Liter originalverschlossenes Trinkwasser `+
-    `vorrätig. Das reicht rechnerisch für ${noun(bottleDays,"Tag","Tage")}.`+
-    (bottleGap>0
-      ?` Allein beim abgefüllten Trinkwasser fehlen damit ${number(bottleGap)} Liter.`
-      :" Der gewählte Zeitraum ist damit bereits vollständig abgedeckt.")
-  );
-
-  /* Zusätzliche Wasserquelle */
-  if(source){
-    if(rain){
-      if(rainKnown){
-        paragraph(
-          banner,
-          `Ihre Regenwassertonne oder Zisterne ${where} enthält zusätzlich etwa `+
-          `${number(rainStored)} Liter. Zusammen verfügen Sie damit über `+
-          `${number(combined)} Liter Wasser. `+
-          (remainingRainGap===0
-            ?"Die benötigte Wassermenge ist damit rechnerisch vorhanden."
-            :`Zur gewählten Wassermenge fehlen trotz Zisterne noch ${number(remainingRainGap)} Liter.`)+
-          " Der Regenwasservorrat ist jedoch nicht automatisch Trinkwasser."
-        );
-      }else{
-        paragraph(
-          banner,
-          `Sie haben außerdem eine Regenwassertonne oder Zisterne ${where}. `+
-          `Die gespeicherte Menge ist nicht bekannt; daher lässt sich ihr `+
-          `Beitrag zur Wassermenge noch nicht berechnen.`
-        );
-      }
-    }else if(spring){
-      paragraph(
-        banner,
-        `Sie haben außerdem eine eigene Quelle ${where}. Das ist `+
-        `für Ihre Krisenvorsorge ein wertvoller Vorteil: Neben Ihrem `+
-        `abgefüllten Vorrat haben Sie Zugang zu einer zusätzlichen, `+
-        `laufenden Wasserquelle. Ob und wie Sie dieses Wasser zum `+
-        `Trinken nutzen können, hängt von der Wasserqualität, der `+
-        `gegebenenfalls nötigen Aufbereitung und der Entnahme ab.`
-      );
-    }else if(well){
-      if(wellPowerGap){
-        paragraph(
-          banner,
-          `Sie verfügen zusätzlich über einen Brunnen ${where}. `+
-          `Das ist eine wertvolle vorhandene Wasserressource, `+
-          `die Ihre Krisenvorsorge künftig erheblich stärken kann. `+
-          `Der Brunnen benötigt allerdings Netzstrom, und eine `+
-          `stromunabhängige Entnahme oder Ersatzstromversorgung `+
-          `ist laut Ihren Angaben nicht vorhanden. Bei einem `+
-          `Stromausfall können Sie daher derzeit kein Wasser `+
-          `aus diesem Brunnen gewinnen. `+
-          (bottleGap>0
-            ?`Die fehlenden ${number(bottleGap)} Liter Trinkwasser `+
-             `werden dadurch derzeit nicht abgedeckt.`
-            :`Ihr bereits ausreichender abgefüllter Trinkwasservorrat `+
-             `bleibt davon unberührt.`)+
-          (hasMethod
-            ?" Ihre vorhandene Wasseraufbereitung ist wertvoll, kann eine fehlende Wasserentnahme jedoch nicht ersetzen."
-            :"")
-        );
-      }else if(yes("strom")){
-        paragraph(
-          banner,
-          `Sie verfügen zusätzlich über einen Brunnen ${where}. `+
-          `Das ist ein wichtiger Vorteil. Für die elektrische `+
-          `Wasserentnahme ist nach Ihren Angaben eine Ersatzlösung `+
-          `vorhanden. Damit kann der Brunnen auch bei einem `+
-          `Stromausfall nutzbar bleiben; Trinkwasserqualität und `+
-          `praktische Einsatzbereitschaft sind gesondert zu beurteilen.`
-        );
-      }else{
-        paragraph(
-          banner,
-          `Sie verfügen zusätzlich über einen Brunnen ${where}. `+
-          `Das ist ein wichtiger Vorteil Ihrer Krisenvorsorge. `+
-          `Die Entnahme ist laut Ihren Angaben nicht vom Netzstrom `+
-          `abhängig. Ob das Wasser als Trinkwasser geeignet ist, `+
-          `hängt von der geprüften Qualität ab.`
-        );
-      }
-    }else if(surface){
-      paragraph(
-        banner,
-        `Sie haben zusätzlich Zugang zu einem Bach, Fluss oder See ${where}. `+
-        `Das ist eine weitere Wasserquelle; ob das Wasser zum Trinken `+
-        `geeignet gemacht werden kann, hängt insbesondere von seiner `+
-        `Belastung und den verfügbaren Aufbereitungsverfahren ab.`
-      );
-    }
-
-    /* Trinkwasserqualität */
-    if(potable){
-      paragraph(
-        banner,
-        natural
-          ?"Laut Ihren Angaben wurde die Trinkwasserqualität dieser Quelle geprüft und bestätigt. Das ist für Ihre Vorsorge ein wesentlicher Vorteil."
-          :"Laut Ihren Angaben wurde Trinkwasserqualität bestätigt. Bei Regen- und Oberflächenwasser kann sich die Qualität später jedoch verändern; die Prüfung ist deshalb nicht für jede künftige Entnahme eine Garantie."
-      );
-    }else if(quality==="offen"){
-      paragraph(
-        banner,
-        "Das Wasser wurde untersucht, aber nicht als Trinkwasser bestätigt. Es ist deshalb derzeit nicht als gesichertes Trinkwasser anzurechnen."
-      );
-    }else if(quality==="nein"){
-      paragraph(
-        banner,
-        "Die Trinkwasserqualität dieser Wasserquelle wurde bisher nicht geprüft. Das bedeutet nicht, dass das Wasser ungeeignet ist; lediglich seine Eignung als Trinkwasser ist noch nicht bestätigt."
-      );
-    }else{
-      paragraph(
-        banner,
-        "Das Ergebnis einer Trinkwasserprüfung ist nicht bekannt. Die Trinkwassereignung bleibt damit offen."
-      );
-    }
-  }
-
-  /* Aufbereitung: alle Methoden einzeln bewerten */
-  if(hasMethod){
-    paragraph(
-      banner,
-      source&&!potable
-        ?`Ein weiterer wichtiger Pluspunkt: Sie haben mit `+
-         `${methods.join(", ")} bereits eine konkrete Möglichkeit, `+
-         `die Wasserqualität zu verbessern. Gerade in einer `+
-         `Versorgungsstörung ist das wesentlich besser, als auf `+
-         `unbehandeltes Wasser angewiesen zu sein.`
-        :`Als zusätzliche Vorsorge verfügen Sie über folgende `+
-         `Aufbereitungsmöglichkeiten: ${methods.join(", ")}. `+
-         `Diese können hilfreich sein, wenn Sie später einmal `+
-         `Wasser ohne bestätigte Trinkwasserqualität nutzen müssen.`
-    );
-
-    if(checked("kochen")){
-      paragraph(
-        banner,
-        "Abkochen: Bei korrekter Durchführung werden krankheitserregende Bakterien, Viren und Parasiten wirksam inaktiviert. Chemische Verunreinigungen werden dadurch nicht entfernt. Für den Krisenfall muss außerdem eine geeignete Kochmöglichkeit zur Verfügung stehen."
-      );
-    }
-
-    if(checked("m_filter")){
-      paragraph(
-        banner,
-        `Ihr Wasserfilter (${filterName}): ${filterProfile.detail}`
-      );
-
-      if(microOnly&&(surface||rain)&&!potable){
-        paragraph(
-          banner,
-          "Bei Regen- und Oberflächenwasser oder möglicher Abwasserbelastung ist die fehlende Virenentfernung besonders zu beachten. "+
-          (checked("kochen")
-            ?"Sie haben auch Abkochen angegeben und damit eine zusätzliche Möglichkeit gegen Viren."
-            :"Eine ergänzende wirksame Behandlung gegen Viren kann hier sinnvoll sein.")
-        );
-      }else if(hasVirusPurifier){
-        paragraph(
-          banner,
-          "Sie besitzen damit bereits ein System mit ausgewiesener Virenreduktion. Bei intaktem Gerät, geeigneter Wasserquelle und korrekter Anwendung ist zusätzliches Abkochen für den mikrobiologischen Schutz normalerweise nicht nötig. "+
-          (checked("kochen")
-            ?"Das zusätzlich vorhandene Abkochen bietet eine zweite, technisch unabhängige Behandlung. Wie groß der zusätzliche Schutz in Ihrem konkreten Fall ist, lässt sich nicht verlässlich in Prozent beziffern."
-            :"Eine Abkochmöglichkeit bleibt als unabhängige Ausweichlösung bei Filterproblemen sinnvoll.")+
-          " Chemische Schadstoffe werden durch diese Verfahren nicht zuverlässig beseitigt."
-        );
-      }
-    }
-
-    if(checked("chemie")){
-      paragraph(
-        banner,
-        "Trinkwasserdesinfektionsmittel: Geeignete Mittel können bei korrekter Anwendung viele Krankheitserreger reduzieren. Die Wirkung hängt vom Wirkstoff, der Wasserbeschaffenheit und den Herstellerangaben ab. Nicht alle Parasiten werden gleichermaßen erfasst; chemische Verunreinigungen werden nicht beseitigt. Achtung: Silberbasierte Mittel wie YACHTICON Aqua Clean ohne Chlor dienen vor allem der Konservierung von bereits trinkbarem Wasser. Sie sind nicht mit einer nachgewiesenen Breitband-Desinfektion ungeprüften Wassers gleichzusetzen."
-      );
-    }
-
-    if(source&&!potable){
-      paragraph(
-        banner,
-        "Welche Belastungen sich mit dem gewählten Verfahren verringern lassen, hängt vom Ausgangswasser ab. Eine Untersuchung kann dabei zusätzliche Sicherheit geben, besonders hinsichtlich möglicher chemischer Verunreinigungen."
-      );
-    }
-  }else if(source&&!potable){
-    paragraph(
-      banner,
-      "Sie haben keine Möglichkeit zur Wasseraufbereitung angegeben. Solange die Trinkwasserqualität Ihrer zusätzlichen Wasserquelle nicht bestätigt ist, fehlt für deren Nutzung als Trinkwasser eine geeignete Aufbereitung. Bis dahin ist abgefülltes oder anderweitig nachweislich sicheres Trinkwasser die verlässlichere Versorgung."
-    );
-  }else if(source&&(rain||surface)){
-    paragraph(
-      banner,
-      "Sie haben keine Möglichkeit zur Wasseraufbereitung angegeben. Obwohl die Trinkwasserqualität bei der Untersuchung bestätigt wurde, kann sie sich bei Regen- und Oberflächenwasser verändern. Eine für die Quelle geeignete Aufbereitung wäre daher eine zusätzliche Absicherung."
-    );
-  }else if(!source&&bottleGap>0){
-    paragraph(
-      banner,
-      "Sie haben keine Wasseraufbereitung angegeben. Wenn Sie den fehlenden Trinkwasservorrat durch originalverschlossenes Wasser ergänzen, ist das nicht erforderlich. Möchten Sie stattdessen Wasser aus einer ungeprüften Quelle nutzen, sollten Sie eine geeignete Aufbereitung einplanen."
-    );
-  }
-
-  /* Behälter und Wassertransport */
-  if(source){
-    if(hasContainers){
-      paragraph(
-        banner,
-        `Für die Wasserentnahme und Aufbewahrung besitzen Sie `+
-        `geeignete, saubere und verschließbare Behälter mit `+
-        `insgesamt ${number(capacity)} Litern Fassungsvermögen. `+
-        `Das ist ein weiterer Pluspunkt für Ihre Vorsorge. `+
-        (yes("tragbar")
-          ?"Die gefüllten Behälter können Sie nach Ihren Angaben auch sicher transportieren."
-          :"Für den sicheren Transport der gefüllten Behälter fehlt allerdings noch eine praktikable Lösung.")
-      );
-    }else{
-      paragraph(
-        banner,
-        "Was Ihnen derzeit noch fehlt, sind geeignete, saubere und verschließbare Wasserbehälter. Sie sind besonders hilfreich, um entnommenes oder aufbereitetes Wasser hygienisch aufzubewahren und gegebenenfalls zu transportieren. Mit solchen Behältern können Sie die bereits vorhandene Vorsorge sinnvoll ergänzen."
-      );
-    }
-  }
-
-  inner.append(banner);
-
-  /* Priorisierte Maßnahmen */
-  const recommendations=document.createElement("div");
-  recommendations.className="result-recommendations";
-
-  const heading=document.createElement("h3");
-  heading.textContent="Ihre nächsten Schritte";
-  recommendations.append(heading);
-
-  let step=0;
-
-  function action(text,kind="measure"){
-    step++;
-
-    const card=document.createElement("article");
-    card.className="step-card "+kind;
-
-    const number=document.createElement("span");
-    number.className="step-number";
-    number.textContent=String(step);
-    number.setAttribute("aria-hidden","true");
-
-    const content=document.createElement("div");
-    content.className="step-content";
-
-    const label=document.createElement("p");
-    label.className="step-label";
-    label.textContent=
-      kind==="priority"?"Vorrangige Maßnahme":
-      kind==="strength"?"Vorhandene Stärke sinnvoll nutzen":
-      "Empfohlene Verbesserung";
-
-    const description=document.createElement("p");
-    description.className="step-text";
-    description.textContent=text;
-
-    content.append(label,description);
-    card.append(number,content);
-    recommendations.append(card);
-  }
-
-  if(source&&wellPowerGap&&bottleGap>0){
-    action(
-      "Sichern Sie vorrangig die Wasserentnahme aus Ihrem Brunnen für einen Stromausfall ab – etwa mit einer geeigneten stromunabhängigen Entnahmelösung oder einer verlässlich verfügbaren Ersatzstromversorgung. Der Brunnen selbst ist bereits vorhanden und damit eine gute Grundlage; erst mit gesicherter Entnahme kann er die Versorgungslücke verkleinern.",
-      "priority"
-    );
-  }
-
-  if(source&&!potable){
-    if(hasMethod){
-      action(
-        "Ihr vorhandenes Aufbereitungsverfahren ist eine gute Ausgangsbasis. Prüfen Sie die Herstellerangaben zur Schutzwirkung und lassen Sie die Trinkwasserqualität nach Möglichkeit untersuchen. Bei konkretem Verdacht auf chemische Belastung nutzen Sie eine andere nachweislich geeignete Trinkwasserquelle.",
-        "strength"
-      );
-    }else{
-      action(
-        "Prüfen Sie die Trinkwassereignung und ergänzen Sie eine für diese Quelle geeignete Aufbereitung. Bis dahin sollten Sie zusätzliches sicheres Trinkwasser vorhalten.",
-        "priority"
-      );
-    }
-  }else if(source&&(rain||surface)){
-    action(
-      hasMethod
-        ?"Behalten Sie die Wasserqualität im Blick: Bei Regen- und Oberflächenwasser können sich Belastungen verändern. Prüfen Sie deshalb, ob Ihre gewählten Aufbereitungsmethoden auch unter veränderten Bedingungen geeignet sind."
-        :"Behalten Sie die Wasserqualität im Blick: Bei Regen- und Oberflächenwasser kann sich die Belastung verändern. Ergänzen Sie möglichst eine geeignete Aufbereitung als zusätzliche Absicherung."
-    );
-  }
-
-  if(source&&bottleGap>0&&microOnly&&!checked("kochen")){
-    action(
-      "Behalten Sie Ihren vorhandenen "+filterName+
-      " als wertvollen Schutz gegen Bakterien und Parasiten. Für Wasser mit möglicher Virenbelastung können Sie das System um einen Wasserreiniger mit geprüfter Virenreduktion ergänzen oder eine geeignete zusätzliche Behandlung vorsehen."
-    );
-  }else if(source&&bottleGap>0&&filterType==="unknown"){
-    action(
-      "Klären Sie die genaue Modellbezeichnung und die nachgewiesene Filterleistung. Aus der allgemeinen Bezeichnung 'Wasserfilter' lässt sich eine Virenentfernung nicht ableiten."
-    );
-  }else if(source&&bottleGap>0&&hasVirusPurifier){
-    action(
-      "Nutzen Sie die bereits vorhandene Virenreduktion Ihres "+
-      filterName+
-      ". Überprüfen Sie Wartung, Kartuschen- oder Membranzustand und die ausreichende Kapazität für den Haushalt.",
-      "strength"
-    );
-  }
-
-  if(source&&!hasContainers){
-    action(
-      "Ergänzen Sie geeignete, saubere und verschließbare Wasserbehälter, damit Sie Wasser aus der Quelle hygienisch aufbewahren und bei Bedarf transportieren können. Bei direkter Versorgung ins Haus prüfen Sie stattdessen, ob zusätzliche Behälter überhaupt benötigt werden."
-    );
-  }else if(source&&!yes("tragbar")){
-    action(
-      "Verbessern Sie den Wassertransport durch leichtere Behälter oder eine passende Transporthilfe."
-    );
-  }else if(source&&capacity<need){
-    action(
-      `Ihre Behälter fassen ${number(capacity)} Liter bei `+
-      `${number(need)} Litern Tagesbedarf. Klären Sie, ob mehrmaliges Befüllen und Transportieren praktikabel ist.`
-    );
-  }
-
-  if(source&&val("entfernung")==="Weiter entfernt"){
-    action(
-      "Erproben Sie den Weg zu Ihrer Wasserquelle und den Rücktransport gefüllter Behälter."
-    );
-  }
-
-  if(rain&&!rainKnown){
-    action(
-      "Ermitteln Sie den aktuellen Füllstand der Zisterne, um die verfügbare Reserve besser beurteilen zu können."
-    );
-  }else if(rain&&rainKnown&&rainStored<bottleGap){
-    action(
-      `Die gespeicherte Regenwassermenge reicht allein nicht für die verbleibenden ${number(bottleGap)} Liter. Berücksichtigen Sie die noch offenen ${number(remainingRainGap)} Liter in Ihrer Vorratsplanung.`
-    );
-  }
-
-  if(checked("m_filter")&&!yes("einsatz")){
-    action(
-      "Überprüfen Sie vor der Nutzung die Einsatzbereitschaft Ihres Wasserfilters und die Herstellervorgaben."
-    );
-  }
-
-  if(checked("kochen")&&source&&!potable){
-    action(
-      "Sorgen Sie dafür, dass das Abkochen im Notfall auch ohne reguläre Stromversorgung möglich bleibt."
-    );
-  }
-
-  if(bottleGap>0){
-    action(
-      `Als unabhängige Reserve können Sie Ihren Vorrat an originalverschlossenem Trinkwasser um ${number(bottleGap)} Liter ergänzen. Das ist besonders hilfreich, falls die zusätzliche Quelle zeitweise nicht genutzt werden kann.`,
-      !source?"priority":"measure"
-    );
-  }else if(!source){
-    action(
-      "Kontrollieren Sie Ihre Vorräte regelmäßig und lagern Sie das Wasser nach Herstellerangaben."
-    );
-  }
-
-  if(step===0){
-    action(
-      "Kontrollieren Sie regelmäßig Bestand, Trinkwasserqualität und praktische Nutzbarkeit Ihrer Versorgung."
-    );
-  }
-
-  inner.append(recommendations);
-
-  /*
-  Produktempfehlungen nur bei relevantem Bedarf.
-  Keine unnötige Empfehlung eines weiteren Virenreinigers,
-  wenn bereits ein geeigneter Purifier vorhanden ist.
-  */
-  const needsExtraTreatment=
-    source&&bottleGap>0&&!potable;
-
-  const recommendPurifier=
-    needsExtraTreatment&&
-    !hasVirusPurifier&&
-    !checked("kochen")&&
-    (
-      microOnly||
-      filterType==="none"||
-      filterType==="unknown"
-    );
-
-  const graylCapacityConcern=
-    needsExtraTreatment&&
-    val("modell")==="GRAYL GeoPress"&&
-    bottleGap>250;
-
-  if(recommendPurifier||graylCapacityConcern){
-    const products=document.createElement("section");
-    products.className="product-guidance";
-
-    const h=document.createElement("h3");
-    h.textContent="Passende Filtertechnik für Ihre Vorsorge";
-    products.append(h);
-
-    paragraph(
-      products,
-      wellPowerGap
-        ?"Zuerst muss die Brunnenentnahme bei Stromausfall funktionieren. Danach können diese Lösungen den mikrobiologischen Schutz ergänzen."
-        :"Diese Vorschläge orientieren sich an Ihrer Wasserquelle und an der angegebenen Aufbereitung. Ein Kauf ersetzt keine Prüfung bei Verdacht auf chemische Belastung."
-    );
-
-    function productLink(name,description,url){
-      const tile=document.createElement("div");
-      tile.className="product-tile";
-
-      const strong=document.createElement("strong");
-      strong.textContent=name;
-
-      const p=document.createElement("p");
-      p.textContent=description;
-
-      const a=document.createElement("a");
-      a.href=url;
-      a.target="_blank";
-      a.rel="noopener noreferrer";
-      a.textContent="Herstellerangaben ansehen";
-
-      tile.append(strong,p,a);
-      products.append(tile);
-    }
-
-    productLink(
-      "LifeStraw Peak Series Gravity Purifier 8L – mit Virenentfernung",
-      "Für mehrere Personen und größere Mengen: 8-Liter-Schwerkraftsystem, laut Hersteller 99,99 % Virenreduktion und bis zu 18.000 Liter Membrankapazität. Nicht mit dem normalen Gravity Filter 8L verwechseln. Kein allgemeiner Schutz gegen chemische Schadstoffe.",
-      "https://eu.lifestraw.com/de-de/products/lifestraw-peak-series-gravity-purifier"
-    );
-
-    if(recommendPurifier){
-      productLink(
-        "MSR Guardian Gravity Purifier 10L – leistungsfähige Alternative",
-        "10-Liter-Schwerkraftsystem ohne Netzstrom. Laut MSR nach dem Prüfprotokoll NSF P248 getestet, mit Reduktion von Viren, Bakterien und Protozoen. Höherpreisige Alternative für die stationäre Versorgung; keine Garantie gegen chemische Schadstoffe.",
-        "https://cascadedesigns.com/de-eu/products/guardian-gravity-purifier"
-      );
-
-      productLink(
-        "MSR Guardian Purifier – robuste Handpumpen-Alternative",
-        "Handbetriebener, selbstreinigender Wasserreiniger mit ausgewiesener Virenreduktion. Für mobile und langfristige Nutzung, falls eine Pumpenlösung gewünscht ist.",
-        "https://cascadedesigns.com/de-eu/products/guardian-purifier"
-      );
-    }
-
-    if(recommendPurifier&&people<=2){
-      productLink(
-        "GRAYL GeoPress – mobile Alternative",
-        "Tragbarer Press-Wasserreiniger mit ausgewiesener Virenreduktion und Aktivkohle zur Reduktion bestimmter Chemikalien. Eher für mobile Nutzung; die Kartusche reicht laut Hersteller ungefähr 250 Liter.",
-        "https://grayl.com/pages/geopress-tech-specs"
-      );
-    }
-
-    inner.append(products);
-  }
-
-  /* Grundlage des Berechnungsmodells */
-  paragraph(
-    inner,
-    "Grundlage ist die Empfehlung des Österreichischen Zivilschutzverbandes, mindestens 2 Liter Trinkwasser pro Person und Tag zu bevorraten. Für Kochen, Hygiene, besondere Bedürfnisse und hohe Temperaturen ist zusätzliches Wasser erforderlich. In einer Krise können Untersuchungen und Kontrollen erschwert sein: Eine passende Aufbereitung verringert Risiken, ersetzt aber nicht den Nachweis der Trinkwassereignung.",
-    "fine"
-  );
-
-  const sourceNote=document.createElement("p");
-  sourceNote.className="fine source-note";
-  sourceNote.append("Quelle: ");
-
-  const sourceLink=document.createElement("a");
-  sourceLink.href=
-    "https://zivilschutz.at/thema/krisenfester-haushalt/";
-  sourceLink.target="_blank";
-  sourceLink.rel="noopener noreferrer";
-  sourceLink.textContent=
-    "Österreichischer Zivilschutzverband – Krisenfester Haushalt";
-
-  sourceNote.append(sourceLink);
-  inner.append(sourceNote);
-
-  /*
-  Allgemeiner Notfall-Ratgeber:
-  wird JEDEM individuellen Bericht hinzugefügt.
-  */
-  const guide=document.createElement("section");
-  guide.className="emergency-guide";
-  guide.setAttribute(
-    "aria-labelledby",
-    "emergencyGuideTitle"
-  );
-
-  guide.innerHTML=`
-    <div class="emergency-guide-head">
-      <span class="eyebrow">Ihr praktischer Notfall-Ratgeber</span>
-      <h3 id="emergencyGuideTitle">Wenn das abgefüllte Trinkwasser zur Neige geht</h3>
-      <p>So gehen Sie vor, wenn Sie im Krisenfall auf eine zusätzliche Wasserquelle angewiesen sind. Die Anleitung gilt unabhängig von Ihrer persönlichen Gesamtbewertung.</p>
-    </div>
-
-    <div class="emergency-guide-body">
-      <ol class="emergency-steps">
-
-        <li>
-          <h4>Zuerst eine geeignete Wasserquelle wählen</h4>
-          <p>Bevorzugen Sie nachweislich sicheres Trinkwasser, etwa eine kontrollierte Versorgung oder eine geprüfte und weiterhin geschützte Quelle. Auch ein eigener Brunnen kann wertvoll sein – die Wasserentnahme muss jedoch bei Stromausfall tatsächlich funktionieren.</p>
-          <p><strong>Prüfen Sie die Umgebung:</strong> Gab es Hochwasser, Abwassereinleitungen, einen Unfall, ausgelaufene Stoffe oder ungewöhnliche Veränderungen des Wassers? Bei Verdacht auf chemische Belastung gilt der Warnhinweis unten.</p>
-        </li>
-
-        <li>
-          <h4>Trübes Wasser zunächst klären</h4>
-          <p>Schwebstoffe möglichst absetzen lassen oder mit einem dafür geeigneten Vorfilter entfernen. Ein sauberes Tuch oder ein mechanischer Vorfilter kann grobe Partikel zurückhalten. <strong>Das allein entfernt Krankheitserreger nicht zuverlässig.</strong></p>
-        </li>
-
-        <li>
-          <h4>Krankheitserreger wirksam reduzieren</h4>
-          <ul>
-            <li><strong>Abkochen:</strong> Eine besonders zuverlässige Maßnahme gegen Bakterien, Viren und Parasiten. Klares Wasser sprudelnd abkochen und abkühlen lassen; beachten Sie die örtlichen behördlichen Abkochvorgaben. Für eine Notlage benötigen Sie dafür eine nutzbare Wärmequelle.</li>
-
-            <li><strong>Gewöhnliche Mikrofilter:</strong> Geeignete Modelle wie Katadyn Pocket, Katadyn BeFree, Sawyer Squeeze oder normale LifeStraw Peak Filter können Bakterien und Parasiten zurückhalten, bieten aber <strong>keinen nachgewiesenen Schutz gegen Viren</strong>. Bei möglicher Virenbelastung sollten Sie ergänzend eine dafür wirksame Behandlung, beispielsweise Abkochen, vorsehen. Einen vorhandenen guten Mikrofilter müssen Sie deshalb nicht ersetzen.</li>
-
-            <li><strong>Wasserreiniger (Purifier) mit nachgewiesener Virenreduktion:</strong> Das ist die umfassendere Filterlösung gegen Krankheitserreger: Geeignete Systeme reduzieren nicht nur <strong>Bakterien und Parasiten, sondern auch Viren</strong>. Beispiele sind der <strong>LifeStraw Peak Series Gravity Purifier 8L</strong> und der <strong>MSR Guardian Gravity Purifier 10L</strong> (beide Schwerkraftsysteme), der <strong>MSR Guardian Purifier mit Handpumpe</strong> sowie der mobile <strong>GRAYL GeoPress</strong>. Der LifeStraw Gravity Purifier weist beispielsweise 99,99 % Viren-, 99,999999 % Bakterien- und 99,999 % Parasitenreduktion aus. Achten Sie auf das genaue Modell, dokumentierte Prüfwerte und korrekte Verwendung. Der normale LifeStraw Gravity <em>Filter</em> bietet keinen entsprechenden Virenschutz. Auch Purifier sind keine universelle Lösung gegen chemische Schadstoffe.</li>
-
-            <li><strong>Trinkwasserdesinfektionsmittel:</strong> Dafür vorgesehene Mittel können je nach Wirkstoff Bakterien und Viren inaktivieren. Gegen manche Parasiten ist die Wirkung eingeschränkt. Ausschließlich die Eignung für Trinkwasser und die Herstellerangaben beachten. <strong>Silberbasierte Konservierungsmittel allein sind dafür kein gleichwertiger Ersatz.</strong></li>
-          </ul>
-        </li>
-
-        <li>
-          <h4>Purifier allein oder zusätzlich abkochen?</h4>
-          <div class="purifier-decision">
-            <h5>Ein funktionierender, entsprechend geprüfter Purifier reicht normalerweise aus.</h5>
-            <p>Für die <strong>mikrobiologische</strong> Aufbereitung von geeignetem Ausgangswasser ist bei korrekt verwendetem, intaktem Purifier mit ausgewiesener Bakterien-, Viren- und Parasitenreduktion <strong>kein routinemäßiges zusätzliches Abkochen nötig</strong>. Behördenanordnungen zum Abkochen haben jedoch Vorrang.</p>
-            <p><strong>Was verbessert zusätzliches Abkochen?</strong> Es kann möglicherweise verbliebene Krankheitserreger inaktivieren und bietet eine zweite, vom Filter unabhängige Barriere. Eine <strong>nachgewiesene zusätzliche Prozentzahl für die konkrete Kombination</strong> liegt nicht vor. Im Alltag ist ein Zusatznutzen daher nicht verlässlich quantifizierbar.</p>
-            <p><strong>Rechenbeispiel, kein Prüfwert:</strong> Ein Purifier mit 99,99 % Virenreduktion lässt rechnerisch 0,01 % der ursprünglichen Viren übrig. Würde eine zweite Behandlung hypothetisch 99 % <em>dieser verbleibenden Viren</em> inaktivieren, läge die Gesamtreduktion bei 99,9999 %. Das entspräche 100-mal weniger verbleibenden Viren, ist aber <strong>keine garantierte Leistung von Purifier plus Abkochen</strong>.</p>
-            <p><strong>Praktische Entscheidung:</strong> Bei einwandfreiem Purifier in der Regel allein filtern. Abkochen als zusätzliche oder alternative Sicherheitsstufe nutzen, wenn die Einsatzfähigkeit fraglich ist und das Wasser nicht chemisch belastet ist. Ein beschädigter oder nicht mehr sicherer Filter sollte nicht weiterverwendet werden. Bei gewöhnlichen Mikrofiltern ohne Virenschutz ist eine zweite wirksame Behandlung gegen Viren deutlich wichtiger.</p>
-          </div>
-        </li>
-
-        <li>
-          <h4>Aufbereitetes Wasser hygienisch lagern</h4>
-          <p>Nur geeignete, saubere und dicht verschließbare Trinkwasserbehälter verwenden. Bereits aufbereitetes Wasser von unbehandeltem Wasser getrennt halten. Behälter, in denen früher Kraftstoffe, Pflanzenschutzmittel oder andere Chemikalien waren, niemals zur Trinkwasserlagerung verwenden.</p>
-        </li>
-
-        <li>
-          <h4>Bereits sicheres Trinkwasser bei Bedarf konservieren</h4>
-          <p>Für Trinkwasser, das bereits trinkbar ist, können geeignete Konservierungsmittel wie <strong>YACHTICON Aqua Clean ohne Chlor</strong> auf Silberbasis die Wiederverkeimung bei der Lagerung begrenzen. Der Hersteller nennt unter den vorgesehenen Einsatzbedingungen bis zu sechs Monate. Das ist <strong>keine Aufbereitung von ungeprüftem Rohwasser</strong> und ersetzt weder eine geeignete Desinfektion noch die Prüfung auf chemische Schadstoffe. Produktkennzeichnung und Lagerbedingungen beachten.</p>
-        </li>
-      </ol>
-
-      <aside class="emergency-chemical-warning" aria-label="Wichtiger Sicherheitshinweis zu chemisch belastetem Wasser">
-        <h4>Achtung: Bei Verdacht auf chemische Verunreinigung nicht trinken!</h4>
-        <p>Mögliche Belastungen sind <strong>Benzin, Diesel, Heizöl und andere Mineralölprodukte</strong>, Lösungsmittel, Industrie- und Reinigungschemikalien, <strong>Pestizide und andere Pflanzenschutzmittel</strong>, Düngerbestandteile wie Nitrat, Schwermetalle sowie bestimmte Algen- oder Umweltgifte. Risiken können beispielsweise durch Unfälle, Landwirtschaft, Abwassereinleitungen, Industrieflächen oder Hochwasser entstehen. <strong>Auch klares und geruchloses Wasser kann betroffen sein.</strong></p>
-        <p><strong>Wichtig:</strong> Abkochen, gewöhnliche Outdoor-Filter, die genannten Wasserreiniger, übliche Trinkwasserdesinfektionsmittel und silberbasierte Konservierung machen chemisch belastetes Wasser <strong>nicht verlässlich trinkbar</strong>. Einzelne Spezialfilter können bestimmte Stoffe reduzieren – das ist keine allgemeine Sicherheitsgarantie.</p>
-        <p><strong>Bei begründetem Verdacht: Dieses Wasser weder trinken noch zum Kochen verwenden. Nutzen Sie eine andere, nachweislich geeignete Wasserquelle und beachten Sie Hinweise der örtlichen Behörden.</strong></p>
-      </aside>
-
-      <p class="emergency-guide-sources">Fachliche Grundlagen:
-        <a href="https://www.who.int/publications/i/item/WHO-FWC-WSH-15.02" target="_blank" rel="noopener noreferrer">WHO – Abkochen</a> ·
-        <a href="https://help.lifestraw.com/en-US/water-filter-vs-water-purifier-%7C-do-i-need-to-use-purification-tablets-or-boil-water-with-your-products-4008358" target="_blank" rel="noopener noreferrer">LifeStraw – Purifier und Zusatzbehandlung</a> ·
-        <a href="https://www.cdc.gov/water-emergency/about/index.html" target="_blank" rel="noopener noreferrer">CDC – Wasser im Notfall aufbereiten</a> ·
-        <a href="https://www.cdc.gov/global-water-sanitation-hygiene/about/about-safe-water-storage.html" target="_blank" rel="noopener noreferrer">CDC – Sichere Wasserlagerung</a> ·
-        <a href="https://www.verbrauchergesundheit.gv.at/lebensmittel/trinkwasser.html" target="_blank" rel="noopener noreferrer">Österreich – Trinkwasser und private Brunnen</a>
-      </p>
-    </div>
-  `;
-
-  inner.append(guide);
-
-  /* Erzeugung des persönlichen PDF-Berichts */
-  try{
-    showPdfReport(
-      {
-        people,
-        days,
-        stored,
-        kind,
-        source,
-        quality,
-        where,
-        well,
-        wellNeedsPower:well&&yes("strom"),
-        backupPower:well&&yes("ersatz"),
-        rainKnown,
-        rainStored,
-        hasContainers,
-        capacity,
-        transportOk,
-        filterName,
-        filterReady:checked("m_filter")&&yes("einsatz"),
-        methods,
-        status,
-        need,
-        total,
-        bottleDays,
-        bottleGap
-      },
-      inner
-    );
-  }catch(e){
-    console.error("PDF-Erzeugung fehlgeschlagen",e);
-
-    $("error").textContent=
-      "Der Bericht konnte nicht erstellt werden. Bitte laden Sie die Seite neu und versuchen Sie es erneut.";
-
-    $("error").hidden=false;
-    $("bericht").hidden=true;
-  }
-}
-
-/*
-PDF-MODUL
-Erzeugt ein PDF direkt im Browser ohne externen Server
-und ohne externe JavaScript-Bibliothek.
-*/
-let currentPdfUrl=null;
-
-function clearPdf(){
-  if(currentPdfUrl){
-    URL.revokeObjectURL(currentPdfUrl);
-    currentPdfUrl=null;
-  }
-
-  const panel=$("pdfResult");
-  if(panel)panel.hidden=true;
-
-  const iframe=$("pdfFrame");
-  if(iframe)iframe.removeAttribute("src");
-
-  const preview=$("pdfMobile");
-  if(preview)preview.replaceChildren();
-}
-
-/*
-Berichtsstruktur:
-Ausgangsdaten, Berechnung, Bewertung, Empfehlungen,
-Produkte, weitere Selbsttests, Workshops, Notfallratgeber.
-*/
-function makeBlocks(d,root){
   const blocks=[];
 
-  const add=(type,text,extra={})=>
-    blocks.push({
-      type,
-      text:String(text||""),
-      ...extra
-    });
+  const add=(type,text,extra={})=>{
+    blocks.push({type,text,...extra});
+  };
 
-  const fmt=n=>
-    Number(n).toLocaleString("de-AT",{
-      maximumFractionDigits:1
-    });
+  const act=(label,text,priority="normal")=>{
+    add("step",label,{value:text,priority});
+  };
 
   add("title","Ihre persönliche Trinkwasseranalyse");
 
   add(
     "subtitle",
-    "KRISENFEST.help · Individueller Vorsorgebericht · "+
+    "KRISENFEST.help · Persönlicher Vorsorgebericht · "+
     new Date().toLocaleDateString("de-AT")
   );
 
   add("heading","1. Ihre Ausgangssituation");
 
-  const entries=[
-    ["Personen im Haushalt",String(d.people)],
-    ["Vorsorgezeitraum",d.days+" Tage"],
-    ["Originalverschlossenes Trinkwasser",fmt(d.stored)+" Liter"],
-    ["Zusätzliche Wasserquelle",d.source?d.kind:"Keine angegeben"]
-  ];
+  const kv=(l,x)=>add("kv",l,{value:String(x)});
 
-  if(d.source){
-    entries.push(["Entfernung",d.where]);
+  kv("Personen im Haushalt",n);
+  kv("Vorsorgezeitraum",days+" Tage");
+  kv("Abgefülltes Trinkwasser",NUM(bottle)+" Liter");
 
-    entries.push([
+  kv(
+    "Zusätzliche Wasserquelle",
+    source?kind:"Keine angegeben"
+  );
+
+  if(source){
+    kv("Entfernung",v("entfernung"));
+
+    kv(
       "Trinkwasserprüfung",
       ({
         ja:"Trinkwasserqualität bestätigt",
         offen:"Geprüft, aber nicht als Trinkwasser bestätigt",
         nein:"Nicht geprüft",
         unbekannt:"Ergebnis unbekannt"
-      })[d.quality]||"Keine Angabe"
-    ]);
+      })[v("qualitaet")]
+    );
 
-    if(d.rainKnown){
-      entries.push([
-        "Gespeichertes Regenwasser",
-        fmt(d.rainStored)+" Liter"
-      ]);
+    if(rainKnown){
+      kv(
+        "Aktueller Regenwasservorrat",
+        NUM(rainAmount)+" Liter"
+      );
     }
 
-    if(d.well){
-      entries.push([
-        "Strom für Brunnenentnahme",
-        d.wellNeedsPower?"Erforderlich":"Nicht erforderlich"
-      ]);
+    if(well){
+      kv(
+        "Netzstrom für die Entnahme",
+        ja("strom")?"Erforderlich":"Nicht erforderlich"
+      );
 
-      if(d.wellNeedsPower){
-        entries.push([
+      if(ja("strom")){
+        kv(
           "Ersatzstrom / alternative Entnahme",
-          d.backupPower?"Vorhanden":"Nicht vorhanden"
-        ]);
+          ja("ersatz")?"Ja":"Nein"
+        );
       }
     }
 
-    entries.push([
-      "Saubere, verschließbare Behälter",
-      d.hasContainers?fmt(d.capacity)+" Liter":"Nicht vorhanden"
-    ]);
+    kv(
+      "Verschließbare Trinkwasserbehälter",
+      containers?NUM(capacity)+" Liter":"Nicht vorhanden"
+    );
 
-    if(d.hasContainers){
-      entries.push([
-        "Wassertransport",
-        d.transportOk?"Möglich":"Noch nicht abgesichert"
-      ]);
+    if(containers){
+      kv(
+        "Sicherer Wassertransport",
+        transport?"Ja":"Nein"
+      );
     }
   }
 
-  entries.push([
-    "Aufbereitung",
-    d.methods.length?d.methods.join(", "):"Keine angegeben"
-  ]);
+  kv(
+    "Filter / Wasserreiniger",
+    filter?model:"Keiner angegeben"
+  );
 
-  if(d.filterName){
-    entries.push(["Filtermodell",d.filterName]);
-    entries.push([
-      "Einsatzbereitschaft überprüft",
-      d.filterReady?"Ja":"Nein"
-    ]);
+  if(filter){
+    kv(
+      "Einsatzbereitschaft kontrolliert",
+      ja("einsatz")?"Ja":"Nein"
+    );
   }
 
-  for(const [label,value] of entries){
-    add("kv",label,{value});
-  }
+  kv("Abkochen möglich",boil?"Ja":"Nein");
 
-  add("heading","2. Ihre Berechnung und Bewertung");
+  kv(
+    "Trinkwasserdesinfektionsmittel",
+    chemical?"Vorhanden":"Nicht angegeben"
+  );
+
+  add("heading","2. Ergebnis und Bewertung");
 
   add("metrics","",{
     metrics:[
-      ["Bedarf",fmt(d.total)+" l"],
-      ["Flaschenvorrat",fmt(d.stored)+" l"],
-      ["Differenz",fmt(d.bottleGap)+" l"]
+      ["Bedarf",NUM(need)+" l"],
+      ["Abgefüllt",NUM(bottle)+" l"],
+      ["Fehlmenge",NUM(gap)+" l"]
     ]
   });
 
   add(
     "status",
-    d.status==="good"
-      ?"GRÜN – Gut abgesichert":
-    d.status==="attention"
-      ?"GELB – Verbesserung sinnvoll":
+    status==="good"?
+      "GRÜN – Gut abgesichert":
+    status==="attention"?
+      "GELB – Teilweise abgesichert":
       "ROT – Deutliche Versorgungslücke",
-    {status:d.status}
+    {status}
   );
 
-  const banner=root.querySelector(".status");
+  add(
+    "lead",
+    status==="good"?
+      "Ihr Haushalt verfügt im gewählten Zeitraum "+
+      "über eine ausreichend abgesicherte "+
+      "Trinkwasserversorgung.":
+    status==="attention"?
+      "Ihre Wasservorsorge ist teilweise abgesichert – "+
+      "einige Punkte bleiben offen!":
+      "Ihre Trinkwasservorsorge weist noch deutliche "+
+      "Versorgungslücken auf."
+  );
 
-  if(banner){
-    const title=banner.querySelector(".result-heading");
+  add(
+    "para",
+    `Sie möchten ${n} ${n===1?"Person":"Personen"} `+
+    `für ${days} Tage versorgen. Mit 2 Litern pro `+
+    `Person und Tag ergibt sich ein Trinkwasserbedarf `+
+    `von ${NUM(daily)} Litern täglich und insgesamt `+
+    `${NUM(need)} Litern.`
+  );
 
-    if(title){
-      add("lead",title.textContent);
+  add(
+    "para",
+    `Sie besitzen ${NUM(bottle)} Liter `+
+    `originalverschlossenes Trinkwasser. `+
+    `Das reicht rechnerisch für ${NUM(bottle/daily)} Tage.`+
+    (
+      gap>0?
+      ` Bezogen auf den abgefüllten Vorrat `+
+      `fehlen ${NUM(gap)} Liter.`:
+      " Der gewählte Zeitraum ist allein damit abgedeckt."
+    )
+  );
+
+  if(source){
+    if(well){
+      add(
+        "para",
+        "Ihr Brunnen ist eine wertvolle zusätzliche "+
+        "Wasserquelle."+
+        (
+          powerGap?
+          " Weil für die Entnahme Netzstrom benötigt "+
+          "wird und keine Ersatzlösung vorhanden ist, "+
+          "steht dieses Wasser bei einem Stromausfall "+
+          "derzeit nicht zur Verfügung.":
+          " Die Wasserentnahme ist nach Ihren Angaben "+
+          "auch ohne die reguläre Stromversorgung möglich."
+        )
+      );
+    }else if(spring){
+      add(
+        "para",
+        "Die eigene Quelle ist ein wertvoller zusätzlicher "+
+        "Zugang zu Wasser. Entscheidend sind die tatsächliche "+
+        "Entnahme, eine mögliche Veränderung der Wasserqualität "+
+        "und eine geeignete Lagerung."
+      );
+    }else if(rain){
+      add(
+        "para",
+        "Es ist eine Regenwasserreserve vorhanden."+
+        (
+          rainKnown?
+          ` Der aktuelle Vorrat beträgt ${NUM(rainAmount)} `+
+          `Liter; zusammen mit abgefülltem Wasser sind `+
+          `rechnerisch ${NUM(rainAmount+bottle)} Liter `+
+          `verfügbar. Dies ist keine Aussage über deren `+
+          `Trinkbarkeit.`:
+          " Die Menge wurde nicht angegeben; eine "+
+          "rechnerische Gesamtreichweite ist daher "+
+          "nicht möglich."
+        )+
+        " Regenwasser ist nicht automatisch Trinkwasser."
+      );
+    }else if(surface){
+      add(
+        "para",
+        "Bach-, Fluss- oder Seewasser ist eine zusätzliche "+
+        "Wasserquelle, kann jedoch mikrobiologisch oder "+
+        "chemisch belastet sein. Eine geeignete Nutzung "+
+        "erfordert besondere Sorgfalt."
+      );
     }
 
-    for(const p of banner.querySelectorAll(":scope > p")){
-      add("para",p.textContent);
+    add(
+      "para",
+      confirmed?
+        "Nach Ihren Angaben wurde Trinkwasserqualität "+
+        "bestätigt. Eine Untersuchung belegt die damalige "+
+        "Qualität, nicht jedoch zwingend jede spätere "+
+        "Entnahme.":
+      v("qualitaet")==="offen"?
+        "Das Wasser wurde untersucht, aber nicht als "+
+        "Trinkwasser bestätigt. Es darf daher nicht als "+
+        "gesicherter Trinkwasservorrat eingerechnet werden.":
+        "Die Trinkwasserqualität ist nicht nachgewiesen. "+
+        "Das bedeutet nicht automatisch, dass das Wasser "+
+        "unbrauchbar ist; eine chemische und mikrobiologische "+
+        "Belastung kann aber nicht ausgeschlossen werden."
+    );
+
+    if(containers){
+      add(
+        "para",
+        `Sie besitzen geeignete, verschließbare Behälter `+
+        `mit zusammen ${NUM(capacity)} Litern `+
+        `Fassungsvermögen.`+
+        (
+          transport?
+          " Der Transport ist nach Ihren Angaben möglich.":
+          " Der sichere Transport ist bislang nicht abgesichert."
+        )
+      );
+    }else{
+      add(
+        "para",
+        "Für die hygienische Entnahme, Aufbewahrung und "+
+        "gegebenenfalls den Transport fehlen noch geeignete, "+
+        "saubere, verschließbare Trinkwasserbehälter."
+      );
     }
   }
 
-  add("heading","3. Ihre persönlichen Empfehlungen");
-
-  const steps=[
-    ...root.querySelectorAll(
-      ".result-recommendations .step-card"
-    )
-  ];
-
-  steps.forEach((card,i)=>{
+  if(filter){
     add(
-      "step",
-      (i+1)+". "+
-      (
-        card.querySelector(".step-label")?.textContent||
-        "Maßnahme"
-      ),
-      {
-        value:
-          card.querySelector(".step-text")?.textContent||
-          ""
-      }
+      "para",
+      `Vorhandenes Gerät: ${model}. ${profile[1]}`
     );
-  });
+
+    if(purifier){
+      add(
+        "para",
+        "Dieses Gerät besitzt eine ausgewiesene Reduktion "+
+        "von Bakterien, Viren und Parasiten. Bei "+
+        "funktionsfähigem Gerät und geeignetem Ausgangswasser "+
+        "ist routinemäßiges zusätzliches Abkochen für den "+
+        "mikrobiologischen Schutz normalerweise nicht nötig. "+
+        "Bei Unsicherheit über die Funktion oder behördlicher "+
+        "Abkochanordnung ist eine zusätzliche geeignete "+
+        "Maßnahme sinnvoll."
+      );
+    }else if(micro){
+      add(
+        "para",
+        "Der vorhandene Mikrofilter ist ein wertvoller Schutz "+
+        "gegen Bakterien und Parasiten. Die Virenreduktion ist "+
+        "für dieses Modell nicht nachgewiesen; bei möglicher "+
+        "Virenbelastung ist eine weitere wirksame Behandlung nötig."
+      );
+    }else{
+      add(
+        "para",
+        "Aus der Modellbezeichnung lässt sich kein zuverlässiger "+
+        "Virenschutz ableiten. Prüfen Sie dokumentierte "+
+        "Hersteller- oder Prüfwerte."
+      );
+    }
+  }
+
+  if(boil){
+    add(
+      "para",
+      "Abkochen inaktiviert bei korrekter Durchführung "+
+      "krankheitserregende Bakterien, Viren und Parasiten "+
+      "sehr wirksam. Voraussetzung ist eine im Krisenfall "+
+      "verfügbare Kochmöglichkeit. Chemische Schadstoffe "+
+      "werden durch Abkochen nicht zuverlässig beseitigt."
+    );
+  }
+
+  if(chemical){
+    add(
+      "para",
+      "Geeignete Trinkwasserdesinfektionsmittel können je "+
+      "nach Wirkstoff Krankheitserreger reduzieren. Nicht "+
+      "alle Mittel wirken gegen alle Parasiten. Silberbasierte "+
+      "Mittel wie Aqua Clean ohne Chlor konservieren bereits "+
+      "sicheres Trinkwasser; sie sind keine gleichwertige "+
+      "Desinfektion von ungeprüftem Wasser."
+    );
+  }
+
+  if(!filter&&!boil&&!chemical&&source&&!confirmed){
+    add(
+      "para",
+      "Für das ungeprüfte zusätzliche Wasser ist keine "+
+      "Aufbereitungsmöglichkeit angegeben. Es kann derzeit "+
+      "nicht als gesichertes Trinkwasser bewertet werden."
+    );
+  }
+
+  add(
+    "para",
+    "Unabhängig von allen Verfahren gilt: Filter, Purifier, "+
+    "Abkochen, übliche Desinfektion und Konservierung "+
+    "beseitigen unbekannte chemische Verunreinigungen "+
+    "nicht zuverlässig. Bei entsprechendem Verdacht "+
+    "ist eine andere sichere Quelle notwendig."
+  );
+
+  add("heading","3. Ihre priorisierten Empfehlungen");
+
+  let steps=0;
+
+  const step=(t,d,k)=>{
+    steps++;
+    act(steps+". "+t,d,k);
+  };
+
+  if(powerGap&&gap>0){
+    step(
+      "Vorrangige Maßnahme",
+      "Sichern Sie zuerst eine stromunabhängige "+
+      "Brunnenentnahme oder eine tatsächlich geeignete "+
+      "Ersatzstromlösung. Ohne Wasserentnahme kann kein "+
+      "Filter die Versorgungslücke schließen.",
+      "priority"
+    );
+  }
+
+  if(source&&!confirmed){
+    step(
+      "Wasserqualität klären",
+      "Lassen Sie die Quelle auf Trinkwassereignung prüfen, "+
+      "insbesondere bei möglicher chemischer Belastung. "+
+      "Bis dahin ist die Quelle kein gesicherter "+
+      "Trinkwasservorrat.",
+      "priority"
+    );
+  }
+
+  if(source&&(!containers||!transport)){
+    step(
+      "Behälter und Transport",
+      !containers?
+        "Beschaffen Sie geeignete, saubere, dicht "+
+        "verschließbare Trinkwasserbehälter. Die bestehende "+
+        "Wasserquelle kann erst damit sinnvoll gelagert "+
+        "oder transportiert werden.":
+        "Sorgen Sie für einen praktikablen Transport oder "+
+        "kleinere Behälter, die auch befüllt sicher bewegt "+
+        "werden können."
+    );
+  }
+
+  if(source&&!confirmed&&!filter&&!boil&&!chemical){
+    step(
+      "Mikrobiologische Aufbereitung ergänzen",
+      "Für ungeprüftes Wasser ist ein geeignetes "+
+      "Aufbereitungsverfahren erforderlich. Möglich sind "+
+      "ein geprüfter Purifier mit Virenreduktion oder eine "+
+      "passende Kombination aus Mikrofilter und Abkochen.",
+      "priority"
+    );
+  }
+
+  if(source&&micro&&!boil){
+    step(
+      "Virenlücke schließen",
+      `Behalten Sie Ihren ${model}. Er ist gegen Bakterien `+
+      `und Parasiten wertvoll. Ergänzen Sie bei möglicher `+
+      `Virenbelastung eine wirksame zweite Behandlung `+
+      `oder einen nachgewiesen virenreduzierenden Purifier.`
+    );
+  }
+
+  if(source&&purifier){
+    step(
+      "Vorhandenen Purifier nutzen und prüfen",
+      `Ihr ${model} bietet bereits ausgewiesenen `+
+      `Virenschutz. Kontrollieren Sie regelmäßig den `+
+      `Zustand, die Filterkapazität und die `+
+      `Herstellervorgaben; ein weiterer Purifier ist `+
+      `normalerweise nicht nötig.`,
+      "strength"
+    );
+  }
+
+  if(filter&&!ja("einsatz")){
+    step(
+      "Einsatzbereitschaft testen",
+      "Überprüfen Sie Ihren Wasserfilter vor einer "+
+      "Krisensituation und halten Sie notwendige "+
+      "Wartungsmöglichkeiten bereit."
+    );
+  }
+
+  if(boil&&source&&!confirmed){
+    step(
+      "Abkochen auch ohne Netzstrom ermöglichen",
+      "Eine geeignete, sichere Kochmöglichkeit muss "+
+      "auch bei einem Stromausfall tatsächlich zur "+
+      "Verfügung stehen."
+    );
+  }
+
+  if(rainKnown&&rainAmount+bottle<need){
+    step(
+      "Gesamte Wassermenge ergänzen",
+      `Selbst unter Einbeziehung des vorhandenen `+
+      `Regenwassers fehlen rechnerisch `+
+      `${NUM(need-rainAmount-bottle)} Liter. `+
+      `Die Trinkwassereignung ist gesondert sicherzustellen.`
+    );
+  }
+
+  if(source&&v("entfernung")==="Weiter entfernt"){
+    step(
+      "Transportweg praktisch prüfen",
+      "Erproben Sie den Transport gefüllter Behälter "+
+      "von der entfernten Wasserquelle zum Haushalt."
+    );
+  }
+
+  if(gap>0){
+    step(
+      "Unabhängige Trinkwasserreserve",
+      `Ergänzen Sie den abgefüllten Vorrat um bis zu `+
+      `${NUM(gap)} Liter, um den gewählten Zeitraum `+
+      `unabhängig von Brunnen, Quelle und Aufbereitung `+
+      `abzusichern.`,
+      !source?"priority":"normal"
+    );
+  }
+
+  if(steps===0){
+    step(
+      "Vorsorge erhalten",
+      "Kontrollieren Sie Wasserbestand, Lagerung, "+
+      "Erreichbarkeit und Funktionsfähigkeit Ihrer "+
+      "Ausstattung regelmäßig.",
+      "strength"
+    );
+  }
 
   add(
     "heading",
     "4. Passende Produkte und vorhandene Ausrüstung"
   );
 
-  const products=root.querySelector(".product-guidance");
+  const suggest=
+    source&&gap>0&&!confirmed&&!purifier&&
+    (!boil||micro);
 
-  if(products){
-    const p=products.querySelector(":scope > p");
+  const largeGrayl=
+    source&&purifier&&
+    model==="GRAYL GeoPress"&&gap>250;
 
-    if(p)add("para",p.textContent);
+  if(suggest||largeGrayl){
+    add(
+      "para",
+      powerGap?
+        "Zuerst muss die Wasserentnahme bei Stromausfall "+
+        "gesichert werden. Die folgenden Produkte betreffen "+
+        "erst den anschließenden mikrobiologischen Schutz.":
+        "Die folgenden Möglichkeiten sind technische "+
+        "Alternativen. Eine zusätzliche Anschaffung ist "+
+        "nur bei tatsächlichem Bedarf sinnvoll."
+    );
 
-    for(const tile of products.querySelectorAll(".product-tile")){
-      add(
-        "product",
-        tile.querySelector("strong")?.textContent||
-        "Produkthinweis",
-        {
-          value:
-            tile.querySelector("p")?.textContent||
-            "",
-          url:
-            tile.querySelector("a")?.href||
-            ""
-        }
-      );
+    for(const [name,desc,url] of PRODUCT){
+      if(name==="GRAYL GeoPress"&&n>2)continue;
+
+      add("product",name,{
+        value:desc,
+        url
+      });
     }
   }else{
     add(
       "para",
-      "Für Ihre Angaben ergibt sich derzeit keine weitere konkrete Kaufempfehlung. Vorhandene Ausrüstung sollte erhalten und ihre Einsatzbereitschaft regelmäßig überprüft werden."
+      purifier?
+        "Sie besitzen bereits einen Wasserreiniger mit "+
+        "ausgewiesener Virenreduktion. Ein weiterer Purifier "+
+        "ist derzeit nicht notwendig; Wartung, Betrieb "+
+        "und ausreichende Filterkapazität haben Vorrang.":
+        "Aus Ihren Angaben ergibt sich derzeit keine "+
+        "zwingende zusätzliche Produktanschaffung. "+
+        "Nutzen und prüfen Sie Ihre bereits vorhandene "+
+        "Ausrüstung."
     );
   }
 
@@ -1708,131 +1417,195 @@ function makeBlocks(d,root){
 
   add(
     "para",
-    "Trinkwasser ist nur ein Teil der Krisenvorsorge. Prüfen Sie auch Lebensmittelversorgung, Strom und Energie, Wärme und Heizen, Kommunikation, Gesundheit und Sicherheit."
+    "Trinkwasser ist nur ein Teil der Krisenvorsorge. "+
+    "Prüfen Sie auch Ihre Vorbereitung für Lebensmittel, "+
+    "Stromversorgung, Wärme und Heizen, Kommunikation, "+
+    "Gesundheit und Sicherheit."
   );
-
-  const selfTests=
-    new URL("selbsttests.html",document.baseURI).href;
-
-  const home=
-    new URL("index.html",document.baseURI).href;
 
   add(
     "link",
-    "Weitere Vorsorge-Selbsttests öffnen",
-    {url:selfTests}
+    "Weitere Selbsttests auf KRISENFEST.help öffnen",
+    {
+      url:new URL(
+        "selbsttests.html",
+        document.baseURI
+      ).href
+    }
   );
 
   add(
     "para",
-    "Auf KRISENFEST.help werden auch Informationen zu Workshops und Veranstaltungen veröffentlicht, in denen die praktische Vorbereitung vertieft werden kann."
+    "Informationen zu geplanten Workshops, praktischen "+
+    "Übungen und Veranstaltungen finden Sie über "+
+    "unsere Homepage."
   );
 
   add(
     "link",
-    "Homepage mit Informationen zu Workshops und Angeboten",
-    {url:home}
+    "KRISENFEST.help – Homepage und Angebote",
+    {
+      url:new URL(
+        "index.html",
+        document.baseURI
+      ).href
+    }
   );
 
   add(
     "heading",
-    "6. Wenn das abgefüllte Trinkwasser zur Neige geht"
+    "6. Notfall-Ratgeber: Wenn abgefülltes Trinkwasser "+
+    "aufgebraucht ist"
   );
 
-  const guide=root.querySelector(".emergency-guide");
-
-  if(guide){
-    const intro=
-      guide.querySelector(".emergency-guide-head p");
-
-    if(intro){
-      add("para",intro.textContent);
-    }
-
+  const guide=[
     [
-      ...guide.querySelectorAll(".emergency-steps > li")
-    ].forEach((li,i)=>{
-      const h=li.querySelector(":scope > h4");
+      "1. Die sicherste verfügbare Quelle wählen",
+      "Bevorzugen Sie nachweislich sicheres Trinkwasser. "+
+      "Bei Brunnen und Quellen ist neben der Qualität "+
+      "auch die tatsächliche Wasserentnahme zu prüfen. "+
+      "Regenwasser und Oberflächenwasser sind nicht "+
+      "automatisch Trinkwasser."
+    ],
+    [
+      "2. Trübes Wasser zunächst klären",
+      "Lassen Sie Schwebstoffe absetzen oder verwenden "+
+      "Sie einen geeigneten Vorfilter. Ein Tuch hält "+
+      "allenfalls grobe Partikel zurück und ist keine "+
+      "zuverlässige Desinfektion."
+    ],
+    [
+      "3. Mit einem Mikrofilter reinigen",
+      "Katadyn Pocket, BeFree, Sawyer MINI/Squeeze "+
+      "sowie normale LifeStraw-Peak-Filter reduzieren "+
+      "Bakterien und Parasiten, jedoch nicht nachweislich "+
+      "Viren. Bei möglicher Virenbelastung ist ein "+
+      "zusätzlicher wirksamer Schutz erforderlich."
+    ],
+    [
+      "4. Einen geeigneten Purifier verwenden",
+      "LifeStraw Peak Series Gravity Purifier, MSR "+
+      "Guardian Gravity, MSR Guardian Handpumpe und "+
+      "GRAYL GeoPress weisen laut Hersteller eine "+
+      "Reduktion von Bakterien, Viren und Parasiten aus. "+
+      "Der normale LifeStraw Gravity Filter ist nicht "+
+      "dasselbe Gerät. Ein intakter, korrekt verwendeter "+
+      "Purifier reicht für die mikrobiologische "+
+      "Aufbereitung geeigneten Ausgangswassers "+
+      "normalerweise ohne zusätzliches Abkochen aus."
+    ],
+    [
+      "5. Abkochen und Desinfektion einordnen",
+      "Abkochen ist eine sehr wirksame Alternative "+
+      "gegen Bakterien, Viren und Parasiten. Nach "+
+      "einem geeigneten Purifier kann es als "+
+      "unabhängige zweite Barriere dienen; ein "+
+      "konkreter zusätzlicher Schutz in Prozent "+
+      "ist für die Kombination nicht belegt. "+
+      "Geeignete Trinkwasserdesinfektionsmittel wirken "+
+      "abhängig vom Wirkstoff und sind nicht automatisch "+
+      "gegen alle Parasiten wirksam."
+    ],
+    [
+      "6. Wasser hygienisch lagern",
+      "Aufbereitetes Wasser gehört in saubere, "+
+      "lebensmittelechte, dicht verschließbare Behälter. "+
+      "Unbehandeltes und behandeltes Wasser getrennt "+
+      "halten. Keine ehemaligen Behälter für Treibstoff, "+
+      "Chemikalien oder Pflanzenschutzmittel verwenden."
+    ],
+    [
+      "7. Bereits sicheres Trinkwasser konservieren",
+      "Silberbasierte Konservierungsmittel wie YACHTICON "+
+      "Aqua Clean ohne Chlor können bei korrekter "+
+      "Verwendung die Lagerfähigkeit bereits geeigneten "+
+      "Trinkwassers unterstützen. Sie sind kein Ersatz "+
+      "für Filterung oder Desinfektion ungeprüften Rohwassers."
+    ]
+  ];
 
-      if(h){
-        add(
-          "subheading",
-          (i+1)+". "+h.textContent
-        );
-      }
+  guide.forEach(([t,d])=>{
+    add("subheading",t);
+    add("para",d);
+  });
 
-      for(const child of li.children){
-        if(child.matches("p")){
-          add("para",child.textContent);
-        }else if(child.matches("ul")){
-          for(
-            const item of child.querySelectorAll(":scope > li")
-          ){
-            add("bullet",item.textContent);
-          }
-        }else if(child.matches(".purifier-decision")){
-          const h5=child.querySelector("h5");
+  add(
+    "warning",
+    "ACHTUNG: Chemisch verunreinigtes Wasser nicht trinken!"
+  );
 
-          if(h5)add("lead",h5.textContent);
+  add(
+    "para",
+    "Mögliche Gefahren sind Benzin, Diesel, Heizöl, "+
+    "Lösungsmittel, Industrie- und Reinigungschemikalien, "+
+    "Pestizide, Nitrat, Schwermetalle und bestimmte "+
+    "Algen- oder Umweltgifte. Solche Belastungen "+
+    "können nach Hochwasser, durch Unfälle, "+
+    "Landwirtschaft oder Abwassereinleitungen auftreten. "+
+    "Auch klares und geruchloses Wasser kann betroffen sein."
+  );
 
-          for(const p of child.querySelectorAll("p")){
-            add("para",p.textContent);
-          }
-        }
-      }
-    });
+  add(
+    "para",
+    "Weder Abkochen noch übliche Outdoor-Mikrofilter, "+
+    "die hier vorgestellten Purifier, "+
+    "Trinkwasserdesinfektionsmittel oder Silberkonservierung "+
+    "machen chemisch belastetes Wasser allgemein und "+
+    "zuverlässig trinkbar. Einzelne Spezialfilter können "+
+    "ausgewählte Stoffe reduzieren, ersetzen aber keine "+
+    "Untersuchung. Bei begründetem Verdacht dieses Wasser "+
+    "weder trinken noch zum Kochen verwenden: eine "+
+    "andere, nachweislich sichere Wasserquelle wählen."
+  );
 
-    const warning=
-      guide.querySelector(".emergency-chemical-warning");
+  add("heading","7. Fachliche Grundlagen");
 
-    if(warning){
-      add(
-        "warning",
-        "Wichtiger Sicherheitshinweis: chemisch verunreinigtes Wasser"
-      );
-
-      for(const p of warning.querySelectorAll("p")){
-        add("para",p.textContent);
-      }
+  add(
+    "link",
+    "Österreichischer Zivilschutzverband – Krisenfester Haushalt",
+    {
+      url:"https://zivilschutz.at/thema/krisenfester-haushalt/"
     }
+  );
 
-    add("heading","7. Fachliche Grundlagen");
-
-    for(
-      const a of guide.querySelectorAll(
-        ".emergency-guide-sources a"
-      )
-    ){
-      add("link",a.textContent,{url:a.href});
+  add(
+    "link",
+    "CDC – Wasser in Notfällen",
+    {
+      url:"https://www.cdc.gov/water-emergency/about/index.html"
     }
-  }
+  );
 
-  const baseSource=
-    root.querySelector(".source-note a");
-
-  if(baseSource){
-    add(
-      "link",
-      "Österreichischer Zivilschutzverband – Trinkwasservorsorge",
-      {url:baseSource.href}
-    );
-  }
+  add(
+    "link",
+    "WHO – Boiling water",
+    {
+      url:"https://www.who.int/publications/i/item/WHO-FWC-WSH-15.02"
+    }
+  );
 
   add(
     "end",
-    "KRISENFEST.help – Die Auswertung ist ein Vorsorge-Selbsttest und ersetzt keine Laborprüfung der Trinkwasserqualität."
+    "KRISENFEST.help – Dieser Selbsttest ist eine "+
+    "allgemeine Vorsorgeeinschätzung und ersetzt "+
+    "weder die Laborprüfung einer Wasserquelle "+
+    "noch behördliche Warnhinweise."
   );
 
   return blocks;
 }
 
 /*
-NATIVE PDF-ERZEUGUNG
+  EIGENSTÄNDIGE PDF-ERZEUGUNG
 
-Verwendet PDF 1.4 mit Standard-PDF-Schriften.
-Enthält echten Text, mehrere Seiten und klickbare Links.
-Keine externe Bibliothek nötig.
+  Keine externe JavaScript-Bibliothek.
+  Kein Server.
+  Keine KI-Verbindung.
+
+  Der Browser erzeugt ein mehrseitiges PDF
+  mit echtem Text und anklickbaren Verweisen.
 */
+
 function makeNativePdf(blocks){
   const PW=595.28;
   const PH=841.89;
@@ -1843,26 +1616,25 @@ function makeNativePdf(blocks){
   const BOTTOM=792;
 
   const usable=PW-LEFT-RIGHT;
-
   const pages=[];
+
   let page=null;
   let cursor=TOP;
 
   const canvas=document.createElement("canvas");
   const ctx=canvas.getContext("2d");
 
-  const soften=s=>
-    String(s||"")
-      .replace(/[\u00a0\u202f]/g," ")
-      .replace(/[\u2010-\u2015]/g,"-")
-      .replace(/\u2026/g,"...")
-      .replace(/\u2022/g,"-")
-      .replace(/[\u2192\u2197]/g,">")
-      .replace(/\u25c6/g,"*")
-      .replace(/\u2726/g,"*")
-      .replace(/[\u200B-\u200D]/g,"")
-      .replace(/\s+/g," ")
-      .trim();
+  const soften=s=>String(s||"")
+    .replace(/[\u00a0\u202f]/g," ")
+    .replace(/[\u2010-\u2015]/g,"-")
+    .replace(/\u2026/g,"...")
+    .replace(/\u2022/g,"-")
+    .replace(/[\u2192\u2197]/g,">")
+    .replace(/\u25c6/g,"*")
+    .replace(/\u2726/g,"*")
+    .replace(/[\u200B-\u200D]/g,"")
+    .replace(/\s+/g," ")
+    .trim();
 
   function winAnsi(str){
     const special={
@@ -1895,19 +1667,17 @@ function makeNativePdf(blocks){
       "Ÿ":159
     };
 
-    let result="";
+    let r="";
 
     for(const c of str){
       const code=c.codePointAt(0);
 
-      result+=String.fromCharCode(
-        code<=255
-          ?code
-          :(special[c]??63)
+      r+=String.fromCharCode(
+        code<=255?code:special[c]??63
       );
     }
 
-    return result;
+    return r;
   }
 
   function esc(str){
@@ -1950,9 +1720,7 @@ function makeNativePdf(blocks){
   }
 
   function width(str,size,bold){
-    ctx.font=
-      `${bold?"bold ":""}${size}px Arial`;
-
+    ctx.font=`${bold?"bold ":""}${size}px Arial`;
     return ctx.measureText(soften(str)).width;
   }
 
@@ -1983,28 +1751,22 @@ function makeNativePdf(blocks){
     cursor=TOP;
 
     rect(0,0,PW,9,"#0C2B4C");
-
     text(
-      LEFT,
-      34,
-      "KRISENFEST.help",
-      11,
-      true,
-      "#0C2B4C"
+      LEFT,34,"KRISENFEST.help",
+      11,true,"#0C2B4C"
     );
 
     line(LEFT,42,PW-RIGHT,42);
   }
 
   function enough(h){
-    if(cursor+h>BOTTOM){
-      newPage();
-    }
+    if(cursor+h>BOTTOM)newPage();
   }
 
   function wrap(s,size,bold,area){
     const words=soften(s).split(" ");
     const rows=[];
+
     let row="";
 
     for(let word of words){
@@ -2036,10 +1798,7 @@ function makeNativePdf(blocks){
 
       const next=row?row+" "+word:word;
 
-      if(
-        row&&
-        width(next,size,bold)>area
-      ){
+      if(row&&width(next,size,bold)>area){
         rows.push(row);
         row=word;
       }else{
@@ -2061,10 +1820,7 @@ function makeNativePdf(blocks){
     const after=opts.after??8;
 
     const lines=wrap(
-      s,
-      size,
-      bold,
-      usable-indent
+      s,size,bold,usable-indent
     );
 
     for(const ln of lines){
@@ -2090,10 +1846,8 @@ function makeNativePdf(blocks){
     cursor+=9;
 
     line(
-      LEFT,
-      cursor-10,
-      PW-RIGHT,
-      cursor-10
+      LEFT,cursor-10,
+      PW-RIGHT,cursor-10
     );
 
     para(s,{
@@ -2108,10 +1862,7 @@ function makeNativePdf(blocks){
     if(!url)return;
 
     const lines=wrap(
-      label,
-      10.2,
-      true,
-      usable-15
+      label,10.2,true,usable-15
     );
 
     for(const ln of lines){
@@ -2147,6 +1898,7 @@ function makeNativePdf(blocks){
 
   for(const b of blocks){
     switch(b.type){
+
       case "title":
         enough(50);
         para(b.text,{
@@ -2185,10 +1937,7 @@ function makeNativePdf(blocks){
         const value=b.value;
 
         const valueLines=wrap(
-          value,
-          9.8,
-          true,
-          usable-190
+          value,9.8,true,usable-190
         );
 
         const h=Math.max(
@@ -2199,12 +1948,8 @@ function makeNativePdf(blocks){
         enough(h);
 
         text(
-          LEFT+4,
-          cursor,
-          label,
-          9.3,
-          false,
-          "#60768B"
+          LEFT+4,cursor,label,
+          9.3,false,"#60768B"
         );
 
         valueLines.forEach((ln,i)=>{
@@ -2240,29 +1985,18 @@ function makeNativePdf(blocks){
           const x=LEFT+i*(w+gap);
 
           rect(
-            x,
-            cursor-2,
-            w,
-            45,
+            x,cursor-2,w,45,
             "#EFF5FA"
           );
 
           text(
-            x+10,
-            cursor+14,
-            label,
-            9,
-            false,
-            "#536D85"
+            x+10,cursor+14,
+            label,9,false,"#536D85"
           );
 
           text(
-            x+10,
-            cursor+33,
-            value,
-            15,
-            true,
-            "#0C2B4C"
+            x+10,cursor+33,
+            value,15,true,"#0C2B4C"
           );
         });
 
@@ -2284,20 +2018,13 @@ function makeNativePdf(blocks){
           "#B42E3D";
 
         rect(
-          LEFT,
-          cursor-7,
-          usable,
-          28,
-          fill
+          LEFT,cursor-7,
+          usable,28,fill
         );
 
         text(
-          LEFT+12,
-          cursor+11,
-          b.text,
-          11.3,
-          true,
-          fg
+          LEFT+12,cursor+11,
+          b.text,11.3,true,fg
         );
 
         cursor+=34;
@@ -2319,7 +2046,6 @@ function makeNativePdf(blocks){
 
       case "step":
         enough(35);
-
         para(b.text,{
           size:10.5,
           bold:true,
@@ -2331,12 +2057,10 @@ function makeNativePdf(blocks){
           size:10.1,
           after:11
         });
-
         break;
 
       case "product":
         enough(42);
-
         para(b.text,{
           size:10.8,
           bold:true,
@@ -2353,26 +2077,19 @@ function makeNativePdf(blocks){
           "Technische Informationen beim Hersteller",
           b.url
         );
-
         break;
 
       case "bullet":
         enough(20);
-
         text(
-          LEFT+2,
-          cursor,
-          "-",
-          11,
-          true,
-          "#175B91"
+          LEFT+2,cursor,
+          "-",11,true,"#175B91"
         );
 
         para(b.text,{
           indent:14,
           after:5
         });
-
         break;
 
       case "warning":
@@ -2385,7 +2102,6 @@ function makeNativePdf(blocks){
           fill:"#B1342B",
           after:10
         });
-
         break;
 
       case "link":
@@ -2399,12 +2115,10 @@ function makeNativePdf(blocks){
           size:8.5,
           fill:"#6B8096"
         });
-
         break;
     }
   }
 
-  /* Fußzeilen auf jeder Seite */
   const total=pages.length;
 
   pages.forEach((p,i)=>{
@@ -2412,34 +2126,29 @@ function makeNativePdf(blocks){
     page=p;
 
     line(
-      LEFT,
-      807,
-      PW-RIGHT,
-      807
+      LEFT,807,
+      PW-RIGHT,807
     );
 
     text(
-      LEFT,
-      824,
-      "KRISENFEST.help  |  Persönliche Vorsorgeanalyse",
-      8,
-      false,
-      "#6B8096"
+      LEFT,824,
+      "KRISENFEST.help | Persönliche Vorsorgeanalyse",
+      8,false,"#6B8096"
     );
 
     text(
-      PW-RIGHT-75,
-      824,
+      PW-RIGHT-75,824,
       `Seite ${i+1} / ${total}`,
-      8,
-      false,
-      "#6B8096"
+      8,false,"#6B8096"
     );
 
     page=previous;
   });
 
-  /* PDF-Objekte zusammensetzen */
+  /*
+    PDF-Objekte und Verknüpfungen erstellen.
+  */
+
   const objs=[];
 
   function reserve(){
@@ -2458,12 +2167,14 @@ function makeNativePdf(blocks){
 
   put(
     font1,
-    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>"
+    "<< /Type /Font /Subtype /Type1 "+
+    "/BaseFont /Helvetica /Encoding /WinAnsiEncoding >>"
   );
 
   put(
     font2,
-    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>"
+    "<< /Type /Font /Subtype /Type1 "+
+    "/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>"
   );
 
   const children=[];
@@ -2580,168 +2291,140 @@ function makeNativePdf(blocks){
 }
 
 /*
-Mobile Vorschau:
-Der Bericht bleibt auch auf Geräten lesbar, deren Browser
-ein eingebettetes PDF nicht direkt anzeigen kann.
+  Zusätzliche Vorschau für Smartphone-Browser,
+  deren integrierter PDF-Viewer eingeschränkt ist.
 */
-function displayMobileReport(blocks){
-  const parent=$("pdfMobile");
-  parent.replaceChildren();
+
+function mobile(blocks){
+  const root=$("mobilVorschau");
+  root.replaceChildren();
+
+  const make=(tag,text,cls)=>{
+    const node=document.createElement(tag);
+    node.textContent=text;
+
+    if(cls)node.className=cls;
+
+    root.append(node);
+    return node;
+  };
 
   for(const b of blocks){
-    let node;
+    if(b.type==="kv"){
+      make("p",b.text+": "+b.value);
+      continue;
+    }
 
     if(b.type==="metrics"){
-      node=document.createElement("div");
-      node.className="mobile-metrics";
-
-      b.metrics.forEach(([label,value])=>{
-        const box=document.createElement("div");
-        const sm=document.createElement("small");
-        sm.textContent=label;
-
-        const strong=document.createElement("strong");
-        strong.textContent=value;
-
-        box.append(sm,strong);
-        node.append(box);
-      });
-
-    }else if(b.type==="kv"){
-      node=document.createElement("div");
-      node.className="mobile-kv";
-
-      const label=document.createElement("span");
-      label.textContent=b.text;
-
-      const value=document.createElement("strong");
-      value.textContent=b.value;
-
-      node.append(label,value);
-
-    }else if(
-      b.type==="link"||
-      b.type==="product"
-    ){
-      node=document.createElement("div");
-      node.className="mobile-entry";
-
-      if(b.type==="product"){
-        const name=document.createElement("strong");
-        name.textContent=b.text;
-
-        const description=document.createElement("p");
-        description.textContent=b.value;
-
-        node.append(name,description);
-      }
-
-      if(b.url){
-        const a=document.createElement("a");
-        a.href=b.url;
-        a.target="_blank";
-        a.rel="noopener noreferrer";
-
-        a.textContent=
-          b.type==="link"
-            ?b.text
-            :"Herstellerinformationen öffnen";
-
-        node.append(a);
-      }
-
-    }else if(b.type==="step"){
-      node=document.createElement("div");
-      node.className="mobile-entry";
-
-      const strong=document.createElement("strong");
-      strong.textContent=b.text;
-
-      const p=document.createElement("p");
-      p.textContent=b.value;
-
-      node.append(strong,p);
-
-    }else{
-      const tag={
-        title:"h2",
-        subtitle:"p",
-        heading:"h3",
-        subheading:"h4",
-        status:"div",
-        lead:"strong",
-        warning:"h4",
-        bullet:"p",
-        end:"small"
-      }[b.type]||"p";
-
-      node=document.createElement(tag);
-
-      node.textContent=
-        (b.type==="bullet"?"• ":"")+
-        b.text;
+      make(
+        "p",
+        b.metrics.map(x=>x.join(": ")).join(" · ")
+      );
+      continue;
     }
 
-    node.classList.add(
-      "report-block",
-      "type-"+b.type
+    if(b.type==="step"){
+      make("h4",b.text);
+      make("p",b.value);
+      continue;
+    }
+
+    if(b.type==="product"){
+      make("h4",b.text);
+      make("p",b.value);
+
+      const a=make(
+        "a",
+        "Herstellerinformationen"
+      );
+
+      a.href=b.url;
+      a.target="_blank";
+      a.rel="noopener noreferrer";
+      continue;
+    }
+
+    if(b.type==="link"){
+      const a=make("a",b.text);
+
+      a.href=b.url;
+      a.target="_blank";
+      a.rel="noopener noreferrer";
+
+      root.append(document.createElement("p"));
+      continue;
+    }
+
+    const tag=
+      ["heading","title"].includes(b.type)?"h3":
+      ["subheading","warning"].includes(b.type)?"h4":
+      "p";
+
+    make(
+      tag,
+      b.text,
+      b.type==="status"?"mstatus":""
     );
-
-    parent.append(node);
   }
 }
 
-/*
-PDF anzeigen und Downloadlink bereitstellen.
-*/
-function showPdfReport(d,root){
-  clearPdf();
+/* Bericht berechnen und als PDF anzeigen. */
+function show(){
+  if(!fieldsOK())return;
 
-  const blocks=makeBlocks(d,root);
-  const blob=makeNativePdf(blocks);
+  try{
+    clearReport();
 
-  if(
-    blob.size<1000||
-    blob.type!=="application/pdf"
-  ){
-    throw new Error("PDF-Datei nicht gültig");
+    const blocks=analyse();
+    const pdf=makeNativePdf(blocks);
+
+    if(pdf.size<1000){
+      throw Error("Das PDF ist unvollständig.");
+    }
+
+    pdfURL=URL.createObjectURL(pdf);
+
+    $("pdfOeffnen").href=pdfURL;
+    $("pdfSpeichern").href=pdfURL;
+    $("pdfRahmen").src=pdfURL;
+
+    mobile(blocks);
+
+    $("bericht").hidden=false;
+
+    $("bericht").scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  }catch(e){
+    console.error("KRISENFEST PDF-Fehler",e);
+
+    $("fehler").hidden=false;
+    $("fehler").textContent=
+      "Die PDF-Erstellung ist fehlgeschlagen. "+
+      "Bitte prüfen Sie die Angaben und versuchen "+
+      "Sie es erneut.";
   }
-
-  currentPdfUrl=URL.createObjectURL(blob);
-
-  $("pdfOpen").href=currentPdfUrl;
-  $("pdfDownload").href=currentPdfUrl;
-  $("pdfFrame").src=currentPdfUrl;
-
-  displayMobileReport(blocks);
-
-  $("pdfResult").hidden=false;
-  $("bericht").hidden=false;
-
-  $("bericht").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-
-  return blob;
 }
 
-/* Bedienung */
-$("auswerten").addEventListener("click",run);
+/* Bedienelemente */
+$("auswerten").addEventListener("click",show);
 
 $("reset").addEventListener("click",()=>{
-  for(const el of document.querySelectorAll("input,select")){
-    if(el.type==="checkbox"){
-      el.checked=false;
+  document.querySelectorAll("input,select").forEach(e=>{
+    if(e.type==="checkbox"){
+      e.checked=false;
     }else{
-      el.value="";
+      e.value="";
     }
-  }
+  });
 
-  refresh();
-  clearInvalid();
-  updateModel();
-  clearPdf();
+  document.querySelectorAll(".invalid").forEach(
+    e=>e.classList.remove("invalid")
+  );
+
+  $("fehler").hidden=true;
+  visibility();
 
   window.scrollTo({
     top:0,
@@ -2749,8 +2432,9 @@ $("reset").addEventListener("click",()=>{
   });
 });
 
-refresh();
-updateModel();
+visibility();
+
+window.KRISENFEST_VERSION="Trinkwasser-PDF-28";
 </script>
 </body>
 </html>
