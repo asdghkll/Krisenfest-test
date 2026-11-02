@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f5f8fc">
 <title>KRISENFEST.AT – Trinkwasser-Selbstcheck</title>
+
 <style>
 :root {
   --navy:#071e3b;
@@ -41,10 +42,9 @@ a {color:inherit}
   gap:24px;
 }
 .smallbrand {
-  display:flex;
-  align-items:center;
-  text-decoration:none;
+  display:block;
   flex:none;
+  text-decoration:none;
 }
 .brandmark {
   display:block;
@@ -158,7 +158,7 @@ a {color:inherit}
   grid-template-rows:minmax(0,1fr) 48px;
 }
 .field.wide {grid-column:1/-1}
-.field label,.field-title {
+.field label {
   color:#14243f;
   font-weight:660;
   font-size:14px;
@@ -210,7 +210,7 @@ input::-webkit-outer-spin-button {
   margin-top:20px;
 }
 
-/* Zusätzliche Fragen */
+/* Zusatzfragen */
 .conditional {
   padding:17px;
   background:#f5f9fd;
@@ -331,7 +331,7 @@ input::-webkit-outer-spin-button {
 .tip {background:#eff7fd}
 .tip-icon {font-size:28px}
 
-/* Ergebnis mit drei Bewertungsfarben */
+/* Ampelfarben */
 #bericht {scroll-margin-top:20px}
 #resultInner .status {
   padding:22px 24px;
@@ -387,16 +387,14 @@ input::-webkit-outer-spin-button {
 }
 .source-note a:hover {color:var(--red)}
 
-/* Fehlende Pflichtfelder */
+/* Pflichtfeldprüfung */
 .field input.invalid,
 .field select.invalid {
   border:3px solid #bf1430!important;
   background:#fff0f2!important;
   box-shadow:0 0 0 3px #bf143022!important;
 }
-.field:has(.invalid) > label {
-  color:#ac1830;
-}
+.field:has(.invalid) > label {color:#ac1830}
 .validation-note {
   position:absolute;
   left:0;
@@ -405,12 +403,6 @@ input::-webkit-outer-spin-button {
   font-weight:700;
   color:#b21832;
   white-space:nowrap;
-}
-#aufbereitungGruppe.invalid {
-  outline:3px solid #bf1430;
-  background:#fff0f2;
-  border-radius:6px;
-  padding:10px!important;
 }
 #error {
   background:#fff2f2;
@@ -493,6 +485,7 @@ input::-webkit-outer-spin-button {
 }
 </style>
 </head>
+
 <body>
 
 <header class="topbar">
@@ -528,9 +521,7 @@ input::-webkit-outer-spin-button {
 <section class="panel" aria-labelledby="h1">
   <div class="headrow">
     <span class="num">1</span>
-    <div>
-      <h2 id="h1">Ihr Haushalt</h2>
-    </div>
+    <div><h2 id="h1">Ihr Haushalt</h2></div>
   </div>
   <div class="fields single">
     <div class="field">
@@ -549,9 +540,7 @@ input::-webkit-outer-spin-button {
 <section class="panel" aria-labelledby="h2">
   <div class="headrow">
     <span class="num">2</span>
-    <div>
-      <h2 id="h2">Vorsorgezeitraum</h2>
-    </div>
+    <div><h2 id="h2">Vorsorgezeitraum</h2></div>
   </div>
   <div class="fields single">
     <div class="field">
@@ -573,9 +562,7 @@ input::-webkit-outer-spin-button {
 <section class="panel" aria-labelledby="h3">
   <div class="headrow">
     <span class="num">3</span>
-    <div>
-      <h2 id="h3">Wasservorrat</h2>
-    </div>
+    <div><h2 id="h3">Wasservorrat</h2></div>
   </div>
   <div class="fields single">
     <div class="field">
@@ -595,9 +582,7 @@ input::-webkit-outer-spin-button {
 <section class="panel" aria-labelledby="h4">
   <div class="headrow">
     <span class="num">4</span>
-    <div>
-      <h2 id="h4">Zusätzliche Wasserquellen</h2>
-    </div>
+    <div><h2 id="h4">Zusätzliche Wasserquellen</h2></div>
   </div>
 
   <div class="fields single">
@@ -656,8 +641,12 @@ input::-webkit-outer-spin-button {
           </label>
           <select id="qualitaet">
             <option value="">Bitte auswählen</option>
-            <option value="ja">Ja, Trinkwasserqualität bestätigt</option>
-            <option value="offen">Ja, aber nicht als Trinkwasser bestätigt</option>
+            <option value="ja">
+              Ja, Trinkwasserqualität bestätigt
+            </option>
+            <option value="offen">
+              Ja, aber nicht als Trinkwasser bestätigt
+            </option>
             <option value="nein">Nein, nicht geprüft</option>
             <option value="unbekannt">Ergebnis unbekannt</option>
           </select>
@@ -902,6 +891,7 @@ const $ = id => document.getElementById(id);
 const val = id => $(id).value;
 const yes = id => val(id) === "ja";
 const checked = id => $(id).checked;
+
 const kinds = {
   well:"Brunnen",
   spring:"Eigene Quelle",
@@ -913,15 +903,22 @@ function updateArt() {
   const labels = {
     "Brunnen":"Wie weit ist der Brunnen entfernt?",
     "Eigene Quelle":"Wie weit ist die Quelle entfernt?",
-    "Regenwasser / Zisterne":"Wie weit ist die Zisterne entfernt?",
-    "Bach, Fluss oder See":"Wie weit ist das Gewässer entfernt?"
+    "Regenwasser / Zisterne":
+      "Wie weit ist die Zisterne entfernt?",
+    "Bach, Fluss oder See":
+      "Wie weit ist das Gewässer entfernt?"
   };
+
   $("entfernungLabel").textContent =
-    labels[val("art")] || "Wie weit ist die Wasserquelle entfernt?";
+    labels[val("art")] ||
+    "Wie weit ist die Wasserquelle entfernt?";
+
   $("stromBox").hidden =
     !(yes("quelle") && val("art") === kinds.well);
+
   $("regenBox").hidden =
     !(yes("quelle") && val("art") === kinds.rain);
+
   $("ersatzBox").hidden = !(
     yes("quelle") &&
     val("art") === kinds.well &&
@@ -934,32 +931,43 @@ function clearOne(el) {
   el.removeAttribute("aria-invalid");
   el.style.removeProperty("border");
   el.style.removeProperty("background-color");
+
   const note =
     el.parentElement?.querySelector(".validation-note");
+
   if (note) note.remove();
 }
 
 function clearInvalid() {
-  for (const el of document.querySelectorAll(".invalid"))
+  for (const el of document.querySelectorAll(".invalid")) {
     clearOne(el);
+  }
+
   for (const note of
-       document.querySelectorAll(".validation-note"))
+    document.querySelectorAll(".validation-note")) {
     note.remove();
+  }
 }
 
 function updateModel() {
   $("anderesModell").hidden =
     val("modell") !== "Anderes Modell";
-  if ($("anderesModell").hidden)
+
+  if ($("anderesModell").hidden) {
     clearOne($("modellAnderes"));
+  }
 }
 
 function refresh() {
   $("quelleDetails").hidden = !yes("quelle");
+
   $("transportBox").hidden =
     !(yes("quelle") && yes("behaelter"));
+
   $("filterBox").hidden = !checked("m_filter");
+
   updateArt();
+
   $("bericht").hidden = true;
   $("error").hidden = true;
 }
@@ -977,8 +985,11 @@ for (const el of document.querySelectorAll("input,select")) {
   for (const evt of ["input","change"]) {
     el.addEventListener(evt,()=>{
       clearOne(el);
-      if (el.type === "checkbox")
+
+      if (el.type === "checkbox") {
         clearOne($("aufbereitungGruppe"));
+      }
+
       $("bericht").hidden = true;
     });
   }
@@ -1006,10 +1017,13 @@ function run() {
     ["m_filter","Wasserfilter"],
     ["kochen","Abkochen"],
     ["chemie","Trinkwasserdesinfektionsmittel"]
-  ].filter(pair=>checked(pair[0]))
-   .map(pair=>pair[1]);
+  ]
+  .filter(pair => checked(pair[0]))
+  .map(pair => pair[1]);
 
   const hasMethod = methods.length > 0;
+
+  /* Eingaben prüfen */
   const required = [];
 
   const requireField = (id,valid) => {
@@ -1045,8 +1059,10 @@ function run() {
 
     if (well) {
       requireField("strom",val("strom") !== "");
-      if (yes("strom"))
+
+      if (yes("strom")) {
         requireField("ersatz",val("ersatz") !== "");
+      }
     }
 
     if (rain && val("regenmenge") !== "") {
@@ -1065,24 +1081,28 @@ function run() {
         Number.isFinite(Number(val("liter"))) &&
         Number(val("liter")) > 0
       );
-      requireField("tragbar",val("tragbar") !== "");
+
+      requireField(
+        "tragbar",
+        val("tragbar") !== ""
+      );
     }
   }
 
   if (checked("m_filter")) {
     requireField("modell",val("modell") !== "");
 
-    if (val("modell") === "Anderes Modell")
+    if (val("modell") === "Anderes Modell") {
       requireField(
         "modellAnderes",
         val("modellAnderes").trim() !== ""
       );
+    }
 
     requireField("einsatz",val("einsatz") !== "");
   }
 
-  // Keine Auswahl bei Wasseraufbereitung ist
-  // eine gültige Antwort, kein Eingabefehler.
+  /* Keine ausgewählte Aufbereitung ist eine gültige Antwort. */
   if (required.length) {
     for (const id of required) {
       const field = $(id);
@@ -1094,6 +1114,7 @@ function run() {
         field.style.setProperty(
           "border","3px solid #bf1430","important"
         );
+
         field.style.setProperty(
           "background-color","#fff0f2","important"
         );
@@ -1107,76 +1128,95 @@ function run() {
 
     $("error").textContent =
       "Bitte ergänzen Sie die rot markierten Angaben.";
+
     $("error").hidden = false;
 
     const first = $(required[0]);
+
     first.scrollIntoView({
-      behavior:"smooth",block:"center"
+      behavior:"smooth",
+      block:"center"
     });
 
-    if (first.matches("input,select"))
+    if (first.matches("input,select")) {
       first.focus({preventScroll:true});
+    }
 
     return;
   }
 
-  /* Wasserbedarf und vorhandener Vorrat */
+  /* Mengenbilanz */
   const need = people * 2;
   const total = need * days;
   const bottleGap = Math.max(0,total-stored);
   const bottleDays = stored / need;
   const bottleCoverage = stored / total;
 
-  /* Technische Nutzbarkeit der Wasserquelle */
   const powerOk =
     !well || !yes("strom") || yes("ersatz");
 
   const hasContainers =
     source && yes("behaelter");
 
-  const transportOk =
-    hasContainers &&
-    yes("tragbar") &&
-    Number(val("liter")) > 0;
-
   const capacity =
     hasContainers ? Number(val("liter")) : 0;
+
+  const transportOk =
+    hasContainers && yes("tragbar") && capacity > 0;
 
   const ready =
     source && powerOk && transportOk;
 
-  /* Nur bei Regenwasser wird eine Speichermenge erfasst */
   const rainKnown =
     rain && val("regenmenge") !== "";
 
   const rainStored =
     rainKnown ? Number(val("regenmenge")) : 0;
 
-  const potentialRainRemaining =
-    rainKnown
-      ? Math.max(0,total-stored-rainStored)
-      : null;
+  const combined = stored + rainStored;
 
-  /*
-   * Geprüfter Brunnen / geprüfte eigene Quelle
-   * mit funktionierender Entnahme = positive Gesamtbewertung.
-   *
-   * Regen- und Oberflächenwasser wird auch bei
-   * vorhandenen Aufbereitungsmethoden vorsichtiger bewertet.
-   */
+  const remainingRainGap =
+    rainKnown ? Math.max(0,total-combined) : null;
+
   const confirmedSupply =
     natural && potable && ready;
 
-  const status =
-    bottleGap === 0 || confirmedSupply
-      ? "good"
-      : (
-          bottleCoverage >= 0.75 ||
-          (natural && potable) ||
-          (ready && (potable || hasMethod))
-        )
-        ? "attention"
-        : "risk";
+  /*
+   * Ampellogik:
+   * Grün: genügend abgefülltes Trinkwasser oder
+   * funktionsfähige, geprüfte eigene Quelle / Brunnen.
+   *
+   * Gelb: erkennbare zusätzliche Reserve mit noch
+   * zu klärenden Voraussetzungen.
+   *
+   * Rot: deutliche Versorgungslücken.
+   */
+  let status = "risk";
+
+  if (bottleGap === 0 || confirmedSupply) {
+    status = "good";
+  } else if (rain && rainKnown) {
+    if (
+      bottleCoverage >= 0.75 ||
+      (
+        ready &&
+        (potable || hasMethod) &&
+        combined / total >= 0.75
+      )
+    ) {
+      status = "attention";
+    }
+  } else if (
+    bottleCoverage >= 0.75 ||
+    (
+      source &&
+      ready &&
+      (potable || hasMethod)
+    ) ||
+    (natural && potable)
+  ) {
+    status = "attention";
+  }
 
   const number = n =>
     Number(n.toFixed(1)).toLocaleString("de-AT",{
@@ -1195,6 +1235,13 @@ function run() {
   const peopleWord =
     people === 1 ? "Person" : "Personen";
 
+  const where =
+    val("entfernung") === "Am Haus"
+      ? "direkt am Haus"
+      : val("entfernung") === "Bis 500 m"
+        ? "in bis zu 500 Metern Entfernung"
+        : "in größerer Entfernung";
+
   const inner = $("resultInner");
   inner.replaceChildren();
 
@@ -1208,7 +1255,7 @@ function run() {
     return p;
   }
 
-  /* Persönlich formuliertes Ergebnis */
+  /* 1. Zusammenhängende persönliche Einschätzung */
   const banner = document.createElement("div");
   banner.className = "status " + status;
 
@@ -1221,12 +1268,22 @@ function run() {
       "Zeitraum ausreichend!";
   } else if (confirmedSupply) {
     title.textContent =
-      "Ihre Trinkwasserversorgung ist durch Vorrat und " +
-      "geprüfte Wasserquelle gut abgesichert!";
+      "Ihre Trinkwasserversorgung ist durch die geprüfte " +
+      "Wasserquelle gut abgesichert!";
+  } else if (
+    rain &&
+    rainKnown &&
+    combined >= total &&
+    ready &&
+    (potable || hasMethod)
+  ) {
+    title.textContent =
+      "Ihre Wasserreserve reicht mengenmäßig aus – " +
+      "die Trinkwasserqualität ist noch abzusichern!";
   } else if (status === "attention") {
     title.textContent =
-      "Ihre zusätzliche Wasserquelle verbessert die " +
-      "Vorsorge – einige Punkte sind noch zu klären!";
+      "Ihre Wasservorsorge ist teilweise abgesichert – " +
+      "einige Punkte bleiben offen!";
   } else {
     title.textContent =
       "Ihre Trinkwasserversorgung weist noch " +
@@ -1238,425 +1295,343 @@ function run() {
   paragraph(
     banner,
     `Sie möchten für ${people} ${peopleWord} ${period} ` +
-    `vorsorgen. Bei einem Richtwert von 2 Litern pro ` +
-    `Person und Tag benötigen Sie dafür ${number(need)} ` +
-    `Liter Trinkwasser täglich, insgesamt ` +
-    `${number(total)} Liter.`
+    `vorsorgen. Bei 2 Litern Trinkwasser pro Person und ` +
+    `Tag benötigen Sie ${number(need)} Liter täglich, ` +
+    `insgesamt ${number(total)} Liter.`
   );
 
   paragraph(
     banner,
-    `Sie verfügen über ${number(stored)} Liter ` +
-    `originalverschlossenes Trinkwasser. Allein damit ` +
-    `können Sie ${noun(bottleDays,"Tag","Tage")} abdecken.`
+    `Sie haben ${number(stored)} Liter originalverschlossenes ` +
+    `Trinkwasser vorrätig. Das reicht rechnerisch für ` +
+    `${noun(bottleDays,"Tag","Tage")}.` +
+    (
+      bottleGap > 0
+        ? ` Allein beim abgefüllten Trinkwasser fehlen ` +
+          `damit ${number(bottleGap)} Liter.`
+        : " Der gewählte Zeitraum ist damit bereits " +
+          "vollständig abgedeckt."
+    )
   );
 
-  if (bottleGap > 0) {
-    paragraph(
-      banner,
-      `Ohne weitere Wasserquelle fehlen im abgefüllten ` +
-      `Vorrat ${number(bottleGap)} Liter für den gewählten ` +
-      `Zeitraum. Das ist nicht automatisch ein Defizit ` +
-      `der gesamten Wasserversorgung.`
-    );
-  } else {
-    paragraph(
-      banner,
-      "Ihr abgefüllter Trinkwasservorrat deckt den " +
-      "gewählten Zeitraum bereits rechnerisch " +
-      "vollständig ab."
-    );
-  }
-
-  /* Individuelle Betrachtung der Wasserquelle */
+  /* Art und Menge der zusätzlichen Wasserquelle */
   if (source) {
-    const distance = val("entfernung");
-
-    const where =
-      distance === "Am Haus"
-        ? "direkt am Haus"
-        : distance === "Bis 500 m"
-          ? "in bis zu 500 Metern Entfernung"
-          : "in größerer Entfernung";
-
-    if (spring) {
+    if (rain) {
+      if (rainKnown) {
+        paragraph(
+          banner,
+          `Ihre Regenwassertonne oder Zisterne ${where} ` +
+          `enthält zusätzlich etwa ${number(rainStored)} Liter. ` +
+          `Zusammen verfügen Sie damit über ` +
+          `${number(combined)} Liter Wasser. ` +
+          (
+            remainingRainGap === 0
+              ? "Die benötigte Wassermenge ist damit " +
+                "rechnerisch vorhanden."
+              : `Zur gewählten Wassermenge fehlen trotz ` +
+                `Zisterne noch ${number(remainingRainGap)} Liter.`
+          ) +
+          " Der Regenwasservorrat ist jedoch nicht " +
+          "automatisch Trinkwasser."
+        );
+      } else {
+        paragraph(
+          banner,
+          `Sie haben außerdem eine Regenwassertonne oder ` +
+          `Zisterne ${where}. Die gespeicherte Menge ist ` +
+          `nicht bekannt; daher lässt sich ihr Beitrag ` +
+          `zur Wassermenge noch nicht berechnen.`
+        );
+      }
+    } else if (spring) {
       paragraph(
         banner,
-        `Zusätzlich haben Sie eine eigene Quelle ${where}. ` +
-        `Bei einer regelmäßig fließenden Quelle ist eine ` +
-        `pauschale Schätzung in Litern pro Tag wenig ` +
-        `hilfreich. Entscheidend sind die vorhandene ` +
-        `Schüttung und die Möglichkeit, Wasser tatsächlich ` +
-        `zu entnehmen.`
+        `Sie haben außerdem eine eigene Quelle ${where}. ` +
+        `Eine laufende Quelle ist ein bedeutender Vorteil: ` +
+        `Statt einer willkürlich geschätzten Tagesmenge ` +
+        `beurteilen wir Trinkwasserqualität und ` +
+        `praktische Entnahme.`
       );
     } else if (well) {
       paragraph(
         banner,
-        `Zusätzlich haben Sie Zugang zu einem Brunnen ` +
-        `${where}. Eine tägliche Literzahl ist nicht ` +
-        `nötig; entscheidend sind die Ergiebigkeit des ` +
-        `Brunnens und ob die Entnahme auch bei Stromausfall ` +
-        `funktioniert.`
+        `Sie verfügen zusätzlich über einen Brunnen ${where}. ` +
+        `Entscheidend für die Nutzung sind die ` +
+        `Trinkwasserqualität, die Ergiebigkeit und die ` +
+        `Entnahme auch bei einem Stromausfall.`
       );
-    } else if (rain) {
-      paragraph(
-        banner,
-        `Zusätzlich steht Ihnen Regenwasser aus einer ` +
-        `Tonne oder Zisterne ${where} zur Verfügung. ` +
-        `Anders als bei einer laufenden Quelle ist hier ` +
-        `die tatsächlich gespeicherte Menge entscheidend.`
-      );
-
-      if (rainKnown) {
-        paragraph(
-          banner,
-          `Derzeit sind nach Ihrer Angabe etwa ` +
-          `${number(rainStored)} Liter Regenwasser ` +
-          `gespeichert. Zusammen mit dem abgefüllten ` +
-          `Trinkwasser sind das rechnerisch ` +
-          `${number(stored+rainStored)} Liter Wasser. ` +
-          (
-            potentialRainRemaining > 0
-              ? `Bis zu ${number(potentialRainRemaining)} ` +
-                `Liter bleiben gegenüber dem Richtwert offen.`
-              : "Damit wäre die Wassermenge nominell abgedeckt."
-          ) +
-          ` Regenwasser zählt ohne gesicherte Aufbereitung ` +
-          `nicht automatisch als Trinkwasser.`
-        );
-      } else {
-        paragraph(
-          banner,
-          "Da keine gespeicherte Regenwassermenge angegeben " +
-          "wurde, lässt sich der mengenmäßige Beitrag der " +
-          "Zisterne nicht beziffern. Künftiger Regen wird " +
-          "nicht als gesicherte Versorgung angerechnet."
-        );
-      }
     } else if (surface) {
       paragraph(
         banner,
-        `Sie haben außerdem Zugang zu einem Bach, Fluss ` +
-        `oder See ${where}. Eine feste tägliche ` +
-        `Entnahmemenge muss dafür nicht geschätzt werden. ` +
-        `Im Vordergrund stehen Erreichbarkeit, sichere ` +
-        `Entnahme und vor allem die Wasserqualität.`
+        `Sie haben zusätzlich Zugang zu einem Bach, Fluss ` +
+        `oder See ${where}. Das ist eine weitere Wasserquelle; ` +
+        `ob das Wasser zum Trinken geeignet gemacht werden ` +
+        `kann, hängt insbesondere von seiner Belastung ` +
+        `und den verfügbaren Aufbereitungsverfahren ab.`
       );
     }
 
-    /* Aussage zur Trinkwasserprüfung */
+    /* Ergebnis der Trinkwasserprüfung */
     if (potable) {
-      if (natural) {
-        paragraph(
-          banner,
-          "Sie geben an, dass eine Trinkwasseruntersuchung " +
-          "vorliegt und die Trinkwasserqualität bestätigt " +
-          "wurde. Das ist ein wesentlicher Vorteil Ihrer " +
-          "Vorsorge. Bei funktionsfähiger Entnahme kann die " +
-          "Quelle den abgefüllten Vorrat sinnvoll ergänzen."
-        );
-      } else {
-        paragraph(
-          banner,
-          "Laut Ihren Angaben wurde die Trinkwasserqualität " +
-          "geprüft und bestätigt. Das ist positiv; bei " +
-          "Regenwasser und Oberflächengewässern ist jedoch " +
-          "besonders auf mögliche Veränderungen der " +
-          "Wasserqualität zu achten."
-        );
-      }
+      paragraph(
+        banner,
+        natural
+          ? "Laut Ihren Angaben wurde die Trinkwasserqualität " +
+            "dieser Quelle geprüft und bestätigt. Das ist " +
+            "für Ihre Vorsorge ein wesentlicher Vorteil."
+          : "Laut Ihren Angaben wurde Trinkwasserqualität " +
+            "bestätigt. Bei Regen- und Oberflächenwasser " +
+            "kann sich die Qualität später jedoch verändern; " +
+            "die Prüfung ist deshalb nicht für jede künftige " +
+            "Entnahme eine Garantie."
+      );
     } else if (quality === "offen") {
       paragraph(
         banner,
-        "Das Wasser wurde zwar geprüft, jedoch nicht als " +
-        "Trinkwasser bestätigt. Eine gesicherte " +
-        "Trinkwasserversorgung lässt sich daraus " +
-        "derzeit nicht ableiten."
+        "Das Wasser wurde untersucht, aber nicht als " +
+        "Trinkwasser bestätigt. Es ist deshalb derzeit " +
+        "nicht als gesichertes Trinkwasser anzurechnen."
       );
     } else if (quality === "nein") {
       paragraph(
         banner,
-        "Die Quelle wurde noch nicht auf Trinkwasserqualität " +
-        "geprüft. Ihre Wassermenge kann daher nicht ohne " +
-        "Weiteres als sicherer Trinkwasservorrat gelten."
+        "Eine Untersuchung auf Trinkwasserqualität liegt " +
+        "nicht vor. Die zusätzliche Menge ist daher eine " +
+        "Wasserreserve, aber noch kein gesicherter " +
+        "Trinkwasservorrat."
       );
     } else {
       paragraph(
         banner,
         "Das Ergebnis einer Trinkwasserprüfung ist nicht " +
-        "bekannt. Die Trinkwassereignung ist deshalb " +
-        "vorerst offen."
+        "bekannt. Die Trinkwassereignung bleibt damit offen."
+      );
+    }
+
+    /*
+     * Wasseraufbereitung direkt in der Einschätzung.
+     * Jede der drei Methoden wird positiv berücksichtigt.
+     * Die unterschiedlichen Grenzen bleiben erkennbar.
+     */
+    if (hasMethod) {
+      const descriptions = [];
+
+      if (checked("kochen")) {
+        descriptions.push(
+          "Abkochen kann Krankheitserreger bei korrekter " +
+          "Durchführung wirksam inaktivieren, entfernt " +
+          "aber keine chemischen Verunreinigungen"
+        );
+      }
+
+      if (checked("m_filter")) {
+        descriptions.push(
+          "ein geeigneter Wasserfilter kann je nach Modell " +
+          "bestimmte Krankheitserreger und Partikel " +
+          "zurückhalten, jedoch nicht automatisch Viren " +
+          "oder gelöste Schadstoffe"
+        );
+      }
+
+      if (checked("chemie")) {
+        descriptions.push(
+          "geeignete Mittel zur Trinkwasserdesinfektion " +
+          "können bestimmte Krankheitserreger reduzieren, " +
+          "beseitigen aber keine chemische Belastung"
+        );
+      }
+
+      paragraph(
+        banner,
+        `Sie haben bereits folgende Wasseraufbereitung ` +
+        `angegeben: ${methods.join(", ")}. Das ist ein ` +
+        `wichtiger Vorteil gegenüber der Verwendung ` +
+        `unbehandelten Wassers. ` +
+        descriptions.map(
+          t => t.charAt(0).toUpperCase() +
+               t.slice(1) + "."
+        ).join(" ") +
+        (
+          !potable
+            ? " Ohne bestätigte Trinkwasserqualität " +
+              "bietet auch eine Aufbereitung keine pauschale " +
+              "Garantie für sicheres Trinkwasser."
+            : ""
+        )
+      );
+    } else if (!potable) {
+      paragraph(
+        banner,
+        "Sie haben keine Wasseraufbereitung angegeben. " +
+        "Für die Nutzung von Wasser ohne bestätigte " +
+        "Trinkwasserqualität fehlt damit eine " +
+        "wesentliche Vorsorgemöglichkeit."
       );
     }
   }
 
   inner.append(banner);
 
-  /* Persönliche Handlungsempfehlungen */
-  const recommendations = document.createElement("div");
-  recommendations.className = "result-recommendations";
+  /* 2. Konkrete nächste Schritte statt redundanter Texte */
+  const recommendations =
+    document.createElement("div");
 
-  const heading = document.createElement("h3");
-  heading.textContent = "Was bedeutet das für Ihre Vorsorge?";
+  recommendations.className =
+    "result-recommendations";
+
+  const heading =
+    document.createElement("h3");
+
+  heading.textContent = "Ihre nächsten Schritte";
   recommendations.append(heading);
 
-  if (bottleGap === 0) {
+  let step = 0;
+
+  function action(text) {
+    step++;
     paragraph(
       recommendations,
-      "Ihr abgefüllter Trinkwasservorrat ist ausreichend. " +
-      "Überprüfen Sie Bestand und Lagerbedingungen regelmäßig."
-    );
-  } else if (confirmedSupply) {
-    paragraph(
-      recommendations,
-      `Ihre ${kind.toLowerCase()} bietet nach Ihren Angaben ` +
-      `eine zusätzlich gut nutzbare Trinkwasserversorgung. ` +
-      `Die ${number(bottleGap)} Liter sind deshalb eine ` +
-      `rechnerische Lücke beim abgefüllten Vorrat, nicht ` +
-      `automatisch eine Versorgungslücke Ihres Haushalts. ` +
-      `Als unabhängige Reserve wäre zusätzliche Bevorratung ` +
-      `dennoch sinnvoll.`
-    );
-  } else if (natural && potable) {
-    paragraph(
-      recommendations,
-      `Die geprüfte Wasserquelle ist ein großer Vorteil. ` +
-      `Damit sie die ${number(bottleGap)} Liter fehlenden ` +
-      `abgefüllten Wassers praktisch ersetzen kann, ` +
-      `sollten die noch offenen Punkte bei Entnahme ` +
-      `und Transport geklärt werden.`
-    );
-  } else if (rain && rainKnown) {
-    paragraph(
-      recommendations,
-      `Die Zisterne enthält nach Ihrer Angabe ` +
-      `${number(rainStored)} Liter. Diese Menge ist eine ` +
-      `zusätzliche Wasserreserve, aber kein gleichwertiger ` +
-      `Vorrat an sicherem Trinkwasser. Für eine gesicherte ` +
-      `Vorsorge sollten Sie die Wasserqualität und eine ` +
-      `geeignete Aufbereitung klären oder den abgefüllten ` +
-      `Vorrat um bis zu ${number(bottleGap)} Liter aufstocken.`
-    );
-  } else if (source) {
-    paragraph(
-      recommendations,
-      `Ihre zusätzliche Wasserquelle kann die Versorgungslücke ` +
-      `beim abgefüllten Wasser verringern. Entscheidend ist, ` +
-      `dass Entnahme, Wasserqualität und gegebenenfalls ` +
-      `Aufbereitung für die tatsächliche Nutzung geeignet ` +
-      `sind. Unabhängig davon könnten Sie den abgefüllten ` +
-      `Vorrat um ${number(bottleGap)} Liter aufstocken.`
-    );
-  } else {
-    paragraph(
-      recommendations,
-      `Ohne zusätzliche Wasserquelle fehlen ` +
-      `${number(bottleGap)} Liter abgefülltes Trinkwasser. ` +
-      `Sie können Ihren Vorrat entsprechend erhöhen oder ` +
-      `eine praktisch nutzbare Wasserquelle erschließen.`
+      `${step}. ${text}`
     );
   }
 
-  if (source) {
-    /* Netzstromabhängigkeit nur bei Brunnen */
-    if (well && yes("strom") && !yes("ersatz")) {
-      paragraph(
-        recommendations,
-        "Ihr Brunnen benötigt Netzstrom, eine Ersatzlösung " +
-        "ist nicht vorhanden. Bei Stromausfall wäre die " +
-        "Entnahme daher nicht gesichert. Das ist die " +
-        "wichtigste technische Schwachstelle."
-      );
-    } else if (
-      well && yes("strom") && yes("ersatz")
-    ) {
-      paragraph(
-        recommendations,
-        "Für die elektrische Brunnenentnahme ist laut Ihren " +
-        "Angaben Ersatzstrom vorhanden. Prüfen Sie, ob die " +
-        "Lösung im Notfall praktisch einsatzbereit ist."
-      );
-    }
-
-    /* Behälter und Transport */
-    if (!hasContainers) {
-      paragraph(
-        recommendations,
-        "Sie haben keine geeigneten Wasserbehälter angegeben. " +
-        "Klären Sie, wie das Wasser aus der Quelle tatsächlich " +
-        "bereitgestellt oder transportiert werden kann; " +
-        "bei einer direkten Hausversorgung kann sich die " +
-        "Situation anders darstellen."
+  /* Wasserqualität */
+  if (source && !potable) {
+    if (hasMethod) {
+      action(
+        "Klären Sie, welche Belastungen bei dieser " +
+        "Wasserquelle möglich sind und ob Ihre vorhandene " +
+        "Aufbereitung dafür geeignet ist. Bei Verdacht " +
+        "auf chemische Verunreinigungen sollten Sie " +
+        "anderes, nachweislich geeignetes Trinkwasser " +
+        "verwenden."
       );
     } else {
-      if (!yes("tragbar")) {
-        paragraph(
-          recommendations,
-          "Die gefüllten Behälter können nicht sicher " +
-          "transportiert werden. Prüfen Sie kleinere " +
-          "Kanister oder eine geeignete Transporthilfe."
-        );
-      }
-
-      if (capacity < need) {
-        paragraph(
-          recommendations,
-          `Ihre Behälter fassen zusammen ${number(capacity)} ` +
-          `Liter, Ihr Tagesbedarf beträgt ${number(need)} ` +
-          `Liter. Mehrmaliges Befüllen kann ausreichen, ` +
-          `wenn die Entnahme und der Transport praktisch ` +
-          `möglich sind.`
-        );
-      }
-    }
-
-    if (val("entfernung") === "Weiter entfernt") {
-      paragraph(
-        recommendations,
-        "Bei der größeren Entfernung sollte der Transportweg " +
-        "praktisch erprobt werden. Die Quelle ist nur so " +
-        "nützlich, wie sich ihr Wasser tatsächlich zum " +
-        "Haushalt bringen lässt."
+      action(
+        "Prüfen Sie die Trinkwassereignung und ergänzen " +
+        "Sie eine für diese Quelle geeignete Aufbereitung. " +
+        "Bis dahin sollten Sie zusätzliches sicheres " +
+        "Trinkwasser vorhalten."
       );
     }
-
-    if (rain) {
-      paragraph(
-        recommendations,
-        "Bei Regenwasser ist die Reserve durch Behälterfüllstand " +
-        "und Niederschläge begrenzt. Einmal gespeichertes " +
-        "Wasser kann verbraucht sein; künftigen Regen " +
-        "sollten Sie nicht fest einplanen."
-      );
-    }
-
-    /* Trinkwasserqualität differenziert behandeln */
-    if (natural && potable) {
-      paragraph(
-        recommendations,
-        "Die bestätigte Trinkwasserqualität spricht für " +
-        "die Nutzung Ihrer Quelle beziehungsweise Ihres " +
-        "Brunnens. Eine erneute Untersuchung ist insbesondere " +
-        "bei Änderungen von Geruch, Trübung, Zufluss oder " +
-        "nach Hochwasser sinnvoll; eine frühere Untersuchung " +
-        "ersetzt nicht die Beobachtung der aktuellen Verhältnisse."
-      );
-    } else if (potable) {
-      paragraph(
-        recommendations,
-        "Die bestätigte Trinkwasserprüfung ist positiv. " +
-        "Bei Regen- oder Oberflächenwasser können sich " +
-        "Qualität und Belastung jedoch schnell ändern. " +
-        "Eine frühere Untersuchung reicht nicht unbedingt " +
-        "aus, um jede spätere Entnahme zu bewerten."
-      );
-    } else if (
-      quality === "nein" ||
-      quality === "unbekannt"
-    ) {
-      paragraph(
-        recommendations,
-        "Lassen Sie nach Möglichkeit feststellen, ob das " +
-        "Wasser Trinkwasserqualität hat. Ohne entsprechenden " +
-        "Nachweis sollte es nicht als gesicherte " +
-        "Trinkwasserreserve bewertet werden."
-      );
-    } else {
-      paragraph(
-        recommendations,
-        "Die vorhandene Prüfung hat keine Trinkwasserqualität " +
-        "bestätigt. Klären Sie die Ursache und nutzen Sie " +
-        "für das Trinken bevorzugt nachweislich geeignetes Wasser."
-      );
-    }
-
-    /* Wasseraufbereitung nach Quellentyp */
-    if (!potable) {
-      if (hasMethod) {
-        paragraph(
-          recommendations,
-          `Sie verfügen über folgende Aufbereitungsmöglichkeiten: ` +
-          `${methods.join(", ")}. Das ist deutlich besser, ` +
-          `als gar keine Möglichkeit zur Behandlung des ` +
-          `Wassers zu haben. Welche Erreger damit reduziert ` +
-          `werden, hängt jedoch vom Verfahren und seiner ` +
-          `korrekten Anwendung ab. Gegen bestimmte chemische ` +
-          `Belastungen helfen Abkochen und übliche Desinfektion nicht.`
-        );
-      } else {
-        paragraph(
-          recommendations,
-          "Sie haben keine Wasseraufbereitung angegeben. " +
-          "Bei Wasser ohne bestätigte Trinkwasserqualität " +
-          "besteht damit eine wichtige Versorgungslücke. " +
-          "Eine geeignete Aufbereitung oder zusätzlicher " +
-          "Vorrat an nachweislich sicherem Trinkwasser " +
-          "wäre sinnvoll."
-        );
-      }
-
-      if (rain || surface) {
-        paragraph(
-          recommendations,
-          "In einer längeren Krise stehen möglicherweise " +
-          "nicht dieselben Prüf- und Versorgungsmöglichkeiten " +
-          "wie im Alltag zur Verfügung. Eine passende " +
-          "Aufbereitung kann das gesundheitliche Risiko " +
-          "vermindern, bietet aber keine pauschale " +
-          "Trinkwassergarantie. Bei Verdacht auf chemische " +
-          "Verunreinigung sollte eine andere Wasserquelle " +
-          "genutzt werden."
-        );
-      }
-    } else if (natural && !hasMethod) {
-      paragraph(
-        recommendations,
-        "Da für Ihre Quelle Trinkwasserqualität bestätigt " +
-        "wurde, ist es nachvollziehbar, dass Sie keine " +
-        "zusätzliche Wasseraufbereitung angegeben haben. " +
-        "Diese fehlende Auswahl wird nicht als Mangel gewertet."
-      );
-    } else if ((rain || surface) && potable) {
-      paragraph(
-        recommendations,
-        hasMethod
-          ? "Die vorliegende Trinkwasserprüfung ist positiv. " +
-            "Da sich Regenwasser und Oberflächengewässer " +
-            "jedoch verändern können, sollten Sie prüfen, " +
-            "ob Ihre Aufbereitungsmethoden für mögliche " +
-            "spätere Belastungen geeignet sind."
-          : "Auch bei einer früher bestätigten Trinkwasserqualität " +
-            "kann sich Regen- oder Oberflächenwasser rasch " +
-            "verändern. Eine geeignete zusätzliche Aufbereitung " +
-            "ist deshalb sinnvoll; ohne sie ist die " +
-            "Versorgung weniger robust."
-      );
-    }
+  } else if (source && (rain || surface)) {
+    action(
+      "Behalten Sie die Wasserqualität im Blick: Bei " +
+      "Regen- und Oberflächenwasser können sich Belastungen " +
+      "verändern. Prüfen Sie die Eignung Ihrer vorhandenen " +
+      "Aufbereitung."
+    );
   }
 
-  /* Spezifische Filterhinweise */
-  if (checked("m_filter")) {
-    const filter =
-      val("modell") === "Anderes Modell"
-        ? val("modellAnderes")
-        : val("modell");
-
-    paragraph(
-      recommendations,
-      `Für Ihren Wasserfilter (${filter}) sind die ` +
-      `dokumentierte Schutzwirkung, die zulässige ` +
-      `Wasserart und der Wartungszustand maßgeblich. ` +
-      `Nicht jeder Filter entfernt Viren oder chemische Stoffe.`
+  /* Brunnen bei Stromausfall */
+  if (
+    source &&
+    well &&
+    yes("strom") &&
+    !yes("ersatz")
+  ) {
+    action(
+      "Sichern Sie die Brunnenentnahme für den Stromausfall " +
+      "durch eine geeignete stromunabhängige Lösung " +
+      "oder Ersatzstrom ab."
     );
+  }
 
-    if (!yes("einsatz")) {
-      paragraph(
-        recommendations,
-        "Die Einsatzbereitschaft Ihres Wasserfilters " +
-        "wird derzeit nicht regelmäßig geprüft. " +
-        "Kontrollieren Sie Zustand und Wartung vor dem Einsatz."
-      );
-    }
+  /* Behälter und Transport */
+  if (source && !hasContainers) {
+    action(
+      "Klären Sie, wie Sie Wasser sicher entnehmen und " +
+      "bereitstellen. Bei Transportbedarf sind saubere, " +
+      "verschließbare Behälter sinnvoll; bei direkter " +
+      "Hausversorgung kann dies anders aussehen."
+    );
+  } else if (source && !yes("tragbar")) {
+    action(
+      "Verbessern Sie den Wassertransport durch leichtere " +
+      "Behälter oder eine passende Transporthilfe."
+    );
+  } else if (source && capacity < need) {
+    action(
+      `Ihre Behälter fassen ${number(capacity)} Liter bei ` +
+      `${number(need)} Litern Tagesbedarf. Klären Sie, ob ` +
+      `mehrmaliges Befüllen und Transportieren praktikabel ist.`
+    );
+  }
+
+  if (
+    source &&
+    val("entfernung") === "Weiter entfernt"
+  ) {
+    action(
+      "Erproben Sie den Weg zu Ihrer Wasserquelle und " +
+      "den Rücktransport gefüllter Behälter."
+    );
+  }
+
+  /* Regenwassermenge */
+  if (rain && !rainKnown) {
+    action(
+      "Ermitteln Sie den aktuellen Füllstand der Zisterne, " +
+      "um die verfügbare Reserve besser beurteilen zu können."
+    );
+  } else if (
+    rain &&
+    rainKnown &&
+    rainStored < bottleGap
+  ) {
+    action(
+      `Die gespeicherte Regenwassermenge reicht allein ` +
+      `nicht für die verbleibenden ${number(bottleGap)} Liter. ` +
+      `Berücksichtigen Sie die noch offenen ` +
+      `${number(remainingRainGap)} Liter in Ihrer Vorratsplanung.`
+    );
+  }
+
+  /* Wasserfilter */
+  if (
+    checked("m_filter") &&
+    !yes("einsatz")
+  ) {
+    action(
+      "Überprüfen Sie vor der Nutzung die Einsatzbereitschaft " +
+      "Ihres Wasserfilters und die Herstellervorgaben."
+    );
+  }
+
+  /* Abkochen ohne Netzstrom */
+  if (
+    checked("kochen") &&
+    source &&
+    !potable
+  ) {
+    action(
+      "Sorgen Sie dafür, dass das Abkochen im Notfall " +
+      "auch ohne reguläre Stromversorgung möglich bleibt."
+    );
+  }
+
+  /* Zusätzlicher unabhängiger Trinkwasservorrat */
+  if (bottleGap > 0) {
+    action(
+      `Als unabhängige Reserve können Sie Ihren Vorrat an ` +
+      `originalverschlossenem Trinkwasser um ` +
+      `${number(bottleGap)} Liter ergänzen. Das ist besonders ` +
+      `hilfreich, falls die zusätzliche Quelle zeitweise ` +
+      `nicht genutzt werden kann.`
+    );
+  } else if (!source) {
+    action(
+      "Kontrollieren Sie Ihre Vorräte regelmäßig und " +
+      "lagern Sie das Wasser nach Herstellerangaben."
+    );
+  }
+
+  if (step === 0) {
+    action(
+      "Kontrollieren Sie regelmäßig Bestand, " +
+      "Trinkwasserqualität und praktische Nutzbarkeit " +
+      "Ihrer Versorgung."
+    );
   }
 
   inner.append(recommendations);
@@ -1664,27 +1639,32 @@ function run() {
   /* Berechnungsgrundlage */
   paragraph(
     inner,
-    "Die Berechnung basiert auf der Empfehlung des " +
-    "Österreichischen Zivilschutzverbandes, mindestens " +
-    "2 Liter Trinkwasser pro Person und Tag zu bevorraten. " +
-    "Für Kochen, Hygiene, besondere Bedürfnisse und hohe " +
-    "Temperaturen ist zusätzliches Wasser erforderlich. " +
-    "Bei einer laufenden Quelle ersetzt die qualitative " +
-    "Beurteilung keine exakte Durchflussmessung; eine " +
-    "gesicherte Trinkwasserqualität und praktische " +
-    "Nutzbarkeit sind dabei entscheidend.",
+    "Grundlage ist die Empfehlung des Österreichischen " +
+    "Zivilschutzverbandes, mindestens 2 Liter Trinkwasser " +
+    "pro Person und Tag zu bevorraten. Für Kochen, Hygiene, " +
+    "besondere Bedürfnisse und hohe Temperaturen ist " +
+    "zusätzliches Wasser erforderlich. In einer Krise " +
+    "können Untersuchungen und Kontrollen erschwert sein: " +
+    "Eine passende Aufbereitung verringert Risiken, " +
+    "ersetzt aber nicht den Nachweis der Trinkwassereignung.",
     "fine"
   );
 
-  const sourceNote = document.createElement("p");
+  const sourceNote =
+    document.createElement("p");
+
   sourceNote.className = "fine source-note";
   sourceNote.append("Quelle: ");
 
-  const sourceLink = document.createElement("a");
+  const sourceLink =
+    document.createElement("a");
+
   sourceLink.href =
     "https://zivilschutz.at/thema/krisenfester-haushalt/";
+
   sourceLink.target = "_blank";
   sourceLink.rel = "noopener noreferrer";
+
   sourceLink.textContent =
     "Österreichischer Zivilschutzverband – Krisenfester Haushalt";
 
@@ -1692,8 +1672,10 @@ function run() {
   inner.append(sourceNote);
 
   $("bericht").hidden = false;
+
   $("bericht").scrollIntoView({
-    behavior:"smooth",block:"start"
+    behavior:"smooth",
+    block:"start"
   });
 }
 
@@ -1713,7 +1695,8 @@ $("reset").addEventListener("click",()=>{
   updateModel();
 
   window.scrollTo({
-    top:0,behavior:"smooth"
+    top:0,
+    behavior:"smooth"
   });
 });
 
