@@ -3,9 +3,10 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f5f8fc">
 <title>KRISENFEST.AT – Trinkwasser-Selbstcheck</title>
+
 <style>
 :root {
   --navy:#071e3b;
@@ -14,6 +15,7 @@
   --muted:#506176;
   --shadow:0 8px 28px rgba(19,44,75,.09);
 }
+
 * {box-sizing:border-box}
 html {scroll-behavior:smooth}
 body {
@@ -26,7 +28,7 @@ body {
 a {color:inherit}
 [hidden] {display:none!important}
 
-/* Kopfzeile und Navigation */
+/* Kopfzeile */
 .topbar {
   background:#ffffffed;
   border-bottom:1px solid #dbe4ed;
@@ -52,6 +54,8 @@ a {color:inherit}
   max-width:46vw;
   height:auto;
 }
+
+/* Navigation */
 .nav {
   display:flex;
   align-items:center;
@@ -93,7 +97,7 @@ a {color:inherit}
   border-bottom:2px solid var(--red);
 }
 
-/* Grundlayout */
+/* Seitenlayout */
 .layout {
   max-width:1200px;
   margin:28px auto 60px;
@@ -142,7 +146,7 @@ a {color:inherit}
   color:#64738b;
 }
 
-/* Einheitlich hohe Eingabefelder */
+/* Eingabefelder */
 .fields {
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
@@ -208,7 +212,7 @@ input::-webkit-outer-spin-button {
   margin-top:20px;
 }
 
-/* Zusatzfragen */
+/* Zusätzliche Fragen */
 .conditional {
   padding:17px;
   background:#f5f9fd;
@@ -279,7 +283,7 @@ input::-webkit-outer-spin-button {
   flex:none;
 }
 
-/* Rechte Informationsspalte */
+/* Informationsspalte */
 .sidebox {
   background:#eaf5ff;
   border-color:#dcecf8;
@@ -329,7 +333,7 @@ input::-webkit-outer-spin-button {
 .tip {background:#eff7fd}
 .tip-icon {font-size:28px}
 
-/* Neue farbliche Ergebnisdarstellung */
+/* Ergebnis mit drei Bewertungsfarben */
 #bericht {scroll-margin-top:20px}
 #resultInner .status {
   padding:22px 24px;
@@ -378,6 +382,12 @@ input::-webkit-outer-spin-button {
 .result-recommendations p {
   margin:0 0 13px;
 }
+.source-note a {
+  color:#175b90;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.source-note a:hover {color:var(--red)}
 
 /* Fehlende Pflichtfelder */
 .field input.invalid,
@@ -422,7 +432,7 @@ input::-webkit-outer-spin-button {
   text-align:center;
 }
 
-/* Anpassung an kleinere Bildschirme */
+/* Responsive */
 @media(max-width:960px) {
   .topin {padding-bottom:28px}
   .brandmark {width:235px}
@@ -490,7 +500,8 @@ input::-webkit-outer-spin-button {
 
 <header class="topbar">
   <div class="topin">
-    <a class="smallbrand" href="selbsttests.html"
+    <a class="smallbrand"
+       href="selbsttests.html"
        aria-label="Zur Übersicht der Selbsttests">
       <img class="brandmark"
            src="krisenfest-logo-transparent.png"
@@ -520,7 +531,9 @@ input::-webkit-outer-spin-button {
 <section class="panel" aria-labelledby="h1">
   <div class="headrow">
     <span class="num">1</span>
-    <div><h2 id="h1">Ihr Haushalt</h2></div>
+    <div>
+      <h2 id="h1">Ihr Haushalt</h2>
+    </div>
   </div>
   <div class="fields single">
     <div class="field">
@@ -539,7 +552,9 @@ input::-webkit-outer-spin-button {
 <section class="panel" aria-labelledby="h2">
   <div class="headrow">
     <span class="num">2</span>
-    <div><h2 id="h2">Vorsorgezeitraum</h2></div>
+    <div>
+      <h2 id="h2">Vorsorgezeitraum</h2>
+    </div>
   </div>
   <div class="fields single">
     <div class="field">
@@ -561,7 +576,9 @@ input::-webkit-outer-spin-button {
 <section class="panel" aria-labelledby="h3">
   <div class="headrow">
     <span class="num">3</span>
-    <div><h2 id="h3">Wasservorrat</h2></div>
+    <div>
+      <h2 id="h3">Wasservorrat</h2>
+    </div>
   </div>
   <div class="fields single">
     <div class="field">
@@ -581,7 +598,9 @@ input::-webkit-outer-spin-button {
 <section class="panel" aria-labelledby="h4">
   <div class="headrow">
     <span class="num">4</span>
-    <div><h2 id="h4">Zusätzliche Wasserquellen</h2></div>
+    <div>
+      <h2 id="h4">Zusätzliche Wasserquellen</h2>
+    </div>
   </div>
 
   <div class="fields single">
@@ -714,6 +733,7 @@ input::-webkit-outer-spin-button {
 
   <fieldset id="aufbereitungGruppe"
             style="border:0;padding:0;margin:0">
+
     <label class="checkline">
       <input type="checkbox" id="m_filter">
       <strong>Wasserfilter</strong>
@@ -772,6 +792,7 @@ input::-webkit-outer-spin-button {
         Desinfektionsmittel zur Trinkwasseraufbereitung
       </strong>
     </label>
+
   </fieldset>
 </section>
 
@@ -800,7 +821,6 @@ input::-webkit-outer-spin-button {
 
 </div>
 
-<!-- Informationsspalte -->
 <aside class="sidebar" aria-label="Hinweise zum Selbstcheck">
 
   <div class="sidebox">
@@ -840,10 +860,13 @@ input::-webkit-outer-spin-button {
       <h3>Gut zu wissen</h3>
     </div>
     <p>
-      Als rechnerischen Richtwert verwenden wir
-      <strong>2 Liter Trinkwasser pro Person und Tag</strong>.
-      Für die tatsächliche Notversorgung kann mehr Wasser
-      erforderlich sein.
+      Die Berechnung orientiert sich an der Empfehlung
+      des Österreichischen Zivilschutzverbandes:
+      <strong>
+        mindestens 2 Liter Trinkwasser pro Person und Tag.
+      </strong>
+      Für Kochen, Hygiene, besondere Bedürfnisse und
+      bei hohen Temperaturen ist zusätzliches Wasser erforderlich.
     </p>
     <p class="fine">
       Eine Quelle oder ein Filter allein beweist noch nicht,
@@ -878,6 +901,7 @@ function updateArt() {
     "Bach, Fluss oder See":
       "Wie weit ist das Gewässer entfernt?"
   };
+
   $("entfernungLabel").textContent =
     labels[val("art")] ||
     "Wie weit ist die Wasserquelle entfernt?";
@@ -898,6 +922,7 @@ function clearInvalid() {
   for (const el of document.querySelectorAll(".invalid")) {
     clearOne(el);
   }
+
   for (const note of
        document.querySelectorAll(".validation-note")) {
     note.remove();
@@ -915,27 +940,30 @@ function updateModel() {
 
 function refresh() {
   $("quelleDetails").hidden = !yes("quelle");
+
   $("ersatzBox").hidden =
     !(yes("quelle") && yes("strom"));
+
   $("transportBox").hidden =
     !(yes("quelle") && yes("behaelter"));
+
   $("filterBox").hidden = !checked("m_filter");
 
   $("bericht").hidden = true;
   $("error").hidden = true;
 }
 
-$("art").addEventListener("change",updateArt);
-$("modell").addEventListener("change",updateModel);
+$("art").addEventListener("change", updateArt);
+$("modell").addEventListener("change", updateModel);
 
 for (const id of [
-  "quelle","strom","behaelter","m_filter"
+  "quelle", "strom", "behaelter", "m_filter"
 ]) {
-  $(id).addEventListener("change",refresh);
+  $(id).addEventListener("change", refresh);
 }
 
 for (const el of document.querySelectorAll("input,select")) {
-  for (const evt of ["input","change"]) {
+  for (const evt of ["input", "change"]) {
     el.addEventListener(evt, () => {
       clearOne(el);
 
@@ -956,9 +984,10 @@ function run() {
   const stored = Number(val("flaschen"));
   const source = yes("quelle");
   const need = people * 2;
+
   const required = [];
 
-  const requireField = (id,valid) => {
+  const requireField = (id, valid) => {
     if (!valid) required.push(id);
   };
 
@@ -983,17 +1012,21 @@ function run() {
     stored <= 1000000
   );
 
-  requireField("quelle",val("quelle") !== "");
+  requireField(
+    "quelle",
+    val("quelle") !== ""
+  );
 
   if (source) {
     for (const id of [
-      "art","entfernung","qualitaet","strom","behaelter"
+      "art", "entfernung", "qualitaet",
+      "strom", "behaelter"
     ]) {
-      requireField(id,val(id) !== "");
+      requireField(id, val(id) !== "");
     }
 
     if (yes("strom")) {
-      requireField("ersatz",val("ersatz") !== "");
+      requireField("ersatz", val("ersatz") !== "");
     }
 
     if (yes("behaelter")) {
@@ -1003,12 +1036,19 @@ function run() {
         Number.isFinite(Number(val("liter"))) &&
         Number(val("liter")) > 0
       );
-      requireField("tragbar",val("tragbar") !== "");
+
+      requireField(
+        "tragbar",
+        val("tragbar") !== ""
+      );
     }
   }
 
   if (checked("m_filter")) {
-    requireField("modell",val("modell") !== "");
+    requireField(
+      "modell",
+      val("modell") !== ""
+    );
 
     if (val("modell") === "Anderes Modell") {
       requireField(
@@ -1017,12 +1057,15 @@ function run() {
       );
     }
 
-    requireField("einsatz",val("einsatz") !== "");
+    requireField(
+      "einsatz",
+      val("einsatz") !== ""
+    );
   }
 
   if (
     source &&
-    !["m_filter","kochen","chemie"].some(checked)
+    !["m_filter", "kochen", "chemie"].some(checked)
   ) {
     required.push("aufbereitungGruppe");
   }
@@ -1033,19 +1076,24 @@ function run() {
       field.classList.add("invalid");
 
       if (field.tagName !== "FIELDSET") {
-        field.setAttribute("aria-invalid","true");
+        field.setAttribute("aria-invalid", "true");
 
         field.style.setProperty(
-          "border","3px solid #bf1430","important"
+          "border",
+          "3px solid #bf1430",
+          "important"
         );
+
         field.style.setProperty(
-          "background-color","#fff0f2","important"
+          "background-color",
+          "#fff0f2",
+          "important"
         );
 
         const note = document.createElement("small");
         note.className = "validation-note";
         note.textContent = "Bitte diese Angabe ergänzen.";
-        field.insertAdjacentElement("afterend",note);
+        field.insertAdjacentElement("afterend", note);
       }
     }
 
@@ -1054,6 +1102,7 @@ function run() {
     $("error").hidden = false;
 
     const first = $(required[0]);
+
     first.scrollIntoView({
       behavior:"smooth",
       block:"center"
@@ -1062,14 +1111,15 @@ function run() {
     if (first.matches("input,select")) {
       first.focus({preventScroll:true});
     }
+
     return;
   }
 
-  /* Persönliche Trinkwasserberechnung */
+  /* Berechnung */
   const total = need * days;
-  const deficit = Math.max(0,total - stored);
+  const deficit = Math.max(0, total - stored);
   const duration = stored / need;
-  const missingDays = Math.max(0,days - duration);
+  const missingDays = Math.max(0, days - duration);
   const coverage = stored / total;
 
   const status =
@@ -1077,18 +1127,18 @@ function run() {
     coverage >= 0.75 ? "attention" : "risk";
 
   const number = n =>
-    Number(n.toFixed(1)).toLocaleString("de-AT",{
+    Number(n.toFixed(1)).toLocaleString("de-AT", {
       maximumFractionDigits:1
     });
 
-  const noun = (n,singular,plural) =>
+  const noun = (n, singular, plural) =>
     number(n) + " " +
     (Math.abs(n - 1) < 0.00001 ? singular : plural);
 
   const period =
     days === 30 ? "einen Monat lang" :
     days === 60 ? "zwei Monate lang" :
-    noun(days,"Tag","Tage") + " lang";
+    noun(days, "Tag", "Tage") + " lang";
 
   const peopleWord =
     people === 1 ? "Person" : "Personen";
@@ -1099,12 +1149,14 @@ function run() {
       : 0;
 
   const powerOk =
-    !source || !yes("strom") || yes("ersatz");
+    !source ||
+    !yes("strom") ||
+    yes("ersatz");
 
   const inner = $("resultInner");
   inner.replaceChildren();
 
-  function paragraph(parent,text,cls="result-paragraph") {
+  function paragraph(parent, text, cls="result-paragraph") {
     const p = document.createElement("p");
     p.className = cls;
     p.textContent = text;
@@ -1112,7 +1164,7 @@ function run() {
     return p;
   }
 
-  /* Farbig unterlegter Ergebnistext */
+  /* Farbiges Ergebnis mit Ausrufezeichen */
   const banner = document.createElement("div");
   banner.className = "status " + status;
 
@@ -1122,14 +1174,15 @@ function run() {
   if (status === "good") {
     title.textContent =
       "Ihr Trinkwasservorrat ist für den gewählten " +
-      "Zeitraum ausreichend.";
+      "Zeitraum ausreichend!";
   } else if (status === "attention") {
     title.textContent =
-      "Ihr Trinkwasservorrat reicht noch nicht ganz aus.";
+      "Ihr Trinkwasservorrat reicht für den gewählten " +
+      "Zeitraum noch nicht aus!";
   } else {
     title.textContent =
       "Ihr Trinkwasservorrat ist für den gewählten " +
-      "Zeitraum deutlich zu gering.";
+      "Zeitraum deutlich zu gering!";
   }
 
   banner.append(title);
@@ -1153,10 +1206,11 @@ function run() {
   if (deficit > 0) {
     paragraph(
       banner,
-      `Damit fehlen Ihnen ${number(deficit)} Liter für ` +
-      `den gewünschten Vorsorgezeitraum. Die noch nicht ` +
-      `durch abgefülltes Trinkwasser gedeckte Zeit ` +
-      `beträgt ${noun(missingDays,"Tag","Tage")}.`
+      `Damit fehlen Ihnen ${number(deficit)} Liter ` +
+      `für den gewünschten Vorsorgezeitraum. ` +
+      `Die noch nicht durch abgefülltes Trinkwasser ` +
+      `gedeckte Zeit beträgt ` +
+      `${noun(missingDays,"Tag","Tage")}.`
     );
   } else {
     paragraph(
@@ -1170,7 +1224,7 @@ function run() {
 
   inner.append(banner);
 
-  /* Persönliche Empfehlungen */
+  /* Handlungsempfehlungen */
   const recommendations = document.createElement("div");
   recommendations.className = "result-recommendations";
 
@@ -1229,7 +1283,7 @@ function run() {
     );
   }
 
-  /* Zusätzliche, situationsabhängige Hinweise */
+  /* Ergänzende Hinweise zu Wasserquellen */
   if (source) {
     if (!yes("behaelter")) {
       paragraph(
@@ -1297,6 +1351,7 @@ function run() {
     }
   }
 
+  /* Hinweise zum vorhandenen Filter */
   if (checked("m_filter")) {
     const filter =
       val("modell") === "Anderes Modell"
@@ -1332,16 +1387,33 @@ function run() {
 
   inner.append(recommendations);
 
+  /* Berechnungsgrundlage und Quellenhinweis */
   paragraph(
     inner,
-    "Grundlage dieser vorläufigen Berechnung sind " +
-    "2 Liter Trinkwasser pro Person und Tag. Für " +
-    "Kochen, Hygiene, besondere Bedürfnisse und höhere " +
-    "Temperaturen kann mehr Wasser erforderlich sein. " +
-    "Die Eignung einer zusätzlichen Wasserquelle wird " +
-    "durch diesen Selbstcheck nicht bestätigt.",
+    "Die Berechnung orientiert sich an der Empfehlung " +
+    "des Österreichischen Zivilschutzverbandes, mindestens " +
+    "2 Liter Trinkwasser pro Person und Tag zu bevorraten. " +
+    "Für Kochen, Hygiene, besondere Bedürfnisse und bei " +
+    "hohen Temperaturen ist zusätzliches Wasser erforderlich. " +
+    "Die Eignung einer zusätzlichen Wasserquelle wird durch " +
+    "diesen Selbstcheck nicht bestätigt.",
     "fine"
   );
+
+  const sourceNote = document.createElement("p");
+  sourceNote.className = "fine source-note";
+  sourceNote.append("Quelle: ");
+
+  const sourceLink = document.createElement("a");
+  sourceLink.href =
+    "https://zivilschutz.at/thema/krisenfester-haushalt/";
+  sourceLink.target = "_blank";
+  sourceLink.rel = "noopener noreferrer";
+  sourceLink.textContent =
+    "Österreichischer Zivilschutzverband – Krisenfester Haushalt";
+
+  sourceNote.append(sourceLink);
+  inner.append(sourceNote);
 
   $("bericht").hidden = false;
   $("bericht").scrollIntoView({
@@ -1350,7 +1422,7 @@ function run() {
   });
 }
 
-$("auswerten").addEventListener("click",run);
+$("auswerten").addEventListener("click", run);
 
 $("reset").addEventListener("click", () => {
   for (const el of document.querySelectorAll("input,select")) {
@@ -1376,5 +1448,6 @@ refresh();
 updateArt();
 updateModel();
 </script>
+
 </body>
 </html>
