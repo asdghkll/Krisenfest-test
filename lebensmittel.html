@@ -128,12 +128,12 @@ function isSecureInEmergency(row,horizon){
  if(prep==='cook'&&(!document.getElementById('cookBackup').checked||num(document.getElementById('cookDays').value)<horizon))return false;
  return true;
 }
-function targetMacro(daily){return {kcal:daily,protein:daily/2000*55,fat:daily/2000*50,carbs:daily/2000*180,fiber:daily/2000*25};}
+function targetMacro(daily){return {kcal:daily,protein:daily/2000*55,fat:daily/2000*67,fatScreen:daily/2000*50,carbs:daily/2000*250,fiber:daily/2000*30};}
 function nutrientReach(entries,daily){
  const val=groupTotals(entries),target=targetMacro(daily),valid=entries.length&&blsReady&&!val.unknown.length;
  const caps={};for(const k of ['kcal','protein','fat','carbs','fiber'])caps[k]=target[k]>0?val[k]/target[k]:0;
  // Näherungs-Obergrenze: Versorgung muss kalorisch sowie bei Protein/Fett möglich sein.
- const days=valid?Math.max(0,Math.min(caps.kcal,caps.protein,caps.fat)):null;
+ const days=valid?Math.max(0,Math.min(caps.kcal,caps.protein,val.fat/(target.fatScreen||1))):null;
  return {val,target,caps,days,valid};
 }
 function secureDays(entries,daily){
@@ -293,7 +293,7 @@ function reportBlocks(s){
  push('heading','8. Weitere Selbsttests');push('paragraph','Ergänzend: Trinkwasser, Kochwasser, Strom und Energie, Wärme und weitere KRISENFEST-Selbsttests.');
  push('heading','9. Datenstand und Methodik');
  push('paragraph',`Lebensmitteldaten: ${blsReady?'Max Rubner-Institut, Bundeslebensmittelschlüssel 4.0 (2025), gekürzte BLS-Nährstoffmatrix':'Fallbackdaten, vollständiger BLS 4.0 nicht geladen'}. Quelle: blsdb.de; DOI: 10.25826/Data20251217-134202-0; Lizenz CC BY 4.0. Die erfassten Mengen beziehen sich auf essbaren Anteil je 100 g.`);
- push('paragraph','Nährstoff-Orientierungswerte (modellhaft): Eiweiß 55 g, Fett 50 g, Kohlenhydrate 180 g und Ballaststoffe 25 g pro 2.000 kcal. Diese Werte dienen nur zur Erkennung auffälliger Vorratslücken, nicht der individuellen Ernährungsplanung. Die ausgewiesene theoretische Reichweite ist das Minimum aus Energie-, Eiweiß- und Fett-Reichweite. Die Krisenreichweite wird für jeden möglichen Tag unter Berücksichtigung der angegebenen Kühl- und Kochdauer überprüft. Beide Kennzahlen sind Näherungsobergrenzen und kein Beweis tatsächlich möglicher Tagesrationen.');
+ push('paragraph','Nährstoff-Orientierungswerte (modellhaft): Eiweiß 55 g, Fett 67 g (circa 30 Energieprozent), Kohlenhydrate 250 g (circa 50 Energieprozent) und Ballaststoffe 30 g pro 2.000 kcal. Für die Reichweite wird beim Fett lediglich ein eigener Screeningwert von 50 g berücksichtigt; er ist kein gesundheitlicher Mindestbedarf. Diese Werte dienen nur zur Erkennung auffälliger Vorratslücken, nicht der individuellen Ernährungsplanung. Die ausgewiesene theoretische Reichweite ist die konservative Obergrenze aus Energie, Eiweiß und einem gesonderten Fett-Screeningwert (50 g je 2.000 kcal). In der Nährstofftabelle wird der höhere Fett-Richtwert gesondert geprüft. Die Krisenreichweite wird für jeden möglichen Tag unter Berücksichtigung der angegebenen Kühl- und Kochdauer überprüft. Beide Kennzahlen sind Näherungsobergrenzen und kein Beweis tatsächlich möglicher Tagesrationen.');
  push('paragraph','Kühl- und Kochverfügbarkeit gemäß Angaben; Verderblichkeit individuell prüfen. Eine ärztliche oder ernährungsmedizinische Beratung wird nicht ersetzt. Alle Bestandsangaben und PDF-Daten werden lokal verarbeitet.');
  push('end','KRISENFEST · www.krisenfest.at · Alle Haushalts- und Vorratsangaben werden lokal im Browser verarbeitet.');
  return b;
