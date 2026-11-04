@@ -358,108 +358,92 @@ placeholder="Liter (auch 0 möglich)">
 </div>
 </div>
 </section>
+
 <section class="panel">
-<div class="headrow"><span class="num">4</span><h2>Zusätzliche Wasserquellen</h2></div>
-<div class="fields single">
-<div class="field">
-<label for="quelle">Haben Sie Zugang zu zusätzlichen Wasserquellen?</label>
-<select id="quelle">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-<div id="quelleDetails" class="conditional" hidden>
-<div class="fields">
-<div class="field">
-<label for="art">Welche Wasserquelle?</label>
-<select id="art">
-<option value="">Bitte auswählen</option>
-<option>Brunnen</option>
-<option>Eigene Quelle</option>
-<option>Regenwasser / Zisterne</option>
-<option>Bach, Fluss oder See</option>
-</select>
-</div>
-<div class="field">
-<label for="entfernung">Wie weit ist die Wasserquelle entfernt?</label>
-<select id="entfernung">
-<option value="">Bitte auswählen</option>
-<option>Am Haus</option>
-<option>Bis 500 m</option>
-<option>Weiter entfernt</option>
-</select>
-</div>
-<div class="field wide" id="regenBox" hidden>
-<label for="regenmenge">
-Wie viele Liter Regenwasser sind aktuell ungefähr gespeichert?
-(Optional)
-</label>
-<input id="regenmenge" type="number" min="0" step="0.5"
-placeholder="Aktueller Vorrat in Litern">
-</div>
-<div class="field">
-<label for="qualitaet">Wurde das Wasser auf Trinkwasserqualität geprüft?</label>
-<select id="qualitaet">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja, Trinkwasserqualität bestätigt</option>
-<option value="offen">Ja, aber nicht als Trinkwasser bestätigt</option>
-<option value="nein">Nein, nicht geprüft</option>
-<option value="unbekannt">Ergebnis unbekannt</option>
-</select>
-</div>
-<div class="field" id="stromBox" hidden>
-<label for="strom">Benötigt die Brunnenentnahme Netzstrom?</label>
-<select id="strom">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-<div class="field wide" id="ersatzBox" hidden>
-<label for="ersatz">
-Ist eine stromunabhängige Wasserentnahme oder Ersatzstromversorgung vorhanden?
-</label>
-<select id="ersatz">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-<div class="field">
-<label for="behaelter">Haben Sie saubere, verschließbare Wasserbehälter?</label>
-<select id="behaelter">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-<div class="field wide" id="transportBox" hidden>
-<div class="fields">
-<div class="field">
-<label for="liter">Gesamtkapazität der Behälter (Liter)</label>
-<input id="liter" type="number" min="0" step="0.5"
-placeholder="Gesamtkapazität">
-</div>
-<div class="field">
-<label for="tragbar">
-Können Sie gefüllte Behälter sicher transportieren?
-</label>
-<select id="tragbar">
-<option value="">Bitte auswählen</option>
-<option value="ja">Ja</option>
-<option value="nein">Nein</option>
-</select>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+  <div class="headrow"><span class="num">4</span><h2>Zusätzliche Wasserquellen</h2></div>
+  <div class="fields single">
+    <div class="field">
+      <label for="quelle">Haben Sie Zugang zu zusätzlichen Wasserquellen?</label>
+      <select id="quelle">
+        <option value="">Bitte auswählen</option><option value="ja">Ja</option><option value="nein">Nein</option>
+      </select>
+    </div>
+    <div id="quelleDetails" class="conditional" hidden>
+      <div class="fields">
+        <div class="field">
+          <label for="art">Welche Wasserquelle?</label>
+          <select id="art">
+            <option value="">Bitte auswählen</option>
+            <option>Brunnen</option><option>Eigene Quelle</option>
+            <option>Regenwasser / Zisterne</option><option>Bach, Fluss oder See</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="entfernung" id="entfernungLabel">Wie weit ist die Wasserquelle entfernt?</label>
+          <select id="entfernung">
+            <option value="">Bitte auswählen</option>
+            <option>Am Haus</option><option>Bis 500 m</option><option>Weiter entfernt</option>
+          </select>
+        </div>
+        <div class="field wide" id="regenBox" hidden>
+          <label for="regenmenge">Wie viele Liter Regenwasser sind aktuell ungefähr gespeichert? (Optional)</label>
+          <input id="regenmenge" type="number" min="0" max="1000000" step="0.5" inputmode="decimal" placeholder="Aktueller Vorrat in Litern">
+        </div>
+        <div class="field">
+          <label for="qualitaet">Wurde das Wasser auf Trinkwasserqualität geprüft?</label>
+          <select id="qualitaet">
+            <option value="">Bitte auswählen</option>
+            <option value="ja">Ja, Trinkwasserqualität bestätigt</option>
+            <option value="offen">Ja, aber nicht als Trinkwasser bestätigt</option>
+            <option value="nein">Nein, nicht geprüft</option>
+            <option value="unbekannt">Ergebnis unbekannt</option>
+          </select>
+        </div>
+        <div class="field" id="stromBox" hidden>
+          <label for="strom">Benötigt die Brunnenentnahme Netzstrom?</label>
+          <select id="strom">
+            <option value="">Bitte auswählen</option><option value="ja">Ja</option><option value="nein">Nein</option>
+          </select>
+        </div>
+        <div class="field wide" id="ersatzBox" hidden>
+          <label for="ersatz">Ist eine stromunabhängige Wasserentnahme oder Ersatzstromversorgung vorhanden?</label>
+          <select id="ersatz">
+            <option value="">Bitte auswählen</option><option value="ja">Ja</option><option value="nein">Nein</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="panel">
+  <div class="headrow"><span class="num">5</span><h2>Wasserbehälter und Transport</h2></div>
+  <p class="sub">Wasser hygienisch aufbewahren und bei Bedarf transportieren – auch ohne eigene zusätzliche Wasserquelle.</p>
+  <div class="fields single">
+    <div class="field">
+      <label for="behaelter">Haben Sie geeignete, saubere und verschließbare Wasserbehälter?</label>
+      <select id="behaelter">
+        <option value="">Bitte auswählen</option><option value="ja">Ja</option><option value="nein">Nein</option>
+      </select>
+    </div>
+    <div id="transportBox" class="conditional" hidden>
+      <div class="fields">
+        <div class="field">
+          <label for="liter">Wie viele Liter fassen Ihre Behälter insgesamt?</label>
+          <input id="liter" type="number" min="0" max="1000000" step="0.5" inputmode="decimal" placeholder="Gesamtkapazität in Litern">
+        </div>
+        <div class="field">
+          <label for="tragbar">Können Sie gefüllte Behälter sicher tragen oder mit einer Transporthilfe bewegen?</label>
+          <select id="tragbar">
+            <option value="">Bitte auswählen</option><option value="ja">Ja</option><option value="nein">Nein</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <section class="panel">
 <div class="headrow">
-<span class="num">5</span>
+<span class="num">6</span>
 <div>
 <h2>Wasseraufbereitung</h2>
 <p class="sub">Welche Möglichkeiten stehen Ihnen im Notfall zur Verfügung?</p>
@@ -774,11 +758,18 @@ function visibility(){
   const source=Y("quelle");
   const well=source&&V("art")===K.well;
 
+  const distanceLabels={
+    "Brunnen":"Wie weit ist der Brunnen entfernt?",
+    "Eigene Quelle":"Wie weit ist die Quelle entfernt?",
+    "Regenwasser / Zisterne":"Wie weit ist die Zisterne entfernt?",
+    "Bach, Fluss oder See":"Wie weit ist das Gewässer entfernt?"
+  };
+  $("entfernungLabel").textContent=distanceLabels[V("art")]||"Wie weit ist die Wasserquelle entfernt?";
   $("quelleDetails").hidden=!source;
   $("regenBox").hidden=!(source&&V("art")===K.rain);
   $("stromBox").hidden=!well;
   $("ersatzBox").hidden=!(well&&Y("strom"));
-  $("transportBox").hidden=!(source&&Y("behaelter"));
+  $("transportBox").hidden=!Y("behaelter");
   $("filterBox").hidden=!C("m_filter");
   $("anderesModell").hidden=!(C("m_filter")&&V("modell")==="Anderes Modell");
 
@@ -810,7 +801,7 @@ function validate(){
   check("quelle",V("quelle")!=="");
 
   if(Y("quelle")){
-    for(const id of ["art","entfernung","qualitaet","behaelter"]){
+    for(const id of ["art","entfernung","qualitaet"]){
       check(id,V(id)!=="");
     }
     if(V("art")===K.well){
@@ -822,10 +813,12 @@ function validate(){
         Number.isFinite(+V("regenmenge"))&&+V("regenmenge")>=0
       );
     }
-    if(Y("behaelter")){
-      check("liter",V("liter")!==""&&+V("liter")>0);
-      check("tragbar",V("tragbar")!=="");
-    }
+  }
+  // Wasserbehälter und Transport werden unabhängig von der Wasserquelle geprüft.
+  check("behaelter",V("behaelter")!=="");
+  if(Y("behaelter")){
+    check("liter",V("liter")!==""&&Number.isFinite(+V("liter"))&&+V("liter")>0&&+V("liter")<=1000000);
+    check("tragbar",V("tragbar")!=="");
   }
 
   if(C("m_filter")){
@@ -868,7 +861,7 @@ function analyse(){
   const quality=source?V("qualitaet"):"";
   const potable=quality==="ja";
   const powerGap=well&&Y("strom")&&!Y("ersatz");
-  const containers=source&&Y("behaelter");
+  const containers=Y("behaelter");
   const capacity=containers?+V("liter"):0;
   const transport=containers&&Y("tragbar");
   const accessible=source&&!powerGap&&transport;
@@ -945,13 +938,10 @@ function analyse(){
         );
       }
     }
-    kv("Saubere, verschließbare Behälter",
-      containers?N(capacity)+" Liter":"Nicht vorhanden"
-    );
-    if(containers){
-      kv("Wassertransport",transport?"Möglich":"Nicht abgesichert");
-    }
   }
+  // Eigenständiger Bereich 5: auch ohne zusätzliche Quelle im Bericht.
+  kv("Saubere, verschließbare Behälter",containers?N(capacity)+" Liter":"Nicht vorhanden");
+  if(containers)kv("Wassertransport",transport?"Möglich":"Nicht abgesichert");
 
   kv("Wasserfilter",filter?model:"Keiner angegeben");
   if(filter){
@@ -1010,7 +1000,7 @@ function analyse(){
     gaps.push("Bei Stromausfall ist die Brunnenentnahme "
       +"ohne Ersatzlösung nicht gesichert.");
   }
-  if(source&&!containers){
+  if(!containers){
     gaps.push("Geeignete, saubere und verschließbare "
       +"Wasserbehälter fehlen.");
   }
@@ -1405,6 +1395,16 @@ function makePDF(blocks,logo){
     );
   }
 
+  // Abgerundete farbige Bewertungsflächen ohne externe PDF-Bibliothek.
+  function roundedRect(x,y,w,h,r,fill){
+    const k=.5522847498,L=x,R=x+w,T=PH-y,B=PH-y-h,c=Math.min(r,w/2,h/2),f=v=>v.toFixed(2);
+    page.ops.push(`${rgb(fill)} rg ${f(L+c)} ${f(T)} m `+
+      `${f(R-c)} ${f(T)} l ${f(R-c+k*c)} ${f(T)} ${f(R)} ${f(T-c+k*c)} ${f(R)} ${f(T-c)} c `+
+      `${f(R)} ${f(B+c)} l ${f(R)} ${f(B+c-k*c)} ${f(R-c+k*c)} ${f(B)} ${f(R-c)} ${f(B)} c `+
+      `${f(L+c)} ${f(B)} l ${f(L+c-k*c)} ${f(B)} ${f(L)} ${f(B+c-k*c)} ${f(L)} ${f(B+c)} c `+
+      `${f(L)} ${f(T-c)} l ${f(L)} ${f(T-c+k*c)} ${f(L+c-k*c)} ${f(T)} ${f(L+c)} ${f(T)} c h f`);
+  }
+
   function line(x1,y1,x2,y2,color=PAL.line,weight=.8){
     page.ops.push(
       `${rgb(color)} RG ${weight} w `+
@@ -1432,16 +1432,20 @@ function makePDF(blocks,logo){
     cursor=TOP;
 
     if(logo){
+      const logoHeight=52;
+      const logoWidth=logoHeight*(logo.width/logo.height);
+      const logoBottom=86;
       page.ops.push(
-        `q 144 0 0 55 ${LEFT.toFixed(2)} `+
-        `${(PH-84).toFixed(2)} cm /ImLogo Do Q`
+        `q ${logoWidth.toFixed(2)} 0 0 ${logoHeight.toFixed(2)} ${LEFT.toFixed(2)} `+
+        `${(PH-logoBottom).toFixed(2)} cm /ImLogo Do Q`
       );
     }else{
       print(LEFT,65,"KRISEN",16,true,PAL.navy);
       print(LEFT+69,65,"FEST",16,true,"#D72234");
     }
-
-    print(PW-RIGHT-118,67,"www.krisen-fest.at",10.5,true,PAL.navy);
+    // URL rechtsbündig auf der optischen Basislinie des Schriftzugs.
+    const urlLabel="www.krisen-fest.at",urlSize=10.5;
+    print(PW-RIGHT-textWidth(urlLabel,urlSize,true),83,urlLabel,urlSize,true,PAL.navy);
     line(LEFT,102,PW-RIGHT,102,"#70879B",.85);
   }
 
@@ -1509,9 +1513,9 @@ function makePDF(blocks,logo){
     const titles=wrap(title,11.1,true,usable-37);
     const rows=wrap(body,10.15,false,usable-37);
     const height=30+titles.length*16+rows.length*16;
-    ensure(height+12);
-    rect(LEFT,cursor-13,usable,height,bg);
-    rect(LEFT,cursor-13,4,height,fg);
+    ensure(height+24);
+    roundedRect(LEFT,cursor-13,usable,height,10,bg);
+    roundedRect(LEFT+9,cursor-3,4,height-20,2,fg);
     let y=cursor+2;
     titles.forEach(row=>{
       print(LEFT+16,y,row,11.1,true,fg);
@@ -1522,16 +1526,16 @@ function makePDF(blocks,logo){
       print(LEFT+16,y,row,10.15,false,PAL.ink);
       y+=16;
     });
-    cursor+=height+4;
+    cursor+=height+17;
   }
 
   function listCard(title,items,fg,bg){
     const chunks=items.map(item=>wrap(item,10.2,false,usable-52));
     const totalLines=chunks.reduce((a,rows)=>a+rows.length,0);
     const height=45+totalLines*15.6+items.length*7;
-    ensure(height+12);
-    rect(LEFT,cursor-12,usable,height,bg);
-    rect(LEFT,cursor-12,4,height,fg);
+    ensure(height+27);
+    roundedRect(LEFT,cursor-12,usable,height,10,bg);
+    roundedRect(LEFT+9,cursor-2,4,height-20,2,fg);
     print(LEFT+14,cursor+5,title,12.1,true,fg);
     let y=cursor+33;
     chunks.forEach(rows=>{
@@ -1542,7 +1546,7 @@ function makePDF(blocks,logo){
       });
       y+=7;
     });
-    cursor+=height+3;
+    cursor+=height+21;
   }
 
   function link(label,url){
@@ -1615,7 +1619,7 @@ function makePDF(blocks,logo){
         const gap=10,w=(usable-20)/3;
         b.metrics.forEach(([label,value],i)=>{
           const x=LEFT+i*(w+gap);
-          rect(x,cursor-10,w,57,
+          roundedRect(x,cursor-10,w,57,8,
             i===2?"#FDEDEF":"#ECF5FD"
           );
           print(x+10,cursor+8,label,9.2,false,PAL.muted);
@@ -1623,7 +1627,7 @@ function makePDF(blocks,logo){
             i===2?"#B9273B":PAL.navy
           );
         });
-        cursor+=70;
+        cursor+=83;
         break;
       }
 
@@ -1645,9 +1649,10 @@ function makePDF(blocks,logo){
         break;
 
       case "lead":
+        cursor+=12;
         paragraph(b.text,{
           size:11.5,bold:true,color:PAL.navy,
-          leading:18.4,after:12
+          leading:19.5,after:16
         });
         break;
 
@@ -1825,7 +1830,7 @@ async function loadLogo(){
 
   const canvas=document.createElement("canvas");
   canvas.width=760;
-  canvas.height=290;
+  canvas.height=Math.max(1,Math.round(canvas.width*img.naturalHeight/img.naturalWidth));
   const ctx=canvas.getContext("2d");
   if(!ctx)return null;
 
