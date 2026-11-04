@@ -309,7 +309,7 @@ a{color:inherit}
 <div class="topin">
 <a class="smallbrand" href="selbsttests.html">
 <img class="brandmark"
-src="krisenfest-logo-transparent.png"
+src="krisenfest-logo-aktuell.svg"
 alt="KRISENFEST">
 </a>
 <nav class="nav" aria-label="Hauptnavigation">
@@ -1464,24 +1464,21 @@ function makePDF(blocks,logo){
     pages.push(page);
     cursor=TOP;
 
-    const logoWidth=178;
-    const logoHeight=logo?logoWidth*logo.height/logo.width:0;
-    const logoTop=41;
+    const logoHeight=52;
+    const logoWidth=logo?logoHeight*logo.width/logo.height:0;
+    const logoBottom=86;
     if(logo){
-      // Echtes Seitenverhältnis des verwendeten Website-Logos einhalten.
       page.ops.push(
         `q ${logoWidth.toFixed(2)} 0 0 ${logoHeight.toFixed(2)} `+
-        `${LEFT.toFixed(2)} ${(PH-logoTop-logoHeight).toFixed(2)} cm /ImLogo Do Q`
+        `${LEFT.toFixed(2)} ${(PH-logoBottom).toFixed(2)} cm /ImLogo Do Q`
       );
     }else{
-      print(LEFT,81,"KRISENFEST.AT",17.5,true,PAL.navy);
+      print(LEFT,82,'KRISENFEST',18,true,PAL.navy);
     }
-
-    const address="www.krisenfest.at",size=12.5;
-    const baseline=logo?logoTop+logoHeight-3:81;
-    print(PW-RIGHT-textWidth(address,size,true),baseline,
+    const address='www.krisenfest.at',size=12.5;
+    print(PW-RIGHT-textWidth(address,size,true),logoBottom-3,
       address,size,true,PAL.navy);
-    line(LEFT,103,PW-RIGHT,103,"#70879B",.85);
+    line(LEFT,103,PW-RIGHT,103,'#70879B',.85);
   }
 
   function ensure(h){
