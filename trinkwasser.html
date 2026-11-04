@@ -274,8 +274,9 @@ a{color:inherit}
   .pdf-report-buttons a{flex:1;text-align:center}
   .pdf-frame{display:none}
   .pdf-mobile{
-    display:block;margin:8px;background:white;padding:20px 16px;
-    border:1px solid #dbe5f0;max-height:650px;overflow-y:auto
+    display:block;margin:8px;background:white;padding:22px 18px;
+    border:1px solid #dbe5f0;border-radius:12px;
+    max-height:650px;overflow-y:auto
   }
   .pdf-mobile h3{font-size:18px}
   .pdf-mobile p{font-size:13px;line-height:1.6}
@@ -284,16 +285,22 @@ a{color:inherit}
     border-bottom:1px solid #e4edf4;gap:8px;padding:6px 0;
     font-size:12px
   }
-  .mobile-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+  .mobile-metrics{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:9px;margin:15px 0 18px
+  }
   .mobile-metrics>div{
-    background:#edf5fa;padding:8px 4px;text-align:center;border-radius:6px
+    background:#edf5fa;padding:14px 9px;text-align:center;
+    border-radius:11px
   }
   .mobile-metrics small{display:block;font-size:10px}
   .mobile-metrics strong{display:block;font-size:15px}
   .mobile-entry{
-    border-left:3px solid #14649c;padding:9px 10px;
-    background:#f3f8fc;margin:9px 0
+    border:1px solid #e0eaf2;border-left:4px solid #14649c;
+    border-radius:11px;padding:16px 18px;line-height:1.65;
+    background:#f3f8fc;margin:16px 0
   }
+  .mobile-entry p{margin:10px 0 0}
 }
 </style>
 </head>
@@ -315,7 +322,7 @@ alt="KRISENFEST">
 <span>Produkte</span>
 <span>Veranstaltungen</span>
 <span>Service</span>
-<span class="brand-url">www.krisen-fest.at</span>
+<span class="brand-url">www.krisenfest.at</span>
 </nav>
 </div>
 </header>
@@ -586,7 +593,7 @@ Für Kochen, Hygiene und besondere Bedürfnisse kommt weiteres Wasser hinzu.
 </aside>
 </main>
 <footer class="foot">
-KRISENFEST · www.krisen-fest.at · Kostenloser Vorsorge-Selbstcheck
+KRISENFEST · www.krisenfest.at · Kostenloser Vorsorge-Selbstcheck
 </footer>
 <script>
 "use strict";
@@ -1411,6 +1418,26 @@ function makePDF(blocks,logo){
     );
   }
 
+  /* PDF mit weich abgerundeten Farbflächen statt eckigen Rechtecken */
+  function roundedRect(x,y,w,h,fill,r=10){
+    const radius=Math.max(0,Math.min(r,w/2,h/2));
+    const k=0.55228475*radius;
+    const bottom=PH-y-h,top=bottom+h,right=x+w;
+    const f=v=>v.toFixed(2);
+    page.ops.push(
+      `${rgb(fill)} rg `+
+      `${f(x+radius)} ${f(bottom)} m `+
+      `${f(right-radius)} ${f(bottom)} l `+
+      `${f(right-radius+k)} ${f(bottom)} ${f(right)} ${f(bottom+radius-k)} ${f(right)} ${f(bottom+radius)} c `+
+      `${f(right)} ${f(top-radius)} l `+
+      `${f(right)} ${f(top-radius+k)} ${f(right-radius+k)} ${f(top)} ${f(right-radius)} ${f(top)} c `+
+      `${f(x+radius)} ${f(top)} l `+
+      `${f(x+radius-k)} ${f(top)} ${f(x)} ${f(top-radius+k)} ${f(x)} ${f(top-radius)} c `+
+      `${f(x)} ${f(bottom+radius)} l `+
+      `${f(x)} ${f(bottom+radius-k)} ${f(x+radius-k)} ${f(bottom)} ${f(x+radius)} ${f(bottom)} c h f`
+    );
+  }
+
   function line(x1,y1,x2,y2,color=PAL.line,weight=.8){
     page.ops.push(
       `${rgb(color)} RG ${weight} w `+
@@ -1437,18 +1464,24 @@ function makePDF(blocks,logo){
     pages.push(page);
     cursor=TOP;
 
+    const logoWidth=178;
+    const logoHeight=logo?logoWidth*logo.height/logo.width:0;
+    const logoTop=41;
     if(logo){
+      // Echtes Seitenverhältnis des verwendeten Website-Logos einhalten.
       page.ops.push(
-        `q 144 0 0 55 ${LEFT.toFixed(2)} `+
-        `${(PH-84).toFixed(2)} cm /ImLogo Do Q`
+        `q ${logoWidth.toFixed(2)} 0 0 ${logoHeight.toFixed(2)} `+
+        `${LEFT.toFixed(2)} ${(PH-logoTop-logoHeight).toFixed(2)} cm /ImLogo Do Q`
       );
     }else{
-      print(LEFT,65,"KRISEN",16,true,PAL.navy);
-      print(LEFT+69,65,"FEST",16,true,"#D72234");
+      print(LEFT,81,"KRISENFEST.AT",17.5,true,PAL.navy);
     }
 
-    print(PW-RIGHT-118,67,"www.krisen-fest.at",10.5,true,PAL.navy);
-    line(LEFT,102,PW-RIGHT,102,"#70879B",.85);
+    const address="www.krisenfest.at",size=12.5;
+    const baseline=logo?logoTop+logoHeight-3:81;
+    print(PW-RIGHT-textWidth(address,size,true),baseline,
+      address,size,true,PAL.navy);
+    line(LEFT,103,PW-RIGHT,103,"#70879B",.85);
   }
 
   function ensure(h){
@@ -1501,54 +1534,59 @@ function makePDF(blocks,logo){
   }
 
   function heading(label,fill=PAL.pale,fg=PAL.navy){
-    ensure(62);
-    cursor+=8;
-    rect(LEFT,cursor-13,usable,35,fill);
-    rect(LEFT,cursor-13,5,35,fg);
-    print(LEFT+16,cursor+9,label,13,true,fg);
-    cursor+=54;
+    ensure(78);
+    cursor+=11;
+    const y=cursor-12,h=42;
+    roundedRect(LEFT,y,usable,h,fill,10);
+    roundedRect(LEFT+10,y+10,4,h-20,fg,2);
+    print(LEFT+26,y+27,label,13,true,fg);
+    cursor+=51;
   }
 
   function card(title,body,options={}){
     const fg=options.fg||PAL.blue;
     const bg=options.bg||"#F1F7FC";
-    const titles=wrap(title,11.1,true,usable-37);
-    const rows=wrap(body,10.15,false,usable-37);
-    const height=30+titles.length*16+rows.length*16;
-    ensure(height+12);
-    rect(LEFT,cursor-13,usable,height,bg);
-    rect(LEFT,cursor-13,4,height,fg);
-    let y=cursor+2;
+    const titles=wrap(title,11.2,true,usable-59);
+    const rows=wrap(body,10.2,false,usable-59);
+    const titleLeading=18,bodyLeading=17.6;
+    const height=23+titles.length*titleLeading+10+
+      rows.length*bodyLeading+20;
+    ensure(height+20);
+    const top=cursor-11;
+    roundedRect(LEFT,top,usable,height,bg,11);
+    roundedRect(LEFT+10,top+14,4,height-28,fg,2);
+    let y=top+27;
     titles.forEach(row=>{
-      print(LEFT+16,y,row,11.1,true,fg);
-      y+=16;
+      print(LEFT+27,y,row,11.2,true,fg);
+      y+=titleLeading;
     });
-    y+=3;
+    y+=10;
     rows.forEach(row=>{
-      print(LEFT+16,y,row,10.15,false,PAL.ink);
-      y+=16;
+      print(LEFT+27,y,row,10.2,false,PAL.ink);
+      y+=bodyLeading;
     });
-    cursor+=height+4;
+    cursor+=height+12;
   }
 
   function listCard(title,items,fg,bg){
-    const chunks=items.map(item=>wrap(item,10.2,false,usable-52));
+    const chunks=items.map(item=>wrap(item,10.2,false,usable-69));
     const totalLines=chunks.reduce((a,rows)=>a+rows.length,0);
-    const height=45+totalLines*15.6+items.length*7;
-    ensure(height+12);
-    rect(LEFT,cursor-12,usable,height,bg);
-    rect(LEFT,cursor-12,4,height,fg);
-    print(LEFT+14,cursor+5,title,12.1,true,fg);
-    let y=cursor+33;
+    const height=59+totalLines*17.4+items.length*10+20;
+    ensure(height+20);
+    const top=cursor-11;
+    roundedRect(LEFT,top,usable,height,bg,11);
+    roundedRect(LEFT+10,top+14,4,height-28,fg,2);
+    print(LEFT+27,top+27,title,12.1,true,fg);
+    let y=top+58;
     chunks.forEach(rows=>{
-      print(LEFT+16,y,"-",11.5,true,fg);
+      print(LEFT+27,y,"-",11.5,true,fg);
       rows.forEach(row=>{
-        print(LEFT+33,y,row,10.2,false,PAL.ink);
-        y+=15.6;
+        print(LEFT+45,y,row,10.2,false,PAL.ink);
+        y+=17.4;
       });
-      y+=7;
+      y+=10;
     });
-    cursor+=height+3;
+    cursor+=height+12;
   }
 
   function link(label,url){
@@ -1617,19 +1655,19 @@ function makePDF(blocks,logo){
       }
 
       case "metrics":{
-        ensure(75);
-        const gap=10,w=(usable-20)/3;
+        ensure(95);
+        const gap=12,w=(usable-24)/3;
         b.metrics.forEach(([label,value],i)=>{
-          const x=LEFT+i*(w+gap);
-          rect(x,cursor-10,w,57,
-            i===2?"#FDEDEF":"#ECF5FD"
+          const x=LEFT+i*(w+gap),top=cursor-10;
+          roundedRect(x,top,w,70,
+            i===2?"#FDEDEF":"#ECF5FD",10
           );
-          print(x+10,cursor+8,label,9.2,false,PAL.muted);
-          print(x+10,cursor+32,value,16,true,
+          print(x+13,top+25,label,9.2,false,PAL.muted);
+          print(x+13,top+53,value,16,true,
             i===2?"#B9273B":PAL.navy
           );
         });
-        cursor+=70;
+        cursor+=87;
         break;
       }
 
@@ -1697,7 +1735,7 @@ function makePDF(blocks,logo){
     page=p;
     line(LEFT,797,PW-RIGHT,797,"#70879B",.75);
     print(LEFT,817,
-      "www.krisen-fest.at | Persönliche Vorsorgeanalyse",
+      "www.krisenfest.at | Persönliche Vorsorgeanalyse",
       8.4,false,PAL.muted
     );
     print(PW-RIGHT-67,817,
@@ -1830,8 +1868,9 @@ async function loadLogo(){
   if(!img.naturalWidth)return null;
 
   const canvas=document.createElement("canvas");
-  canvas.width=760;
-  canvas.height=290;
+  // Originales Bildseitenverhältnis bleibt bei der PDF-Erstellung erhalten.
+  canvas.width=900;
+  canvas.height=Math.round(900*img.naturalHeight/img.naturalWidth);
   const ctx=canvas.getContext("2d");
   if(!ctx)return null;
 
