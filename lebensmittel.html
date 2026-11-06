@@ -214,7 +214,7 @@ function readinessAssessment(s){
  const reasons=[];
  if(blockedCooking.length){
   const examples=blockedCooking.slice(0,3).map(r=>r.search).join(', ');
-  reasons.push(`${blockedCooking.length} Position(en) benötigen Zubereitung durch Erhitzen (z. B. ${examples}). Ohne für den Vorsorgezeitraum gesicherte Kochmöglichkeit sind diese Vorräte nicht vollständig anrechenbar.`);
+  reasons.push(`${blockedCooking.length===1?"1 Lebensmittel benötigt":`${blockedCooking.length} Lebensmittel benötigen`} Zubereitung durch Erhitzen (z. B. ${examples}). Ohne für den Vorsorgezeitraum gesicherte Kochmöglichkeit sind diese Vorräte nicht vollständig anrechenbar.`);
  }
  if(blockedChilled.length)reasons.push(`${blockedChilled.length} gekühlte Position(en) sind ohne ausreichend lange unabhängige Kühlung nicht für den gesamten Zeitraum gesichert.`);
  if(blockedFrozen.length)reasons.push(`${blockedFrozen.length} Tiefkühlposition(en) sind ohne ausreichend lange unabhängige Tiefkühlung nicht für den gesamten Zeitraum gesichert.`);
@@ -321,7 +321,7 @@ function reportBlocks(s){
  for(const k of Object.keys(labels)){push('paragraph',`${labels[k]}: gesamt ${fmt(s.now.val[k])} g; unter Krisenbedingungen ${fmt(s.emergency.val[k])} g; Orientierungswert für ${s.horizon} Tage ${fmt(s.now.target[k]*s.horizon)} g.`);}
  push('warning','Ein vollständig ausgewogenes Ernährungsmuster und die Versorgung mit Vitaminen, Mineralstoffen sowie essenziellen Fettsäuren sind hiermit noch nicht nachgewiesen. Bei fehlenden BLS-Nährwerten ist die Aussagekraft eingeschränkt.');
  push('heading','4. Erfasste Lebensmittel und Eigenschaften');
- for(const r of s.entries){push('item',`${r.search}: ${fmt(num(r.quantity),2)} ${r.unit} · ${fmt(energy(r))} kcal · Lagerung: ${r.storage||'pantry'} · Zubereitung: ${r.prep||'ready'}${s.excluded.includes(r)?' · im Krisenszenario nicht langfristig angerechnet':''}`);}
+ for(const r of s.entries){push('item',`${r.search}: ${fmt(num(r.quantity),2)} ${r.unit} · ${fmt(energy(r))} kcal · Lagerung: ${({pantry:'ohne Kühlung haltbar',fresh:'Frischware',chilled:'Kühlware',frozen:'Tiefkühlware'})[r.storage||'pantry']} · Zubereitung: ${r.prep==='cook'?'Erhitzen erforderlich':'ohne Erhitzen verwendbar'}${s.excluded.includes(r)?' · im Krisenszenario nicht langfristig angerechnet':''}`);}
  push('heading','5. Sinnvolle Kombinationen');for(const i of mealSuggestions(s))push('paragraph',i);
  push('heading','6. Ihre konkreten Ergänzungsempfehlungen');recommendations.forEach((x,i)=>push('step',`${i+1}. ${x.heading}`,{detail:x.text}));
  push('heading','7. Passende Produktgruppen');products.forEach(x=>push('product',x.heading,{detail:x.text}));
